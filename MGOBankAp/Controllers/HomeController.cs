@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MGOBankAp.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public HomeController()
@@ -18,6 +17,11 @@ namespace MGOBankAp.Controllers
         }
 
         public IActionResult AboutUs()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Scanner()
         {
             return View();
         }
