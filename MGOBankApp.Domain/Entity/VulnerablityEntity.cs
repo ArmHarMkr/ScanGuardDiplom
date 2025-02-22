@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MGOBankApp.Domain.Entity
+{
+    public class VulnerabilityEntity
+    {
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public WebsiteScanEntity ScanEntity { get; set; }
+        public Guid ScanEntityId { get; set; }
+        public VulnerabilityType VulnerabilityType { get; set; }
+    }
+
+    public enum VulnerabilityType
+    {
+        XSS,
+        SQLi,
+        CSRF,
+        SSRF,
+        DirectoryListing,
+        SensitiveDataExposure,
+        RFI,
+        LFI,
+        Virus,
+        Macro
+    }
+}

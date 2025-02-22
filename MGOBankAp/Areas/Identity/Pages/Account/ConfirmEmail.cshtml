@@ -1,0 +1,23 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/MGOBankAp.styles.css" asp-append-version="true" />
+<link rel="stylesheet" type="text/css" href="~/css/util.css">
+<link rel="stylesheet" type="text/css" href="~/css/main.css">
+<div class="limiter">
+    <div class="container-login100">
+        <div style="box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+                -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+                -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+                -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+                -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+background-color:white;border-radius:20px; width:auto; height:100px; display:flex; align-items:center;justify-content:center;">
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+</div>
+</div>
+</div>
