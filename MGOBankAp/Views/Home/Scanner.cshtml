@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Введите ссылку";
+}
+
+<h2>Введите ссылку</h2>
+
+<form method="post" asp-controller="Home" asp-action="Scanner">
+    <label for="urlInput">Ссылка:</label>
+    <input type="text" id="urlInput" name="url" required />
+    <button type="submit">Отправить</button>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.ReceivedUrl))
+{
+    <p>Вы ввели: @ViewBag.ReceivedUrl</p>
+}

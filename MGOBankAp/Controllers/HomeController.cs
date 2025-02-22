@@ -21,8 +21,20 @@ namespace MGOBankAp.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Scanner()
+        [HttpGet]
+        public IActionResult Scanner()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Scanner(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                Console.WriteLine($"Полученная ссылка: {url}");
+                ViewBag.ReceivedUrl = url; // Передаём в представление
+            }
             return View();
         }
 
