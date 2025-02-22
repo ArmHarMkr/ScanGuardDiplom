@@ -6,7 +6,6 @@ namespace MGOBankApp.Domain.Entity
 {
     public class ApplicationUser : IdentityUser
     {
-        [Key]
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string FullName { get; set; }
         public DateTime UserCreatedDate { get; set; } = DateTime.Now;

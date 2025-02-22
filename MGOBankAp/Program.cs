@@ -80,10 +80,48 @@ internal class Program
         var logger = app.Services.GetService<ILogger<Program>>();
         logger?.LogInformation("Starting program...");
 
+
+        /*        using (var scope = app.Services.CreateScope())
+                {
+                    var serviceProvider = scope.ServiceProvider;
+                    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                    await SeedRolesAsync(roleManager);
+                    await AssignRolesToUsersAsync(userManager);
+                }
+
+
+                async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
+                {
+                    string[] roleNames = { "Admin", "User", "Manager" };
+
+                    foreach (var role in roleNames)
+                    {
+                        if (!await roleManager.RoleExistsAsync(role))
+                        {
+                            await roleManager.CreateAsync(new IdentityRole(role));
+                        }
+                    }
+                }
+
+                async Task AssignRolesToUsersAsync(UserManager<ApplicationUser> userManager)
+                {
+                    var user = await userManager.FindByEmailAsync("har.mkrtchyan2006@gmail.com");
+
+                    if (user != null && !await userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        await userManager.AddToRoleAsync(user, "Admin");
+                    }
+                }*/
+
+
+
+
         using (var scope = app.Services.CreateScope())
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var roles = new[] { SD.Role_Customer, SD.Role_Admin };
+            var roles = new[] { SD.Role_Admin, SD.Role_Customer };
 
             foreach (var role in roles)
             {
@@ -98,12 +136,11 @@ internal class Program
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            string email = "admin@admin.com";
-            if (await userManager.FindByEmailAsync(email) != null)
+            if (await userManager.FindByEmailAsync("admin@admin.com") != null)
             {
-                var user = await userManager.FindByEmailAsync(email);
-                await userManager.AddToRoleAsync(user, SD.Role_Admin);
+                var user = await userManager.FindByEmailAsync("admin@admin.com");
                 await userManager.RemoveFromRoleAsync(user, SD.Role_Customer);
+                await userManager.AddToRoleAsync(user, SD.Role_Admin);
             }
         }
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MGOBankApp.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250222075113_InitialCreate")]
+    [Migration("20250222101157_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

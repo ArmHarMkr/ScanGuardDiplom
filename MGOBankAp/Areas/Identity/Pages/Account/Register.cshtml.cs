@@ -123,33 +123,29 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    var defaultRole = _roleManager.FindByNameAsync(SD.Role_Customer).Result;
-                    if (defaultRole != null)
-                    {
-                        IdentityResult roleResult = await _userManager.AddToRoleAsync(user, defaultRole.Name);
-                    }
                     _logger.LogInformation("User created a new account with password.");
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    var userId = await _userManager.GetUserIdAsync(user); // Ensure userId exists
+                    if (!string.IsNullOrEmpty(userId))
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        var defaultRole = await _roleManager.FindByNameAsync(SD.Role_Customer);
+                        if (defaultRole != null)
+                        {
+                            IdentityResult roleResult = await _userManager.AddToRoleAsync(user, defaultRole.Name);
+                            if (!roleResult.Succeeded)
+                            {
+                                foreach (var error in roleResult.Errors)
+                                {
+                                    _logger.LogError(error.Description);
+                                    ModelState.AddModelError(string.Empty, error.Description);
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        _logger.LogError("User ID is null or empty after creation.");
+                        ModelState.AddModelError(string.Empty, "User creation failed unexpectedly.");
                     }
                 }
                 foreach (var error in result.Errors)
