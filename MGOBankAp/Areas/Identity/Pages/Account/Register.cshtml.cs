@@ -109,6 +109,55 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        /*        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+                {
+                    returnUrl ??= Url.Content("~/");
+                    ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                    if (ModelState.IsValid)
+                    {
+                        var user = CreateUser();
+                        user.FullName = Input.FullName;
+                        user.EmailConfirmed = true;
+                        await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                        await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                        var result = await _userManager.CreateAsync(user, Input.Password);
+
+                        if (result.Succeeded)
+                        {
+                            _logger.LogInformation("User created a new account with password.");
+
+                            var userId = await _userManager.GetUserIdAsync(user); // Ensure userId exists
+                            if (!string.IsNullOrEmpty(userId))
+                            {
+                                var defaultRole = await _roleManager.FindByNameAsync(SD.Role_Customer);
+                                if (defaultRole != null)
+                                {
+                                    IdentityResult roleResult = await _userManager.AddToRoleAsync(user, defaultRole.Name);
+                                    if (!roleResult.Succeeded)
+                                    {
+                                        foreach (var error in roleResult.Errors)
+                                        {
+                                            _logger.LogError(error.Description);
+                                            ModelState.AddModelError(string.Empty, error.Description);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                _logger.LogError("User ID is null or empty after creation.");
+                                ModelState.AddModelError(string.Empty, "User creation failed unexpectedly.");
+                            }
+                        }
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+
+                    // If we got this far, something failed, redisplay form
+                    return Page();
+                }*/
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -125,7 +174,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var userId = await _userManager.GetUserIdAsync(user); // Ensure userId exists
+                    var userId = await _userManager.GetUserIdAsync(user);
                     if (!string.IsNullOrEmpty(userId))
                     {
                         var defaultRole = await _roleManager.FindByNameAsync(SD.Role_Customer);
@@ -139,8 +188,25 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                                     _logger.LogError(error.Description);
                                     ModelState.AddModelError(string.Empty, error.Description);
                                 }
+                                return Page(); // Return the page if role assignment fails
                             }
                         }
+
+                        // Generate email confirmation token and URL
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        // Send confirmation email (optional, if email service is configured)
+                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        // Redirect to RegisterConfirmation page
+                        return RedirectToPage("./RegisterConfirmation", new { email = Input.Email, emailConfirmationUrl = callbackUrl, returnUrl });
                     }
                     else
                     {
@@ -148,6 +214,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                         ModelState.AddModelError(string.Empty, "User creation failed unexpectedly.");
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
