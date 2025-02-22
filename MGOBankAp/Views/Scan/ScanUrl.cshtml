@@ -1,0 +1,47 @@
+﻿@page
+@using MGOBankApp.Models
+@model Vulnerability
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сканер уязвимостей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Сканер уязвимостей</h1>
+    <form method="post">
+        <label for="url">Введите URL для проверки:</label><br>
+        <input type="text" id="url" name="Url" style="width: 300px;" placeholder="https://example.com" /><br><br>
+        <button type="submit">Сканировать</button>
+    </form>
+
+        <div class="result">
+            <h3>Результаты сканирования:</h3>
+            <p><strong>SQLi:</strong> <span class="@(Model.SQLi ? "error" : "success")">@Model.SQLi</span></p>
+            <p><strong>XSS:</strong> <span class="@(Model.XSS ? "error" : "success")">@Model.XSS</span></p>
+            <p><strong>XSRF:</strong> <span class="@(Model.XSRF ? "error" : "success")">@Model.XSRF</span></p>
+        </div>
+    }
+</body>
+</html>

@@ -45,6 +45,10 @@ internal class Program
             options.SupportedCultures = supportedCultures;
         });
 
+        //DI Container
+        builder.Services.AddHttpClient();
+
+
 
         var app = builder.Build();
         app.UseRequestLocalization();

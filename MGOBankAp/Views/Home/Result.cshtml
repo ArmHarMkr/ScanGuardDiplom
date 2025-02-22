@@ -1,0 +1,18 @@
+﻿@page
+@using MGOBankApp.Models
+@model Vulnerability
+
+@{
+    ViewData["Title"] = "Результаты сканирования";
+}
+
+<h2>Результаты сканирования</h2>
+<p>Проверенный URL: @ViewBag.ReceivedUrl</p>
+
+<div>
+    <p><strong>SQL Injection:</strong> <span style="color: @(Model.SQLi ? "red" : "green")">@Model.SQLi</span></p>
+    <p><strong>XSS:</strong> <span style="color: @(Model.XSS ? "red" : "green")">@Model.XSS</span></p>
+    <p><strong>XSRF:</strong> <span style="color: @(Model.XSRF ? "red" : "green")">@Model.XSRF</span></p>
+</div>
+
+<a asp-action="Index">Вернуться назад</a>

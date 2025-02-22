@@ -1,52 +1,33 @@
-using HtmlAgilityPack;
-using MGOBankApp.Domain.Entity;
+﻿using HtmlAgilityPack;
 using MGOBankApp.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace MGOBankAp.Controllers
+namespace MGOBankApp.Controllers
 {
-    public class HomeController : Controller
+    public class ScanController : Controller
     {
         private readonly HttpClient _httpClient;
 
-        public HomeController(IHttpClientFactory httpClientFactory)
+        public ScanController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient();
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult AboutUs()
-        {
-            return View();
-        }
-
-        [HttpGet]
+        [HttpPost]
         public IActionResult Scanner()
         {
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Scanner(string url)
-        {
-            ViewBag.ReceivedUrl = url; // Для отображения введенного URL
-            var result = await ScanUrl(url);
-            return result; // Вернёт View с результатами или ошибку
-        }
-
-        private async Task<IActionResult> ScanUrl(string url)
+        [HttpGet]
+        public async Task<IActionResult> ScanUrl(string url)
         {
             if (string.IsNullOrEmpty(url))
                 return BadRequest("URL не указан");
 
             try
             {
+                // Получаем страницу
                 var response = await _httpClient.GetAsync(url);
                 if (!response.IsSuccessStatusCode)
                     return StatusCode((int)response.StatusCode, "Ошибка доступа к сайту");
@@ -55,6 +36,7 @@ namespace MGOBankAp.Controllers
                 var doc = new HtmlDocument();
                 doc.LoadHtml(html);
 
+                // Находим формы
                 var forms = doc.DocumentNode.SelectNodes("//form") ?? new HtmlNodeCollection(null);
                 Vulnerability vulnerablity = new Vulnerability();
 
@@ -64,6 +46,7 @@ namespace MGOBankAp.Controllers
                     var method = form.GetAttributeValue("method", "get").ToLower();
                     var inputs = form.SelectNodes(".//input");
 
+                    // Собираем данные формы
                     var data = new Dictionary<string, string>();
                     if (inputs != null)
                     {
@@ -82,7 +65,9 @@ namespace MGOBankAp.Controllers
 
                     var sqliResponse = await SendRequest(method, action, data);
                     if (sqliResponse.ToLower().Contains("mysql") || sqliResponse.ToLower().Contains("sql"))
+                    {
                         vulnerablity.SQLi = true;
+                    }
 
                     // Тест XSS
                     var xssPayload = "<script>alert('xss')</script>";
@@ -91,15 +76,19 @@ namespace MGOBankAp.Controllers
 
                     var xssResponse = await SendRequest(method, action, data);
                     if (xssResponse.Contains(xssPayload))
+                    {
                         vulnerablity.XSS = true;
+                    }
 
-                    // Тест XSRF
+                    // Тест XSRF (проверка наличия токена)
                     var csrfToken = form.SelectSingleNode(".//input[@name='csrf_token']");
                     if (csrfToken == null && method == "post")
+                    {
                         vulnerablity.XSRF = true;
+                    }
                 }
 
-                return View("Result", vulnerablity);
+                return View(vulnerablity);
             }
             catch (Exception ex)
             {
@@ -122,6 +111,5 @@ namespace MGOBankAp.Controllers
                 return await response.Content.ReadAsStringAsync();
             }
         }
-
     }
 }
