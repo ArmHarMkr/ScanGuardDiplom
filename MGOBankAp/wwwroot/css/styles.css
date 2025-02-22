@@ -1,0 +1,433 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(180deg, #0a192f, #0d1b2a);
+    min-height: 100vh;
+    color: #a3bffa;
+    overflow-x: hidden;
+    overflow-y: hidden; /* Убираем вертикальный скролл */
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 80px 20px 20px; /* Уменьшаем верхний отступ */
+    max-height: 600px; /* Ограничиваем высоту контейнера */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Уменьшаем отступы навигации */
+    background: rgba(10, 25, 47, 0.95);
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 212, 255, 0.1);
+}
+
+.nav-logo {
+    font-size: 1.2rem; /* Уменьшаем размер логотипа */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+    .nav-logo span {
+        display: inline-block;
+        color: #00d4ff;
+        text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+        transition: transform 0.2s ease, color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .nav-logo:hover span {
+        transform: translateY(-3px);
+        color: #ff007a;
+        text-shadow: 0 0 15px #ff007a;
+    }
+
+.nav-links, .auth-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+    .nav-links li, .auth-links li {
+        margin-left: 15px; /* Уменьшаем отступ между элементами */
+    }
+
+    .nav-links a, .auth-links .nav-link {
+        color: #a3bffa;
+        font-size: 0.9rem; /* Уменьшаем размер шрифта */
+        text-decoration: none;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+        .nav-links a:hover, .auth-links .nav-link:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 5px #00d4ff;
+        }
+
+/* Стили для _LoginPartial */
+.auth-container {
+    display: flex;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-right: 15px; /* Уменьшаем отступ */
+}
+
+.user-icon {
+    width: 18px; /* Уменьшаем размер иконки */
+    height: 18px;
+    margin-right: 6px; /* Уменьшаем отступ */
+    transition: transform 0.3s ease;
+}
+
+.user-info:hover .user-icon {
+    transform: scale(1.2);
+}
+
+.username {
+    color: #ff007a;
+    font-weight: bold;
+    font-size: 0.9rem; /* Уменьшаем размер шрифта */
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+    .username:hover {
+        color: #00d4ff;
+        text-shadow: 0 0 10px #00d4ff;
+    }
+
+.logout-form {
+    display: inline-block;
+}
+
+.btn-logout {
+    padding: 6px 15px; /* Уменьшаем размер кнопки */
+    font-size: 0.9rem; /* Уменьшаем размер шрифта */
+    background: linear-gradient(45deg, #00d4ff, #ff007a);
+    border-radius: 20px; /* Чуть уменьшаем радиус */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .btn-logout:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+    }
+
+.logout-icon {
+    width: 14px; /* Уменьшаем размер иконки */
+    height: 14px;
+    margin-right: 4px; /* Уменьшаем отступ */
+    transition: transform 0.3s ease;
+}
+
+.btn-logout:hover .logout-icon {
+    transform: translateX(5px);
+}
+
+.description, .subtitle {
+    font-size: 1rem; /* Уменьшаем размер шрифта */
+    color: #a3bffa;
+    margin-bottom: 15px; /* Уменьшаем отступ */
+    text-shadow: 0 0 5px rgba(163, 191, 250, 0.3);
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Уменьшаем отступ */
+}
+
+.title {
+    font-size: 2.5rem; /* Уменьшаем размер заголовка */
+    font-weight: bold;
+    display: inline-block;
+}
+
+    .title span {
+        display: inline-block;
+        color: #00d4ff;
+        text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        transition: transform 0.2s ease, color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .title:hover span {
+        transform: translateY(-3px); /* Уменьшаем смещение */
+        color: #ff007a;
+        text-shadow: 0 0 15px #ff007a;
+    }
+
+.btn-custom {
+    padding: 12px 30px; /* Уменьшаем размер кнопки */
+    font-size: 1rem; /* Уменьшаем размер шрифта */
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(45deg, #00d4ff, #ff007a);
+    border: none;
+    border-radius: 20px; /* Чуть уменьшаем радиус */
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+    .btn-custom:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
+    }
+
+.slogan {
+    font-size: 0.9rem; /* Уменьшаем размер шрифта */
+    color: #b0c4de;
+    margin-top: 15px; /* Уменьшаем отступ */
+    text-shadow: 0 0 5px rgba(176, 196, 222, 0.3);
+}
+
+.form-group {
+    margin: 15px 0; /* Уменьшаем отступ */
+}
+
+    .form-group label {
+        display: block;
+        color: #a3bffa;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        padding: 8px; /* Уменьшаем отступы */
+        width: 100%;
+        max-width: 250px; /* Уменьшаем ширину */
+        border: 1px solid #00d4ff;
+        border-radius: 5px;
+        background: rgba(10, 25, 47, 0.8);
+        color: #ffffff;
+        font-size: 0.9rem; /* Уменьшаем размер шрифта */
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    }
+
+.bg-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 0;
+    animation: bgMove 15s infinite linear;
+}
+
+.cyber-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(0, 212, 255, 0.05), rgba(0, 212, 255, 0.05) 1px, transparent 1px, transparent 15px), repeating-linear-gradient(90deg, rgba(0, 212, 255, 0.05), rgba(0, 212, 255, 0.05) 1px, transparent 1px, transparent 15px);
+    z-index: 0;
+    opacity: 0.5;
+}
+
+/* Анимации */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    }
+}
+
+@keyframes bgMove {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.form-input {
+    padding: 8px;
+    width: 100%;
+    max-width: 250px;
+    border: 1px solid #00d4ff;
+    border-radius: 5px;
+    background: rgba(10, 25, 47, 0.8);
+    color: #ffffff;
+    font-size: 0.9rem; 
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-input:focus {
+        border-color: #ff007a;
+        box-shadow: 0 0 10px rgba(255, 0, 122, 0.5);
+    }
+
+.text-danger {
+    color: #ff007a;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* ... (предыдущие стили остаются без изменений) ... */
+
+/* ... (предыдущие стили остаются без изменений) ... */
+
+.manage-nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    padding: 0;
+    background: rgba(10, 25, 47, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+    .manage-nav li {
+        margin: 0 10px;
+    }
+
+    .manage-nav .nav-link {
+        color: #a3bffa;
+        font-size: 0.9rem; /* Оставляем для "External logins", если нужно */
+        text-decoration: none;
+        padding: 8px 15px;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+        .manage-nav .nav-link#profile,
+        .manage-nav .nav-link#two-factor,
+        .manage-nav .nav-link#personal-data {
+            font-size: 1.1rem; /* Увеличиваем размер для указанных ссылок */
+            font-weight: bold; /* Добавляем жирность для акцента */
+        }
+
+        .manage-nav .nav-link:hover, .manage-nav .nav-link.active {
+            color: #00d4ff;
+            text-shadow: 0 0 5px #00d4ff;
+        }
+
+/* ... (остальные стили остаются без изменений) ... */
+
+/* ... (предыдущие стили остаются без изменений) ... */
+
+.confirm-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 80px; /* Учитываем фиксированную навигацию */
+}
+
+.form-container {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(10, 25, 47, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5rem; /* Уменьшаем размер заголовка */
+    font-weight: bold;
+    color: #00d4ff;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+    .title:hover {
+        color: #ff007a;
+        text-shadow: 0 0 20px #ff007a;
+    }
+
+.description {
+    font-size: 1rem;
+    color: #a3bffa;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(163, 191, 250, 0.3);
+}
+
+.txt1 {
+    font-size: 1rem;
+    color: #444444;
+    line-height: 20px;
+}
+
+.slogan {
+    font-size: 0.9rem;
+    color: #b0c4de;
+    margin-top: 15px;
+    text-shadow: 0 0 5px rgba(176, 196, 222, 0.3);
+}
+
+
+.auth-link {
+    color: #a3bffa;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    margin: 5px 10px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+    .auth-link:hover {
+        color: #00d4ff;
+        text-shadow: 0 0 5px #00d4ff;
+    }
+
+/* ... (предыдущие стили остаются без изменений) ... */
+
+.data-link {
+    color: #a3bffa;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+    .data-link:hover {
+        color: #00d4ff;
+        text-shadow: 0 0 5px #00d4ff;
+    }
+
+    /* Специфический стиль для "Delete" */
+    .data-link[style*="color: #ff007a"] {
+        color: #ff007a;
+    }
+
+        .data-link[style*="color: #ff007a"]:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 5px #00d4ff;
+        }
+
+/* ... (остальные стили остаются без изменений) ... */

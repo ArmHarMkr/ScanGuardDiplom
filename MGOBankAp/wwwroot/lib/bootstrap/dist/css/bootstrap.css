@@ -11219,3 +11219,43 @@ textarea.form-control-lg {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
+
+/* ... (предыдущие стили остаются без изменений) ... */
+
+.alert-danger {
+    background: rgba(255, 0, 122, 0.1);
+    color: #ff007a;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 0, 122, 0.3);
+}
+
+.alert-warning {
+    background: rgba(255, 165, 0, 0.1);
+    color: #ff8c00;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+}
+
+.link-action {
+    color: #00d4ff;
+    text-decoration: underline;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+    .link-action:hover {
+        color: #ff007a;
+        text-shadow: 0 0 5px #ff007a;
+    }
+
+.form-subtitle {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+}
+
+/* ... (остальные стили остаются без изменений) ... */
