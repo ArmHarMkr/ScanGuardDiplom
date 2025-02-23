@@ -50,6 +50,7 @@ internal class Program
         //DI Container
         builder.Services.AddHttpClient();
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IScannerService, ScannerService>();
 
 
         var app = builder.Build();
