@@ -29,24 +29,20 @@ namespace MGOBankAp.Controllers
         [HttpGet]
         public IActionResult Scanner()
         {
-            return View();
+            return View(new Vulnerability());
         }
 
         [HttpPost]
         public async Task<IActionResult> Scanner(string url)
-        {
-            ViewBag.ReceivedUrl = url; // Для отображения введенного URL
-            var result = await ScanUrl(url);
-            return result; // Вернёт View с результатами или ошибку
-        }
-
-        private async Task<IActionResult> ScanUrl(string url)
         {
             if (string.IsNullOrEmpty(url))
                 return BadRequest("URL не указан");
 
             try
             {
+                var baseUri = new Uri(url);
+                _httpClient.BaseAddress = new Uri(baseUri.GetLeftPart(UriPartial.Authority));
+
                 var response = await _httpClient.GetAsync(url);
                 if (!response.IsSuccessStatusCode)
                     return StatusCode((int)response.StatusCode, "Ошибка доступа к сайту");
@@ -64,6 +60,7 @@ namespace MGOBankAp.Controllers
                     var method = form.GetAttributeValue("method", "get").ToLower();
                     var inputs = form.SelectNodes(".//input");
 
+                    var absoluteAction = action.StartsWith("http") ? action : new Uri(baseUri, action).ToString();
                     var data = new Dictionary<string, string>();
                     if (inputs != null)
                     {
@@ -76,12 +73,21 @@ namespace MGOBankAp.Controllers
                     }
 
                     // Тест SQLi
+                    var normalPayload = "test";
+                    foreach (var key in data.Keys)
+                        data[key] = normalPayload;
+
+                    var (normalResponse, normalStatusCode) = await SendRequest(method, absoluteAction, data);
+
                     var sqliPayload = "' OR 1=1 --";
                     foreach (var key in data.Keys)
                         data[key] = sqliPayload;
 
-                    var sqliResponse = await SendRequest(method, action, data);
-                    if (sqliResponse.ToLower().Contains("mysql") || sqliResponse.ToLower().Contains("sql"))
+                    var (sqliResponse, sqliStatusCode) = await SendRequest(method, absoluteAction, data);
+
+                    if (sqliStatusCode >= 200 && sqliStatusCode < 300 && normalStatusCode != sqliStatusCode)
+                        vulnerablity.SQLi = true;
+                    else if (sqliStatusCode >= 500 && normalStatusCode < 500)
                         vulnerablity.SQLi = true;
 
                     // Тест XSS
@@ -89,7 +95,7 @@ namespace MGOBankAp.Controllers
                     foreach (var key in data.Keys)
                         data[key] = xssPayload;
 
-                    var xssResponse = await SendRequest(method, action, data);
+                    var (xssResponse, _) = await SendRequest(method, absoluteAction, data); // Код статуса не нужен
                     if (xssResponse.Contains(xssPayload))
                         vulnerablity.XSS = true;
 
@@ -99,7 +105,7 @@ namespace MGOBankAp.Controllers
                         vulnerablity.XSRF = true;
                 }
 
-                return View("Result", vulnerablity);
+                return View("Scanner", vulnerablity);
             }
             catch (Exception ex)
             {
@@ -107,21 +113,22 @@ namespace MGOBankAp.Controllers
             }
         }
 
-        private async Task<string> SendRequest(string method, string action, Dictionary<string, string> data)
+        private async Task<(string response, int statusCode)> SendRequest(string method, string action, Dictionary<string, string> data)
         {
+            HttpResponseMessage response;
             if (method == "post")
             {
                 var content = new FormUrlEncodedContent(data);
-                var response = await _httpClient.PostAsync(action, content);
-                return await response.Content.ReadAsStringAsync();
+                response = await _httpClient.PostAsync(action, content);
             }
             else
             {
                 var query = string.Join("&", data.Select(kvp => $"{kvp.Key}={kvp.Value}"));
-                var response = await _httpClient.GetAsync($"{action}?{query}");
-                return await response.Content.ReadAsStringAsync();
+                response = await _httpClient.GetAsync($"{action}?{query}");
             }
-        }
 
+            var responseBody = await response.Content.ReadAsStringAsync();
+            return (responseBody, (int)response.StatusCode);
+        }
     }
 }
