@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using MGOBankApp.Domain.Roles
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +27,21 @@
                 <li><a asp-action="AboutUs" asp-controller="Home">About Us</a></li>
                 <li><a asp-action="Scanner" asp-controller="Home">Scanner</a></li>
             </ul>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                var currentUser = await UserManager.GetUserAsync(User);
+                var isAdmin = await UserManager.IsInRoleAsync(currentUser, SD.Role_Admin);
+                var isManager = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium);
+
+                if (isAdmin)
+                {
+                    <ul class="nav-links">
+                        <li><a href="Admin/users/index">Users</a></li>
+                    </ul>
+
+                }
+            }
+
             <partial name="_LoginPartial.cshtml" />
         </nav>
     </header>

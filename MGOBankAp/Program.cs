@@ -6,6 +6,8 @@ using MGOBankApp.Domain.Roles;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using MGOBankApp.Service.Interfaces;
+using MGOBankApp.Service.Implementations;
 
 internal class Program
 {
@@ -47,7 +49,7 @@ internal class Program
 
         //DI Container
         builder.Services.AddHttpClient();
-
+        builder.Services.AddScoped<IUserService, UserService>();
 
 
         var app = builder.Build();
@@ -83,43 +85,6 @@ internal class Program
 
         var logger = app.Services.GetService<ILogger<Program>>();
         logger?.LogInformation("Starting program...");
-
-
-        /*        using (var scope = app.Services.CreateScope())
-                {
-                    var serviceProvider = scope.ServiceProvider;
-                    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-                    await SeedRolesAsync(roleManager);
-                    await AssignRolesToUsersAsync(userManager);
-                }
-
-
-                async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
-                {
-                    string[] roleNames = { "Admin", "User", "Manager" };
-
-                    foreach (var role in roleNames)
-                    {
-                        if (!await roleManager.RoleExistsAsync(role))
-                        {
-                            await roleManager.CreateAsync(new IdentityRole(role));
-                        }
-                    }
-                }
-
-                async Task AssignRolesToUsersAsync(UserManager<ApplicationUser> userManager)
-                {
-                    var user = await userManager.FindByEmailAsync("har.mkrtchyan2006@gmail.com");
-
-                    if (user != null && !await userManager.IsInRoleAsync(user, "Admin"))
-                    {
-                        await userManager.AddToRoleAsync(user, "Admin");
-                    }
-                }*/
-
-
 
 
         using (var scope = app.Services.CreateScope())
