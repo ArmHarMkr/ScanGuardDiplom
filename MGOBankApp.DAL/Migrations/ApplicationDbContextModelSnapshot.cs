@@ -106,7 +106,6 @@ namespace MGOBankApp.DAL.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FileHash")
@@ -142,10 +141,7 @@ namespace MGOBankApp.DAL.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ApplicationUserId1")
+                    b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NotificationContent")
@@ -161,7 +157,7 @@ namespace MGOBankApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("NotificationEntities");
                 });
@@ -171,10 +167,7 @@ namespace MGOBankApp.DAL.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ScanEntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ScanEntityId1")
+                    b.Property<string>("ScanEntityId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("VulnerabilityType")
@@ -182,7 +175,7 @@ namespace MGOBankApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ScanEntityId1");
+                    b.HasIndex("ScanEntityId");
 
                     b.ToTable("VulnerabilityEntities");
                 });
@@ -195,10 +188,7 @@ namespace MGOBankApp.DAL.Migrations
                     b.Property<DateTime>("ScanDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ScanUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ScanUserId1")
+                    b.Property<string>("ScanUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -215,7 +205,7 @@ namespace MGOBankApp.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ScanUserId1");
+                    b.HasIndex("ScanUserId");
 
                     b.ToTable("WebsiteScanEntities");
                 });
@@ -361,9 +351,7 @@ namespace MGOBankApp.DAL.Migrations
                 {
                     b.HasOne("MGOBankApp.Domain.Entity.ApplicationUser", "ScannedByUser")
                         .WithMany("FileScans")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ScannedByUser");
                 });
@@ -372,7 +360,7 @@ namespace MGOBankApp.DAL.Migrations
                 {
                     b.HasOne("MGOBankApp.Domain.Entity.ApplicationUser", "ApplicationUser")
                         .WithMany("Notifications")
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });
@@ -381,7 +369,7 @@ namespace MGOBankApp.DAL.Migrations
                 {
                     b.HasOne("MGOBankApp.Domain.Entity.WebsiteScanEntity", "ScanEntity")
                         .WithMany("Vulnerabilities")
-                        .HasForeignKey("ScanEntityId1");
+                        .HasForeignKey("ScanEntityId");
 
                     b.Navigation("ScanEntity");
                 });
@@ -390,7 +378,7 @@ namespace MGOBankApp.DAL.Migrations
                 {
                     b.HasOne("MGOBankApp.Domain.Entity.ApplicationUser", "ScanUser")
                         .WithMany("WebsiteScans")
-                        .HasForeignKey("ScanUserId1")
+                        .HasForeignKey("ScanUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

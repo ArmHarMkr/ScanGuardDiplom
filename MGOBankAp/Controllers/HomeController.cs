@@ -1,7 +1,9 @@
 using HtmlAgilityPack;
+using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
 using MGOBankApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +12,17 @@ namespace MGOBankAp.Controllers
     public class HomeController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly UserManager<ApplicationUser> UserManager;
+        private readonly SignInManager<ApplicationUser> SignInManager;
+        private readonly ApplicationDbContext Context;
 
-        public HomeController(IHttpClientFactory httpClientFactory)
+        public HomeController(IHttpClientFactory httpClientFactory, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+                              ApplicationDbContext db)
         {
             _httpClient = httpClientFactory.CreateClient();
+            UserManager = userManager;
+            SignInManager = signInManager;
+            Context = db;
         }
 
         public IActionResult Index()
@@ -54,6 +63,7 @@ namespace MGOBankAp.Controllers
                 var forms = doc.DocumentNode.SelectNodes("//form") ?? new HtmlNodeCollection(null);
                 Vulnerability vulnerablity = new Vulnerability();
 
+                int vulnCount = 0;
                 foreach (var form in forms)
                 {
                     var action = form.GetAttributeValue("action", url);
@@ -85,10 +95,17 @@ namespace MGOBankAp.Controllers
 
                     var (sqliResponse, sqliStatusCode) = await SendRequest(method, absoluteAction, data);
 
-                    if (sqliStatusCode >= 200 && sqliStatusCode < 300 && normalStatusCode != sqliStatusCode)
+                    if (sqliStatusCode >= 200 && sqliStatusCode < 300 || normalStatusCode != sqliStatusCode)
+                    { 
                         vulnerablity.SQLi = true;
-                    else if (sqliStatusCode >= 500 && normalStatusCode < 500)
+                        vulnCount++;
+                    }
+
+                    else if (sqliStatusCode >= 400 && normalStatusCode < 500)
+                    {
                         vulnerablity.SQLi = true;
+                        vulnCount++;
+                    }
 
                     // Тест XSS
                     var xssPayload = "<script>alert('xss')</script>";
@@ -97,12 +114,59 @@ namespace MGOBankAp.Controllers
 
                     var (xssResponse, _) = await SendRequest(method, absoluteAction, data); // Код статуса не нужен
                     if (xssResponse.Contains(xssPayload))
+                    {
                         vulnerablity.XSS = true;
+                        vulnCount++;
+                    }
 
                     // Тест XSRF
                     var csrfToken = form.SelectSingleNode(".//input[@name='csrf_token']");
                     if (csrfToken == null && method == "post")
+                    {
                         vulnerablity.XSRF = true;
+                        vulnCount++;
+                    }
+                }
+
+                if (SignInManager.IsSignedIn(User))
+                {
+                    var currentUser = await UserManager.GetUserAsync(User);
+                    if (currentUser == null)
+                    {
+                        return BadRequest("No user found");
+                    }
+
+                    WebsiteScanEntity websiteScanEntity = new()
+                    {
+                        ScanUser = currentUser,
+                        Url = url,
+                        Status = "Scanned",
+                        VulnerablityCount = vulnCount,
+                    };
+                    VulnerabilityEntity sqli = new()
+                    {
+                        ScanEntity = websiteScanEntity,
+                        VulnerabilityType = VulnerabilityType.SQLi
+                    };
+                    
+                    VulnerabilityEntity xss = new()
+                    {
+                        ScanEntity = websiteScanEntity,
+                        VulnerabilityType = VulnerabilityType.XSS
+                    };
+
+                    VulnerabilityEntity csrf = new()
+                    {
+                        ScanEntity = websiteScanEntity,
+                        VulnerabilityType = VulnerabilityType.CSRF
+                    };
+
+                    Context.Add(websiteScanEntity);
+                    Context.Add(sqli);
+                    Context.Add(xss);
+                    Context.Add(csrf);
+                    await Context.SaveChangesAsync();
+
                 }
 
                 return View("Scanner", vulnerablity);

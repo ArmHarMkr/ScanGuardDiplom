@@ -10,7 +10,6 @@ namespace MGOBankApp.Domain.Entity
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public WebsiteScanEntity ScanEntity { get; set; }
-        public Guid ScanEntityId { get; set; }
         public VulnerabilityType VulnerabilityType { get; set; }
     }
 

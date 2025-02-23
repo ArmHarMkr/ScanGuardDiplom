@@ -11,7 +11,6 @@ namespace MGOBankApp.Domain.Entity
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string NotificationTitle { get; set; }
         public string NotificationContent { get; set; }
-        public Guid ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public DateTime SentDateTime { get; set; } = DateTime.Now;
     }

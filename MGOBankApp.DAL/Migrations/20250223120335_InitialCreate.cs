@@ -171,7 +171,7 @@ namespace MGOBankApp.DAL.Migrations
                     VirusTotalReport = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsMalicious = table.Column<bool>(type: "bit", nullable: false),
                     VulnerabilityType = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -180,8 +180,7 @@ namespace MGOBankApp.DAL.Migrations
                         name: "FK_FileScanEntities_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -191,16 +190,15 @@ namespace MGOBankApp.DAL.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NotificationTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NotificationContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ApplicationUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SentDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NotificationEntities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NotificationEntities_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_NotificationEntities_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -210,8 +208,7 @@ namespace MGOBankApp.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ScanUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ScanUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ScanUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ScanDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -221,8 +218,8 @@ namespace MGOBankApp.DAL.Migrations
                 {
                     table.PrimaryKey("PK_WebsiteScanEntities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WebsiteScanEntities_AspNetUsers_ScanUserId1",
-                        column: x => x.ScanUserId1,
+                        name: "FK_WebsiteScanEntities_AspNetUsers_ScanUserId",
+                        column: x => x.ScanUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -233,16 +230,15 @@ namespace MGOBankApp.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ScanEntityId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ScanEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ScanEntityId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     VulnerabilityType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VulnerabilityEntities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VulnerabilityEntities_WebsiteScanEntities_ScanEntityId1",
-                        column: x => x.ScanEntityId1,
+                        name: "FK_VulnerabilityEntities_WebsiteScanEntities_ScanEntityId",
+                        column: x => x.ScanEntityId,
                         principalTable: "WebsiteScanEntities",
                         principalColumn: "Id");
                 });
@@ -292,19 +288,19 @@ namespace MGOBankApp.DAL.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NotificationEntities_ApplicationUserId1",
+                name: "IX_NotificationEntities_ApplicationUserId",
                 table: "NotificationEntities",
-                column: "ApplicationUserId1");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VulnerabilityEntities_ScanEntityId1",
+                name: "IX_VulnerabilityEntities_ScanEntityId",
                 table: "VulnerabilityEntities",
-                column: "ScanEntityId1");
+                column: "ScanEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WebsiteScanEntities_ScanUserId1",
+                name: "IX_WebsiteScanEntities_ScanUserId",
                 table: "WebsiteScanEntities",
-                column: "ScanUserId1");
+                column: "ScanUserId");
         }
 
         /// <inheritdoc />
