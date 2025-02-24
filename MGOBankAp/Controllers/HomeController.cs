@@ -1,6 +1,7 @@
 using HtmlAgilityPack;
 using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
+using MGOBankApp.Domain.Enums;
 using MGOBankApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

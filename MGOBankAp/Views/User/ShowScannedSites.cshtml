@@ -1,0 +1,40 @@
+﻿@using MGOBankApp.ViewModels
+@model List<SiteVulnViewModel>
+
+<!-- Подключение CSS -->
+<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+<div class="table-container">
+    <table class="cyber-table">
+        <thead>
+            <tr>
+                <th class="cyber-header">Website URL</th>
+                <th class="cyber-header">Scan Date</th>
+                <th class="cyber-header">Vulnerability Count</th>
+                <th class="cyber-header">Vulnerability Type</th>
+                <th class="cyber-header">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var site in Model)
+            {
+                <tr class="cyber-row">
+                    <td class="cyber-cell">@site.Url</td>
+                    <td class="cyber-cell">@site.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td class="cyber-cell">@site.VulnerabilityCount</td>
+                    <td class="cyber-cell">
+                        @(site.Vulnerabilities != null && site.Vulnerabilities.Any()
+                            ? string.Join(", ", site.Vulnerabilities.Select(v => v.VulnerabilityType)) // Assuming "Type" is the property you want
+                            : "No vulnerabilities found")
+                    </td>
+
+                    <td class="cyber-cell">
+                        <form asp-action="RemoveSiteScan" asp-route-id="@site.WebsiteScanId" method="post" class="action-form">
+                            <button type="submit" class="btn-custom">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

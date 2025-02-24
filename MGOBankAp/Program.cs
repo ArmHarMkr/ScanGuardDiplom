@@ -51,6 +51,7 @@ internal class Program
         builder.Services.AddHttpClient();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IScannerService, ScannerService>();
+        builder.Services.AddScoped<IScannedSites, ScannedSites>();
 
 
         var app = builder.Build();
