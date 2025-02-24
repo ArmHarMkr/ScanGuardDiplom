@@ -42,6 +42,11 @@ namespace MGOBankAp.Controllers
             return View(new Vulnerability());
         }
 
+        public IActionResult FwdScanner()
+        {
+            return RedirectToAction("Scanner");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Scanner(string url)
         {
