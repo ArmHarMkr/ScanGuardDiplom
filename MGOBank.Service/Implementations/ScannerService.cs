@@ -78,11 +78,9 @@ namespace MGOBankApp.Service.Implementations
                         vulnerablity.SQLi = true;
                         vulnCount++;
                     }
-
                     else if (sqliStatusCode >= 400 && normalStatusCode < 500)
                     {
-                        vulnerablity.SQLi = true;
-                        vulnCount++;
+                        vulnerablity.SQLi = false;
                     }
 
                     // Тест XSS
