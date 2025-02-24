@@ -36,15 +36,16 @@ namespace MGOBankAp.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Scanner()
-        {
-            return View(new Vulnerability());
-        }
 
         public IActionResult FwdScanner()
         {
             return RedirectToAction("Scanner");
+        }
+
+        [HttpGet]
+        public IActionResult Scanner()
+        {
+            return View(new Vulnerability());
         }
 
         [HttpPost]
@@ -102,7 +103,7 @@ namespace MGOBankAp.Controllers
                     var (sqliResponse, sqliStatusCode) = await SendRequest(method, absoluteAction, data);
 
                     if (sqliStatusCode >= 200 && sqliStatusCode < 300 || normalStatusCode != sqliStatusCode)
-                    { 
+                    {
                         vulnerablity.SQLi = true;
                         vulnCount++;
                     }
@@ -154,7 +155,7 @@ namespace MGOBankAp.Controllers
                         ScanEntity = websiteScanEntity,
                         VulnerabilityType = VulnerabilityType.SQLi
                     };
-                    
+
                     VulnerabilityEntity xss = new()
                     {
                         ScanEntity = websiteScanEntity,

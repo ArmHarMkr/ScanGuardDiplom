@@ -17,14 +17,20 @@ namespace MGOBankApp.Controllers
             _scannerService = scannerService;
         }
 
-        [HttpPost]
-        public IActionResult Scanner()
+        public IActionResult FwdScanner()
         {
-            return View();
+            return RedirectToAction("Scanner");
         }
 
         [HttpGet]
-        public async Task<IActionResult> ScanUrl(string url)
+        public IActionResult Scanner()
+        {
+            var vuln = new Vulnerability();
+            return View(vuln);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Scanner(string url)
         {
             if (string.IsNullOrEmpty(url))
                 return BadRequest("URL не указан");
