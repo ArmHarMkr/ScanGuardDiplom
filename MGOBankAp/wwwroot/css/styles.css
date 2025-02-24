@@ -431,3 +431,105 @@
         }
 
 /* ... (остальные стили остаются без изменений) ... */
+
+/* ... (предыдущие стили остаются без изменений) ... */
+
+.table-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(10, 25, 47, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.cyber-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    color: #a3bffa;
+    font-size: 0.9rem;
+}
+
+.cyber-header {
+    padding: 12px;
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+    .cyber-header:hover {
+        background: rgba(0, 212, 255, 0.2);
+        color: #ff007a;
+        text-shadow: 0 0 10px #ff007a;
+    }
+
+.cyber-row {
+    transition: background 0.3s ease;
+}
+
+    .cyber-row:hover {
+        background: rgba(255, 0, 122, 0.1);
+    }
+
+.cyber-cell {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+    text-align: left;
+}
+
+.role-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 2px;
+    background: rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    text-shadow: 0 0 2px rgba(0, 212, 255, 0.5);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+    .role-tag:hover {
+        background: rgba(255, 0, 122, 0.2);
+        color: #ff007a;
+        text-shadow: 0 0 5px #ff007a;
+    }
+
+.action-form {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.btn-custom {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(45deg, #00d4ff, #ff007a);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+    .btn-custom:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+    }
+
+.admin-note {
+    color: #ff007a;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 0, 122, 0.5);
+    margin: 5px 0;
+}
+
+/* ... (остальные стили остаются без изменений) ... */

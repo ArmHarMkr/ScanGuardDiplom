@@ -12,18 +12,4 @@ namespace MGOBankApp.Domain.Entity
         public WebsiteScanEntity ScanEntity { get; set; }
         public VulnerabilityType VulnerabilityType { get; set; }
     }
-
-    public enum VulnerabilityType
-    {
-        XSS,
-        SQLi,
-        CSRF,
-        SSRF,
-        DirectoryListing,
-        SensitiveDataExposure,
-        RFI,
-        LFI,
-        Virus,
-        Macro
-    }
 }

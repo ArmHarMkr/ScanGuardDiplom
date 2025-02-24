@@ -7,16 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MGOBankApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class UsersController : Controller
+    public class AdminController : Controller
     {
         private readonly ApplicationDbContext Context;
         private readonly SignInManager<ApplicationUser> SignInManager;
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IUserService UserService;
 
-        public UsersController(ApplicationDbContext context, 
+        public AdminController(ApplicationDbContext context,
                                SignInManager<ApplicationUser> signInManager,
                                UserManager<ApplicationUser> usermanager,
                                IUserService userservice)
@@ -28,7 +27,7 @@ namespace MGOBankApp.Areas.Admin.Controllers
         }
 
 
-        
+
         public async Task<IActionResult> Index()
         {
             try
@@ -41,6 +40,33 @@ namespace MGOBankApp.Areas.Admin.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPost("GivePremiumRole")]
+        public async Task<IActionResult> GivePremiumRole(string? id)
+        {
+            if (id == null) return NotFound();
+            var userFromDb = await UserService.GetApplicationUser(id);
+            await UserService.GivePremiumRole(userFromDb);
+            return RedirectToAction("Index", "Admin");
+        }
+
+        [HttpPost("GiveCustomerRole")]
+        public async Task<IActionResult> GiveCustomerRole(string? id)
+        {
+            if (id == null) return NotFound();
+            var userFromDb = await UserService.GetApplicationUser(id);
+            await UserService.GiveCustomerRole(userFromDb);
+            return RedirectToAction("Index", "Admin");
+        }
+
+        [HttpPost("GiveAdminRole")]
+        public async Task<IActionResult> GiveAdminRole(string? id)
+        {
+            if (id == null) return NotFound();
+            var userFromDb = await UserService.GetApplicationUser(id);
+            await UserService.GiveAdminRole(userFromDb);
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

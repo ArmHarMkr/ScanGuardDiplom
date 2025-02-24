@@ -1,9 +1,11 @@
-﻿using MGOBankApp.DAL.Data;
+﻿using HtmlAgilityPack;
+using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
 using MGOBankApp.Domain.Roles;
 using MGOBankApp.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +51,18 @@ namespace MGOBankApp.Service.Implementations
         {
             var allUsers = await Context.Users.ToListAsync();
             return allUsers;
+        }
+
+        public async Task<ApplicationUser> GetApplicationUser(string id)
+        {
+            if (id != null || !id.IsNullOrEmpty())
+            {
+                return await Context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            }
+            else
+            {
+                throw new Exception("No User Found");
+            }
         }
     }
 }

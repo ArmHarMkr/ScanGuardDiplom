@@ -15,5 +15,6 @@ namespace MGOBankApp.Service.Interfaces
         Task GiveAdminRole(ApplicationUser applicationUser);
         
         Task<List<ApplicationUser>> GetAllUsers();
+        Task<ApplicationUser> GetApplicationUser(string id);
     }
 }

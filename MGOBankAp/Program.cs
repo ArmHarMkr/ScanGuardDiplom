@@ -72,6 +72,8 @@ internal class Program
 
         app.UseAuthorization();
 
+
+
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -79,8 +81,9 @@ internal class Program
         app.MapAreaControllerRoute(
             name: "admin_area",
             areaName: "Admin",
-            pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+            pattern: "admin/{controller=Home}/{action=Index}/{id?}"
         );
+
 
 
 
@@ -91,7 +94,7 @@ internal class Program
         using (var scope = app.Services.CreateScope())
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var roles = new[] { SD.Role_Admin, SD.Role_Customer };
+            var roles = new[] { SD.Role_Admin, SD.Role_Customer, SD.Role_Premium };
 
             foreach (var role in roles)
             {

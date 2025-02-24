@@ -1,0 +1,73 @@
+﻿@using MGOBankApp.Domain.Entity
+@using MGOBankApp.Domain.Roles
+@using Microsoft.AspNetCore.Identity
+@model List<ApplicationUser>
+@inject UserManager<ApplicationUser> userManager
+
+<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+<div class="table-container">
+    <table class="cyber-table">
+        <thead>
+            <tr>
+                <th class="cyber-header">Id</th>
+                <th class="cyber-header">Employee Name</th>
+                <th class="cyber-header">Employee Email</th>
+                <th class="cyber-header">User Role</th>
+                <th class="cyber-header">Employee Registered time</th>
+                <th class="cyber-header">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="cyber-row">
+                    <td class="cyber-cell">@item.Id</td>
+                    <td class="cyber-cell">@item.FullName</td>
+                    <td class="cyber-cell">@item.Email</td>
+                    <td class="cyber-cell">
+                        @foreach (var role in await userManager.GetRolesAsync(item))
+                        {
+                            <span class="role-tag">@role</span>
+                        }
+                    </td>
+                    <td class="cyber-cell">@item.UserCreatedDate</td>
+                    <td class="cyber-cell">
+                        @if(await userManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id != (await userManager.GetUserAsync(User)).Id)
+                        {
+                            <form asp-controller="Admin" asp-action="GivePremiumRole" asp-route-id="@item.Id" class="action-form">
+                                <button type="submit" class="btn-custom">Give Premium Role</button>
+                            </form>
+                            <form asp-controller="Admin" asp-action="GiveCustomerRole" asp-route-id="@item.Id" class="action-form">
+                                <button type="submit" class="btn-custom">Give Customer Role</button>
+                            </form>
+                        }
+                        else if (await userManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id == (await userManager.GetUserAsync(User)).Id)
+                        {
+                            <p class="admin-note">Admin Role (Current User)</p>
+                        }
+                        else if (await userManager.IsInRoleAsync(item, SD.Role_Customer))
+                        {
+                            <form asp-controller="Admin" asp-action="GivePremiumRole" asp-route-id="@item.Id" class="action-form">
+                                <button type="submit" class="btn-custom">Give Premium Role</button>
+                            </form>
+                            <form asp-controller="Admin" asp-action="GiveAdminRole" asp-route-id="@item.Id" class="action-form">
+                                <button type="submit" class="btn-custom">Give Admin Role</button>
+                            </form>
+                        }
+                        else if (await userManager.IsInRoleAsync(item, SD.Role_Premium))
+                        {
+                            <form asp-controller="Admin" asp-action="GiveAdminRole" asp-route-id="@item.Id" class="action-form">
+                                <button type="submit" class="btn-custom">Give Admin Role</button>
+                            </form>
+                            <form asp-controller="Admin" asp-action="GiveCustomerRole" asp-route-id="@item.Id" class="action-form">
+                                <button type="submit" class="btn-custom">Give Customer Role</button>
+                            </form>
+
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
