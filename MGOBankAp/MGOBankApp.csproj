@@ -51,7 +51,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MGOBankApp.DAL\MGOBankApp.DAL.csproj" />
 
-    <ProjectReference Include="..\MGOBank.Service\MGOBankApp.Service.csproj" />
+    <ProjectReference Include="..\MGOBank.Service\MGOBankApp.BLL.csproj" />
     <ProjectReference Include="..\MGOBankApp.DAL\MGOBankApp.DAL.csproj" />
     <ProjectReference Include="..\MGOBankApp.Domain\MGOBankApp.Domain.csproj" />
   </ItemGroup>

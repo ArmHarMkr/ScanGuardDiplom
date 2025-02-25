@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.DAL", "MGOBankAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.Domain", "MGOBankApp.Domain\MGOBankApp.Domain.csproj", "{D744A8CD-AD92-4A3A-8BE8-0E0AFFEB6AC8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.Service", "MGOBank.Service\MGOBankApp.Service.csproj", "{96CF6A20-29B1-48F2-A2AA-87EA64A51838}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.BLL", "MGOBank.Service\MGOBankApp.BLL.csproj", "{96CF6A20-29B1-48F2-A2AA-87EA64A51838}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

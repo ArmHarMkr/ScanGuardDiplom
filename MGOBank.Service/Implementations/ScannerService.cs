@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MGOBankApp.Service.Implementations
 {
@@ -30,12 +31,11 @@ namespace MGOBankApp.Service.Implementations
         {
             try
             {
+                Vulnerability vulnerability = new Vulnerability();
                 var baseUri = new Uri(url);
                 _httpClient.BaseAddress = new Uri(baseUri.GetLeftPart(UriPartial.Authority));
 
                 // Check if the URL uses HTTPS
-                bool isHttps = baseUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase);
-
                 var response = await _httpClient.GetAsync(url);
                 if (!response.IsSuccessStatusCode)
                     throw new Exception($"Ошибка доступа к сайту : {response.StatusCode}");
@@ -45,18 +45,11 @@ namespace MGOBankApp.Service.Implementations
                 doc.LoadHtml(html);
 
                 var forms = doc.DocumentNode.SelectNodes("//form") ?? new HtmlNodeCollection(null);
-                Vulnerability vulnerability = new Vulnerability
-                {
-                    HTTPWithoutS = !isHttps
-                };
 
-                int vulnCount = 0;
 
-                // Count HTTP vulnerability separately
-                if (vulnerability.HTTPWithoutS)
-                {
-                    vulnCount++;
-                }
+
+                vulnerability.HTTPWithoutS = IsHttps(baseUri);
+
 
                 foreach (var form in forms)
                 {
@@ -76,50 +69,16 @@ namespace MGOBankApp.Service.Implementations
                         }
                     }
 
-                    // SQL Injection Test
-                    var normalPayload = "test";
-                    foreach (var key in data.Keys)
-                        data[key] = normalPayload;
-
-                    var (normalResponse, normalStatusCode) = await SendRequest(method, absoluteAction, data);
-
-                    var sqliPayload = "' OR 1=1 --";
-                    foreach (var key in data.Keys)
-                        data[key] = sqliPayload;
-
-                    var (sqliResponse, sqliStatusCode) = await SendRequest(method, absoluteAction, data);
-
-                    if (sqliStatusCode >= 200 && sqliStatusCode < 300 || normalStatusCode != sqliStatusCode)
-                    {
-                        vulnerability.SQLi = true;
-                    }
+                    // SQL Injection Test    
+                        vulnerability.SQLi = await SqlInjectionTest(data,method,absoluteAction);
 
                     // XSS Test
-                    var xssPayload = "<script>alert('xss')</script>";
-                    foreach (var key in data.Keys)
-                        data[key] = xssPayload;
-
-                    var (xssResponse, _) = await SendRequest(method, absoluteAction, data);
-                    if (xssResponse.Contains(xssPayload))
-                    {
-                        vulnerability.XSS = true;
-                    }
-
+                        vulnerability.XSS = await XssTest(method, absoluteAction, data);
                     // CSRF Test
-                    var csrfToken = form.SelectSingleNode(".//input[@name='csrf_token']");
-                    if (csrfToken == null && method == "post")
-                    {
-                        vulnerability.CSRF = true;
-                    }
+                        vulnerability.CSRF = CsrfTest(method, form);
                 }
 
-                if (vulnerability.SQLi) vulnCount++;
-                if (vulnerability.XSS) vulnCount++;
-                if (vulnerability.CSRF) vulnCount++;
-
-
-
-
+                int vulnCount = calculateVulnerabilityCount(vulnerability);
 
 
                 if (applicationUser != null)
@@ -177,7 +136,72 @@ namespace MGOBankApp.Service.Implementations
                 throw new Exception($"Ошибка сканирования: {ex.Message}");
             }
         }
+        public async Task<bool> SqlInjectionTest(Dictionary<string, string> data,string method,string absoluteAction)
+        {
+            var normalPayload = "test";
+            foreach (var key in data.Keys)
+                data[key] = normalPayload;
 
+            var (normalResponse, normalStatusCode) = await SendRequest(method, absoluteAction, data);
+
+            var sqliPayload = "' OR 1=1 --";
+            foreach (var key in data.Keys)
+                data[key] = sqliPayload;
+
+            var (sqliResponse, sqliStatusCode) = await SendRequest(method, absoluteAction, data);
+
+            if (sqliStatusCode >= 200 && sqliStatusCode < 300 || normalStatusCode != sqliStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> XssTest(string method , string absoluteAction, Dictionary<string,string> data)
+        {
+            var xssPayload = "<script>alert('xss')</script>";
+            foreach (var key in data.Keys)
+                data[key] = xssPayload;
+
+            var (xssResponse, _) = await SendRequest(method, absoluteAction, data);
+            if (xssResponse.Contains(xssPayload))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool CsrfTest(string method,HtmlNode form)
+        {
+            var csrfToken = form.SelectSingleNode(".//input[@name='csrf_token']");
+            if (csrfToken == null && method == "post")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private bool IsHttps(Uri baseUri)
+        {
+            return baseUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private int calculateVulnerabilityCount(Vulnerability vulnerability)
+        {
+            int vulnCount = 0;
+            if (vulnerability.SQLi) vulnCount++;
+            if (vulnerability.XSS) vulnCount++;
+            if (vulnerability.CSRF) vulnCount++;
+            if (vulnerability.HTTPWithoutS) vulnCount++;
+            return vulnCount;
+        }
         private async Task<(string response, int statusCode)> SendRequest(string method, string action, Dictionary<string, string> data)
         {
             HttpResponseMessage response;
