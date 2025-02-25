@@ -1,6 +1,15 @@
-﻿@page
-@using MGOBankApp.Models
-@model Vulnerability
+﻿@model MGOBankApp.Models.Vulnerability
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="error">@TempData["ErrorMessage"]</div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="success">@TempData["SuccessMessage"]</div>
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,17 +39,26 @@
 </head>
 <body>
     <h1>Сканер уязвимостей</h1>
-    <form method="post">
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="error">@ViewBag.ErrorMessage</div>
+    }
+
+    <form asp-action="Scanner" method="post">
         <label for="url">Введите URL для проверки:</label><br>
-        <input type="text" id="url" name="Url" style="width: 300px;" placeholder="https://example.com" /><br><br>
+        <input type="text" id="url" name="url" style="width: 300px;" placeholder="https://example.com" /><br><br>
         <button type="submit">Сканировать</button>
     </form>
 
+    @if (Model != null)
+    {
         <div class="result">
             <h3>Результаты сканирования:</h3>
             <p><strong>SQLi:</strong> <span class="@(Model.SQLi ? "error" : "success")">@Model.SQLi</span></p>
             <p><strong>XSS:</strong> <span class="@(Model.XSS ? "error" : "success")">@Model.XSS</span></p>
-            <p><strong>XSRF:</strong> <span class="@(Model.XSRF ? "error" : "success")">@Model.XSRF</span></p>
+            <p><strong>CSRF:</strong> <span class="@(Model.CSRF ? "error" : "success")">@Model.CSRF</span></p>
+            <p><strong>Encrypted Domain:</strong> <span style="color: @(Model.HTTPWithoutS ? "red" : "green")">@Model.HTTPWithoutS</span></p>
         </div>
     }
 </body>

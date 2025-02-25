@@ -12,7 +12,7 @@
 <div>
     <p><strong>SQL Injection:</strong> <span style="color: @(Model.SQLi ? "red" : "green")">@Model.SQLi</span></p>
     <p><strong>XSS:</strong> <span style="color: @(Model.XSS ? "red" : "green")">@Model.XSS</span></p>
-    <p><strong>XSRF:</strong> <span style="color: @(Model.XSRF ? "red" : "green")">@Model.XSRF</span></p>
+    <p><strong>XSRF:</strong> <span style="color: @(Model.CSRF ? "red" : "green")">@Model.CSRF</span></p>
 </div>
 
 <a asp-action="Index">Вернуться назад</a>

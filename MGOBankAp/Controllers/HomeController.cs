@@ -126,11 +126,11 @@ namespace MGOBankAp.Controllers
                         vulnCount++;
                     }
 
-                    // Тест XSRF
+                    // Тест CSRF
                     var csrfToken = form.SelectSingleNode(".//input[@name='csrf_token']");
                     if (csrfToken == null && method == "post")
                     {
-                        vulnerablity.XSRF = true;
+                        vulnerablity.CSRF = true;
                         vulnCount++;
                     }
                 }
