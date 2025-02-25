@@ -1,4 +1,6 @@
 ﻿using HtmlAgilityPack;
+using MGOBankApp.BLL.Interfaces;
+using MGOBankApp.BLL.Utilities;
 using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
 using MGOBankApp.Models;
@@ -19,10 +21,12 @@ namespace MGOBankApp.Service.Implementations
         private readonly HttpClient _httpClient;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
+        private readonly IVulnerabilityAnalyzer _analyzer;
 
-        public ScannerService(HttpClient httpClient, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public ScannerService(HttpClient httpClient, IVulnerabilityAnalyzer analyzer, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _analyzer = analyzer;
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _context = context;
         }
@@ -48,7 +52,7 @@ namespace MGOBankApp.Service.Implementations
 
 
 
-                vulnerability.HTTPWithoutS = IsHttps(baseUri);
+                vulnerability.HTTPWithoutS = _analyzer.IsHttps(baseUri);
 
 
                 foreach (var form in forms)
@@ -70,15 +74,15 @@ namespace MGOBankApp.Service.Implementations
                     }
 
                     // SQL Injection Test    
-                        vulnerability.SQLi = await SqlInjectionTest(data,method,absoluteAction);
+                        vulnerability.SQLi = await _analyzer.SqlInjectionTest(data,method,absoluteAction);
 
                     // XSS Test
-                        vulnerability.XSS = await XssTest(method, absoluteAction, data);
+                        vulnerability.XSS = await _analyzer.XssTest(method, absoluteAction, data);
                     // CSRF Test
-                        vulnerability.CSRF = CsrfTest(method, form);
+                        vulnerability.CSRF = _analyzer.CsrfTest(method, form);
                 }
 
-                int vulnCount = calculateVulnerabilityCount(vulnerability);
+                int vulnCount = _analyzer.calculateVulnerabilityCount(vulnerability);
 
 
                 if (applicationUser != null)
@@ -136,88 +140,7 @@ namespace MGOBankApp.Service.Implementations
                 throw new Exception($"Ошибка сканирования: {ex.Message}");
             }
         }
-        public async Task<bool> SqlInjectionTest(Dictionary<string, string> data,string method,string absoluteAction)
-        {
-            var normalPayload = "test";
-            foreach (var key in data.Keys)
-                data[key] = normalPayload;
-
-            var (normalResponse, normalStatusCode) = await SendRequest(method, absoluteAction, data);
-
-            var sqliPayload = "' OR 1=1 --";
-            foreach (var key in data.Keys)
-                data[key] = sqliPayload;
-
-            var (sqliResponse, sqliStatusCode) = await SendRequest(method, absoluteAction, data);
-
-            if (sqliStatusCode >= 200 && sqliStatusCode < 300 || normalStatusCode != sqliStatusCode)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> XssTest(string method , string absoluteAction, Dictionary<string,string> data)
-        {
-            var xssPayload = "<script>alert('xss')</script>";
-            foreach (var key in data.Keys)
-                data[key] = xssPayload;
-
-            var (xssResponse, _) = await SendRequest(method, absoluteAction, data);
-            if (xssResponse.Contains(xssPayload))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public bool CsrfTest(string method,HtmlNode form)
-        {
-            var csrfToken = form.SelectSingleNode(".//input[@name='csrf_token']");
-            if (csrfToken == null && method == "post")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        private bool IsHttps(Uri baseUri)
-        {
-            return baseUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase);
-        }
-
-        private int calculateVulnerabilityCount(Vulnerability vulnerability)
-        {
-            int vulnCount = 0;
-            if (vulnerability.SQLi) vulnCount++;
-            if (vulnerability.XSS) vulnCount++;
-            if (vulnerability.CSRF) vulnCount++;
-            if (vulnerability.HTTPWithoutS) vulnCount++;
-            return vulnCount;
-        }
-        private async Task<(string response, int statusCode)> SendRequest(string method, string action, Dictionary<string, string> data)
-        {
-            HttpResponseMessage response;
-
-            if (method == "post")
-            {
-                var content = new FormUrlEncodedContent(data);
-                response = await _httpClient.PostAsync(action, content);
-            }
-            else
-            {
-                var query = string.Join("&", data.Select(kvp => $"{Uri.EscapeDataString(kvp.Key)}={Uri.EscapeDataString(kvp.Value)}"));
-                response = await _httpClient.GetAsync($"{action}?{query}");
-            }
-
-            return (await response.Content.ReadAsStringAsync(), (int)response.StatusCode);
-        }
+        
+             
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.Service.Implementations
+namespace MGOBankApp.BLL.Utilities
 {
     public class ScannedSites : IScannedSites
     {

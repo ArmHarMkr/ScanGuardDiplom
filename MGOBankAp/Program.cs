@@ -8,6 +8,8 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using MGOBankApp.Service.Interfaces;
 using MGOBankApp.Service.Implementations;
+using MGOBankApp.BLL.Utilities;
+using MGOBankApp.BLL.Interfaces;
 
 internal class Program
 {
@@ -49,10 +51,10 @@ internal class Program
 
         //DI Container
         builder.Services.AddHttpClient();
+        builder.Services.AddHttpClient<IVulnerabilityAnalyzer, VulnerabilityAnalyzer>();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IScannerService, ScannerService>();
         builder.Services.AddScoped<IScannedSites, ScannedSites>();
-
 
         var app = builder.Build();
         app.UseRequestLocalization();
