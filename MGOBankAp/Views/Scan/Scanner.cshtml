@@ -58,7 +58,7 @@
             <p><strong>SQLi:</strong> <span class="@(Model.SQLi ? "error" : "success")">@Model.SQLi</span></p>
             <p><strong>XSS:</strong> <span class="@(Model.XSS ? "error" : "success")">@Model.XSS</span></p>
             <p><strong>CSRF:</strong> <span class="@(Model.CSRF ? "error" : "success")">@Model.CSRF</span></p>
-            <p><strong>Encrypted Domain:</strong> <span style="color: @(Model.HTTPWithoutS ? "red" : "green")">@Model.HTTPWithoutS</span></p>
+            <p><strong>Encrypted Domain:</strong> <span class="@(Model.HTTPWithoutS ? "success" : "error")">@Model.HTTPWithoutS</span></p>
         </div>
     }
 </body>
