@@ -3,6 +3,7 @@ using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
 using MGOBankApp.Domain.Enums;
 using MGOBankApp.Models;
+using MGOBankApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,10 +27,25 @@ namespace MGOBankAp.Controllers
             Context = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            bool isSignedIn = SignInManager.IsSignedIn(User);
+
+            int siteCount = isSignedIn ? 30 : 10; // Get top 30 if signed in, else top 10
+
+            List<SiteScanCountEntity> mostScanCount = await Context.SiteScanCounts
+                .OrderByDescending(x => x.CheckCount) // Order by highest check count
+                .Take(siteCount)
+                .ToListAsync();
+
+            var scanVulnerableSitesVM = new ScannedVulnerableSitesVM()
+            {
+                IsSignedIn = isSignedIn
+            };
+
+            return View(mostScanCount);
         }
+
 
         public IActionResult AboutUs()
         {

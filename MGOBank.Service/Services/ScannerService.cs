@@ -6,6 +6,7 @@ using MGOBankApp.Domain.Entity;
 using MGOBankApp.Models;
 using MGOBankApp.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,25 @@ namespace MGOBankApp.Service.Implementations
                 Vulnerability vulnerability = new Vulnerability();
                 var baseUri = new Uri(url);
                 _httpClient.BaseAddress = new Uri(baseUri.GetLeftPart(UriPartial.Authority));
+
+               
+                if (_context.SiteScanCounts.Any(x => x.Url == _httpClient.BaseAddress.ToString()))
+                {
+                    var siteScanCount = await _context.SiteScanCounts.FirstOrDefaultAsync(x => x.Url == _httpClient.BaseAddress.ToString());
+                    siteScanCount.CheckCount++;
+                }
+                else
+                {
+                    SiteScanCountEntity siteScanCount = new SiteScanCountEntity()
+                    {
+                        Url = _httpClient.BaseAddress.ToString(),
+                        CheckCount = 1
+                    };
+                    _context.SiteScanCounts.Add(siteScanCount);
+                }
+
+                await _context.SaveChangesAsync();
+
 
                 // Check if the URL uses HTTPS
                 var response = await _httpClient.GetAsync(url);

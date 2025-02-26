@@ -2,6 +2,7 @@
     ViewData["Title"] = "Главная";
 }
 
+@model List<SiteScanCountEntity>
 <div class="description">Check the websites you visit for security</div>
 <div class="title-wrapper">
     <h1 class="title">
@@ -12,3 +13,36 @@
     <button class="btn-custom" >Try It Now</button>
 </form>
 <div class="slogan">Your first line of defense in the digital world</div>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Website URL</th>
+            <th>Scan Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int count = 1;
+            @foreach (var site in Model)
+            {
+                <tr>
+                    <td>@count</td>
+                    <td>@site.Url</td>
+                    <td>@site.CheckCount</td>
+                </tr>
+                count++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">No scanned websites available.</td>
+            </tr>
+        }
+    </tbody>
+</table>
