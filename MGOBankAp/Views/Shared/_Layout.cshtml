@@ -32,14 +32,30 @@
             {
                 var currentUser = await UserManager.GetUserAsync(User);
                 var isAdmin = await UserManager.IsInRoleAsync(currentUser, SD.Role_Admin);
-                var isManager = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium);
+                var isPremium = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium);
+                var isCustomer = await UserManager.IsInRoleAsync(currentUser, SD.Role_Customer);
+
 
                 if (isAdmin)
                 {
                     <ul class="nav-links">
-                        <li><a href="../Admin/index">Users</a></li>
+                        <li><a href="/Admin/index">Users</a></li>
                     </ul>
-
+                }
+                if (isPremium)
+                {
+                    <ul class="nav-links">
+                        <li><a asp-action="Index" asp-controller="Premium">Scan File</a></li>
+                    </ul>
+                }
+                if (isCustomer)
+                {
+                    <ul class="nav-links">
+                        <li><a asp-action="Index" asp-controller="FileScan">Scan File</a></li>
+                    </ul>
+                    <ul class="nav-links">
+                        <li><a asp-action="History" asp-controller="FileScan">History</a></li>
+                    </ul>
                 }
             }
 

@@ -10,6 +10,7 @@ using MGOBankApp.Service.Interfaces;
 using MGOBankApp.Service.Implementations;
 using MGOBankApp.BLL.Utilities;
 using MGOBankApp.BLL.Interfaces;
+using MGOBankApp.BLL.Services;
 
 internal class Program
 {
@@ -55,6 +56,8 @@ internal class Program
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IScannerService, ScannerService>();
         builder.Services.AddScoped<IScannedSites, ScannedSites>();
+        builder.Services.AddHttpClient<IFileScanService, FileScanService>();
+        builder.Services.AddScoped<IFileScanService, FileScanService>();
 
         var app = builder.Build();
         app.UseRequestLocalization();

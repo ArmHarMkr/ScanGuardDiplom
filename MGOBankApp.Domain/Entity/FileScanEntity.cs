@@ -12,7 +12,7 @@ namespace MGOBankApp.Domain.Entity
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string FileName { get; set; }
         public string FileHash { get; set; }
-        public DateTime ScanDate { get; set; }
+        public DateTime ScanDate { get; set; } = DateTime.Now;
         public string VirusTotalReport { get; set; }
         public bool IsMalicious { get; set; }
         public VulnerabilityType VulnerabilityType { get; set; }

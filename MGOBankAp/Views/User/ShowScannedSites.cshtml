@@ -24,7 +24,7 @@
                     <td class="cyber-cell">@site.VulnerabilityCount</td>
                     <td class="cyber-cell">
                         @(site.Vulnerabilities != null && site.Vulnerabilities.Any()
-                            ? string.Join(", ", site.Vulnerabilities.Select(v => v.VulnerabilityType)) // Assuming "Type" is the property you want
+                            ? string.Join(", ", site.Vulnerabilities.Select(v => v.VulnerabilityType)) 
                             : "No vulnerabilities found")
                     </td>
 

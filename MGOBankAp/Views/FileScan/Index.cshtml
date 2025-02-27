@@ -1,0 +1,26 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Сканирование файла";
+}
+
+<h2>Загрузить файл для проверки</h2>
+
+@if (TempData["Notification"] != null)
+{
+    <div class="alert alert-warning">@TempData["Notification"]</div>
+}
+
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Выберите файл:</label>
+        <input type="file" name="file" class="form-control" />
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model))
+    {
+        <div class="alert alert-danger">@Model</div>
+    }
+
+    <button type="submit" class="btn btn-primary">Сканировать</button>
+</form>

@@ -1,0 +1,20 @@
+﻿@model FileScanEntity
+@{
+    ViewData["Title"] = "Результат сканирования";
+}
+
+<h2>Результат сканирования</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Файл: @Model.FileName</h5>
+        <p class="card-text">
+            <strong>Дата сканирования:</strong> @Model.ScanDate<br />
+            <strong>Хэш файла:</strong> @Model.FileHash<br />
+            <strong>Потенциальная угроза:</strong> @Model.VulnerabilityType<br />
+            <strong>Является ли вредоносным:</strong> @(Model.IsMalicious ? "Да" : "Нет")<br />
+            <strong>Отчет VirusTotal:</strong>
+            <pre>@Model.VirusTotalReport</pre>
+        </p>
+    </div>
+</div>

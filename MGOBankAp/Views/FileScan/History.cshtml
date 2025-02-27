@@ -1,0 +1,31 @@
+﻿@using MGOBankApp.Domain.Entity 
+@model List<FileScanEntity>
+
+<!-- Подключение CSS -->
+<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+<div class="table-container">
+    <table class="cyber-table">
+        <thead>
+            <tr>
+                <th class="cyber-header">File Name</th>
+                <th class="cyber-header">Scan Date</th>
+                <th class="cyber-header">File Hash</th>
+                <th class="cyber-header">Vulnerability Type</th>
+                <th class="cyber-header">Malicious</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var file in Model)
+            {
+                <tr class="cyber-row">
+                    <td class="cyber-cell">@file.FileName</td>
+                    <td class="cyber-cell">@file.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td class="cyber-cell">@file.FileHash</td>
+                    <td class="cyber-cell">@file.VulnerabilityType</td>
+                    <td class="cyber-cell">@(file.IsMalicious ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
