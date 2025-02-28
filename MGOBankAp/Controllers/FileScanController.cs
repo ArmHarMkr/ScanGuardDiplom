@@ -1,7 +1,9 @@
 ﻿using MGOBankApp.BLL.Interfaces;
 using MGOBankApp.DAL.Data;
+using MGOBankApp.Domain.Entity;
 using MGOBankApp.Domain.Roles;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -11,14 +13,18 @@ namespace MGOBankApp.Controllers;
 public class FileScanController : Controller
 {
     private readonly IFileScanService _scanService;
-    private const string RoleCustomer = "SD.Role_Customer";
     private const int DailyScanLimit = 2;
     private readonly ApplicationDbContext _context;
+    private readonly SignInManager<ApplicationUser> SignInManager;
+    private readonly UserManager<ApplicationUser> UserManager;
 
-    public FileScanController(IFileScanService scanService, ApplicationDbContext applicationDbContext)
+
+    public FileScanController(IFileScanService scanService, ApplicationDbContext applicationDbContext, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
     {
         _scanService = scanService ?? throw new ArgumentNullException(nameof(scanService));
         _context = applicationDbContext;
+        SignInManager = signInManager;
+        UserManager = userManager;
     }
 
     [HttpGet]
@@ -44,15 +50,9 @@ public class FileScanController : Controller
         }
 
         // Проверяем роль пользователя в базе
-        var user = await _context.Users.FindAsync(userId);
-        if (user == null)
-        {
-            ModelState.AddModelError("", "Пользователь не найден");
-            return View("Index");
-        }
+        var user = await UserManager.GetUserAsync(User);
 
-        bool isCustomer = await _context.UserRoles
-            .AnyAsync(ur => ur.UserId == userId && ur.RoleId == RoleCustomer); // Проверка роли
+        bool isCustomer = await UserManager.IsInRoleAsync(user, SD.Role_Customer);
 
         if (isCustomer)
         {
@@ -84,15 +84,18 @@ public class FileScanController : Controller
                     }
                 }
             }
-            try
+            else
             {
-                var result = await _scanService.ScanFileAsync(file, userId);
-                return RedirectToAction("Result", new { id = result.Id });
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", $"Ошибка при сканировании: {ex.Message}");
-                return View("Index");
+                try
+                {
+                    var result = await _scanService.ScanFileAsync(file, userId);
+                    return RedirectToAction("Result", new { id = result.Id });
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Ошибка при сканировании: {ex.Message}");
+                    return View("Index");
+                }
             }
         }
         else

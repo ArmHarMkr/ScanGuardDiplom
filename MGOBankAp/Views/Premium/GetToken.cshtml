@@ -1,0 +1,25 @@
+﻿@model TGUserEntity
+
+<h1>Get Token for TG</h1>
+
+@if (Model == null)
+{
+    <form asp-action="ShowToken" asp-controller="Premium">
+        <button type="submit">Get Token</button>
+    </form>
+}
+else
+{
+    <h1 id="tgToken">@Model.TGUserToken</h1>
+    <button onclick="copyToClipboard()">Copy Token</button>
+}
+
+<script>
+    function copyToClipboard() {
+        const tokenText = document.getElementById("tgToken").innerText;
+        navigator.clipboard.writeText(tokenText).then(() => {
+        }).catch(err => {
+            console.error("Failed to copy:", err);
+        });
+    }
+</script>

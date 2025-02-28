@@ -10,6 +10,7 @@ namespace MGOBankApp.Domain.Entity
         public DateTime UserCreatedDate { get; set; } = DateTime.Now;
         public int ScannedUrlCount { get; set; } = 0;
         public int ScannedFileCount { get; set; } = 0;
+        public bool TGConnected { get; set; } = false;
 
         public virtual ICollection<WebsiteScanEntity> WebsiteScans { get; set; } // Если нужно
         public virtual ICollection<NotificationEntity> Notifications { get; set; } // Уведомления

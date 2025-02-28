@@ -1,7 +1,12 @@
 ﻿using MGOBankApp.BLL.Interfaces;
+using MGOBankApp.DAL.Data;
+using MGOBankApp.Domain.Entity;
 using MGOBankApp.Domain.Roles;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Claims;
 
 namespace MGOBankApp.Controllers
@@ -10,10 +15,14 @@ namespace MGOBankApp.Controllers
     public class PremiumController : Controller
     {
         private readonly IFileScanService _scanService;
+        private readonly UserManager<ApplicationUser> UserManager;
+        private readonly ApplicationDbContext Context;
 
-        public PremiumController(IFileScanService scanService)
+        public PremiumController(IFileScanService scanService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _scanService = scanService;
+            UserManager = userManager;
+            Context = context;
         }
 
         [HttpGet]
@@ -23,7 +32,6 @@ namespace MGOBankApp.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Upload(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -43,6 +51,38 @@ namespace MGOBankApp.Controllers
             if (scanResult == null)
                 return NotFound();
             return View(scanResult);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetToken()
+        {
+            var currentUser = await UserManager.GetUserAsync(User);
+            TGUserEntity? tgUserEntity = await Context.TGUserEntities.FirstOrDefaultAsync(x => x.ApplicationUser == currentUser);
+            return View(tgUserEntity);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ShowToken()
+        {
+            var currentUser = await UserManager.GetUserAsync(User);
+            if(!currentUser.TGConnected)
+            {
+                TGUserEntity tGUserEntity = new TGUserEntity();
+                currentUser.TGConnected = true;
+                tGUserEntity.TGUserToken = Guid.NewGuid().ToString();
+                tGUserEntity.ApplicationUser = currentUser;
+                Context.TGUserEntities.Add(tGUserEntity);
+                await Context.SaveChangesAsync();
+
+                return View("GetToken");
+            }
+            else
+            {
+                var tgUserEntity = await Context.TGUserEntities.FirstOrDefaultAsync(x => x.ApplicationUser.Id == currentUser.Id);
+                TempData["Notification"] = $"You have already had your Token. {tgUserEntity.TGUserToken}";
+                return View("Index");
+            }
+
         }
     }
 }

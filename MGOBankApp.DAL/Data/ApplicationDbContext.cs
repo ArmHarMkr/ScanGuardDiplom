@@ -22,6 +22,7 @@ namespace MGOBankApp.DAL.Data
         public DbSet<NotificationEntity> NotificationEntities { get; set; }
         public DbSet<WebsiteScanEntity> WebsiteScanEntities { get; set; }
         public DbSet<SiteScanCountEntity> SiteScanCounts { get; set; }
+        public DbSet<TGUserEntity> TGUserEntities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
