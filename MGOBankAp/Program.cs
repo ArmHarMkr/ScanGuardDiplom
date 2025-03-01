@@ -11,6 +11,8 @@ using MGOBankApp.Service.Implementations;
 using MGOBankApp.BLL.Utilities;
 using MGOBankApp.BLL.Interfaces;
 using MGOBankApp.BLL.Services;
+using ScanGuard.TelegramBot;
+using Telegram.Bot;
 
 internal class Program
 {
@@ -59,6 +61,14 @@ internal class Program
         builder.Services.AddHttpClient<IFileScanService, FileScanService>();
         builder.Services.AddScoped<IFileScanService, FileScanService>();
 
+        builder.Services.AddScoped<TGUserService>();
+        builder.Services.AddScoped<ITelegramBotClient>(provider =>
+        {
+            var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0"; // Твой токен
+            return new TelegramBotClient(token);
+        });
+        builder.Services.AddScoped<BotService>();
+
         var app = builder.Build();
         app.UseRequestLocalization();
 
@@ -96,6 +106,13 @@ internal class Program
         var logger = app.Services.GetService<ILogger<Program>>();
         logger?.LogInformation("Starting program...");
 
+
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var botService = scope.ServiceProvider.GetRequiredService<BotService>();
+            await botService.StartAsync(); // Bot Running
+        }
 
         using (var scope = app.Services.CreateScope())
         {

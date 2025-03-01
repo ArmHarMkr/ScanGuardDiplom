@@ -9,12 +9,12 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using MGOBankApp.BLL.Services;
 
-namespace ScanGuard.TelegramBot.Service
+namespace ScanGuard.TelegramBot
 {
     public class BotService
     {
         private readonly ITelegramBotClient _botClient;
-        private readonly TGUserService _userService; // BLL для работы с пользователями
+        private readonly TGUserService _userService;
 
         public BotService(ITelegramBotClient botClient, TGUserService userService)
         {
