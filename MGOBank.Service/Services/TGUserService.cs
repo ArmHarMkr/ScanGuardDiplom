@@ -19,7 +19,7 @@ namespace MGOBankApp.BLL.Services
         }
         public async Task<string> LinkUser(string chatId, string token)
         {
-            var user = await _context.TGUserEntities.FirstOrDefaultAsync(x => x.TGUserToken == token);
+            var user =  await _context.TGUserEntities.FirstOrDefaultAsync(x => x.TGUserToken == token);
             if (user == null)
             {
                 return "Token is not valid";
