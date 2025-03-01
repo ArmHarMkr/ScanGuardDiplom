@@ -1,17 +1,17 @@
-using Microsoft.EntityFrameworkCore;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.DAL.Data;
-using Microsoft.AspNetCore.Identity;
-using MGOBankApp.Domain.Roles;
-using Microsoft.AspNetCore.Mvc.Razor;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using MGOBankApp.Service.Interfaces;
-using MGOBankApp.Service.Implementations;
-using MGOBankApp.BLL.Utilities;
 using MGOBankApp.BLL.Interfaces;
 using MGOBankApp.BLL.Services;
+using MGOBankApp.BLL.Utilities;
+using MGOBankApp.DAL.Data;
+using MGOBankApp.Domain.Entity;
+using MGOBankApp.Domain.Roles;
+using MGOBankApp.Service.Implementations;
+using MGOBankApp.Service.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 using ScanGuard.TelegramBot;
+using System.Globalization;
 using Telegram.Bot;
 
 internal class Program
@@ -25,16 +25,12 @@ internal class Program
         builder.Logging.AddConsole();
 
         builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-
         builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
         builder.Services.AddControllersWithViews()
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         builder.Services.AddLocalization(options =>
         {
@@ -43,16 +39,12 @@ internal class Program
 
         builder.Services.Configure<RequestLocalizationOptions>(options =>
         {
-            var supportedCultures = new[]
-            {
-        new CultureInfo("hy-AM")
-            };
-
+            var supportedCultures = new[] { new CultureInfo("hy-AM") };
             options.DefaultRequestCulture = new RequestCulture("hy-AM");
             options.SupportedCultures = supportedCultures;
         });
 
-        //DI Container
+        // DI Container
         builder.Services.AddHttpClient();
         builder.Services.AddHttpClient<IVulnerabilityAnalyzer, VulnerabilityAnalyzer>();
         builder.Services.AddScoped<IUserService, UserService>();
@@ -60,7 +52,6 @@ internal class Program
         builder.Services.AddScoped<IScannedSites, ScannedSites>();
         builder.Services.AddHttpClient<IFileScanService, FileScanService>();
         builder.Services.AddScoped<IFileScanService, FileScanService>();
-
         builder.Services.AddScoped<TGUserService>();
         builder.Services.AddScoped<ITelegramBotClient>(provider =>
         {
@@ -72,23 +63,17 @@ internal class Program
         var app = builder.Build();
         app.UseRequestLocalization();
 
-
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Home/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-        app.MapRazorPages();
 
+        app.MapRazorPages();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
-
         app.UseAuthorization();
-
-
 
         app.MapControllerRoute(
             name: "default",
@@ -97,23 +82,19 @@ internal class Program
         app.MapAreaControllerRoute(
             name: "admin_area",
             areaName: "Admin",
-            pattern: "admin/{controller=Home}/{action=Index}/{id?}"
-        );
-
-
-
+            pattern: "admin/{controller=Home}/{action=Index}/{id?}");
 
         var logger = app.Services.GetService<ILogger<Program>>();
         logger?.LogInformation("Starting program...");
 
-
-        
+        // Запуск бота в DI
         using (var scope = app.Services.CreateScope())
         {
             var botService = scope.ServiceProvider.GetRequiredService<BotService>();
-            await botService.StartAsync(); // Bot Running
+            await botService.StartAsync();  // Ожидаем запуск бота
         }
 
+        // Создание ролей
         using (var scope = app.Services.CreateScope())
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -128,6 +109,7 @@ internal class Program
             }
         }
 
+        // Добавление пользователя с ролью Admin
         using (var scope = app.Services.CreateScope())
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();

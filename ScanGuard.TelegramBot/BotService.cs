@@ -52,20 +52,11 @@ namespace ScanGuard.TelegramBot
                     else if (text!.StartsWith("/link"))
                     {
                         var tgToken = text.Split(" ")[1];
+                        // todo 
+                        var result = await _userService.LinkUser(message.Chat.Id.ToString(), tgToken);
 
-                        /*var user = new TGUserEntity
-                        {
-                            ChatId = message.Chat.Id,
-                            Token = token
-                        };
-                        using var context = new ApplicationDbContext();
-                        context.TGUserEntities.Add(user);
-                        await context.SaveChangesAsync(token);*/
-                        await client.SendMessage(message.Chat.Id, "You have successfully linked your account", cancellationToken: token);
+                        await client.SendMessage(message.Chat.Id, result , cancellationToken: token);
                     }
-
-
-                    await client.SendMessage(message.Chat.Id, "Hello, world!", cancellationToken: token);
                 }
             }
         }
