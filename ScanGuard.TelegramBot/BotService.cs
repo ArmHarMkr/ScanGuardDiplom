@@ -53,7 +53,7 @@ namespace ScanGuard.TelegramBot
                     {
                         var tgToken = text.Split(" ")[1];
                         // todo 
-                        var result = await _userService.LinkUser(message.Chat.Id.ToString(), tgToken);
+                        var result = await _userService.LinkUser(tgToken, message.Chat.Id.ToString());
 
                         await client.SendMessage(message.Chat.Id, result , cancellationToken: token);
                     }

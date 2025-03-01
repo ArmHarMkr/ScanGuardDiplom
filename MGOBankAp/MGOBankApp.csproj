@@ -55,7 +55,7 @@
     <ProjectReference Include="..\MGOBank.Service\MGOBankApp.BLL.csproj" />
     <ProjectReference Include="..\MGOBankApp.DAL\MGOBankApp.DAL.csproj" />
     <ProjectReference Include="..\MGOBankApp.Domain\MGOBankApp.Domain.csproj" />
-    <ProjectReference Include="..\ScanGuard.TelegramBot\ScanGuard.TelegramBot.csproj" />
+    <ProjectReference Include="..\ScanGuard.TelegramBot\MGOBankApp.TelegramBot.csproj" />
   </ItemGroup>
 
 </Project>
