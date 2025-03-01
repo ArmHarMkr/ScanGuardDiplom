@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.Domain", "MGOBan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.BLL", "MGOBank.Service\MGOBankApp.BLL.csproj", "{96CF6A20-29B1-48F2-A2AA-87EA64A51838}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanGuard.TelegramBot", "ScanGuard.TelegramBot\ScanGuard.TelegramBot.csproj", "{0543164C-D907-43FB-90D8-54A5A2BB8983}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{96CF6A20-29B1-48F2-A2AA-87EA64A51838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96CF6A20-29B1-48F2-A2AA-87EA64A51838}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96CF6A20-29B1-48F2-A2AA-87EA64A51838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0543164C-D907-43FB-90D8-54A5A2BB8983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0543164C-D907-43FB-90D8-54A5A2BB8983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0543164C-D907-43FB-90D8-54A5A2BB8983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0543164C-D907-43FB-90D8-54A5A2BB8983}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
