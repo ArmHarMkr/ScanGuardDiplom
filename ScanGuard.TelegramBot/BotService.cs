@@ -61,6 +61,8 @@ namespace ScanGuard.TelegramBot
                         await client.SendMessage(message.Chat.Id, result, cancellationToken: token);
                     }else if (text!.StartsWith("/scanurl")){
 
+                        var result = await _userService.ScanUrl(message.Chat.Id.ToString(), text.Split(" ")[1]);
+                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token,parseMode:ParseMode.Html);
                     }
                 }
             }
