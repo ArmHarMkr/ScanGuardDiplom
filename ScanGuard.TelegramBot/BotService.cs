@@ -55,6 +55,11 @@ namespace ScanGuard.TelegramBot
                         var result = await _userService.ConnectUser(tgToken, message.Chat.Id.ToString());
 
                         await client.SendMessage(message.Chat.Id, result , cancellationToken: token);
+                    }else if (text == "/disconnect")
+                    {
+                        //wrong code. TODO : Add checks to see if the user is connected
+                        await _userService.DisconnectUser(message.Chat.Id.ToString());
+                        await client.SendMessage(message.Chat.Id, "Disconnected", cancellationToken: token);
                     }
                 }
             }
