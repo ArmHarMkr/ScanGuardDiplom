@@ -77,9 +77,9 @@ namespace MGOBankApp.BLL.Services
 🛡️ <b>CSRF Protection:</b> {(!resultVulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
 🛡️ <b>HTTPS Enabled:</b> {(resultVulnerability.HTTPWithoutS ? "✅ Yes": "⚠️ No")}
 
-📌 <b>Total:</b> <b>{(resultVulnerability.XSS && resultVulnerability.SQLi && resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
+📌 <b>Total:</b> <b>{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && resultVulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
 
- {(resultVulnerability.XSS && resultVulnerability.SQLi && resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS
+ {(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && resultVulnerability.HTTPWithoutS
 ? "🎉 Your website is well-protected! No vulnerabilities found."
 : "⚠️ Security Alert! Your website has vulnerabilities that need fixing.")}"; ;
         }
