@@ -17,14 +17,10 @@ namespace MGOBankApp.BLL.Services
 
         public async Task<string> LinkUser(string token, string chatId)
         {
-<<<<<<< HEAD
-            var user =  await _context.TGUserEntities.FirstOrDefaultAsync(x => x.TGUserToken == token);
-=======
             using var scope = _scopeFactory.CreateScope();
             var _context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
             var user = await _context.TGUserEntities.Include(x => x.ApplicationUser).FirstOrDefaultAsync(x => x.TGUserToken == token);
->>>>>>> e7e61456fa1c6a49e807eabeb94c6cd92121a0b2
             if (user == null)
             {
                 return "Token is not valid";
