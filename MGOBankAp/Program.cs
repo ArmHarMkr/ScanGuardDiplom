@@ -55,7 +55,7 @@ internal class Program
         builder.Services.AddScoped<TGUserService>();
         builder.Services.AddScoped<ITelegramBotClient>(provider =>
         {
-            var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0"; // Твой токен
+            var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0"; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             return new TelegramBotClient(token);
         });
         builder.Services.AddScoped<BotService>();
@@ -87,14 +87,14 @@ internal class Program
         var logger = app.Services.GetService<ILogger<Program>>();
         logger?.LogInformation("Starting program...");
 
-        // Запуск бота в DI
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ DI
         using (var scope = app.Services.CreateScope())
         {
             var botService = scope.ServiceProvider.GetRequiredService<BotService>();
-            await botService.StartAsync();  // Ожидаем запуск бота
+            await botService.StartAsync();  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         }
 
-        // Создание ролей
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         using (var scope = app.Services.CreateScope())
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -109,7 +109,7 @@ internal class Program
             }
         }
 
-        // Добавление пользователя с ролью Admin
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ Admin
         using (var scope = app.Services.CreateScope())
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
