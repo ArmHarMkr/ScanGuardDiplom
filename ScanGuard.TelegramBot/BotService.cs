@@ -38,12 +38,12 @@ namespace ScanGuard.TelegramBot
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message;
-                if (message.Type == MessageType.Text)
+                if (message!.Type == MessageType.Text)
                 {
-                    var text = message.Text;
+                    var text = message.Text!.ToLower();
                     if (text == "/start")
                     {
-                        await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/link [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
+                        await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/connect [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
                     }
                     else if (text == "/connect")
                     {
@@ -57,9 +57,10 @@ namespace ScanGuard.TelegramBot
                         await client.SendMessage(message.Chat.Id, result , cancellationToken: token);
                     }else if (text == "/disconnect")
                     {
-                        //wrong code. TODO : Add checks to see if the user is connected
-                        await _userService.DisconnectUser(message.Chat.Id.ToString());
-                        await client.SendMessage(message.Chat.Id, "Disconnected", cancellationToken: token);
+                        var result = await _userService.DisconnectUser(message.Chat.Id.ToString());
+                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token);
+                    }else if (text!.StartsWith("/scanurl")){
+
                     }
                 }
             }
