@@ -12,7 +12,7 @@ namespace MGOBankApp.BLL.Services
     {
         private readonly IServiceScopeFactory _scopeFactory;
 
-        public TGUserService(IServiceScopeFactory scopeFactory,IScannerService scannerService)
+        public TGUserService(IServiceScopeFactory scopeFactory, IScannerService scannerService)
         {
             _scopeFactory = scopeFactory;
         }
@@ -49,7 +49,7 @@ namespace MGOBankApp.BLL.Services
             {
                 return "You don't have Telegram connected to ScanGuard";
             }
-            
+
 
             user.TGUserId = null;
             user.ApplicationUser.TGConnected = false;
@@ -58,7 +58,7 @@ namespace MGOBankApp.BLL.Services
             await _context.SaveChangesAsync();
             return "Disconnected";
         }
-        public async Task<string> ScanUrl(string url,string chatId)
+        public async Task<string> ScanUrl(string url, string chatId)
         {
             using var scope = _scopeFactory.CreateScope();
             var _context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -70,21 +70,21 @@ namespace MGOBankApp.BLL.Services
             var _scannerService = scope.ServiceProvider.GetRequiredService<IScannerService>();
             try
             {
-            var resultVulnerability = await _scannerService.ScanUrl(url, user.ApplicationUser);
+                var resultVulnerability = await _scannerService.ScanUrl(url, user.ApplicationUser);
 
-            return $@"
+                return $@"
                 🔍 <b>Scan Results for:</b> {url}
 
-🛡 <b>XSS Protection:</b> {(!resultVulnerability.XSS ? "✅ Secure" : "⚠️ Vulnerable")}
-🛡 <b>SQL Injection Protection:</b> {(!resultVulnerability.SQLi ? "✅ Secure" : "⚠️ Vulnerable")}
-🛡 <b>CSRF Protection:</b> {(!resultVulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
-🛡 <b>HTTPS Enabled:</b> {(resultVulnerability.HTTPWithoutS ? "✅ Yes" : "⚠️ No")}
+                🛡 <b>XSS Protection:</b> {(!resultVulnerability.XSS ? "✅ Secure" : "⚠️ Vulnerable")}
+                🛡 <b>SQL Injection Protection:</b> {(!resultVulnerability.SQLi ? "✅ Secure" : "⚠️ Vulnerable")}
+                🛡 <b>CSRF Protection:</b> {(!resultVulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
+                🛡 <b>HTTPS Enabled:</b> {(!resultVulnerability.HTTPWithoutS ? "✅ Yes" : "⚠️ No")}
 
-📌 <b>Total:</b> <b>{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && resultVulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
+                📌 <b>Total:</b> <b>{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
 
- {(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && resultVulnerability.HTTPWithoutS
-? "🎉 Your website is well-protected! No vulnerabilities found."
-: "⚠️ Security Alert! Your website has vulnerabilities that need fixing.")}";  
+                {(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS
+                ? "🎉 Your website is well-protected! No vulnerabilities found."
+                : "⚠️ Security Alert! Your website has vulnerabilities that need fixing.")}";
             }
             catch (Exception)
             {
