@@ -54,21 +54,5 @@ namespace MGOBankApp.Controllers
                 return RedirectToAction("Scanner");
             }
         }
-
-        private async Task<string> SendRequest(string method, string action, Dictionary<string, string> data)
-        {
-            if (method == "post")
-            {
-                var content = new FormUrlEncodedContent(data);
-                var response = await _httpClient.PostAsync(action, content);
-                return await response.Content.ReadAsStringAsync();
-            }
-            else
-            {
-                var query = string.Join("&", data.Select(kvp => $"{Uri.EscapeDataString(kvp.Key)}={Uri.EscapeDataString(kvp.Value)}"));
-                var response = await _httpClient.GetAsync($"{action}?{query}");
-                return await response.Content.ReadAsStringAsync();
-            }
-        }
     }
 }

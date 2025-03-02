@@ -8,6 +8,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using MGOBankApp.BLL.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace ScanGuard.TelegramBot
 {
@@ -43,20 +44,34 @@ namespace ScanGuard.TelegramBot
                     var text = message.Text;
                     if (text == "/start")
                     {
-                        await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/link [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
+                        await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/connect [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
                     }
-                    else if (text == "/link")
+                    else if (text == "/connect")
                     {
-                        await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/link [Your tg token]</b>", cancellationToken: token, parseMode: ParseMode.Html);
+                        await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/connect [Your tg token]</b>", cancellationToken: token, parseMode: ParseMode.Html);
                     }
-                    else if (text!.StartsWith("/link"))
+                    else if (text == "/scanurl")
+                    {
+                        await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/scanurl [url]</b>\r\n(ex. https://example.com)", cancellationToken: token, parseMode: ParseMode.Html);
+                    }
+                    else if (text == "/disconnect")
+                    {
+                        var result = await _userService.DisconnectUser(message.Chat.Id.ToString());
+                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token);
+                    }
+                    else if (text!.StartsWith("/connect"))
                     {
                         var tgToken = text.Split(" ")[1];
-                        // todo 
-                        var result = await _userService.LinkUser(tgToken, message.Chat.Id.ToString());
+                        var result = await _userService.ConnectUser(tgToken, message.Chat.Id.ToString());
 
                         await client.SendMessage(message.Chat.Id, result, cancellationToken: token);
                     }
+                    else if (text!.StartsWith("/scanurl"))
+                    {
+                        var result = await _userService.ScanUrl(text.Split(" ")[1], message.Chat.Id.ToString());
+                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token, parseMode: ParseMode.Html);
+                    } 
+                    
                 }
             }
         }
