@@ -38,31 +38,24 @@ namespace ScanGuard.TelegramBot
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message;
-                if (message!.Type == MessageType.Text)
+                if (message.Type == MessageType.Text)
                 {
-                    var text = message.Text!.ToLower();
+                    var text = message.Text;
                     if (text == "/start")
                     {
-                        await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/connect [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
+                        await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/link [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
                     }
-                    else if (text == "/connect")
+                    else if (text == "/link")
                     {
-                        await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/connect [Your tg token]</b>", cancellationToken: token, parseMode: ParseMode.Html);
+                        await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/link [Your tg token]</b>", cancellationToken: token, parseMode: ParseMode.Html);
                     }
-                    else if (text!.StartsWith("/connect"))
+                    else if (text!.StartsWith("/link"))
                     {
                         var tgToken = text.Split(" ")[1];
-                        var result = await _userService.ConnectUser(tgToken, message.Chat.Id.ToString());
+                        // todo 
+                        var result = await _userService.LinkUser(tgToken, message.Chat.Id.ToString());
 
-                        await client.SendMessage(message.Chat.Id, result , cancellationToken: token);
-                    }else if (text == "/disconnect")
-                    {
-                        var result = await _userService.DisconnectUser(message.Chat.Id.ToString());
                         await client.SendMessage(message.Chat.Id, result, cancellationToken: token);
-                    }else if (text!.StartsWith("/scanurl")){
-
-                        var result = await _userService.ScanUrl(message.Chat.Id.ToString(), text.Split(" ")[1]);
-                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token,parseMode:ParseMode.Html);
                     }
                 }
             }
