@@ -45,11 +45,11 @@ namespace ScanGuard.TelegramBot
                     {
                         await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/link [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
                     }
-                    else if (text == "/link")
+                    else if (text == "/connect")
                     {
                         await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/link [Your tg token]</b>", cancellationToken: token, parseMode: ParseMode.Html);
                     }
-                    else if (text!.StartsWith("/link"))
+                    else if (text!.StartsWith("/connect"))
                     {
                         var tgToken = text.Split(" ")[1];
                         // todo 
