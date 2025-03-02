@@ -64,7 +64,7 @@ namespace MGOBankApp.Service.Implementations
 
 
 
-                vulnerability.HTTPWithoutS = _analyzer.IsHttps(baseUri);
+                vulnerability.HTTPWithoutS = _analyzer.IsHttp(baseUri);
 
 
                 foreach (var form in forms)
