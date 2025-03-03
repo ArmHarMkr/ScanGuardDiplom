@@ -70,7 +70,11 @@ namespace ScanGuard.TelegramBot
                     {
                         var result = await _userService.ScanUrl(text.Split(" ")[1], message.Chat.Id.ToString());
                         await client.SendMessage(message.Chat.Id, result, cancellationToken: token, parseMode: ParseMode.Html);
-                    } 
+                    }else if (text == "/profile")
+                    {
+                        var result = await _userService.GetProfileInfo(message.Chat.Id.ToString());
+                        await client.SendPhoto(message.Chat.Id, new InputFileStream(File.OpenRead(result.profileImageUrl)), caption: result.profileInfo,cancellationToken: token);
+                    }
                     
                 }
             }

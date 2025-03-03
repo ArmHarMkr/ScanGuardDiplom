@@ -92,5 +92,22 @@ namespace MGOBankApp.BLL.Services
                 return "Invalid link";
             }
         }
+        public async Task<(string profileInfo, string profileImageUrl)> GetProfileInfo(string chatId)
+        {
+            var user = await IsVeryfiedUser(chatId);
+            if (user == null)
+            {
+                return ("You don't have access to use the ScanGuard telegram.\r\nGet premium, or if you already have it, connect your account to the bot <b>(/connect)</b>",null!);
+            }
+            var profileImageUrl = user.ApplicationUser.ProfilePhotoPath;
+            var profileInfo = $"👤 Name: {user.ApplicationUser.FullName}\n📧 Email: {user.ApplicationUser.Email}\n📅 Registered: {user.ApplicationUser.UserCreatedDate}";
+            return (profileInfo, profileImageUrl);
+        }
+        private async Task<TGUserEntity?> IsVeryfiedUser(string chatId)
+        {
+            using var scope = _scopeFactory.CreateScope();
+            var _context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            return await _context.TGUserEntities.Include(x => x.ApplicationUser).FirstOrDefaultAsync(x => x.TGUserId == chatId);
+        }
     }
 }

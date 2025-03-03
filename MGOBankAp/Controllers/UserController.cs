@@ -101,7 +101,7 @@ public class UserController : Controller
             }
 
             var user = await UserManager.GetUserAsync(User);
-            user.ProfilePhotoPath = Path.Combine("img", uniqueFileName).Replace("\\", "/");
+            user.ProfilePhotoPath = Path.Combine("wwwroot","img", uniqueFileName).Replace("\\", "/");
             Context.Update(user);
             await Context.SaveChangesAsync();
         }
@@ -138,7 +138,7 @@ public class UserController : Controller
                 }
             }
 
-            user.ProfilePhotoPath = Path.Combine("img", uniqueFileName).Replace("\\", "/");
+            user.ProfilePhotoPath = Path.Combine("wwwroot","img", uniqueFileName).Replace("\\", "/");
             Context.Update(user);
             await Context.SaveChangesAsync();
         }
