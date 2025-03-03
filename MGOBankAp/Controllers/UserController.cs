@@ -100,7 +100,7 @@ public class UserController : Controller
             //TODO: Refactor this code to a separate method
             using (var stream = new MemoryStream())
             {
-                await newProfilePhoto.CopyToAsync(stream);
+                await profilePhoto.CopyToAsync(stream);
                 stream.Seek(0, SeekOrigin.Begin);
 
                 using (var originalImage = Image.FromStream(stream))
@@ -112,13 +112,13 @@ public class UserController : Controller
 
                     if (originalWidth >= 1080 && originalHeight >= 1080)
                     {
-                        // Если изображение больше 1080x1080, делаем его 1080x1080
+                        // Если изображение больше 1080x1080, обрезаем и уменьшаем до 1080x1080
                         cropSize = Math.Min(originalWidth, originalHeight);
                         finalSize = 1080;
                     }
                     else
                     {
-                        // Если изображение меньше 1080x1080, делаем его квадратным по минимальной стороне
+                        // Если изображение меньше 1080x1080, делаем квадрат по минимальной стороне
                         cropSize = Math.Min(originalWidth, originalHeight);
                         finalSize = cropSize; // Оставляем оригинальный размер
                     }
@@ -138,11 +138,12 @@ public class UserController : Controller
                         // Применяем нужный размер (либо 1080x1080, либо оригинальный)
                         using (var resizedImage = new Bitmap(croppedImage, new Size(finalSize, finalSize)))
                         {
-                            resizedImage.Save(filePath, ImageFormat.Jpeg);
+                            resizedImage.Save(filePath, ImageFormat.Jpeg); // Сохраняем изображение
                         }
                     }
                 }
             }
+
 
             user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
             Context.Update(user);

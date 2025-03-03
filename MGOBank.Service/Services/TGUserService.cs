@@ -11,7 +11,7 @@ namespace MGOBankApp.BLL.Services
     public class TGUserService
     {
         private readonly IServiceScopeFactory _scopeFactory;
-
+        private string notConnectedUserErrorMessage = "You don't have access to use the ScanGuard telegram.\r\nGet premium, or if you already have it, connect your account to the bot <b>(/connect)</b>";
         public TGUserService(IServiceScopeFactory scopeFactory, IScannerService scannerService)
         {
             _scopeFactory = scopeFactory;
@@ -65,7 +65,7 @@ namespace MGOBankApp.BLL.Services
             var user = await _context.TGUserEntities.Include(x => x.ApplicationUser).FirstOrDefaultAsync(x => x.TGUserId == chatId);
             if (user == null)
             {
-                return "You don't have access to use the ScanGuard telegram.\r\nGet premium, or if you already have it, connect your account to the bot <b>(/connect)</b>";
+                return notConnectedUserErrorMessage;
             }
             var _scannerService = scope.ServiceProvider.GetRequiredService<IScannerService>();
             try
@@ -73,18 +73,18 @@ namespace MGOBankApp.BLL.Services
                 var resultVulnerability = await _scannerService.ScanUrl(url, user.ApplicationUser);
 
                 return $@"
-                🔍 <b>Scan Results for:</b> {url}
+ 🔍 <b>Scan Results for:</b> {url}
 
-                🛡 <b>XSS Protection:</b> {(!resultVulnerability.XSS ? "✅ Secure" : "⚠️ Vulnerable")}
-                🛡 <b>SQL Injection Protection:</b> {(!resultVulnerability.SQLi ? "✅ Secure" : "⚠️ Vulnerable")}
-                🛡 <b>CSRF Protection:</b> {(!resultVulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
-                🛡 <b>HTTPS Enabled:</b> {(!resultVulnerability.HTTPWithoutS ? "✅ Yes" : "⚠️ No")}
+🛡 <b>XSS Protection:</b> {(!resultVulnerability.XSS ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>SQL Injection Protection:</b> {(!resultVulnerability.SQLi ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>CSRF Protection:</b> {(!resultVulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>HTTPS Enabled:</b> {(!resultVulnerability.HTTPWithoutS ? "✅ Yes" : "⚠️ No")}
 
-                📌 <b>Total:</b> <b>{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
+📌 <b>Total:</b> <b>{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
 
-                {(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS
-                ? "🎉 Your website is well-protected! No vulnerabilities found."
-                : "⚠️ Security Alert! Your website has vulnerabilities that need fixing.")}";
+{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS
+? "🎉 Your website is well-protected! No vulnerabilities found."
+: "⚠️ Security Alert! Your website has vulnerabilities that need fixing.")}";
             }
             catch (Exception)
             {
@@ -97,10 +97,17 @@ namespace MGOBankApp.BLL.Services
             var user = await IsVeryfiedUser(chatId);
             if (user == null)
             {
-                return ("You don't have access to use the ScanGuard telegram.\r\nGet premium, or if you already have it, connect your account to the bot <b>(/connect)</b>",null!);
+                return (notConnectedUserErrorMessage, null!);
             }
             var profileImageUrl = user.ApplicationUser.ProfilePhotoPath;
-            var profileInfo = $"👤 Name: {user.ApplicationUser.FullName}\n📧 Email: {user.ApplicationUser.Email}\n📅 Registered: {user.ApplicationUser.UserCreatedDate}";
+            var profileInfo = $@"
+<b>👤 Name:</b> {user.ApplicationUser.FullName}
+<b>📧 Email:</b> {user.ApplicationUser.Email}
+<b>📅 Registered:</b> {user.ApplicationUser.UserCreatedDate:dd.MM.yyyy}
+
+<b>📊 Scanned Websites:</b> {user.ApplicationUser.ScannedUrlCount}
+<b>📂 Scanned Files:</b> {user.ApplicationUser.ScannedFileCount}
+";
             return (profileInfo, profileImageUrl);
         }
         private async Task<TGUserEntity?> IsVeryfiedUser(string chatId)
