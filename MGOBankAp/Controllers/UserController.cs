@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Primitives;
+using System.Drawing;
 
 namespace MGOBankApp.Controllers;
 
@@ -121,29 +121,5 @@ public class UserController : Controller
             var uniqueFileName = $"{Guid.NewGuid()}_{newProfilePhoto.FileName}";
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await newProfilePhoto.CopyToAsync(stream);
-            }
-
-            var user = await UserManager.GetUserAsync(User);
-
-            // Optional: Delete old profile photo if exists
-            if (!string.IsNullOrEmpty(user.ProfilePhotoPath))
-            {
-                var oldPhotoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePhotoPath);
-                if (System.IO.File.Exists(oldPhotoPath))
-                {
-                    System.IO.File.Delete(oldPhotoPath);
-                }
-            }
-
-            user.ProfilePhotoPath = Path.Combine("img", uniqueFileName).Replace("\\", "/");
-            Context.Update(user);
-            await Context.SaveChangesAsync();
-        }
-
-        return RedirectToAction("UserProfile");
     }
-
 }
