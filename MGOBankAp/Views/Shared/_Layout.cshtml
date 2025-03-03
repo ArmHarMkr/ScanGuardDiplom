@@ -35,6 +35,9 @@
                 var isPremium = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium);
                 var isCustomer = await UserManager.IsInRoleAsync(currentUser, SD.Role_Customer);
 
+                <ul class="nav-links">
+                    <li><a asp-controller="User" asp-action="UserProfile">User Profile</a></li>
+                </ul>
 
                 if (isAdmin)
                 {

@@ -78,5 +78,37 @@ namespace MGOBankApp.Controllers
             return View("ShowScannedSites", resList);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> UserProfile()
+        {
+            return View(await UserManager.GetUserAsync(User));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadProfilePhoto(IFormFile profilePhoto)
+        {
+            if (profilePhoto != null && profilePhoto.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
+                Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
+
+                var uniqueFileName = $"{Guid.NewGuid()}_{profilePhoto.FileName}";
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await profilePhoto.CopyToAsync(stream);
+                }
+
+                var user = await UserManager.GetUserAsync(User);
+                user.ProfilePhotoPath = Path.Combine("img", uniqueFileName).Replace("\\", "/");
+                Context.Update(user);
+                await Context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("UserProfile");
+        }
+
+
     }
 }
