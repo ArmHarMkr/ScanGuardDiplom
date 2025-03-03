@@ -1,11 +1,15 @@
 ﻿@model ApplicationUser
 
-<p>@Model.FullName</p>
-<p>@Model.Email</p>
-<img src="~/@Model.ProfilePhotoPath" alt="Product Image" class="img-thumbnail" />
+<h2>User Profile</h2>
 
-<form asp-action="UploadProfilePhoto" method="post" enctype="multipart/form-data">
-    <input type="file" name="profilePhoto" accept="image/*" />
-    <button type="submit">Upload Photo</button>
+<div>
+    <img src="/@Model.ProfilePhotoPath" alt="Profile Photo" style="width:150px;height:150px;border-radius:50%;" />
+</div>
+
+<form asp-action="ChangeProfilePhoto" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="newProfilePhoto">Change Profile Photo:</label>
+        <input type="file" name="newProfilePhoto" id="newProfilePhoto" accept="image/*" />
+    </div>
+    <button type="submit">Upload</button>
 </form>
-
