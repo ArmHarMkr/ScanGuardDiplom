@@ -96,16 +96,51 @@ public class UserController : Controller
 
             var uniqueFileName = $"{user.Id}.jpg"; // User ID as filename
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
+            //changin size of photo
+            //TODO: Refactor this code to a separate method
             using (var stream = new MemoryStream())
             {
-                await profilePhoto.CopyToAsync(stream);
+                await newProfilePhoto.CopyToAsync(stream);
                 stream.Seek(0, SeekOrigin.Begin);
 
                 using (var originalImage = Image.FromStream(stream))
-                using (var resizedImage = new Bitmap(originalImage, new Size(1080, 1080)))
                 {
-                    resizedImage.Save(filePath, ImageFormat.Jpeg); // Save resized image
+                    int originalWidth = originalImage.Width;
+                    int originalHeight = originalImage.Height;
+
+                    int cropSize, finalSize;
+
+                    if (originalWidth >= 1080 && originalHeight >= 1080)
+                    {
+                        // Если изображение больше 1080x1080, делаем его 1080x1080
+                        cropSize = Math.Min(originalWidth, originalHeight);
+                        finalSize = 1080;
+                    }
+                    else
+                    {
+                        // Если изображение меньше 1080x1080, делаем его квадратным по минимальной стороне
+                        cropSize = Math.Min(originalWidth, originalHeight);
+                        finalSize = cropSize; // Оставляем оригинальный размер
+                    }
+
+                    int x = (originalWidth - cropSize) / 2;
+                    int y = (originalHeight - cropSize) / 2;
+
+                    // Обрезаем изображение по центру
+                    using (var croppedImage = new Bitmap(cropSize, cropSize))
+                    {
+                        using (var graphics = Graphics.FromImage(croppedImage))
+                        {
+                            graphics.DrawImage(originalImage, new Rectangle(0, 0, cropSize, cropSize),
+                                               new Rectangle(x, y, cropSize, cropSize), GraphicsUnit.Pixel);
+                        }
+
+                        // Применяем нужный размер (либо 1080x1080, либо оригинальный)
+                        using (var resizedImage = new Bitmap(croppedImage, new Size(finalSize, finalSize)))
+                        {
+                            resizedImage.Save(filePath, ImageFormat.Jpeg);
+                        }
+                    }
                 }
             }
 
@@ -138,18 +173,53 @@ public class UserController : Controller
                     System.IO.File.Delete(oldPhotoPath);
                 }
             }
-
+            //changing size of new photo
             using (var stream = new MemoryStream())
             {
                 await newProfilePhoto.CopyToAsync(stream);
                 stream.Seek(0, SeekOrigin.Begin);
 
                 using (var originalImage = Image.FromStream(stream))
-                using (var resizedImage = new Bitmap(originalImage, new Size(1080, 1080)))
                 {
-                    resizedImage.Save(filePath, ImageFormat.Jpeg);
+                    int originalWidth = originalImage.Width;
+                    int originalHeight = originalImage.Height;
+
+                    int cropSize, finalSize;
+
+                    if (originalWidth >= 1080 && originalHeight >= 1080)
+                    {
+                        // Если изображение больше 1080x1080, делаем его 1080x1080
+                        cropSize = Math.Min(originalWidth, originalHeight);
+                        finalSize = 1080;
+                    }
+                    else
+                    {
+                        // Если изображение меньше 1080x1080, делаем его квадратным по минимальной стороне
+                        cropSize = Math.Min(originalWidth, originalHeight);
+                        finalSize = cropSize; // Оставляем оригинальный размер
+                    }
+
+                    int x = (originalWidth - cropSize) / 2;
+                    int y = (originalHeight - cropSize) / 2;
+
+                    // Обрезаем изображение по центру
+                    using (var croppedImage = new Bitmap(cropSize, cropSize))
+                    {
+                        using (var graphics = Graphics.FromImage(croppedImage))
+                        {
+                            graphics.DrawImage(originalImage, new Rectangle(0, 0, cropSize, cropSize),
+                                               new Rectangle(x, y, cropSize, cropSize), GraphicsUnit.Pixel);
+                        }
+
+                        // Применяем нужный размер (либо 1080x1080, либо оригинальный)
+                        using (var resizedImage = new Bitmap(croppedImage, new Size(finalSize, finalSize)))
+                        {
+                            resizedImage.Save(filePath, ImageFormat.Jpeg);
+                        }
+                    }
                 }
             }
+
 
             user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
             Context.Update(user);
