@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace MGOBankApp.Controllers;
 
@@ -89,19 +90,26 @@ public class UserController : Controller
     {
         if (profilePhoto != null && profilePhoto.Length > 0)
         {
+            var user = await UserManager.GetUserAsync(User);
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
             Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
 
-            var uniqueFileName = $"{Guid.NewGuid()}_{profilePhoto.FileName}";
+            var uniqueFileName = $"{user.Id}.jpg"; // User ID as filename
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            using (var stream = new MemoryStream())
             {
                 await profilePhoto.CopyToAsync(stream);
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (var originalImage = Image.FromStream(stream))
+                using (var resizedImage = new Bitmap(originalImage, new Size(1080, 1080)))
+                {
+                    resizedImage.Save(filePath, ImageFormat.Jpeg); // Save resized image
+                }
             }
 
-            var user = await UserManager.GetUserAsync(User);
-            user.ProfilePhotoPath = Path.Combine("wwwroot","img", uniqueFileName).Replace("\\", "/");
+            user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
             Context.Update(user);
             await Context.SaveChangesAsync();
         }
@@ -109,26 +117,19 @@ public class UserController : Controller
         return RedirectToAction("UserProfile");
     }
 
-
     [HttpPost]
     public async Task<IActionResult> ChangeProfilePhoto(IFormFile newProfilePhoto)
     {
         if (newProfilePhoto != null && newProfilePhoto.Length > 0)
         {
+            var user = await UserManager.GetUserAsync(User);
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
-            Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
+            Directory.CreateDirectory(uploadsFolder);
 
-            var uniqueFileName = $"{Guid.NewGuid()}_{newProfilePhoto.FileName}";
+            var uniqueFileName = $"{user.Id}.jpg";
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await newProfilePhoto.CopyToAsync(stream);
-            }
-
-            var user = await UserManager.GetUserAsync(User);
-
-            // Optional: Delete old profile photo if exists
+            // Delete current photo if exists
             if (!string.IsNullOrEmpty(user.ProfilePhotoPath))
             {
                 var oldPhotoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePhotoPath);
@@ -138,11 +139,24 @@ public class UserController : Controller
                 }
             }
 
-            user.ProfilePhotoPath = Path.Combine("wwwroot","img", uniqueFileName).Replace("\\", "/");
+            using (var stream = new MemoryStream())
+            {
+                await newProfilePhoto.CopyToAsync(stream);
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (var originalImage = Image.FromStream(stream))
+                using (var resizedImage = new Bitmap(originalImage, new Size(1080, 1080)))
+                {
+                    resizedImage.Save(filePath, ImageFormat.Jpeg);
+                }
+            }
+
+            user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
             Context.Update(user);
             await Context.SaveChangesAsync();
         }
 
         return RedirectToAction("UserProfile");
     }
+
 }
