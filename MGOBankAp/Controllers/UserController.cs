@@ -165,7 +165,6 @@ public class UserController : Controller
             var uniqueFileName = $"{user.Id}.jpg";
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            // Delete current photo if exists
             if (!string.IsNullOrEmpty(user.ProfilePhotoPath))
             {
                 var oldPhotoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePhotoPath);
@@ -174,7 +173,6 @@ public class UserController : Controller
                     System.IO.File.Delete(oldPhotoPath);
                 }
             }
-            //changing size of new photo
             using (var stream = new MemoryStream())
             {
                 await newProfilePhoto.CopyToAsync(stream);
@@ -189,21 +187,18 @@ public class UserController : Controller
 
                     if (originalWidth >= 1080 && originalHeight >= 1080)
                     {
-                        // Если изображение больше 1080x1080, делаем его 1080x1080
                         cropSize = Math.Min(originalWidth, originalHeight);
                         finalSize = 1080;
                     }
                     else
                     {
-                        // Если изображение меньше 1080x1080, делаем его квадратным по минимальной стороне
                         cropSize = Math.Min(originalWidth, originalHeight);
-                        finalSize = cropSize; // Оставляем оригинальный размер
+                        finalSize = cropSize; 
                     }
 
                     int x = (originalWidth - cropSize) / 2;
                     int y = (originalHeight - cropSize) / 2;
 
-                    // Обрезаем изображение по центру
                     using (var croppedImage = new Bitmap(cropSize, cropSize))
                     {
                         using (var graphics = Graphics.FromImage(croppedImage))
@@ -212,7 +207,6 @@ public class UserController : Controller
                                                new Rectangle(x, y, cropSize, cropSize), GraphicsUnit.Pixel);
                         }
 
-                        // Применяем нужный размер (либо 1080x1080, либо оригинальный)
                         using (var resizedImage = new Bitmap(croppedImage, new Size(finalSize, finalSize)))
                         {
                             resizedImage.Save(filePath, ImageFormat.Jpeg);

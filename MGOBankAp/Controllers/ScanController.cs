@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
 using MGOBankApp.Models;
 using MGOBankApp.Service.Interfaces;
@@ -12,12 +13,14 @@ namespace MGOBankApp.Controllers
         private readonly HttpClient _httpClient;
         private readonly IScannerService _scannerService;
         private readonly UserManager<ApplicationUser> UserManager;
+        private readonly ApplicationDbContext Context;
 
-        public ScanController(IHttpClientFactory httpClientFactory, IScannerService scannerService, UserManager<ApplicationUser> userManager)
+        public ScanController(IHttpClientFactory httpClientFactory, IScannerService scannerService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _httpClient = httpClientFactory.CreateClient();
             _scannerService = scannerService;
             UserManager = userManager;
+            Context = context;
         }
 
         public IActionResult FwdScanner()
@@ -44,6 +47,12 @@ namespace MGOBankApp.Controllers
             {
                 ApplicationUser? applicationUser = await UserManager.GetUserAsync(User);
                 var result = await _scannerService.ScanUrl(url, applicationUser);
+                
+                if(applicationUser != null)
+                {
+                    applicationUser.ScannedUrlCount++;
+                    await Context.SaveChangesAsync();
+                }
 
                 TempData["SuccessMessage"] = "Сканирование завершено успешно.";
                 return View("~/Views/Scan/Scanner.cshtml", result);

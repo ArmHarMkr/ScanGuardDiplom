@@ -51,7 +51,8 @@ public class FileScanController : Controller
 
         // Проверяем роль пользователя в базе
         var user = await UserManager.GetUserAsync(User);
-
+        user.ScannedFileCount++;
+        await _context.SaveChangesAsync();
         bool isCustomer = await UserManager.IsInRoleAsync(user, SD.Role_Customer);
 
         if (isCustomer)

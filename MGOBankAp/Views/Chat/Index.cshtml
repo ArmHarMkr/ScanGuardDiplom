@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Chat";
+}
+
+<div id="chatContainer">
+    <input type="text" id="userName" placeholder="Enter your name" />
+    <textarea id="messageInput" placeholder="Enter your message"></textarea>
+    <button id="sendMessageButton">Send Message</button>
+    <ul id="messagesList"></ul>
+</div>
+
+@section Scripts {
+    <!-- Load SignalR from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+    <!-- OR from local project -->
+    <script src="~/lib/signalr/signalr.min.js"></script>
+
+    <!-- Load your chat.js after SignalR -->
+    <script src="~/js/chat.js"></script>
+}
