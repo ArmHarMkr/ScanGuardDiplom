@@ -12,8 +12,8 @@ namespace MGOBankApp.BLL.Services
     public class TGUserService
     {
         private readonly IServiceScopeFactory _scopeFactory;
-        private string notConnectedUserErrorMessage = "You don't have access to use the ScanGuard telegram.\r\nGet premium, or if you already have it, connect your account to the bot <b>(/connect)</b>";
         private readonly ILogger<TGUserService> _logger;
+        private string notConnectedUserErrorMessage = "You don't have access to use the ScanGuard telegram.\r\nGet premium, or if you already have it, connect your account to the bot <b>(/connect)</b>";
         public TGUserService(IServiceScopeFactory scopeFactory, IScannerService scannerService,ILogger<TGUserService> logger)
         {
             _scopeFactory = scopeFactory;

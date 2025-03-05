@@ -9,18 +9,22 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using MGOBankApp.BLL.Services;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
+using MGOBankApp.TelegramBot;
 
 namespace ScanGuard.TelegramBot
 {
     public class BotService
     {
         private readonly ITelegramBotClient _botClient;
-        private readonly TGUserService _userService;
+        private readonly MessageSender _sender;
+        private readonly ILogger<BotService> _logger;
 
-        public BotService(ITelegramBotClient botClient, TGUserService userService)
+        public BotService(ITelegramBotClient botClient, MessageSender sender,ILogger<BotService> logger)
         {
             _botClient = botClient;
-            _userService = userService;
+            _sender = sender;
+            _logger = logger;
         }
 
         public async Task StartAsync()
@@ -39,58 +43,17 @@ namespace ScanGuard.TelegramBot
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message;
-                if (message.Type == MessageType.Text)
+                if (message!.Type == MessageType.Text)
                 {
-                    var text = message.Text;
-                    if (text == "/start")
-                    {
-                        await client.SendMessage(message.Chat.Id, "Hello !!!\r\nIf you want to connect your ScanGuard account to the bot, then use the command \r\n<b>/connect [Your tg token]</b>\r\n You can get it in the Get Token section✅", cancellationToken: token, parseMode: ParseMode.Html);
-                    }
-                    else if (text == "/connect")
-                    {
-                        await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/connect [Your tg token]</b>", cancellationToken: token, parseMode: ParseMode.Html);
-                    }
-                    else if (text == "/scanurl")
-                    {
-                        await client.SendMessage(message.Chat.Id, "Please, use\r\n<b>/scanurl [url]</b>\r\n(ex. https://example.com)", cancellationToken: token, parseMode: ParseMode.Html);
-                    }
-                    else if (text == "/disconnect")
-                    {
-                        var result = await _userService.DisconnectUser(message.Chat.Id.ToString());
-                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token);
-                    }
-                    else if (text!.StartsWith("/connect"))
-                    {
-                        var tgToken = text.Split(" ")[1];
-                        var result = await _userService.ConnectUser(tgToken, message.Chat.Id.ToString());
-
-                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token);
-                    }
-                    else if (text!.StartsWith("/scanurl"))
-                    {
-                        var result = await _userService.ScanUrl(text.Split(" ")[1], message.Chat.Id.ToString());
-                        await client.SendMessage(message.Chat.Id, result, cancellationToken: token, parseMode: ParseMode.Html);
-                    }
-                    else if (text == "/profile")
-                    {
-                        var result = await _userService.GetProfileInfo(message.Chat.Id.ToString());
-                        if (result.profileImageUrl == null)
-                        {
-                            await client.SendMessage(message.Chat.Id, result.profileInfo, cancellationToken: token,parseMode:ParseMode.Html );
-                        }
-                        else
-                        {
-                            await client.SendPhoto(message.Chat.Id, new InputFileStream(File.OpenRead(result.profileImageUrl!)), caption: result.profileInfo, cancellationToken: token, parseMode: ParseMode.Html);
-                        }
-                    }
-                        
+                   await _sender.SendMessage(client, message, token);
+                   _logger.LogInformation("Telegram {ChatId} : {Message}", message.Chat.Id,message.Text);
                 }
             }
         }
 
         private Task HandleErrorAsync(ITelegramBotClient client, Exception exception, HandleErrorSource source, CancellationToken token)
         {
-            Console.WriteLine($"Ошибка: {exception.Message}");
+            _logger.LogError("Telegram Error: {Message}",exception.Message);
             return Task.CompletedTask;
         }
     }

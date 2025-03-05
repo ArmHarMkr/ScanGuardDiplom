@@ -9,6 +9,7 @@ using MGOBankApp.Domain.Roles;
 using MGOBankApp.Hubs;
 using MGOBankApp.Service.Implementations;
 using MGOBankApp.Service.Interfaces;
+using MGOBankApp.TelegramBot;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -76,6 +77,7 @@ internal class Program
         });
         builder.Services.AddScoped<BotService>();
         builder.Services.AddScoped<TGUserService>();
+        builder.Services.AddScoped<MessageSender>();
         builder.Services.AddHostedService<ChatCleanupService>();
         builder.Services.AddSignalR();
 
