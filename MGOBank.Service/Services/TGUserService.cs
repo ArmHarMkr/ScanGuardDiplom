@@ -4,6 +4,7 @@ using MGOBankApp.Models;
 using MGOBankApp.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.Globalization;
 
 namespace MGOBankApp.BLL.Services
@@ -12,9 +13,11 @@ namespace MGOBankApp.BLL.Services
     {
         private readonly IServiceScopeFactory _scopeFactory;
         private string notConnectedUserErrorMessage = "You don't have access to use the ScanGuard telegram.\r\nGet premium, or if you already have it, connect your account to the bot <b>(/connect)</b>";
-        public TGUserService(IServiceScopeFactory scopeFactory, IScannerService scannerService)
+        private readonly ILogger<TGUserService> _logger;
+        public TGUserService(IServiceScopeFactory scopeFactory, IScannerService scannerService,ILogger<TGUserService> logger)
         {
             _scopeFactory = scopeFactory;
+            _logger = logger;
         }
 
         public async Task<string> ConnectUser(string token, string chatId)
@@ -37,6 +40,7 @@ namespace MGOBankApp.BLL.Services
             user.ApplicationUser.TGConnected = true;
 
             await _context.SaveChangesAsync();
+            _logger.LogInformation("User {Email} connected to telegram with telegramID {chatId}",user.ApplicationUser.Email,chatId);
             return "Connected";
         }
         public async Task<string> DisconnectUser(string chatId)
@@ -56,6 +60,7 @@ namespace MGOBankApp.BLL.Services
             user.TGConnectedTime = default;
 
             await _context.SaveChangesAsync();
+            _logger.LogInformation("User {Email} disconnected from telegram with telegramID {chatId}", user.ApplicationUser.Email, chatId);
             return "Disconnected";
         }
         public async Task<string> ScanUrl(string url, string chatId)

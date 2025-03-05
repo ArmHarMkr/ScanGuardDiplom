@@ -6,7 +6,7 @@ using MGOBankApp.Models;
 using MGOBankApp.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 namespace MGOBankApp.Service.Implementations
 {
     public class ScannerService : IScannerService
@@ -15,13 +15,15 @@ namespace MGOBankApp.Service.Implementations
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IVulnerabilityAnalyzer _analyzer;
+        private readonly ILogger<ScannerService> _logger;
 
-        public ScannerService(HttpClient httpClient, IVulnerabilityAnalyzer analyzer, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public ScannerService(HttpClient httpClient, IVulnerabilityAnalyzer analyzer, UserManager<ApplicationUser> userManager, ApplicationDbContext context,ILogger<ScannerService> logger)
         {
             _userManager = userManager;
             _analyzer = analyzer;
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _context = context;
+            _logger = logger;
         }
 
         public async Task<Vulnerability> ScanUrl(string url, ApplicationUser? applicationUser)
@@ -36,7 +38,7 @@ namespace MGOBankApp.Service.Implementations
                 if (_context.SiteScanCounts.Any(x => x.Url == _httpClient.BaseAddress.ToString()))
                 {
                     var siteScanCount = await _context.SiteScanCounts.FirstOrDefaultAsync(x => x.Url == _httpClient.BaseAddress.ToString());
-                    siteScanCount.CheckCount++;
+                    siteScanCount!.CheckCount++;
                 }
                 else
                 {
@@ -142,11 +144,12 @@ namespace MGOBankApp.Service.Implementations
 
                     await _context.SaveChangesAsync();
                 }
-
+                _logger.LogInformation("{user} scanned URL - {url} ",applicationUser!.Email ,url);
                 return vulnerability;
             }
             catch (Exception ex)
             {
+                _logger.LogError("{user} : Error while scanning URL - {url} ... {exeptionMessage}",applicationUser!.Email!, url,ex.Message);
                 throw new Exception($"Ошибка сканирования: {ex.Message}");
             }
         }

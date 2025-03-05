@@ -9,18 +9,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MGOBankApp.Domain.Entity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Serilog;
 
 namespace MGOBankApp.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
-            _logger = logger;
         }
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    Log.Information("User {UserName} logged in.", Input.Email);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -118,7 +117,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    Log.Warning("User {UserName} account locked out.", Input.Email);
                     return RedirectToPage("./Lockout");
                 }
                 if (result.IsNotAllowed)

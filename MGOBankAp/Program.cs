@@ -13,10 +13,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ScanGuard.TelegramBot;
+using Serilog;
 using System.Globalization;
 using Telegram.Bot;
-
 internal class Program
 {
     private static async Task Main(string[] args)
@@ -24,8 +25,19 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
-        builder.Logging.ClearProviders();
-        builder.Logging.AddConsole();
+        // Настройка Serilog
+        Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()  // Логируем только информационные сообщения и выше
+    .WriteTo.Console()
+    .WriteTo.File("Logs/app-log.txt", rollingInterval: RollingInterval.Day)
+    // Исключаем логи от Microsoft и других ненужных компонентов
+    .Filter.ByExcluding(logEvent => logEvent.Properties.ContainsKey("SourceContext") &&
+                                    (logEvent.Properties["SourceContext"].ToString().Contains("Microsoft") ||
+                                     logEvent.Properties["SourceContext"].ToString().Contains("System")))
+    .CreateLogger();
+
+        // Применяем Serilog как основной логгер для приложения
+        builder.Host.UseSerilog();
 
         builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
         builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
