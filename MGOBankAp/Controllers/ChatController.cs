@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MGOBankApp.Controllers
 {
+    [Authorize]
     public class ChatController : Controller
     {
         private readonly ApplicationDbContext _context;
