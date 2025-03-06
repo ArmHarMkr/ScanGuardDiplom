@@ -1,43 +1,25 @@
-﻿// Ensure SignalR is properly loaded
-if (typeof signalR === "undefined") {
-    console.error("SignalR library is not loaded correctly!");
-} else {
-    console.log("SignalR is loaded!");
-}
-
-// Create the SignalR connection
-const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chathub") // Ensure this matches your Hub's URL in the backend
+﻿const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chatHub")
+    .configureLogging(signalR.LogLevel.Information)
     .build();
 
-// Start the connection
-connection.start().then(function () {
-    console.log("Connected to ChatHub!");
-}).catch(function (err) {
-    return console.error("Error connecting to ChatHub: " + err.toString());
-});
+connection.start().then(() => {
+    document.getElementById("sendButton").disabled = false;
+}).catch(err => console.error(err.toString()));
 
-// Handle receiving messages from the server
-connection.on("ReceiveMessage", function (user, message, time) {
-    const li = document.createElement("li");
-    li.textContent = `${user} (${time}): ${message}`;
-    document.getElementById("messagesList").appendChild(li);
-});
+document.getElementById("sendButton").addEventListener("click", function (event) {
+    event.preventDefault();
 
-// Handle sending message to the server when the button is clicked
-document.getElementById("sendMessageButton").addEventListener("click", function () {
-    const userName = document.getElementById("userName").value; // Get the username from input field
-    const message = document.getElementById("messageInput").value; // Get the message from input field
+    const user = document.getElementById("userInput").value;
+    const message = document.getElementById("messageInput").value;
 
-    // Check if the message is not empty
-    if (message.trim() !== "") {
-        connection.invoke("SendMessage", userName, message).catch(function (err) {
-            return console.error("Error sending message: " + err.toString());
-        });
-    } else {
-        console.warn("Message cannot be empty!");
+    if (user && message) {
+        connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
     }
+});
 
-    // Clear the message input field after sending
-    document.getElementById("messageInput").value = "";
+connection.on("ReceiveMessage", function (user, message) {
+    const li = document.createElement("li");
+    li.textContent = `${user} says ${message}`;
+    document.getElementById("messagesList").appendChild(li);
 });

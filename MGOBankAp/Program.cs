@@ -2,8 +2,6 @@ using MGOBankApp.BLL.Interfaces;
 using MGOBankApp.BLL.Services;
 using MGOBankApp.BLL.Utilities;
 using MGOBankApp.DAL.Data;
-using MGOBankApp.DAL.Interfaces;
-using MGOBankApp.DAL.Repositories;
 using MGOBankApp.Domain.Entity;
 using MGOBankApp.Domain.Roles;
 using MGOBankApp.Hubs;
@@ -14,7 +12,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using ScanGuard.TelegramBot;
 using Serilog;
 using System.Globalization;
@@ -68,8 +65,6 @@ internal class Program
         builder.Services.AddScoped<IScannedSites, ScannedSites>();
         builder.Services.AddHttpClient<IFileScanService, FileScanService>();
         builder.Services.AddScoped<IFileScanService, FileScanService>();
-        builder.Services.AddScoped<IChatRepository, ChatRepository>();
-        builder.Services.AddScoped<IChatService, ChatService>();
         builder.Services.AddSingleton<ITelegramBotClient>(provider =>
         {
             var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0"; // ���� �����
@@ -78,12 +73,9 @@ internal class Program
         builder.Services.AddScoped<BotService>();
         builder.Services.AddScoped<TGUserService>();
         builder.Services.AddScoped<MessageSender>();
-        builder.Services.AddHostedService<ChatCleanupService>();
         builder.Services.AddSignalR();
 
         var app = builder.Build();
-
-        app.MapHub<ChatHub>("/chathub");
 
 
         app.UseRequestLocalization();
@@ -149,6 +141,7 @@ internal class Program
             }
         }
 
+        app.MapHub<ChatHub>("/chatHub");
         app.Run();
     }
 }
