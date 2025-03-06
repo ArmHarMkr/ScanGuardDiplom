@@ -1,32 +1,99 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
     ViewData["Title"] = "Chat";
+    var user = await UserManager.GetUserAsync(User);
+    var fullName = user?.FullName ?? "";
+    var profilePhoto = user != null && !string.IsNullOrEmpty(user.ProfilePhotoPath)
+        ? user.ProfilePhotoPath.Replace("wwwroot", "")
+        : "/img/default.jpg";
+    var isUserSignedIn = SignInManager.IsSignedIn(User);
 }
 
-<div class="container">
-    <div class="row p-1">
-        <div class="col-1">User</div>
-        <div class="col-5"><input type="text" id="userInput" /></div>
+<style>
+    .chat-container {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: #f9f9f9;
+    }
+
+    .messages {
+        list-style-type: none;
+        padding: 0;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .message {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .message .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+
+        .message .text {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+    .own-message {
+        flex-direction: row-reverse;
+    }
+
+        .own-message .text {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+        }
+
+    .other-message .text {
+        background-color: #e5e5ea;
+        text-align: left;
+    }
+
+    .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 8px;
+    }
+</style>
+
+<div class="chat-container">
+    <ul id="messagesList" class="messages"></ul>
+
+    <div class="input-group mt-2">
+        @if (isUserSignedIn)
+        {
+            <img id="userAvatar" src="@profilePhoto" class="avatar" alt="User Photo" />
+            <input type="text" id="userInput" value="@fullName" readonly class="form-control" />
+        }
+        else
+        {
+            <input type="text" id="userInput" placeholder="Enter your name" class="form-control" />
+        }
     </div>
-    <div class="row p-1">
-        <div class="col-1">Message</div>
-        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
-    </div>
-    <div class="row p-1">
-        <div class="col-6 text-end">
-            <input type="button" id="sendButton" value="Send Message" />
-        </div>
-    </div>
-    <div class="row p-1">
-        <div class="col-6">
-            <hr />
-        </div>
-    </div>
-    <div class="row p-1">
-        <div class="col-6">
-            <ul id="messagesList"></ul>
-        </div>
+
+    <div class="input-group mt-2">
+        <input type="text" class="form-control" id="messageInput" placeholder="Type a message..." />
+        <button id="sendButton" class="btn btn-primary">Send</button>
     </div>
 </div>
-<script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 <script src="~/js/chat.js"></script>
