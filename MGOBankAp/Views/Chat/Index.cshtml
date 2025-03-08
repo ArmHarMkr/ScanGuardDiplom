@@ -17,10 +17,11 @@
         width: 100%;
         max-width: 600px;
         margin: auto;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 15px;
-        background-color: #f9f9f9;
+        border: none;
+        border-radius: 15px;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     }
 
     .messages {
@@ -30,70 +31,118 @@
         overflow-y: auto;
     }
 
-    .message {
+    .message-container {
         display: flex;
-        align-items: center;
-        margin-bottom: 10px;
+        flex-direction: column;
+        margin-bottom: 12px;
+        animation: fadeIn 0.3s ease-in-out;
     }
 
-        .message .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-            object-fit: cover;
-        }
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        .message .text {
-            padding: 10px;
-            border-radius: 10px;
-            max-width: 70%;
-        }
+    .message-header {
+        font-size: 12px;
+        color: #555;
+        margin-bottom: 2px;
+        text-align: right;
+        padding-right: 10px;
+        font-weight: bold;
+    }
+
+    .message {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .message .avatar {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin-right: 8px;
+        object-fit: cover;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .message .text {
+        padding: 10px 14px;
+        border-radius: 12px;
+        max-width: 75%;
+        font-size: 14px;
+        line-height: 1.4;
+    }
 
     .own-message {
         flex-direction: row-reverse;
+        align-items: flex-end;
     }
 
-        .own-message .text {
-            background-color: #007bff;
-            color: white;
-            text-align: right;
-        }
+    .own-message .text {
+        background: #007bff;
+        color: white;
+        text-align: right;
+        border-top-right-radius: 3px;
+    }
 
     .other-message .text {
-        background-color: #e5e5ea;
+        background: #f1f1f1;
         text-align: left;
+        border-top-left-radius: 3px;
     }
 
-    .avatar {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 8px;
+    .input-group {
+        display: flex;
+        align-items: center;
+        border-radius: 25px;
+        background: white;
+        padding: 10px;
+        margin-top: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-group input {
+        border: none;
+        outline: none;
+        flex: 1;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .send-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #007bff;
+        transition: transform 0.2s;
+    }
+
+    .send-button:hover {
+        transform: scale(1.1);
     }
 </style>
 
 <div class="chat-container">
     <ul id="messagesList" class="messages"></ul>
-
-    <div class="input-group mt-2">
-        @if (isUserSignedIn)
-        {
-            <img id="userAvatar" src="@profilePhoto" class="avatar" alt="User Photo" />
-            <input type="text" id="userInput" value="@fullName" readonly class="form-control" />
-        }
-        else
-        {
-            <input type="text" id="userInput" placeholder="Enter your name" class="form-control" />
-        }
-    </div>
-
+    <div class="input-group mt-2" style="display: none;">
+    @if (isUserSignedIn)
+    {
+        <img id="userAvatar" src="@profilePhoto" class="avatar" alt="User Photo" style="width: 30px; height: 30px;" />
+        <input type="text" id="userInput" value="@fullName" readonly class="form-control" />
+    }
+    else
+    {
+        <input type="text" id="userInput" placeholder="Enter your name" class="form-control" />
+    }
+</div>
     <div class="input-group mt-2">
         <input type="text" class="form-control" id="messageInput" placeholder="Type a message..." />
-        <button id="sendButton" class="btn btn-primary">Send</button>
+        <button id="sendButton" class="send-button"><i class="fas fa-paper-plane"></i></button>
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 <script src="~/js/chat.js"></script>
