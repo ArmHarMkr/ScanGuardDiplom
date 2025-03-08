@@ -30,14 +30,14 @@ public class FileScanService : IFileScanService
         _restClient = new RestClient(options) ?? throw new InvalidOperationException("Failed to initialize RestClient");
     }
 
-    public async Task<int> GetDailyScanCountAsync(string userId) // Изменено на Async
+    public async Task<int> GetDailyScanCountAsync(string userId) 
     {
         var today = DateTime.UtcNow.Date;
         return await _context.FileScanEntities
             .CountAsync(x => x.ApplicationUserId == userId && x.ScanDate.Date == today);
     }
 
-    public async Task<List<FileScanEntity>> GetUserScanHistoryAsync(string userId) // Добавлено
+    public async Task<List<FileScanEntity>> GetUserScanHistoryAsync(string userId) 
     {
         return await _context.FileScanEntities
             .Where(x => x.ApplicationUserId == userId)

@@ -34,52 +34,40 @@ namespace MGOBankApp.Service.Implementations
                 var baseUri = new Uri(url);
                 _httpClient.BaseAddress = new Uri(baseUri.GetLeftPart(UriPartial.Authority));
 
-
-                if (_context.SiteScanCounts.Any(x => x.Url == _httpClient.BaseAddress.ToString()))
-                {
-                    var siteScanCount = await _context.SiteScanCounts.FirstOrDefaultAsync(x => x.Url == _httpClient.BaseAddress.ToString());
-                    siteScanCount!.CheckCount++;
-                }
-                else
-                {
-                    SiteScanCountEntity siteScanCount = new SiteScanCountEntity()
-                    {
-                        Url = _httpClient.BaseAddress.ToString(),
-                        CheckCount = 1
-                    };
-                    _context.SiteScanCounts.Add(siteScanCount);
-                }
-
-                await _context.SaveChangesAsync();
-
-
-                // Check if the URL uses HTTPS
+                // Получаем HTML страницы
                 var response = await _httpClient.GetAsync(url);
                 if (!response.IsSuccessStatusCode)
-                    throw new Exception($"Ошибка доступа к сайту : {response.StatusCode}");
+                    throw new Exception($"Ошибка доступа к сайту: {response.StatusCode}");
 
                 var html = await response.Content.ReadAsStringAsync();
                 var doc = new HtmlDocument();
                 doc.LoadHtml(html);
 
+                // Ищем формы
                 var forms = doc.DocumentNode.SelectNodes("//form") ?? new HtmlNodeCollection(null);
 
-
-
                 vulnerability.HTTPWithoutS = _analyzer.IsHttp(baseUri);
-
+                vulnerability.Phishing = await _analyzer.PhishingTest(url);
+                vulnerability.RFI = await _analyzer.RfiTest(url);
+                vulnerability.LFI = await _analyzer.LfiTest(url);
+                vulnerability.HTTPResponseSplitting = await _analyzer.HttpResponseSplittingTest(url);
+                vulnerability.IDOR = await _analyzer.IdorTest(url);
+                vulnerability.SecurityMisconfiguration = await _analyzer.SecurityMisconfigurationTest(url);
+                vulnerability.UnvalidatedRedirectAndForwards = await _analyzer.UnvalidatedRedirectTest(url);
+                vulnerability.DirectoryListing = await _analyzer.DirectoryListingTest(url);
+                vulnerability.BrokenAuthentification = await _analyzer.BrokenAuthenticationTest(url);
 
                 foreach (var form in forms)
                 {
                     var action = form.GetAttributeValue("action", url);
                     var method = form.GetAttributeValue("method", "get").ToLower();
-                    var inputs = form.SelectNodes(".//input");
-
                     var absoluteAction = action.StartsWith("http") ? action : new Uri(baseUri, action).ToString();
                     var data = new Dictionary<string, string>();
-                    if (inputs != null)
+
+                    var inputFields = form.SelectNodes(".//input");
+                    if (inputFields != null)
                     {
-                        foreach (var input in inputs)
+                        foreach (var input in inputFields)
                         {
                             var name = input.GetAttributeValue("name", null);
                             if (!string.IsNullOrEmpty(name))
@@ -87,72 +75,25 @@ namespace MGOBankApp.Service.Implementations
                         }
                     }
 
-                    // SQL Injection Test    
                     vulnerability.SQLi = await _analyzer.SqlInjectionTest(data, method, absoluteAction);
-
-                    // XSS Test
                     vulnerability.XSS = await _analyzer.XssTest(method, absoluteAction, data);
-                    // CSRF Test
                     vulnerability.CSRF = _analyzer.CsrfTest(method, form);
                 }
 
-                int vulnCount = _analyzer.calculateVulnerabilityCount(vulnerability);
-                if (applicationUser != null)
-                {
-                    WebsiteScanEntity websiteScanEntity = new()
-                    {
-                        ScanUser = applicationUser,
-                        Status = "Scanned",
-                        Url = url,
-                        VulnerablityCount = vulnCount
-                    };
-
-                    _context.WebsiteScanEntities.Add(websiteScanEntity);
-
-                    if (vulnerability.SQLi)
-                    {
-                        _context.VulnerabilityEntities.Add(new VulnerabilityEntity
-                        {
-                            ScanEntity = websiteScanEntity,
-                            VulnerabilityType = Domain.Enums.VulnerabilityType.SQLi
-                        });
-                    }
-                    if (vulnerability.XSS)
-                    {
-                        _context.VulnerabilityEntities.Add(new VulnerabilityEntity
-                        {
-                            ScanEntity = websiteScanEntity,
-                            VulnerabilityType = Domain.Enums.VulnerabilityType.XSS
-                        });
-                    }
-                    if (vulnerability.CSRF)
-                    {
-                        _context.VulnerabilityEntities.Add(new VulnerabilityEntity
-                        {
-                            ScanEntity = websiteScanEntity,
-                            VulnerabilityType = Domain.Enums.VulnerabilityType.CSRF
-                        });
-                    }
-                    if (vulnerability.HTTPWithoutS)
-                    {
-                        _context.VulnerabilityEntities.Add(new VulnerabilityEntity
-                        {
-                            ScanEntity = websiteScanEntity,
-                            VulnerabilityType = Domain.Enums.VulnerabilityType.HTTPWithoutS
-                        });
-                    }
-
-                    await _context.SaveChangesAsync();
-                }
-                _logger.LogInformation("{user} scanned URL - {url} ",applicationUser!.Email ,url);
+                // Логирование
+                _logger.LogInformation("{user} просканировал URL - {url} ", applicationUser!.Email, url);
                 return vulnerability;
             }
             catch (Exception ex)
             {
-                _logger.LogError("{user} : Error while scanning URL - {url} ... {exeptionMessage}",applicationUser!.Email!, url,ex.Message);
+                _logger.LogError("{user} : Ошибка при сканировании URL - {url} ... {exeptionMessage}", applicationUser!.Email!, url, ex.Message);
                 throw new Exception($"Ошибка сканирования: {ex.Message}");
             }
         }
+
+
+
+
 
 
     }

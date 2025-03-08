@@ -58,6 +58,15 @@
             <p><strong>SQLi:</strong> <span class="@(Model.SQLi ? "error" : "success")">@Model.SQLi</span></p>
             <p><strong>XSS:</strong> <span class="@(Model.XSS ? "error" : "success")">@Model.XSS</span></p>
             <p><strong>CSRF:</strong> <span class="@(Model.CSRF ? "error" : "success")">@Model.CSRF</span></p>
+            <p><strong>IDOR:</strong> <span class="@(Model.IDOR ? "error" : "success")">@Model.IDOR</span></p>
+            <p><strong>Broken Authentification:</strong> <span class="@(Model.BrokenAuthentification ? "error" : "success")">@Model.BrokenAuthentification</span></p>
+            <p><strong>Security Misconfiguration:</strong> <span class="@(Model.SecurityMisconfiguration ? "error" : "success")">@Model.SecurityMisconfiguration</span></p>
+            <p><strong>Unvalidated Redirect And Forwards:</strong> <span class="@(Model.UnvalidatedRedirectAndForwards ? "error" : "success")">@Model.UnvalidatedRedirectAndForwards</span></p>
+            <p><strong>Directory Listing:</strong> <span class="@(Model.DirectoryListing ? "error" : "success")">@Model.DirectoryListing</span></p>
+            <p><strong>LFI:</strong> <span class="@(Model.LFI ? "error" : "success")">@Model.LFI</span></p>
+            <p><strong>RFI:</strong> <span class="@(Model.RFI ? "error" : "success")">@Model.RFI</span></p>
+            <p><strong>HTTP Response Splitting:</strong> <span class="@(Model.HTTPResponseSplitting ? "error" : "success")">@Model.HTTPResponseSplitting</span></p>
+            <p><strong>Phishing:</strong> <span class="@(Model.Phishing ? "error" : "success")">@Model.Phishing</span></p>
             <p><strong>Not Secure Domain:</strong> <span class="@(!Model.HTTPWithoutS ? "success" : "error")">@Model.HTTPWithoutS</span></p>
         </div>
     }

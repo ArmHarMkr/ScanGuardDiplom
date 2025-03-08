@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using RestSharp;
 using ScanGuard.TelegramBot;
 using Serilog;
 using System.Globalization;
@@ -74,6 +75,17 @@ internal class Program
         builder.Services.AddScoped<TGUserService>();
         builder.Services.AddScoped<MessageSender>();
         builder.Services.AddSignalR();
+
+        builder.Services.AddSingleton<RestSharp.RestClient>(sp =>
+        {
+            var options = new RestClientOptions("https://www.virustotal.com/api/v3/")
+            {
+                ThrowOnAnyError = true
+            };
+            return new RestClient(options);
+        });
+
+
 
         var app = builder.Build();
 
