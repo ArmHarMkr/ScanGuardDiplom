@@ -12,6 +12,6 @@ namespace MGOBankApp.Service.Interfaces
 {
     public interface IScannerService
     {
-        Task<Vulnerability> ScanUrl(string url, ApplicationUser? applicationUser);
+        Task<(Vulnerability vulnerability, Dictionary<int, (bool IsOpen, string Service, string Version)> portResults)> ScanUrl(string url, ApplicationUser? applicationUser);
     }
 }

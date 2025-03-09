@@ -78,25 +78,60 @@ namespace MGOBankApp.BLL.Services
                 var resultVulnerability = await _scannerService.ScanUrl(url, user.ApplicationUser);
 
                 return $@"
- 🔍 <b>Scan Results for:</b> {url}
+🔍 <b>Scan Results for:</b> {url}
 
-🛡 <b>XSS Protection:</b> {(!resultVulnerability.XSS ? "✅ Secure" : "⚠️ Vulnerable")}
-🛡 <b>SQL Injection Protection:</b> {(!resultVulnerability.SQLi ? "✅ Secure" : "⚠️ Vulnerable")}
-🛡 <b>CSRF Protection:</b> {(!resultVulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
-🛡 <b>HTTPS Enabled:</b> {(!resultVulnerability.HTTPWithoutS ? "✅ Yes" : "⚠️ No")}
+🛡 <b>SQL Injection:</b> {(!resultVulnerability.vulnerability.SQLi ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>XSS:</b> {(!resultVulnerability.vulnerability.XSS ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>CSRF:</b> {(!resultVulnerability.vulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>IDOR:</b> {(!resultVulnerability.vulnerability.IDOR ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>Broken Authentication:</b> {(!resultVulnerability.vulnerability.BrokenAuthentification ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>Security Misconfiguration:</b> {(!resultVulnerability.vulnerability.SecurityMisconfiguration ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>Unvalidated Redirect:</b> {(!resultVulnerability.vulnerability.UnvalidatedRedirectAndForwards ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>Directory Listing:</b> {(!resultVulnerability.vulnerability.DirectoryListing ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>LFI:</b> {(!resultVulnerability.vulnerability.LFI ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>RFI:</b> {(!resultVulnerability.vulnerability.RFI ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>HTTP Response Splitting:</b> {(!resultVulnerability.vulnerability.HTTPResponseSplitting ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>Phishing:</b> {(!resultVulnerability.vulnerability.Phishing ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>Not Secure Domain (HTTPS):</b> {(!resultVulnerability.vulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Not Secure")}
 
-📌 <b>Total:</b> <b>{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
+📌 <b>Total:</b> <b>{(!resultVulnerability.vulnerability.SQLi &&
+            !resultVulnerability.vulnerability.XSS &&
+            !resultVulnerability.vulnerability.CSRF &&
+            !resultVulnerability.vulnerability.IDOR &&
+            !resultVulnerability.vulnerability.BrokenAuthentification &&
+            !resultVulnerability.vulnerability.SecurityMisconfiguration &&
+            !resultVulnerability.vulnerability.UnvalidatedRedirectAndForwards &&
+            !resultVulnerability.vulnerability.DirectoryListing &&
+            !resultVulnerability.vulnerability.LFI &&
+            !resultVulnerability.vulnerability.RFI &&
+            !resultVulnerability.vulnerability.HTTPResponseSplitting &&
+            !resultVulnerability.vulnerability.Phishing &&
+            !resultVulnerability.vulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
 
-{(!resultVulnerability.XSS && !resultVulnerability.SQLi && !resultVulnerability.CSRF && !resultVulnerability.HTTPWithoutS
-? "🎉 Your website is well-protected! No vulnerabilities found."
-: "⚠️ Security Alert! Your website has vulnerabilities that need fixing.")}";
+{(!resultVulnerability.vulnerability.SQLi &&
+            !resultVulnerability.vulnerability.XSS &&
+            !resultVulnerability.vulnerability.CSRF &&
+            !resultVulnerability.vulnerability.IDOR &&
+            !resultVulnerability.vulnerability.BrokenAuthentification &&
+            !resultVulnerability.vulnerability.SecurityMisconfiguration &&
+            !resultVulnerability.vulnerability.UnvalidatedRedirectAndForwards &&
+            !resultVulnerability.vulnerability.DirectoryListing &&
+            !resultVulnerability.vulnerability.LFI &&
+            !resultVulnerability.vulnerability.RFI &&
+            !resultVulnerability.vulnerability.HTTPResponseSplitting &&
+            !resultVulnerability.vulnerability.Phishing &&
+            !resultVulnerability.vulnerability.HTTPWithoutS
+            ? "🎉 Your website is well-protected! No vulnerabilities found."
+            : "⚠️ Security Alert! Your website has vulnerabilities that need fixing.")}";
             }
             catch (Exception)
             {
-
                 return "Invalid link";
             }
         }
+
+
+
         public async Task<(string profileInfo, string profileImageUrl)> GetProfileInfo(string chatId)
         {
             var user = await IsVeryfiedUser(chatId);

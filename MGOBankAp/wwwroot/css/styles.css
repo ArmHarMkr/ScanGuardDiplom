@@ -5,16 +5,19 @@
     background: linear-gradient(180deg, #0a192f, #0d1b2a);
     min-height: 100vh;
     color: #a3bffa;
-    overflow-x: hidden;
-    overflow-y: hidden; /* Убираем вертикальный скролл */
+    overflow-y: hidden;
+    box-sizing: border-box;
+    scrollbar-width: none;
 }
 
 .container {
     text-align: center;
     position: relative;
     z-index: 1;
-    padding: 80px 20px 20px; /* Уменьшаем верхний отступ */
-    max-height: 600px; /* Ограничиваем высоту контейнера */
+    padding: 80px 20px 20px;
+    max-height: 950px;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 .navbar {
@@ -441,6 +444,9 @@
     background: rgba(10, 25, 47, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    overflow: scroll;
+    max-height: 600px;
+    overflow-x: hidden
 }
 
 .cyber-table {

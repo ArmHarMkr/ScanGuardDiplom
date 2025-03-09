@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace MGOBankApp.Controllers
 {
-    [Authorize(Roles = SD.Role_Premium)]
+    [Authorize(Roles = $"{SD.Role_Premium}, {SD.Role_Admin}")]
     public class PremiumController : Controller
     {
         private readonly IFileScanService _scanService;

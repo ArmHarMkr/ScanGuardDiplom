@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="bg-effect"></div>
+@*     <div class="bg-effect"></div>
     <div class="cyber-grid"></div>
-    <header>
+ *@    <header>
         <nav class="navbar">
             <a href="/" class="nav-logo">
                 <span>S</span><span>c</span><span>a</span><span>n</span><span>G</span><span>u</span><span>a</span><span>r</span><span>d</span>
@@ -45,6 +45,10 @@
                     <ul class="nav-links">
                         <li><a href="/Admin/index">Users</a></li>
                     </ul>
+                    <ul class="nav-links">
+                        <li><a asp-action="GetToken" asp-controller="Premium">Get Token</a></li>
+                    </ul>
+
                 }
                 if (isPremium)
                 {

@@ -6,62 +6,66 @@ using MGOBankApp.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MGOBankApp.Controllers
+namespace MGOBankApp.Controllers;
+
+public class ScanController : Controller
 {
-    public class ScanController : Controller
+    private readonly HttpClient _httpClient;
+    private readonly IScannerService _scannerService;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ApplicationDbContext _context;
+
+    public ScanController(
+        IHttpClientFactory httpClientFactory,
+        IScannerService scannerService,
+        UserManager<ApplicationUser> userManager,
+        ApplicationDbContext context)
     {
-        private readonly HttpClient _httpClient;
-        private readonly IScannerService _scannerService;
-        private readonly UserManager<ApplicationUser> UserManager;
-        private readonly ApplicationDbContext Context;
+        _httpClient = httpClientFactory.CreateClient();
+        _scannerService = scannerService;
+        _userManager = userManager;
+        _context = context;
+    }
 
-        public ScanController(IHttpClientFactory httpClientFactory, IScannerService scannerService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
-        {
-            _httpClient = httpClientFactory.CreateClient();
-            _scannerService = scannerService;
-            UserManager = userManager;
-            Context = context;
-        }
+    public IActionResult FwdScanner()
+    {
+        return RedirectToAction("Scanner");
+    }
 
-        public IActionResult FwdScanner()
+    [HttpGet]
+    public IActionResult Scanner()
+    {
+        return View("~/Views/Scan/Scanner.cshtml", new Vulnerability());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Scanner(string url)
+    {
+        if (string.IsNullOrEmpty(url))
         {
+            TempData["ErrorMessage"] = "URL не указан";
             return RedirectToAction("Scanner");
         }
 
-        [HttpGet]
-        public IActionResult Scanner()
+        try
         {
-            return View("~/Views/Scan/Scanner.cshtml", new Vulnerability());
+            ApplicationUser? applicationUser = await _userManager.GetUserAsync(User);
+            var (vulnerability, portResults) = await _scannerService.ScanUrl(url, applicationUser);
+            ViewBag.PortScanResults = portResults;
+
+            if (applicationUser != null)
+            {
+                applicationUser.ScannedUrlCount++;
+                await _context.SaveChangesAsync();
+            }
+
+            TempData["SuccessMessage"] = "Сканирование завершено успешно.";
+            return View("~/Views/Scan/Scanner.cshtml", vulnerability);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Scanner(string url)
+        catch (Exception ex)
         {
-            if (string.IsNullOrEmpty(url))
-            {
-                TempData["ErrorMessage"] = "URL не указан";
-                return RedirectToAction("Scanner");
-            }
-
-            try
-            {
-                ApplicationUser? applicationUser = await UserManager.GetUserAsync(User);
-                var result = await _scannerService.ScanUrl(url, applicationUser);
-                
-                if(applicationUser != null)
-                {
-                    applicationUser.ScannedUrlCount++;
-                    await Context.SaveChangesAsync();
-                }
-
-                TempData["SuccessMessage"] = "Сканирование завершено успешно.";
-                return View("~/Views/Scan/Scanner.cshtml", result);
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = $"Ошибка: {ex.Message}";
-                return RedirectToAction("Scanner");
-            }
+            TempData["ErrorMessage"] = $"Ошибка: {ex.Message}";
+            return RedirectToAction("Scanner");
         }
     }
 }
