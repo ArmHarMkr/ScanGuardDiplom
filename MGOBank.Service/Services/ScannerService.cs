@@ -43,7 +43,7 @@ namespace MGOBankApp.Service.Implementations
                 // Get HTML page
                 var response = await _httpClient.GetAsync(url);
                 if (!response.IsSuccessStatusCode)
-                    throw new Exception($"Ошибка доступа к сайту: {response.StatusCode}");
+                    throw new Exception($"Error : Acces to this site denied: {response.StatusCode}");
 
                 var html = await response.Content.ReadAsStringAsync();
                 var doc = new HtmlDocument();
@@ -106,22 +106,16 @@ namespace MGOBankApp.Service.Implementations
                 await _context.SaveChangesAsync();
 
                 // Logging
-                if (applicationUser == null)
-                {
-                    _logger.LogInformation($"Неизвестный просканировал URL - {url}");
-                }
-                else
-                {
-                    _logger.LogInformation("{user} просканировал URL - {url} ", applicationUser?.Email, url);
-                }
+                    _logger.LogInformation("{user} Scanned URL - {url} ", applicationUser?.Email, url);
+
 
                 return (vulnerability, portResults);
             }
             catch (Exception ex)
             {
-                _logger.LogError("{user} : Ошибка при сканировании URL - {url} ... {exeptionMessage}",
+                _logger.LogError("{user} : URL Scanning error - {url} ... {exeptionMessage}",
                     applicationUser?.Email ?? "Unknown", url, ex.Message);
-                throw new Exception($"Ошибка сканирования: {ex.Message}");
+                throw new Exception($"Scanning Error: {ex.Message}");
             }
         }
 
