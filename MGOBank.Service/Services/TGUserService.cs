@@ -10,6 +10,7 @@ using System.Globalization;
 namespace MGOBankApp.BLL.Services
 {
     public class TGUserService
+
     {
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly ILogger<TGUserService> _logger;

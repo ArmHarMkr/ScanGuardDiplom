@@ -92,7 +92,7 @@ namespace MGOBankApp.Service.Implementations
                 // Save scan results to database
                 WebsiteScanEntity websiteScanEntity = new()
                 {
-                    ScanUser = applicationUser,
+                    ScanUser = applicationUser!,
                     Status = "Scanned",
                     Url = url,
                     VulnerablityCount = _analyzer.CalculateVulnerabilityCount(vulnerability)

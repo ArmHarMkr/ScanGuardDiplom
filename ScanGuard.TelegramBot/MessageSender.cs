@@ -50,8 +50,10 @@ namespace MGOBankApp.TelegramBot
             }
             else if (text!.StartsWith("/scanurl"))
             {
+                var loadingMessage = await client.SendMessage(chatId, "<b>Scanning the URL, please wait...</b>⏳", cancellationToken: token, parseMode: ParseMode.Html);
                 var result = await _userService.ScanUrl(text.Split(" ")[1], chatId.ToString());
-                await client.SendMessage(chatId, result, cancellationToken: token, parseMode: ParseMode.Html);
+                await client.EditMessageText(chatId, loadingMessage.MessageId, result, cancellationToken: token, parseMode: ParseMode.Html);
+               // await client.SendMessage(chatId, result, cancellationToken: token, parseMode: ParseMode.Html);
             }
             else if (text == "/profile")
             {
