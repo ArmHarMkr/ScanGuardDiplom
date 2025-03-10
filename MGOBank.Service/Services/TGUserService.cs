@@ -25,7 +25,10 @@ namespace MGOBankApp.BLL.Services
         {
             using var scope = _scopeFactory.CreateScope();
             var _context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
+            if (await IsVeryfiedUser(chatId) is not null)
+            {
+                return "You are already linked";
+            }
             var user = await _context.TGUserEntities.Include(x => x.ApplicationUser).FirstOrDefaultAsync(x => x.TGUserToken == token);
             if (user == null)
             {
