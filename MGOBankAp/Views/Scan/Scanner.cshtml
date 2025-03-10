@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Сканер уязвимостей</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="~/css/styles.css">
 </head>
 <body>
     <div class="main_container">
@@ -69,8 +69,17 @@
     </div>
 
     <script>
-        document.getElementById('scanForm').addEventListener('submit', function () {
-            document.getElementById('loading').style.display = 'block';
+        document.addEventListener("DOMContentLoaded", function () {
+            let loadingOverlay = document.getElementById('loading');
+
+            document.getElementById('scanForm').addEventListener('submit', function () {
+                loadingOverlay.style.display = 'flex';
+            });
+
+            // Прячем спиннер после загрузки страницы
+            window.onload = function () {
+                loadingOverlay.style.display = 'none';
+            };
         });
     </script>
 </body>
