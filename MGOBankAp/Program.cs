@@ -64,6 +64,7 @@ internal class Program
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IScannerService, ScannerService>();
         builder.Services.AddScoped<IScannedSites, ScannedSites>();
+        builder.Services.AddTransient<IEmailService,EmailService>();
         builder.Services.AddHttpClient<IFileScanService, FileScanService>();
         builder.Services.AddScoped<IFileScanService, FileScanService>();
         builder.Services.AddSingleton<ITelegramBotClient>(provider =>

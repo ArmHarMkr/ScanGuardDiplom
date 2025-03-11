@@ -10,16 +10,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MGOBankApp.Domain.Entity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Serilog;
+using MGOBankApp.BLL.Interfaces;
+using Telegram.Bot.Types;
 
 namespace MGOBankApp.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
-
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        private readonly IEmailService _emailService;
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger,IEmailService emailService)
         {
             _signInManager = signInManager;
+            _emailService = emailService;
         }
 
         /// <summary>
@@ -108,7 +111,15 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = _signInManager.UserManager.FindByEmailAsync(Input.Email).Result;
                     Log.Information("User {UserName} logged in. IP : {IP}", Input.Email,ip);
+                    if (ip != user.RegistrationIpAdress)
+                    {
+
+                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAdress, ip);
+
+                        Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAdress, ip);
+                    }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
