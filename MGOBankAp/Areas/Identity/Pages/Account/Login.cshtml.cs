@@ -98,7 +98,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
+            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -108,7 +108,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    Log.Information("User {UserName} logged in.", Input.Email);
+                    Log.Information("User {UserName} logged in. IP : {IP}", Input.Email,ip);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -117,7 +117,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    Log.Warning("User {UserName} account locked out.", Input.Email);
+                    Log.Warning("User {UserName} account locked out. IP : {}", Input.Email,ip);
                     return RedirectToPage("./Lockout");
                 }
                 if (result.IsNotAllowed)

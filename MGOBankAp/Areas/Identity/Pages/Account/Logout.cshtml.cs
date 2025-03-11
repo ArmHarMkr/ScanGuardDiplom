@@ -26,7 +26,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
-            Log.Information("User {User} logged out.",User.Identity.Name);
+            Log.Information("User {User} logged out. IP : {IP}",User.Identity.Name,HttpContext.Connection.RemoteIpAddress?.ToString());
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);

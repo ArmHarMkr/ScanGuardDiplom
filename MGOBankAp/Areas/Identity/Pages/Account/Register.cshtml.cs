@@ -41,7 +41,6 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _emailSender = emailSender;
         }
-
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -99,6 +98,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
         }
 
 
@@ -116,14 +116,15 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 user.FullName = Input.FullName;
+                user.RegistrationIpAdress = HttpContext.Connection.RemoteIpAddress?.ToString();
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
-
-                    Log.Information("User {UserName} registered successfully.", user.Email);
+                    
+                    Log.Information("User {UserName} registered successfully. IP : {IP}", user.Email, user.RegistrationIpAdress);
                     var userId = await _userManager.GetUserIdAsync(user);
                     if (!string.IsNullOrEmpty(userId))
                     {
