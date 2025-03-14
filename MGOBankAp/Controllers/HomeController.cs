@@ -30,21 +30,48 @@ namespace MGOBankAp.Controllers
         public async Task<IActionResult> Index()
         {
             bool isSignedIn = SignInManager.IsSignedIn(User);
-
-            int siteCount = isSignedIn ? 30 : 10; // Get top 30 if signed in, else top 10
+            int siteCount = isSignedIn ? 30 : 10;
 
             List<SiteScanCountEntity> mostScanCount = await Context.SiteScanCounts
-                .OrderByDescending(x => x.CheckCount) // Order by highest check count
+                .OrderByDescending(x => x.CheckCount)
                 .Take(siteCount)
                 .ToListAsync();
 
-            var scanVulnerableSitesVM = new ScannedVulnerableSitesVM()
+            // Get local IP
+            string userIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+            // Check if behind a proxy (get real client IP)
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
             {
-                IsSignedIn = isSignedIn
-            };
+                userIpAddress = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
+            }
+
+            // Get public IP (only if the IP is private)
+            if (userIpAddress.StartsWith("10.") || userIpAddress.StartsWith("192.168.") || userIpAddress.StartsWith("172.16.") || userIpAddress == "::1")
+            {
+                userIpAddress = await GetPublicIp();
+            }
+
+            ViewBag.UserIp = userIpAddress;
 
             return View(mostScanCount);
         }
+
+        private async Task<string> GetPublicIp()
+        {
+            try
+            {
+                using var client = new HttpClient();
+                return await client.GetStringAsync("https://api4.ipify.org"); // Fetches IPv4 only
+            }
+            catch
+            {
+                return "Unable to retrieve public IPv4";
+            }
+        }
+
+
+
 
 
         public IActionResult AboutUs()

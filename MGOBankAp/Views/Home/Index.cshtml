@@ -3,6 +3,14 @@
 }
 
 @model List<SiteScanCountEntity>
+
+@if (ViewBag.UserIp != null)
+{
+    <p><strong>Your IP Address:</strong> @ViewBag.UserIp</p>
+}
+
+
+
 <div class="description">Check the websites you visit for security</div>
 <div class="title-wrapper">
     <h1 class="title">

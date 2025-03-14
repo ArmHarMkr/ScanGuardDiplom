@@ -13,7 +13,7 @@ namespace MGOBankApp.Domain.Entity
         public int ScannedFileCount { get; set; } = 0;
         public bool TGConnected { get; set; } = false;
         public string ProfilePhotoPath { get; set; } = "wwwroot/img/default.jpg";
-        public string RegistrationIpAdress { get; set; }
+        public string? RegistrationIpAdress { get; set; }
         public virtual ICollection<WebsiteScanEntity> WebsiteScans { get; set; } // Если нужно
         public virtual ICollection<NotificationEntity> Notifications { get; set; } // Уведомления
         public virtual ICollection<FileScanEntity> FileScans { get; set; } // Сканирования файлов
