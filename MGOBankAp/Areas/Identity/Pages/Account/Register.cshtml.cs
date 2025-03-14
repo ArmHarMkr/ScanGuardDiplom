@@ -108,6 +108,21 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        // Method to get the public IPv4 address
+        private async Task<string> GetPublicIp()
+        {
+            try
+            {
+                using var client = new HttpClient();
+                return await client.GetStringAsync("https://api4.ipify.org"); // Only IPv4
+            }
+            catch
+            {
+                return "Unable to retrieve public IPv4";
+            }
+        }
+
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -116,6 +131,23 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 user.FullName = Input.FullName;
+
+                string userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+                // Check if behind a proxy (Cloudflare, Nginx, etc.)
+                if (Request.Headers.ContainsKey("X-Forwarded-For"))
+                {
+                    userIp = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
+                }
+
+                // Fetch public IPv4 if it's local or IPv6
+                if (string.IsNullOrEmpty(userIp) || userIp == "::1" || userIp.StartsWith("10.") || userIp.StartsWith("192.168.") || userIp.StartsWith("172.16.") || userIp.Contains(":"))
+                {
+                    userIp = await GetPublicIp();
+                }
+
+                Log.Information("User {User} logged out. IP: {IP}", User.Identity?.Name ?? "Unknown", userIp);
+                user.RegistrationIpAdress = userIp;
                 user.RegistrationIpAdress = HttpContext.Connection.RemoteIpAddress?.ToString();
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

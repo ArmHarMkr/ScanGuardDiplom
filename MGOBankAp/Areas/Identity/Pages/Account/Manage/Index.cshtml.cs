@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,16 @@ namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = dbContext;
         }
 
         /// <summary>
@@ -86,6 +90,21 @@ namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
+        // Method to get the public IPv4 address
+        private async Task<string> GetPublicIp()
+        {
+            try
+            {
+                using var client = new HttpClient();
+                return await client.GetStringAsync("https://api4.ipify.org"); // Only IPv4
+            }
+            catch
+            {
+                return "Unable to retrieve public IPv4";
+            }
+        }
+
+
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -100,6 +119,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -111,6 +131,26 @@ namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            // Get user's IP
+            string userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+            // Check if behind a proxy (Cloudflare, Nginx, etc.)
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+            {
+                userIp = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
+            }
+
+            // Fetch public IPv4 if it's local or IPv6
+            if (string.IsNullOrEmpty(userIp) || userIp == "::1" || userIp.StartsWith("10.") || userIp.StartsWith("192.168.") || userIp.StartsWith("172.16.") || userIp.Contains(":"))
+            {
+                userIp = await GetPublicIp();
+            }
+
+            if(user.RegistrationIpAdress == null)
+            {
+                user.RegistrationIpAdress = userIp;
+            }
+            await _context.SaveChangesAsync();
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

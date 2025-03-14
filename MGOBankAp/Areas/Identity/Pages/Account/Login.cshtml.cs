@@ -101,50 +101,72 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+
+            // Get user's IP
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+            {
+                ip = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
+            }
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
-                    var user = _signInManager.UserManager.FindByEmailAsync(Input.Email).Result;
-                    Log.Information("User {UserName} logged in. IP : {IP}", Input.Email,ip);
-                    if (ip != user.RegistrationIpAdress)
-                    {
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
 
+                    if (user == null)
+                    {
+                        Log.Warning("Login attempt failed: User not found. Email: {Email}", Input.Email);
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
+                    }
+
+                    Log.Information("User {UserName} logged in. IP: {IP}", Input.Email, ip);
+
+                    // Check if IP is different from stored IP
+                    if (string.IsNullOrEmpty(user.RegistrationIpAdress) || user.RegistrationIpAdress != ip)
+                    {
                         await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAdress, ip);
 
                         Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAdress, ip);
+
+                        // Update user's stored IP to the new one
+                        user.RegistrationIpAdress = ip;
+                        await _signInManager.UserManager.UpdateAsync(user);
                     }
+
                     return LocalRedirect(returnUrl);
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
+
                 if (result.IsLockedOut)
                 {
-                    Log.Warning("User {UserName} account locked out. IP : {}", Input.Email,ip);
+                    Log.Warning("User {UserName} account locked out. IP: {IP}", Input.Email, ip);
                     return RedirectToPage("./Lockout");
                 }
+
                 if (result.IsNotAllowed)
                 {
                     ModelState.AddModelError(string.Empty, "You are not allowed.");
                     return Page();
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
 }
