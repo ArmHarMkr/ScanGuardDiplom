@@ -110,6 +110,12 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 ip = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
             }
 
+            // Check if the IP is private and fetch public IP
+            if (ip.StartsWith("10.") || ip.StartsWith("192.168.") || ip.StartsWith("172.16.") || ip == "::1")
+            {
+                ip = await GetPublicIp();
+            }
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -133,7 +139,6 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                     if (string.IsNullOrEmpty(user.RegistrationIpAdress) || user.RegistrationIpAdress != ip)
                     {
                         await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAdress, ip);
-
                         Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAdress, ip);
 
                         // Update user's stored IP to the new one
@@ -166,6 +171,19 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             }
 
             return Page();
+        }
+
+        private async Task<string> GetPublicIp()
+        {
+            try
+            {
+                using var client = new HttpClient();
+                return await client.GetStringAsync("https://api4.ipify.org"); // Fetches IPv4 only
+            }
+            catch
+            {
+                return "Unable to retrieve public IPv4";
+            }
         }
 
     }
