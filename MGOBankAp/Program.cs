@@ -146,9 +146,9 @@ internal class Program
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            if (await userManager.FindByEmailAsync("admin@admin.com") != null)
+            if (await userManager.FindByEmailAsync("har.mkrtchyan2006@gmail.com") != null)
             {
-                var user = await userManager.FindByEmailAsync("admin@admin.com");
+                var user = await userManager.FindByEmailAsync("har.mkrtchyan2006@gmail.com");
                 await userManager.RemoveFromRoleAsync(user, SD.Role_Customer);
                 await userManager.AddToRoleAsync(user, SD.Role_Admin);
             }

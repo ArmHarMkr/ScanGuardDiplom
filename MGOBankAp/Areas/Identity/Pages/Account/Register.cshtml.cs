@@ -116,7 +116,24 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 user.FullName = Input.FullName;
-                user.RegistrationIpAdress = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+                string userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+                // Check if behind a proxy (Cloudflare, Nginx, etc.)
+                if (Request.Headers.ContainsKey("X-Forwarded-For"))
+                {
+                    userIp = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
+                }
+
+                // Fetch public IPv4 if it's local or IPv6
+                if (string.IsNullOrEmpty(userIp) || userIp == "::1" || userIp.StartsWith("10.") || userIp.StartsWith("192.168.") || userIp.StartsWith("172.16.") || userIp.Contains(":"))
+                {
+                    userIp = await GetPublicIp();
+                }
+
+                Log.Information("User {User} logged out. IP: {IP}", User.Identity?.Name ?? "Unknown", userIp);
+                user.RegistrationIpAddress = userIp;
+                user.LastLoginIpAddress = user.RegistrationIpAddress;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -124,7 +141,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     
-                    Log.Information("User {UserName} registered successfully. IP : {IP}", user.Email, user.RegistrationIpAdress);
+                    Log.Information("User {UserName} registered successfully. IP : {IP}", user.Email, user.RegistrationIpAddress);
                     var userId = await _userManager.GetUserIdAsync(user);
                     if (!string.IsNullOrEmpty(userId))
                     {

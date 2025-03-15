@@ -51,7 +51,7 @@ namespace MGOBankApp.BLL.Utilities
     <p><a href='https://example.com/change-password' class='button'>Change Password</a></p>
 
     <div class='footer'>
-        <p>If you need assistance, please contact our support team at <a href='mailto:support@example.com'>support@example.com</a>.</p> 
+        <p>If you need assistance, please contact our support team at <a href='mailto:har.mkrtchyan2006@gmail.com'>har.mkrtchyan2006@gmail.com</a>.</p> 
         <p>Best regards,</p>
         <p>The Security Team<br>ScanGuard</p>
     </div>

@@ -111,6 +111,26 @@ namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            // Get user's IP
+            string userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+            // Check if behind a proxy (Cloudflare, Nginx, etc.)
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+            {
+                userIp = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
+            }
+
+            // Fetch public IPv4 if it's local or IPv6
+            if (string.IsNullOrEmpty(userIp) || userIp == "::1" || userIp.StartsWith("10.") || userIp.StartsWith("192.168.") || userIp.StartsWith("172.16.") || userIp.Contains(":"))
+            {
+                userIp = await GetPublicIp();
+            }
+
+            if(user.RegistrationIpAddress == null)
+            {
+                user.RegistrationIpAddress = userIp;
+            }
+            await _context.SaveChangesAsync();
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

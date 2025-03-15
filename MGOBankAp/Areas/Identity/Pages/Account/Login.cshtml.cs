@@ -101,7 +101,21 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+
+            // Get user's IP
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+            {
+                ip = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
+            }
+
+            // Check if the IP is private and fetch public IP
+            if (ip.StartsWith("10.") || ip.StartsWith("192.168.") || ip.StartsWith("172.16.") || ip == "::1")
+            {
+                ip = await GetPublicIp();
+            }
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -116,9 +130,16 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                     if (ip != user.RegistrationIpAdress)
                     {
 
+                    // Check if IP is different from stored IP
+                    if (string.IsNullOrEmpty(user.RegistrationIpAdress) || user.RegistrationIpAdress != ip)
+                    {
                         await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAdress, ip);
 
                         Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAdress, ip);
+
+                        // Update user's stored IP to the new one
+                        user.RegistrationIpAdress = ip;
+                        await _signInManager.UserManager.UpdateAsync(user);
                     }
                     return LocalRedirect(returnUrl);
                 }
@@ -146,5 +167,6 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
 }
