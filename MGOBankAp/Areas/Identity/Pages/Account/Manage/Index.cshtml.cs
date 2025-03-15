@@ -146,9 +146,9 @@ namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
                 userIp = await GetPublicIp();
             }
 
-            if(user.RegistrationIpAdress == null)
+            if(user.RegistrationIpAddress == null)
             {
-                user.RegistrationIpAdress = userIp;
+                user.RegistrationIpAddress = userIp;
             }
             await _context.SaveChangesAsync();
             await _signInManager.RefreshSignInAsync(user);

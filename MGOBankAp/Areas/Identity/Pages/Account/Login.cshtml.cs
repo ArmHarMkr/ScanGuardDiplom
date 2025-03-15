@@ -136,13 +136,13 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                     Log.Information("User {UserName} logged in. IP: {IP}", Input.Email, ip);
 
                     // Check if IP is different from stored IP
-                    if (string.IsNullOrEmpty(user.RegistrationIpAdress) || user.RegistrationIpAdress != ip)
+                    if (string.IsNullOrEmpty(user.RegistrationIpAddress) || user.RegistrationIpAddress != ip)
                     {
-                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAdress, ip);
-                        Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAdress, ip);
+                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAddress, ip);
+                        Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAddress, ip);
 
                         // Update user's stored IP to the new one
-                        user.RegistrationIpAdress = ip;
+                        user.LastLoginIpAddress = ip;
                         await _signInManager.UserManager.UpdateAsync(user);
                     }
 

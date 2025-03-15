@@ -147,8 +147,8 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 }
 
                 Log.Information("User {User} logged out. IP: {IP}", User.Identity?.Name ?? "Unknown", userIp);
-                user.RegistrationIpAdress = userIp;
-                user.RegistrationIpAdress = HttpContext.Connection.RemoteIpAddress?.ToString();
+                user.RegistrationIpAddress = userIp;
+                user.LastLoginIpAddress = user.RegistrationIpAddress;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -156,7 +156,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     
-                    Log.Information("User {UserName} registered successfully. IP : {IP}", user.Email, user.RegistrationIpAdress);
+                    Log.Information("User {UserName} registered successfully. IP : {IP}", user.Email, user.RegistrationIpAddress);
                     var userId = await _userManager.GetUserIdAsync(user);
                     if (!string.IsNullOrEmpty(userId))
                     {

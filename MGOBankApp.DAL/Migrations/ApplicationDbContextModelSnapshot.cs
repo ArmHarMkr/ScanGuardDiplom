@@ -72,7 +72,7 @@ namespace MGOBankApp.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RegistrationIpAdress")
+                    b.Property<string>("RegistrationIpAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
