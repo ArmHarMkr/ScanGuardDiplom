@@ -48,7 +48,7 @@ namespace MGOBankApp.BLL.Utilities
 
     <p>If this was you, there's no need for concern. If you don't recognize this activity, we recommend updating your password and reviewing your account activity for any suspicious actions.</p>
 
-    <p><a href='https://example.com/change-password' class='button'>Change Password</a></p>
+    <p><a href='https://localhost:7160/Identity/Account/Manage/ChangePassword' class='button'>Change Password</a></p>
 
     <div class='footer'>
         <p>If you need assistance, please contact our support team at <a href='mailto:har.mkrtchyan2006@gmail.com'>har.mkrtchyan2006@gmail.com</a>.</p> 

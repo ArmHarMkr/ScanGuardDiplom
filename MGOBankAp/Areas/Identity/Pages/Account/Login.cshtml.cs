@@ -19,7 +19,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailService _emailService;
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger,IEmailService emailService)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IEmailService emailService)
         {
             _signInManager = signInManager;
             _emailService = emailService;
@@ -120,52 +120,70 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
-                    var user = _signInManager.UserManager.FindByEmailAsync(Input.Email).Result;
-                    Log.Information("User {UserName} logged in. IP : {IP}", Input.Email,ip);
-                    if (ip != user.RegistrationIpAdress)
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+
+                    if (user == null)
                     {
+                        Log.Warning("Login attempt failed: User not found. Email: {Email}", Input.Email);
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
+                    }
+
+                    Log.Information("User {UserName} logged in. IP: {IP}", Input.Email, ip);
 
                     // Check if IP is different from stored IP
-                    if (string.IsNullOrEmpty(user.RegistrationIpAdress) || user.RegistrationIpAdress != ip)
+                    if (string.IsNullOrEmpty(user.RegistrationIpAddress) || user.RegistrationIpAddress != ip)
                     {
-                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAdress, ip);
-
-                        Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAdress, ip);
+                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.RegistrationIpAddress, ip);
+                        Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.RegistrationIpAddress, ip);
 
                         // Update user's stored IP to the new one
-                        user.RegistrationIpAdress = ip;
+                        user.LastLoginIpAddress = ip;
                         await _signInManager.UserManager.UpdateAsync(user);
                     }
+
                     return LocalRedirect(returnUrl);
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
+
                 if (result.IsLockedOut)
                 {
-                    Log.Warning("User {UserName} account locked out. IP : {}", Input.Email,ip);
+                    Log.Warning("User {UserName} account locked out. IP: {IP}", Input.Email, ip);
                     return RedirectToPage("./Lockout");
                 }
+
                 if (result.IsNotAllowed)
                 {
                     ModelState.AddModelError(string.Empty, "You are not allowed.");
                     return Page();
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task<string> GetPublicIp()
+        {
+            try
+            {
+                using var client = new HttpClient();
+                return await client.GetStringAsync("https://api4.ipify.org"); // Fetches IPv4 only
+            }
+            catch
+            {
+                return "Unable to retrieve public IPv4";
+            }
         }
 
     }

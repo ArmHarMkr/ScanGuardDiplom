@@ -108,6 +108,21 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        // Method to get the public IPv4 address
+        private async Task<string> GetPublicIp()
+        {
+            try
+            {
+                using var client = new HttpClient();
+                return await client.GetStringAsync("https://api4.ipify.org"); // Only IPv4
+            }
+            catch
+            {
+                return "Unable to retrieve public IPv4";
+            }
+        }
+
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -140,7 +155,7 @@ namespace MGOBankApp.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    
+
                     Log.Information("User {UserName} registered successfully. IP : {IP}", user.Email, user.RegistrationIpAddress);
                     var userId = await _userManager.GetUserIdAsync(user);
                     if (!string.IsNullOrEmpty(userId))
