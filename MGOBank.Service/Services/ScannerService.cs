@@ -87,6 +87,7 @@ namespace MGOBankApp.Service.Implementations
                     vulnerability.UnvalidatedRedirectAndForwards = await _analyzer.UnvalidatedRedirectTest(url);
                     vulnerability.DirectoryListing = await _analyzer.DirectoryListingTest(url);
                     vulnerability.BrokenAuthentification = await _analyzer.BrokenAuthenticationTest(url);
+                    vulnerability.CheckWeakPasswordPolicy = await _analyzer.CheckWeakPasswordPolicy(url);
                 }
 
                 // Save scan results to database
@@ -149,6 +150,8 @@ namespace MGOBankApp.Service.Implementations
                 vulnerabilities.Add(new VulnerabilityEntity { ScanEntity = websiteScanEntity, VulnerabilityType = VulnerabilityType.DirectoryListing });
             if (vulnerability.BrokenAuthentification)
                 vulnerabilities.Add(new VulnerabilityEntity { ScanEntity = websiteScanEntity, VulnerabilityType = VulnerabilityType.BrokenAuthentification });
+            if (vulnerability.CheckWeakPasswordPolicy)
+                vulnerabilities.Add(new VulnerabilityEntity { ScanEntity = websiteScanEntity, VulnerabilityType = VulnerabilityType.CheckWeakPasswordPolicy });
         }
     }
 }
