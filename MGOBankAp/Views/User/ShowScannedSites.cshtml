@@ -46,7 +46,7 @@
 
 <script>
     function analyzeSite(scanId) {
-        fetch('/User/Analyze?scanId=' + scanId, {
+        fetch('/api/ScanApi/analyze?scanId=' + scanId, {
             method: 'GET'
         })
             .then(response => {
@@ -63,4 +63,3 @@
             });
     }
 </script>
-

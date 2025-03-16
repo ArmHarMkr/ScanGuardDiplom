@@ -33,8 +33,8 @@ public class UserController : Controller
     public async Task<IActionResult> ShowScannedSites()
     {
         var currentUser = await UserManager.GetUserAsync(User);
-        bool isPremium = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium); // Check role
-        bool isAdmin= await UserManager.IsInRoleAsync(currentUser, SD.Role_Admin); // Check role
+        bool isPremium = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium);
+        bool isAdmin = await UserManager.IsInRoleAsync(currentUser, SD.Role_Admin);
 
         var scannedSites = await Context.WebsiteScanEntities
             .Include(x => x.ScanUser)

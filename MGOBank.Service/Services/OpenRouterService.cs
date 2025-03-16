@@ -7,7 +7,7 @@ namespace MGOBankApp.BLL.Services
 {
     public class OpenRouterService
     {
-        private const string apiKey = "PRIVATE KEY"; // Replace with your key
+        private const string apiKey = "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"; // Replace with your key
 
         public OpenRouterService()
         {
