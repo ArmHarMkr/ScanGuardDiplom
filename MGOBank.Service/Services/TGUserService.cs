@@ -89,6 +89,7 @@ namespace MGOBankApp.BLL.Services
 🛡 <b>CSRF:</b> {(!resultVulnerability.vulnerability.CSRF ? "✅ Secure" : "⚠️ Vulnerable")}
 🛡 <b>IDOR:</b> {(!resultVulnerability.vulnerability.IDOR ? "✅ Secure" : "⚠️ Vulnerable")}
 🛡 <b>Broken Authentication:</b> {(!resultVulnerability.vulnerability.BrokenAuthentification ? "✅ Secure" : "⚠️ Vulnerable")}
+🛡 <b>Weak Credentials Vulnerability:</b> {(!resultVulnerability.vulnerability.CheckWeakPasswordPolicy ? "✅ Secure" : "⚠️ Vulnerable")}
 🛡 <b>Security Misconfiguration:</b> {(!resultVulnerability.vulnerability.SecurityMisconfiguration ? "✅ Secure" : "⚠️ Vulnerable")}
 🛡 <b>Unvalidated Redirect:</b> {(!resultVulnerability.vulnerability.UnvalidatedRedirectAndForwards ? "✅ Secure" : "⚠️ Vulnerable")}
 🛡 <b>Directory Listing:</b> {(!resultVulnerability.vulnerability.DirectoryListing ? "✅ Secure" : "⚠️ Vulnerable")}
@@ -103,6 +104,7 @@ namespace MGOBankApp.BLL.Services
             !resultVulnerability.vulnerability.CSRF &&
             !resultVulnerability.vulnerability.IDOR &&
             !resultVulnerability.vulnerability.BrokenAuthentification &&
+            !resultVulnerability.vulnerability.CheckWeakPasswordPolicy &&
             !resultVulnerability.vulnerability.SecurityMisconfiguration &&
             !resultVulnerability.vulnerability.UnvalidatedRedirectAndForwards &&
             !resultVulnerability.vulnerability.DirectoryListing &&
@@ -112,11 +114,12 @@ namespace MGOBankApp.BLL.Services
             !resultVulnerability.vulnerability.Phishing &&
             !resultVulnerability.vulnerability.HTTPWithoutS ? "✅ Secure" : "⚠️ Vulnerable")}</b>
 
-{(!resultVulnerability.vulnerability.SQLi &&
+            {(!resultVulnerability.vulnerability.SQLi &&
             !resultVulnerability.vulnerability.XSS &&
             !resultVulnerability.vulnerability.CSRF &&
             !resultVulnerability.vulnerability.IDOR &&
             !resultVulnerability.vulnerability.BrokenAuthentification &&
+            !resultVulnerability.vulnerability.CheckWeakPasswordPolicy &&
             !resultVulnerability.vulnerability.SecurityMisconfiguration &&
             !resultVulnerability.vulnerability.UnvalidatedRedirectAndForwards &&
             !resultVulnerability.vulnerability.DirectoryListing &&

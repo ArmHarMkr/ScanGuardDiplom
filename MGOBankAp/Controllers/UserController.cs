@@ -1,5 +1,7 @@
-﻿using MGOBankApp.DAL.Data;
+﻿using MGOBankApp.BLL.Services;
+using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
+using MGOBankApp.Domain.Roles;
 using MGOBankApp.Service.Interfaces;
 using MGOBankApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -17,18 +19,23 @@ public class UserController : Controller
     private readonly ApplicationDbContext Context;
     private readonly IScannedSites ScannedSites;
     private readonly UserManager<ApplicationUser> UserManager;
+    private readonly ILogger<OpenRouterService> _logger;
 
-    public UserController(ApplicationDbContext context, IScannedSites scannedSites, UserManager<ApplicationUser> userManager)
+    public UserController(ApplicationDbContext context, IScannedSites scannedSites, UserManager<ApplicationUser> userManager, ILogger<OpenRouterService> logger)
     {
         Context = context;
         ScannedSites = scannedSites;
         UserManager = userManager;
+        _logger = logger;
     }
 
 
     public async Task<IActionResult> ShowScannedSites()
     {
         var currentUser = await UserManager.GetUserAsync(User);
+        bool isPremium = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium); // Check role
+        bool isAdmin= await UserManager.IsInRoleAsync(currentUser, SD.Role_Admin); // Check role
+
         var scannedSites = await Context.WebsiteScanEntities
             .Include(x => x.ScanUser)
             .Include(x => x.Vulnerabilities)
@@ -42,10 +49,30 @@ public class UserController : Controller
             Url = scan.Url,
             ScanDate = scan.ScanDate,
             VulnerabilityCount = scan.VulnerablityCount,
-            Vulnerabilities = scan.Vulnerabilities.ToList() ?? new List<VulnerabilityEntity>()
+            Vulnerabilities = scan.Vulnerabilities.ToList() ?? new List<VulnerabilityEntity>(),
+            IsPremium = isPremium,
+            IsAdmin = isAdmin
         }).ToList();
 
         return View(resList);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Analyze(string scanId)
+    {
+        var scan = await Context.WebsiteScanEntities
+            .Include(x => x.Vulnerabilities)
+            .FirstOrDefaultAsync(x => x.Id == scanId);
+
+        if (scan == null) return NotFound();
+
+        string scanResults = $"Scan for {scan.Url} found {scan.VulnerablityCount} vulnerabilities: " +
+                             string.Join(", ", scan.Vulnerabilities.Select(v => v.VulnerabilityType));
+
+        OpenRouterService aiService = new OpenRouterService();
+        string analysis = await aiService.GetAnalysisAsync(scanResults);
+
+        return Json(new { analysis });
     }
 
     public async Task<IActionResult> RemoveSiteScan(string id)

@@ -11,5 +11,7 @@ namespace MGOBankApp.ViewModels
         public DateTime ScanDate { get; set; }
         public int VulnerabilityCount { get; set; }
         public List<VulnerabilityEntity>? Vulnerabilities { get; set; }
+        public bool IsPremium { get; set; }
+        public bool IsAdmin{ get; set; }
     }
 }
