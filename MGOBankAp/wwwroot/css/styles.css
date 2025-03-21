@@ -10,6 +10,20 @@
     scrollbar-width: none;
 }
 
+.analysis-result {
+    max-height: 300px; /* Limit height */
+    overflow-y: auto; /* Enable scrolling */
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    background-color: #1a1a1a;
+    color: white;
+    font-family: monospace;
+    white-space: pre-line; /* Preserve new lines */
+}
+
+
+
 .container {
     text-align: center;
     position: relative;

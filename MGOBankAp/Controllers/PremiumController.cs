@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Claims;
 
@@ -17,12 +18,14 @@ namespace MGOBankApp.Controllers
         private readonly IFileScanService _scanService;
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly ApplicationDbContext Context;
+        private readonly INewsService _newsService;
 
-        public PremiumController(IFileScanService scanService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public PremiumController(IFileScanService scanService, UserManager<ApplicationUser> userManager, ApplicationDbContext context, INewsService newsService)
         {
             _scanService = scanService;
             UserManager = userManager;
             Context = context;
+            _newsService = newsService;
         }
 
         [HttpGet]
@@ -83,6 +86,11 @@ namespace MGOBankApp.Controllers
                 return View("Index");
             }
 
+        }
+
+        public async Task<IActionResult> GetAllNews()
+        {
+            return View(await _newsService.GetAllNews() ?? new List<NewsEntity>());
         }
     }
 }

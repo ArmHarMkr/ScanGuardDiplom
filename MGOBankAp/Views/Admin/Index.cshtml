@@ -1,4 +1,4 @@
-﻿                                                                                                                                                @using MGOBankApp.Domain.Entity
+﻿@using MGOBankApp.Domain.Entity
 @using MGOBankApp.Domain.Roles
 @using Microsoft.AspNetCore.Identity
 @model List<ApplicationUser>
@@ -33,7 +33,7 @@
                     </td>
                     <td class="cyber-cell">@item.UserCreatedDate</td>
                     <td class="cyber-cell">
-                        @if(await userManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id != (await userManager.GetUserAsync(User)).Id)
+                        @if (await userManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id != (await userManager.GetUserAsync(User)).Id)
                         {
                             <form asp-controller="Admin" asp-action="GivePremiumRole" asp-route-id="@item.Id" class="action-form">
                                 <button type="submit" class="btn-custom">Give Premium Role</button>

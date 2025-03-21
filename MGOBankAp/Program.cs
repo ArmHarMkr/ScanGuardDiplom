@@ -61,6 +61,7 @@ builder.Services.AddScoped<IScannedSites, ScannedSites>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddHttpClient<IFileScanService, FileScanService>();
 builder.Services.AddScoped<IFileScanService, FileScanService>();
+builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddSingleton<ITelegramBotClient>(provider =>
 {
     var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0"; // ���� �����

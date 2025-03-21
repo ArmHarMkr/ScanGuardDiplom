@@ -1,4 +1,5 @@
-﻿using MGOBankApp.DAL.Data;
+﻿using MGOBankApp.BLL.Interfaces;
+using MGOBankApp.DAL.Data;
 using MGOBankApp.Domain.Entity;
 using MGOBankApp.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -14,16 +15,19 @@ namespace MGOBankApp.Areas.Admin.Controllers
         private readonly SignInManager<ApplicationUser> SignInManager;
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IUserService UserService;
+        private readonly INewsService _newsService;
 
         public AdminController(ApplicationDbContext context,
                                SignInManager<ApplicationUser> signInManager,
                                UserManager<ApplicationUser> usermanager,
-                               IUserService userservice)
+                               IUserService userservice,
+                               INewsService newsService)
         {
             Context = context;
             SignInManager = signInManager;
             UserManager = usermanager;
             UserService = userservice;
+            _newsService = newsService;
         }
 
 
@@ -67,6 +71,34 @@ namespace MGOBankApp.Areas.Admin.Controllers
             var userFromDb = await UserService.GetApplicationUser(id);
             await UserService.GiveAdminRole(userFromDb);
             return RedirectToAction("Index", "Admin");
+        }
+
+        [HttpGet("AddNews")]
+        public async Task<IActionResult> AddNews()
+        {
+            return View();
+        }
+
+        [HttpPost("AddNews")]   
+        public async Task<IActionResult> AddNews(NewsEntity newsEntity)
+        {
+            await _newsService.CreteNews(newsEntity);
+            return RedirectToAction("AllNews", "Admin");
+        }
+
+
+        public async Task<IActionResult> AllNews()
+        {
+            return View(await _newsService.GetAllNews() ?? new List<NewsEntity>());
+        }
+
+
+        [HttpPost("RemoveNews")]
+        public async Task<IActionResult> RemoveNews(string? id)
+        {
+            if (id == null) return NotFound();
+            await _newsService.RemoveNews(id);
+            return RedirectToAction("AllNews", "Admin");
         }
     }
 }

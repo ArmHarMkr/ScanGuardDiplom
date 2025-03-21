@@ -1,0 +1,138 @@
+﻿@model NewsEntity
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add News - ScanGuard</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0f24 0%, #1a2a44 100%);
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox: Hide scrollbar */
+            -ms-overflow-style: none; /* IE and Edge: Hide scrollbar */
+        }
+
+            body::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Edge: Hide scrollbar */
+            }
+
+        .container {
+            width: 50%;
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 30px;
+            background: rgba(20, 30, 50, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.2em;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            margin-bottom: 30px;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+            h2:hover {
+                color: #ff00ff;
+                text-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+            }
+
+        .news-form {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1em;
+            color: #a3bffa;
+            margin-bottom: 8px;
+            text-shadow: 0 0 5px rgba(163, 191, 250, 0.3);
+        }
+
+        input, textarea {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #00ffff;
+            background: rgba(10, 25, 47, 0.8);
+            color: #ffffff;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+            input:focus, textarea:focus {
+                border-color: #ff00ff;
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+                outline: none;
+            }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            button:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+            }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2>Add News</h2>
+        <div class="news-form">
+            <form asp-action="AddNews" asp-controller="Admin" method="POST">
+                <div class="form-group">
+                    <label for="title">News Title:</label>
+                    <input type="text" id="title" name="Title" placeholder="Enter news title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="text">News Content:</label>
+                    <textarea id="text" name="Text" placeholder="Enter news content" rows="5" required></textarea>
+                </div>
+
+                <button type="submit">Submit News</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,13 +1,12 @@
 ﻿using RestSharp;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Logging;
-
+using Newtonsoft.Json.Linq;
 
 namespace MGOBankApp.BLL.Services
 {
     public class OpenRouterService
     {
-        private const string apiKey = "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"; // Replace with your key
+        private const string apiKey = "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"; // Replace with your real key
 
         public OpenRouterService()
         {
@@ -15,34 +14,53 @@ namespace MGOBankApp.BLL.Services
 
         public async Task<string> GetAnalysisAsync(string scanResults)
         {
-            var client = new RestClient("https://openrouter.ai/api/v1/chat/completions");
-            var request = new RestRequest("", Method.Post); // Empty resource since base URL is set in RestClient
-            request.AddHeader("Authorization", $"Bearer {apiKey}");
-            request.AddHeader("Content-Type", "application/json");
-
-            var body = new
+            try
             {
-                model = "openai/gpt-4-turbo",
-                messages = new[]
+                var client = new RestClient("https://openrouter.ai/api/v1/chat/completions");
+                var request = new RestRequest("", Method.Post);
+                request.AddHeader("Authorization", $"Bearer {apiKey}");
+                request.AddHeader("Content-Type", "application/json");
+
+                var body = new
                 {
-            new { role = "system", content = "You are a cybersecurity expert. Analyze the following scan results and provide a security report with recommendations. Why that vulnerabilities occur and how to disable them" },
-            new { role = "user", content = scanResults }
-        }
-            };
+                    model = "openai/gpt-3.5-turbo", // Use a cheaper model
+                    messages = new[]
+                    {
+        new { role = "system", content = "You are a cybersecurity expert. Provide a short security analysis." },
+        new { role = "user", content = scanResults.Substring(0, Math.Min(scanResults.Length, 1000)) } // Limit input length
+    },
+                    max_tokens = 500 // Reduce response size
+                };
 
-            request.AddJsonBody(body);
+                request.AddJsonBody(JsonConvert.SerializeObject(body));
 
-            var response = await client.ExecuteAsync(request);
-            if (response.IsSuccessful)
-            {
-                dynamic jsonResponse = JsonConvert.DeserializeObject(response.Content);
-                return jsonResponse.choices[0].message.content;
+                var response = await client.ExecuteAsync(request).ConfigureAwait(false);
+
+                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content))
+                {
+                    return $"API Error: {response.StatusCode} - {response.Content}";
+                }
+
+                // Debug: Log full API response
+                Console.WriteLine("API Response: " + response.Content);
+
+                // Parse JSON response safely
+                var jsonResponse = JObject.Parse(response.Content);
+                var messageContent = jsonResponse["choices"]?.First?["message"]?["content"]?.ToString();
+
+                if (string.IsNullOrEmpty(messageContent))
+                {
+                    return $"API Response Error: {response.Content}";
+                }
+
+                return messageContent;
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine($"API Error: {response.Content}"); // Log error for debugging
-                return $"Error: Unable to process the request. Details: {response.Content}";
+                return $"Exception: {ex.Message}";
             }
         }
+
+
     }
 }

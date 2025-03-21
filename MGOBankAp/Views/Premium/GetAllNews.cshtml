@@ -1,0 +1,154 @@
+﻿@model List<NewsEntity>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity & Innovation News</title>
+    <link rel="stylesheet" href="~/css/styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0f24 0%, #1a2a44 100%);
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-y: auto; /* Allow scrolling */
+            scrollbar-width: none; /* Firefox: Hide scrollbar */
+            -ms-overflow-style: none; /* IE and Edge: Hide scrollbar */
+        }
+
+            /* Chrome, Safari, and Edge: Hide scrollbar */
+            body::-webkit-scrollbar {
+                display: none;
+            }
+
+        .container {
+            width: 70%;
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 30px;
+            background: rgba(20, 30, 50, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: calc(100vh - 120px); /* Ensure container takes up available space */
+            overflow-y: auto; /* Allow scrolling within container if needed */
+            scrollbar-width: none; /* Firefox: Hide scrollbar */
+            -ms-overflow-style: none; /* IE and Edge: Hide scrollbar */
+        }
+
+            /* Chrome, Safari, and Edge: Hide scrollbar for container */
+            .container::-webkit-scrollbar {
+                display: none;
+            }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .header h1 {
+                font-size: 2.5em;
+                color: #00ffff;
+                text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+                margin: 0;
+            }
+
+        .add-news-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .add-news-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            }
+
+        .news-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .news-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            }
+
+        .news-time {
+            font-size: 0.9em;
+            color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            margin-bottom: 5px;
+        }
+
+        .news-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 5px 0;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .news-text {
+            font-size: 1.1em;
+            color: #d0d0d0;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .remove-btn {
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #ff0066, #ff00cc);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .remove-btn:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 10px rgba(255, 0, 102, 0.7);
+            }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cybersecurity & Innovation News</h1>
+        </div>
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="news-item">
+                    <div class="news-time">@item.CreatedTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                    <div class="news-title">@item.Title</div>
+                </div>
+            }
+
+        }
+        else
+        {
+            <p>No news available.</p>
+        }
+    </>
+</body>
+</html>
