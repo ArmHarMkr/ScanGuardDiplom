@@ -57,14 +57,14 @@
         align-items: flex-end;
     }
 
-    .message .avatar {
+/*     .message .avatar {
         width: 25px;
         height: 25px;
         border-radius: 50%;
         margin-right: 8px;
         object-fit: cover;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+    } */
 
     .message .text {
         padding: 10px 14px;
@@ -87,7 +87,7 @@
     }
 
     .other-message .text {
-        background: #f1f1f1;
+        background: #d4edda; /* Light green */
         text-align: left;
         border-top-left-radius: 3px;
     }
@@ -129,7 +129,7 @@
     <div class="input-group mt-2" style="display: none;">
     @if (isUserSignedIn)
     {
-        <img id="userAvatar" src="@profilePhoto" class="avatar" alt="User Photo" style="width: 30px; height: 30px;" />
+@*         <img id="userAvatar" src="@profilePhoto" class="avatar" alt="User Photo" style="width: 30px; height: 30px;" />*@ 
         <input type="text" id="userInput" value="@fullName" readonly class="form-control" />
     }
     else

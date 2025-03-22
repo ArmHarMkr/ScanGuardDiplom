@@ -47,15 +47,15 @@ function addMessageToChat(user, message, profilePhoto) {
     const li = document.createElement("li");
     li.classList.add("message", isOwnMessage ? "own-message" : "other-message");
 
-    const avatar = document.createElement("img");
-    avatar.src = profilePhoto ? profilePhoto : "/img/default.jpg"; // Handle missing avatar
-    avatar.classList.add("avatar");
+    //const avatar = document.createElement("img");
+    //avatar.src = profilePhoto ? profilePhoto : "/img/default.jpg"; // Handle missing avatar
+    //avatar.classList.add("avatar");
 
     const textDiv = document.createElement("div");
     textDiv.classList.add("text");
     textDiv.innerHTML = `<strong>${user}:</strong> ${message}`;
 
-    li.appendChild(avatar);
+    //li.appendChild(avatar);
     li.appendChild(textDiv);
     document.getElementById("messagesList").appendChild(li);
 

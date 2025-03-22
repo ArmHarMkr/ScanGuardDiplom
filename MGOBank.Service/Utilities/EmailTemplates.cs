@@ -6,9 +6,45 @@ using System.Threading.Tasks;
 
 namespace MGOBankApp.BLL.Utilities
 {
-    internal static class EmailTemplates
+    public static class EmailTemplates
     {
-        //TODO: Change "Changepassword" button and support link 
+        public static string GetConfirmationEmail(string userName, string confirmationLink)
+        {
+            return $@"
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Email Confirmation</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; color: #333; line-height: 1.6; }}
+        h2 {{ color: #4CAF50; }}
+        .content {{ background-color: #f8f8f8; padding: 15px; border-left: 5px solid #4CAF50; }}
+        .button {{
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }}
+    </style>
+</head>
+<body>
+    <h2>Welcome, {userName}!</h2>
+    <p>Thank you for registering. Please confirm your email by clicking the button below:</p>
+
+    <div class='content'>
+        <p><a href='{confirmationLink}' class='button'>Confirm Email</a></p>
+    </div>
+
+    <p>If you did not register, please ignore this email.</p>
+</body>
+</html>";
+        }
+
         public static string GetSecurityAlertMessage(string userName, string originalIp, string newIp)
         {
             return $@"

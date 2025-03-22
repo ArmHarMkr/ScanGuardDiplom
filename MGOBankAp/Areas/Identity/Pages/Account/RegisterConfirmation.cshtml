@@ -5,6 +5,11 @@
     Layout = null; /* Сохраняем Layout = null, если страница должна быть самостоятельной */
 }
 
+<h1>@ViewData["Title"]</h1>
+<p>
+    Please check your email to confirm your account.
+</p>
+
 @if (Model.DisplayConfirmAccountLink)
 {
     <div class="confirm-container">
