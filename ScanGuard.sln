@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp", "MGOBankAp\MGOBankApp.csproj", "{FEB6F469-25AE-4976-82E7-71DEA8B6ADAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScanGuard", "ScanGuard\ScanGuard.csproj", "{FEB6F469-25AE-4976-82E7-71DEA8B6ADAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.DAL", "MGOBankApp.DAL\MGOBankApp.DAL.csproj", "{95E0BD67-CA36-42AD-B6A4-48C13E86CBAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScanGuard.DAL", "ScanGuard.DAL\ScanGuard.DAL.csproj", "{95E0BD67-CA36-42AD-B6A4-48C13E86CBAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.Domain", "MGOBankApp.Domain\MGOBankApp.Domain.csproj", "{D744A8CD-AD92-4A3A-8BE8-0E0AFFEB6AC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScanGuard.Domain", "ScanGuard.Domain\ScanGuard.Domain.csproj", "{D744A8CD-AD92-4A3A-8BE8-0E0AFFEB6AC8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGOBankApp.BLL", "MGOBank.Service\MGOBankApp.BLL.csproj", "{96CF6A20-29B1-48F2-A2AA-87EA64A51838}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScanGuard.BLL", "ScanGuard.Service\ScanGuard.BLL.csproj", "{96CF6A20-29B1-48F2-A2AA-87EA64A51838}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MGOBankApp.TelegramBot", "ScanGuard.TelegramBot\MGOBankApp.TelegramBot.csproj", "{0543164C-D907-43FB-90D8-54A5A2BB8983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScanGuard.TelegramBot", "ScanGuard.TelegramBot\ScanGuard.TelegramBot.csproj", "{0543164C-D907-43FB-90D8-54A5A2BB8983}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

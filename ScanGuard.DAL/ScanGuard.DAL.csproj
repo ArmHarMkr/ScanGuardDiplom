@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MGOBankApp.Domain\MGOBankApp.Domain.csproj" />
+    <ProjectReference Include="..\ScanGuard.Domain\ScanGuard.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

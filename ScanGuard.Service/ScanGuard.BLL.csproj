@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MGOBankApp.DAL\MGOBankApp.DAL.csproj" />
-    <ProjectReference Include="..\MGOBankApp.Domain\MGOBankApp.Domain.csproj" />
+    <ProjectReference Include="..\ScanGuard.DAL\ScanGuard.DAL.csproj" />
+    <ProjectReference Include="..\ScanGuard.Domain\ScanGuard.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -55,12 +55,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MGOBankApp.DAL\MGOBankApp.DAL.csproj" />
+    <ProjectReference Include="..\ScanGuard.DAL\ScanGuard.DAL.csproj" />
 
-    <ProjectReference Include="..\MGOBank.Service\MGOBankApp.BLL.csproj" />
-    <ProjectReference Include="..\MGOBankApp.DAL\MGOBankApp.DAL.csproj" />
-    <ProjectReference Include="..\MGOBankApp.Domain\MGOBankApp.Domain.csproj" />
-    <ProjectReference Include="..\ScanGuard.TelegramBot\MGOBankApp.TelegramBot.csproj" />
+    <ProjectReference Include="..\ScanGuard.Service\ScanGuard.BLL.csproj" />
+    <ProjectReference Include="..\ScanGuard.DAL\ScanGuard.DAL.csproj" />
+    <ProjectReference Include="..\ScanGuard.Domain\ScanGuard.Domain.csproj" />
+    <ProjectReference Include="..\ScanGuard.TelegramBot\ScanGuard.TelegramBot.csproj" />
   </ItemGroup>
 
   <ItemGroup>
