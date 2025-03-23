@@ -9,7 +9,7 @@ namespace MGOBankApp.Domain.Entity
     public class WebsiteScanEntity
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public ApplicationUser ScanUser { get; set; }
+        public ApplicationUser? ScanUser { get; set; }
         public string Url { get; set; }
         public DateTime ScanDate { get; set; } = DateTime.Now;
         public string Status { get; set; }
