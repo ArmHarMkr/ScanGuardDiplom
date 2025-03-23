@@ -38,7 +38,7 @@ namespace MGOBankAp.Controllers
                 .ToListAsync();
 
             // Get local IP
-            string userIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+            string userIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString()!;
 
             // Check if behind a proxy (get real client IP)
             if (Request.Headers.ContainsKey("X-Forwarded-For"))
