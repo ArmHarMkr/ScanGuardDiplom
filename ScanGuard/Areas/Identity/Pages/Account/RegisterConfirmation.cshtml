@@ -2,36 +2,88 @@
 @model RegisterConfirmationModel
 @{
     ViewData["Title"] = "Register confirmation";
-    Layout = null; /* Сохраняем Layout = null, если страница должна быть самостоятельной */
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
-<p>
-    Please check your email to confirm your account.
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ScanGuard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/authPages.css">
+    <style>
+        /* Специфичные стили только для этой страницы */
+        .description {
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
 
-@if (Model.DisplayConfirmAccountLink)
-{
+        .email-icon {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .steps {
+            margin: 2rem 0;
+            text-align: left;
+            padding: 0 1rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .step-number {
+            background: var(--accent-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
     <div class="confirm-container">
         <div class="form-container">
-            <h2 class="title">Register Confirmation</h2>
-            <div class="description">
-                <span class="txt1" style="font-weight: bold;">
-                    Thank you for registering with us!
-                </span><br>
-                <span class="txt1">We are excited to have you join us in ScanGuard community. Please confirm your registration to continue.</span>
+            <div class="email-icon">
+                <i class="fas fa-envelope"></i>
             </div>
-            <a href="@Model.EmailConfirmationUrl" id="confirmation" class="btn-custom">Confirm</a>
+            <h2 class="title">Check Your Email</h2>
+            <div class="description">
+                We've sent a confirmation email. Please check your inbox and click the confirmation link to activate your ScanGuard account.
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <span>Open your email inbox</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <span>Find our email (check spam folder too)</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span>Click the confirmation link</span>
+                </div>
+            </div>
+
             <div class="slogan">Your first line of defense in the digital world</div>
         </div>
     </div>
-}
-else
-{
-    <div class="confirm-container">
-        <div class="form-container">
-            <h2 class="title">Register Confirmation</h2>
-            <p class="description">Please check your email to confirm your account.</p>
-        </div>
-    </div>
-}
+</body>
+</html>

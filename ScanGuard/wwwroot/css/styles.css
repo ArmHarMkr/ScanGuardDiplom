@@ -85,7 +85,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px; /* Уменьшаем отступы навигации */
-    background: rgba(10, 25, 47, 0.95);
+    background: #1c1012;
     z-index: 10;
     box-shadow: 0 2px 10px rgba(0, 212, 255, 0.1);
 }

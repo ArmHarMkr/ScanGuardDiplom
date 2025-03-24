@@ -13,35 +13,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2b2d42;
-            --secondary-color: #8d99ae;
-            --accent-color: #ef233c;
-            --light-color: #edf2f4;
-            --dark-color: #1a1a2e;
-            --menu-speed: 0.75s;
+            --primary-color: #1a1a2e; /* Темно-синий */
+            --secondary-color: #16213e; /* Более темный синий */
+            --accent-color: #ef233c; /* Ярко-красный */
+            --light-color: #edf2f4; /* Светло-серый */
+            --dark-color: #0f0f1a; /* Очень темный синий */
+            --card-bg: #1e1e2e; /* Фон карточек */
+            --text-primary: #ffffff; /* Основной текст */
+            --text-secondary: #b8c2cc; /* Вторичный текст */
+            --menu-speed: 0.3s;
+            --border-radius: 8px;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #121212; /* Темный фон страницы */
+            color: var(--text-primary);
             overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        
+
         .navbar-container {
-            background-color: var(--dark-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .navbar {
             max-width: 100%;
             margin: 0 auto;
@@ -49,10 +57,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            padding-right:60px;
+            padding-right: 60px;
             position: relative;
         }
-        
+
         .logo {
             color: var(--light-color);
             text-decoration: none;
@@ -61,122 +69,136 @@
             letter-spacing: 1px;
             display: flex;
             align-items: center;
-        }
-        
-        .logo span {
-            display: inline-block;
             transition: all 0.3s ease;
         }
-        
-        .logo:hover span {
-            color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-        
-        .logo span:nth-child(odd):hover {
-            transform: rotate(10deg);
-        }
-        
-        .logo span:nth-child(even):hover {
-            transform: rotate(-10deg);
-        }
-        
+
+            .logo span {
+                display: inline-block;
+                transition: all 0.3s ease;
+            }
+
+            .logo:hover {
+                transform: translateY(-2px);
+            }
+
+                .logo:hover span {
+                    color: var(--accent-color);
+                }
+
+            .logo span:nth-child(odd):hover {
+                transform: rotate(10deg) translateY(-3px);
+            }
+
+            .logo span:nth-child(even):hover {
+                transform: rotate(-10deg) translateY(-3px);
+            }
+
         .nav-links {
             display: flex;
             list-style: none;
-            transition: all 0.5s ease;
+            transition: all var(--menu-speed) ease;
         }
-        
-        .nav-links li {
-            margin-left: 1.5rem;
-            position: relative;
-        }
-        
-        .nav-links a {
-            color: var(--light-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-        
-        .nav-links a i {
-            margin-right: 0.5rem;
-        }
-        
-        .nav-links a:hover {
-            color: var(--accent-color);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            bottom: 0;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
+
+            .nav-links li {
+                margin-left: 1.5rem;
+                position: relative;
+            }
+
+            .nav-links a {
+                color: var(--light-color);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+                border-radius: var(--border-radius);
+                transition: all var(--menu-speed) ease;
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+
+                .nav-links a i {
+                    margin-right: 0.5rem;
+                    color: var(--accent-color);
+                }
+
+                .nav-links a:hover {
+                    color: var(--accent-color);
+                    background-color: rgba(255, 255, 255, 0.05);
+                    transform: translateY(-2px);
+                }
+
+                .nav-links a::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 2px;
+                    background: var(--accent-color);
+                    bottom: 0;
+                    left: 0;
+                    transition: width var(--menu-speed) ease;
+                }
+
+                .nav-links a:hover::after {
+                    width: 100%;
+                }
+
         .hamburger {
             display: none;
             cursor: pointer;
             background: transparent;
             border: none;
             outline: none;
+            padding: 0.5rem;
         }
-        
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--light-color);
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-        
+
+            .hamburger span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background-color: var(--light-color);
+                margin: 5px 0;
+                transition: all var(--menu-speed) ease;
+                border-radius: 3px;
+            }
+
         .auth-buttons {
             display: flex;
             align-items: center;
+            gap: 1rem;
         }
-        
-        .auth-buttons a {
-            margin-left: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
+
+            .auth-buttons a {
+                padding: 0.5rem 1.2rem;
+                border-radius: var(--border-radius);
+                text-decoration: none;
+                font-weight: 500;
+                transition: all var(--menu-speed) ease;
+                font-size: 0.95rem;
+            }
+
         .login-btn {
             color: var(--light-color);
             border: 1px solid var(--light-color);
         }
-        
-        .login-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
+
+            .login-btn:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
         .register-btn {
             background-color: var(--accent-color);
             color: white;
+            box-shadow: 0 2px 10px rgba(239, 35, 60, 0.3);
         }
-        
-        .register-btn:hover {
-            background-color: #d90429;
-        }
-        
+
+            .register-btn:hover {
+                background-color: #d90429;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(239, 35, 60, 0.4);
+            }
+
         .user-profile {
             display: flex;
             align-items: center;
@@ -184,84 +206,104 @@
             cursor: pointer;
             position: relative;
             max-width: 200px;
+            transition: all var(--menu-speed) ease;
         }
-        
-        .user-profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 0.5rem;
-            object-fit: cover;
-        }
-        
-        .user-profile span {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 120px;
-        }
-        
+
+            .user-profile:hover {
+                transform: translateY(-2px);
+            }
+
+            .user-profile img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+                object-fit: cover;
+                border: 2px solid var(--accent-color);
+            }
+
+            .user-profile span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 120px;
+            }
+
         .dropdown-menu {
             position: absolute;
             top: 100%;
             right: 0;
-            background-color: white;
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             width: 200px;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all var(--menu-speed) ease;
             z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 0;
         }
-        
+
         .user-profile:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
+            transform: translateY(5px);
         }
-        
+
         .dropdown-menu a {
             display: block;
-            padding: 0.75rem 1rem;
-            color: var(--dark-color);
+            padding: 0.75rem 1.5rem;
+            color: var(--text-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all var(--menu-speed) ease;
         }
-        
-        .dropdown-menu a:hover {
-            background-color: #f0f0f0;
-            color: var(--accent-color);
-        }
-        
-        .dropdown-menu a i {
-            margin-right: 0.5rem;
-            width: 20px;
-            text-align: center;
-        }
-        
+
+            .dropdown-menu a:hover {
+                background-color: rgba(255, 255, 255, 0.05);
+                color: var(--accent-color);
+                padding-left: 1.7rem;
+            }
+
+            .dropdown-menu a i {
+                margin-right: 0.7rem;
+                width: 20px;
+                text-align: center;
+            }
+
         .dropdown-item {
             background: none;
             border: none;
             width: 100%;
             text-align: left;
-            padding: 0.75rem 1rem;
-            color: var(--dark-color);
+            padding: 0.75rem 1.5rem;
+            color: var(--text-primary);
             cursor: pointer;
             display: flex;
             align-items: center;
+            transition: all var(--menu-speed) ease;
         }
-        
-        .dropdown-item:hover {
-            background-color: #f0f0f0;
-            color: var(--accent-color);
+
+            .dropdown-item:hover {
+                background-color: rgba(255, 255, 255, 0.05);
+                color: var(--accent-color);
+                padding-left: 1.7rem;
+            }
+
+            .dropdown-item i {
+                margin-right: 0.7rem;
+                width: 20px;
+                text-align: center;
+            }
+
+        main {
+            flex: 1;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            width: 100%;
         }
-        
-        .dropdown-item i {
-            margin-right: 0.5rem;
-            width: 20px;
-            text-align: center;
-        }
-        
+
         /* Responsive styles */
         @@media (max-width: 992px) {
             .nav-links {
@@ -270,68 +312,66 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background-color: var(--dark-color);
+                background-color: var(--primary-color);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
                 padding-top: 2rem;
-                transition: all 0.5s ease;
+                transition: all var(--menu-speed) ease;
                 z-index: 999;
             }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 1rem 0;
-            }
-            
+
+                .nav-links.active {
+                    left: 0;
+                }
+
+                .nav-links li {
+                    margin: 1rem 0;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .nav-links a {
+                    justify-content: center;
+                    padding: 1rem;
+                    width: 100%;
+                }
+
             .hamburger {
                 display: block;
             }
-            
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-            
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-            
-            .user-profile span {
-                max-width: 150px;
-            }
+
+                .hamburger.active span:nth-child(1) {
+                    transform: rotate(45deg) translate(5px, 5px);
+                }
+
+                .hamburger.active span:nth-child(2) {
+                    opacity: 0;
+                }
+
+                .hamburger.active span:nth-child(3) {
+                    transform: rotate(-45deg) translate(5px, -5px);
+                }
         }
-        
+
         @@media (max-width: 768px) {
             .navbar {
                 padding: 1rem;
+                padding-right: 1rem;
             }
-            
+
             .logo {
                 font-size: 1.5rem;
             }
-            
-            .auth-buttons a {
-                padding: 0.5rem;
-                font-size: 0.9rem;
+
+            .auth-buttons {
+                gap: 0.5rem;
             }
-            
-            .user-profile span {
-                max-width: 100px;
-            }
-        }
-        
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            min-height: calc(100vh - 200px);
+
+                .auth-buttons a {
+                    padding: 0.5rem;
+                    font-size: 0.9rem;
+                }
         }
     </style>
 </head>
@@ -341,20 +381,20 @@
             <a href="/" class="logo">
                 <span>S</span><span>c</span><span>a</span><span>n</span><span>G</span><span>u</span><span>a</span><span>r</span><span>d</span>
             </a>
-            
+
             <button class="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            
+
             <ul class="nav-links">
                 <li><a href="/"><i class="fas fa-home"></i> Main</a></li>
                 <li><a asp-action="AboutUs" asp-controller="Home"><i class="fas fa-info-circle"></i> About Us</a></li>
                 <li><a asp-action="Scanner" asp-controller="Scan"><i class="fas fa-search"></i> Scanner</a></li>
                 <li><a asp-action="ShowScannedSites" asp-controller="User"><i class="fas fa-list"></i> Scanned Sites</a></li>
                 <li><a asp-action="Index" asp-controller="Chat"><i class="fas fa-comments"></i> Chat</a></li>
-                
+
                 @if (SignInManager.IsSignedIn(User))
                 {
                     var currentUser = await UserManager.GetUserAsync(User);
@@ -368,14 +408,14 @@
                         <li><a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a></li>
                         <li><a asp-action="AllNews" asp-controller="Admin"><i class="fas fa-newspaper"></i> All News</a></li>
                     }
-                    
+
                     @if (isPremium)
                     {
                         <li><a asp-action="Index" asp-controller="Premium"><i class="fas fa-file-upload"></i> Scan File</a></li>
                         <li><a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a></li>
                         <li><a asp-action="GetAllNews" asp-controller="Premium"><i class="fas fa-newspaper"></i> News</a></li>
                     }
-                    
+
                     @if (isCustomer)
                     {
                         <li><a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> Scan File</a></li>
@@ -383,13 +423,13 @@
                     }
                 }
             </ul>
-            
+
             <div class="auth-buttons">
                 @if (SignInManager.IsSignedIn(User))
                 {
                     var currentUser = await UserManager.GetUserAsync(User);
-                    var profilePhotoPath = currentUser?.ProfilePhotoPath.Replace("wwwroot","");
-                    
+                    var profilePhotoPath = currentUser?.ProfilePhotoPath.Replace("wwwroot", "");
+
                     <div class="user-profile">
                         <img src="@profilePhotoPath" alt="User profile">
                         <span>@User.Identity?.Name</span>
@@ -414,20 +454,20 @@
     <main class="container">
         @RenderBody()
     </main>
-    
+
     @RenderSection("Scripts", required: false)
     <script src="~/js/scripts.js" asp-append-version="true"></script>
-    
+
     <script>
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-        
+
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
-        
+
         // Close menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
@@ -435,7 +475,7 @@
                 navLinks.classList.remove('active');
             });
         });
-        
+
         // Logo animation
         const logoSpans = document.querySelectorAll('.logo span');
         logoSpans.forEach((span, index) => {
