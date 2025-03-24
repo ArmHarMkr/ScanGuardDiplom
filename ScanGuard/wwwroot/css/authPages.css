@@ -1,0 +1,122 @@
+﻿:root {
+    --primary-color: #2b2d42;
+    --secondary-color: #8d99ae;
+    --accent-color: #ef233c;
+    --light-color: #edf2f4;
+    --dark-color: #1a1a2e;
+    --dark-bg: #121212;
+    --card-bg: #1e1e1e;
+    --success-color: #4BB543;
+    --black-color: black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--light-color);
+    background-image: radial-gradient(circle at 10% 20%, rgba(239, 35, 60, 0.08) 0%, transparent 90%), radial-gradient(circle at 90% 80%, rgba(43, 45, 66, 0.08) 0%, transparent 90%);
+}
+
+.confirm-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+}
+
+.form-container {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+    .form-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(90deg, var(--accent-color), var(--black-color));
+    }
+
+.title {
+    color: var(--light-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.slogan {
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+    .slogan::before,
+    .slogan::after {
+        content: '';
+        display: inline-block;
+        width: 30px;
+        height: 1px;
+        background: var(--secondary-color);
+        margin: 0 6px;
+        vertical-align: middle;
+        opacity: 0.5;
+    }
+
+/* Анимации */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-20px);
+    }
+
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 576px) {
+    .form-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+}
