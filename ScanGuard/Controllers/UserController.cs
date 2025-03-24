@@ -145,7 +145,6 @@ public class UserController : Controller
                     }
                     else
                     {
-                        // Если изображение меньше 1080x1080, делаем квадрат по минимальной стороне
                         cropSize = Math.Min(originalWidth, originalHeight);
                         finalSize = cropSize; // Оставляем оригинальный размер
                     }
@@ -153,7 +152,6 @@ public class UserController : Controller
                     int x = (originalWidth - cropSize) / 2;
                     int y = (originalHeight - cropSize) / 2;
 
-                    // Обрезаем изображение по центру
                     using (var croppedImage = new Bitmap(cropSize, cropSize))
                     {
                         using (var graphics = Graphics.FromImage(croppedImage))
@@ -162,10 +160,9 @@ public class UserController : Controller
                                                new Rectangle(x, y, cropSize, cropSize), GraphicsUnit.Pixel);
                         }
 
-                        // Применяем нужный размер (либо 1080x1080, либо оригинальный)
                         using (var resizedImage = new Bitmap(croppedImage, new Size(finalSize, finalSize)))
                         {
-                            resizedImage.Save(filePath, ImageFormat.Jpeg); // Сохраняем изображение
+                            resizedImage.Save(filePath, ImageFormat.Jpeg); 
                         }
                     }
                 }
