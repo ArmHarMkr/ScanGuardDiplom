@@ -395,7 +395,7 @@
                         <span>@User.Identity?.Name</span>
                         <div class="dropdown-menu">
                             <a asp-controller="User" asp-action="UserProfile"><i class="fas fa-user"></i> Profile</a>
-                            <a asp-controller="User" asp-action="ChangePassword"><i class="fas fa-key"></i> Change Password</a>
+                            <a href="/Identity/Account/Manage/ChangePassword" class="dropdown-item"><i class="fas fa-key"></i> Change Password</a>
                             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
                             </form>

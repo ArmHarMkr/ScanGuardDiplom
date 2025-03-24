@@ -77,7 +77,7 @@ namespace MGOBankApp.Controllers
                 Context.TGUserEntities.Add(tGUserEntity);
                 await Context.SaveChangesAsync();
 
-                return View("GetToken");
+                return RedirectToAction("GetToken");
             }
             else
             {
