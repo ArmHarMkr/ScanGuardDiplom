@@ -4,53 +4,68 @@
 
 @model List<SiteScanCountEntity>
 
-@if (ViewBag.UserIp != null)
-{
-    <p><strong>Your IP Address:</strong> @ViewBag.UserIp</p>
-}
+<div class="main-container">
+    <!-- Хедер с IP -->
+    @if (ViewBag.UserIp != null)
+    {
+        <div class="ip-badge">
+            <i class="fas fa-network-wired"></i> Your IP: @ViewBag.UserIp
+        </div>
+    }
 
+    <!-- Главный блок -->
+    <div class="hero-section">
+        <div class="title-wrapper">
+            <h1 class="title-glitch">
+                <span>S</span><span>c</span><span>a</span><span>n</span><span>G</span><span>u</span><span>a</span><span>r</span><span>d</span>
+            </h1>
+        </div>
+        
+        <div class="tagline">Your first line of defense in the digital world</div>
+        <p class="description">Advanced security scanning for websites with real-time threat detection</p>
+        
+        <form asp-action="FwdScanner" asp-controller="Scan">
+            <button class="scan-button">
+                <span class="scan-text">Scan Now</span>
+                <span class="scan-icon"><i class="fas fa-shield-alt"></i></span>
+            </button>
+        </form>
+    </div>
 
-
-<div class="description">Check the websites you visit for security</div>
-<div class="title-wrapper">
-    <h1 class="title">
-        <span>S</span><span>c</span><span>a</span><span>n</span><span>G</span><span>u</span><span>a</span><span>r</span><span>d</span>
-    </h1>
+    <!-- Таблица топ сайтов -->
+    <div class="stats-section">
+        <h2 class="stats-title"><i class="fas fa-chart-line"></i> Top Scanned Websites</h2>
+        <div class="table-container">
+            <table class="sites-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Website URL</th>
+                        <th>Scan Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        int count = 1;
+                        @foreach (var site in Model)
+                        {
+                            <tr>
+                                <td class="rank">@count</td>
+                                <td class="url">@site.Url</td>
+                                <td class="count">@site.CheckCount</td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="empty-message">No scanned websites yet. Be the first!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<form asp-action="FwdScanner" asp-controller="Scan">
-    <button class="btn-custom" >Try It Now</button>
-</form>
-<div class="slogan">Your first line of defense in the digital world</div>
-
-
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Website URL</th>
-            <th>Scan Count</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null && Model.Any())
-        {
-            int count = 1;
-            @foreach (var site in Model)
-            {
-                <tr>
-                    <td>@count</td>
-                    <td>@site.Url</td>
-                    <td>@site.CheckCount</td>
-                </tr>
-                count++;
-            }
-        }
-        else
-        {
-            <tr>
-                <td colspan="3" class="text-center">No scanned websites available.</td>
-            </tr>
-        }
-    </tbody>
-</table>
