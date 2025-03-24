@@ -16,31 +16,100 @@ namespace MGOBankApp.BLL.Utilities
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Email Confirmation</title>
+    <title>ScanGuard - Confirm Your Email</title>
     <style>
-        body {{ font-family: Arial, sans-serif; color: #333; line-height: 1.6; }}
-        h2 {{ color: #4CAF50; }}
-        .content {{ background-color: #f8f8f8; padding: 15px; border-left: 5px solid #4CAF50; }}
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #edf2f4;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            background: #2b2d42;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(239, 35, 60, 0.2);
+            border-top: 4px solid #ef233c;
+        }}
+        h2 {{
+            color: #ef233c;
+            margin: 0 0 25px 0;
+            font-size: 26px;
+            font-weight: 600;
+        }}
+        p {{
+            margin: 0 0 25px 0;
+            font-size: 16px;
+            color:whitesmoke;
+        }}
         .button {{
             display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
+            background: #ef233c;
+            background: linear-gradient(135deg, #ef233c, #d90429);
+            color: white !important;
+            padding: 14px 30px;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(239, 35, 60, 0.4);
+            border: none;
+            font-size: 16px;
+        }}
+        .button:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 35, 60, 0.6);
+        }}
+        .footer {{
+            margin-top: 35px;
+            font-size: 14px;
+            color: #8d99ae;
+            border-top: 1px solid #3a3d5e;
+            padding-top: 20px;
+        }}
+        .logo {{
+            color: #edf2f4;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 25px;
+            display: block;
+        }}
+        a {{
+            color: #ef233c;
+            text-decoration: none;
+            font-weight: 500;
+        }}
+        .highlight {{
+            background: rgba(239, 35, 60, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 25px 0;
         }}
     </style>
 </head>
 <body>
-    <h2>Welcome, {userName}!</h2>
-    <p>Thank you for registering. Please confirm your email by clicking the button below:</p>
-
-    <div class='content'>
-        <p><a href='{confirmationLink}' class='button'>Confirm Email</a></p>
+    <div class='container'>
+        <span class='logo'>ScanGuard</span>
+        <h2>Complete Your Registration, {userName}!</h2>
+        
+        <p>We're excited to have you join our security community. To activate your ScanGuard account and unlock all features, please verify your email address:</p>
+        
+        <div class='highlight'>
+            <a href='{confirmationLink}' class='button'>Verify Email Address</a>
+        </div>
+        
+        <p>This link will expire in 24 hours. If you didn't create this account, please <a href='mailto:zadref45@gmail.com'>contact our support team</a> immediately.</p>
+        
+        <div class='footer'>
+            <p>Your first line of defense in the digital world</p>
+            <p>© {DateTime.Now.Year} ScanGuard. All rights reserved.</p>
+        </div>
     </div>
-
-    <p>If you did not register, please ignore this email.</p>
 </body>
 </html>";
         }
