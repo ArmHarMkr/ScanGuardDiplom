@@ -32,13 +32,13 @@ namespace MGOBankAp.Controllers
             bool isSignedIn = SignInManager.IsSignedIn(User);
             int siteCount = isSignedIn ? 30 : 10;
 
-            List<SiteScanCountEntity> mostScanCount = await Context.SiteScanCounts
-                .OrderByDescending(x => x.CheckCount)
+            List<WebsiteScanEntity> mostScanCount = await Context.WebsiteScanEntities
+                .OrderByDescending(x => x.VulnerablityCount)
                 .Take(siteCount)
                 .ToListAsync();
 
             // Get local IP
-            string userIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString()!;
+            string userIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
 
             // Check if behind a proxy (get real client IP)
             if (Request.Headers.ContainsKey("X-Forwarded-For"))
@@ -70,15 +70,10 @@ namespace MGOBankAp.Controllers
             }
         }
 
-
-
-
-
         public IActionResult AboutUs()
         {
             return View();
         }
-
 
         public IActionResult FwdScanner()
         {
@@ -111,7 +106,7 @@ namespace MGOBankAp.Controllers
                 doc.LoadHtml(html);
 
                 var forms = doc.DocumentNode.SelectNodes("//form") ?? new HtmlNodeCollection(null);
-                Vulnerability vulnerablity = new Vulnerability();
+                Vulnerability vulnerability = new Vulnerability();
 
                 int vulnCount = 0;
                 foreach (var form in forms)
@@ -132,7 +127,7 @@ namespace MGOBankAp.Controllers
                         }
                     }
 
-                    // Тест SQLi
+                    // Test SQLi
                     var normalPayload = "test";
                     foreach (var key in data.Keys)
                         data[key] = normalPayload;
@@ -147,35 +142,48 @@ namespace MGOBankAp.Controllers
 
                     if (sqliStatusCode >= 200 && sqliStatusCode < 300 || normalStatusCode != sqliStatusCode)
                     {
-                        vulnerablity.SQLi = true;
+                        vulnerability.SQLi = true;
                         vulnCount++;
                     }
-
                     else if (sqliStatusCode >= 400 && normalStatusCode < 500)
                     {
-                        vulnerablity.SQLi = true;
+                        vulnerability.SQLi = true;
                         vulnCount++;
                     }
 
-                    // Тест XSS
+                    // Test XSS
                     var xssPayload = "<script>alert('xss')</script>";
                     foreach (var key in data.Keys)
                         data[key] = xssPayload;
 
-                    var (xssResponse, _) = await SendRequest(method, absoluteAction, data); // Код статуса не нужен
+                    var (xssResponse, _) = await SendRequest(method, absoluteAction, data);
                     if (xssResponse.Contains(xssPayload))
                     {
-                        vulnerablity.XSS = true;
+                        vulnerability.XSS = true;
                         vulnCount++;
                     }
 
-                    // Тест CSRF
+                    // Test CSRF
                     var csrfToken = form.SelectSingleNode(".//input[@name='csrf_token']");
                     if (csrfToken == null && method == "post")
                     {
-                        vulnerablity.CSRF = true;
+                        vulnerability.CSRF = true;
                         vulnCount++;
                     }
+                }
+
+                // Update SiteScanCountEntity
+                var siteScanCount = await Context.SiteScanCounts.FirstOrDefaultAsync(s => s.Url == url);
+                if (siteScanCount == null)
+                {
+                    siteScanCount = new SiteScanCountEntity { Url = url, CheckCount = 1 };
+                    Context.SiteScanCounts.Add(siteScanCount);
+                    await Context.SaveChangesAsync();
+                }
+                else
+                {
+                    siteScanCount.CheckCount++;
+                    await Context.SaveChangesAsync();
                 }
 
                 if (SignInManager.IsSignedIn(User))
@@ -198,13 +206,11 @@ namespace MGOBankAp.Controllers
                         ScanEntity = websiteScanEntity,
                         VulnerabilityType = VulnerabilityType.SQLi
                     };
-
                     VulnerabilityEntity xss = new()
                     {
                         ScanEntity = websiteScanEntity,
                         VulnerabilityType = VulnerabilityType.XSS
                     };
-
                     VulnerabilityEntity csrf = new()
                     {
                         ScanEntity = websiteScanEntity,
@@ -215,11 +221,11 @@ namespace MGOBankAp.Controllers
                     Context.Add(sqli);
                     Context.Add(xss);
                     Context.Add(csrf);
-                    await Context.SaveChangesAsync();
-
                 }
 
-                return View("Scanner", vulnerablity);
+                await Context.SaveChangesAsync();
+
+                return View("Scanner", vulnerability);
             }
             catch (Exception ex)
             {
