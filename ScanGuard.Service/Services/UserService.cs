@@ -6,6 +6,7 @@ using MGOBankApp.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using ScanGuard.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,5 +65,34 @@ namespace MGOBankApp.Service.Implementations
                 throw new Exception("No User Found");
             }
         }
+
+        public async Task AddToCorp(CorporationEntity corporationEntity)
+        {
+            await Context.Corporations.AddAsync(corporationEntity);
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task RemoveFromCorp(ApplicationUser appUser, CorporationEntity corporationEntity)
+        {
+            if(appUser.Corporation == corporationEntity)
+            {
+                Context.Corporations.Remove(corporationEntity);
+                await Context.SaveChangesAsync();
+            }
+        }
+
+        public async Task ApproveCorp(CreateCorpRequestEntity request)
+        {
+            request.IsApproved = true;
+            request.Corporation.IsSubmitted = true;
+            await Context.SaveChangesAsync();
+        }
+        public async Task DisapproveCorp(CreateCorpRequestEntity request)
+        {
+            Context.Corporations.Remove(request.Corporation);
+            Context.CreateCorpRequests.Remove(request);
+            await Context.SaveChangesAsync();
+        }
+
     }
 }

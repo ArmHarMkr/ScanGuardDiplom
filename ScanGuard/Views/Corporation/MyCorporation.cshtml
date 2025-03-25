@@ -1,0 +1,21 @@
+﻿@using ScanGuard.Domain.Entity
+@model CorporationEntity
+
+@{
+    ViewBag.Title = "My Corporation";
+}
+
+@if(Model != null || Model.IsSubmitted == false)
+{
+    <h1>@Model.CorpName</h1>
+    <h1>@Model.AdminUser.FullName</h1>
+    <h1>@Model.CreatedDate</h1>
+}
+else if(Model == null)
+{
+    <p>Don't have corporation?<a asp-controller="Corporation" asp-action="CreateCorporation">Create it!</a></p>
+}
+else if(Model.IsSubmitted == false)
+{
+    <p>Your application is under review. Please wait!</p>
+}

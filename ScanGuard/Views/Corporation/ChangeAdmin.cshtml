@@ -1,0 +1,56 @@
+﻿@model List<ScanGuard.Domain.Entity.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Change Corporation Admin";
+}
+
+<h2>Change Corporation Admin</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        <button class="btn btn-primary change-admin-btn" data-user-id="@user.Id">Make Admin</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No users found in this corporation.</p>
+}
+
+<script>
+    document.querySelectorAll('.change-admin-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            let userId = this.getAttribute('data-user-id');
+
+            fetch('/Corporation/ChangeCorpAdmin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: userId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message || 'Admin changed successfully!');
+                    location.reload();
+                })
+                .catch(error => alert('Error: ' + error));
+        });
+    });
+</script>

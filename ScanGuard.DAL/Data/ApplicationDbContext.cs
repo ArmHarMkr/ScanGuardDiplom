@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScanGuard.Domain.Entity;
 
 namespace MGOBankApp.DAL.Data
 {
@@ -25,6 +26,8 @@ namespace MGOBankApp.DAL.Data
         public DbSet<TGUserEntity> TGUserEntities { get; set; }
         public DbSet<ChatMessageEntity> ChatMessages { get; set; }
         public DbSet<NewsEntity> NewsEntities { get; set; }
+        public DbSet<CorporationEntity> Corporations { get; set; }
+        public DbSet<CreateCorpRequestEntity> CreateCorpRequests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,0 +1,64 @@
+﻿@using ScanGuard.Domain.Entity
+@model CorporationEntity
+
+@{
+    ViewData["Title"] = "Edit Corporation";
+}
+
+
+<h2>Edit Corporation</h2>
+
+
+<form asp-action="EditCorp" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.CorpName"></label>
+        <input asp-for="@Model.CorpName" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Website"></label>
+        <input asp-for="@Model.Website" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Email"></label>
+        <input asp-for="@Model.Email" type="email" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Phone"></label>
+        <input asp-for="@Model.Phone" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Address"></label>
+        <input asp-for="@Model.Address" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.City"></label>
+        <input asp-for="@Model.City" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.State"></label>
+        <input asp-for="@Model.State" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Zip"></label>
+        <input asp-for="@Model.Zip" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Country"></label>
+        <input asp-for="@Model.Country" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.WorkerCount"></label>
+        <input asp-for="@Model.WorkerCount" type="number" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Edit Corporation</button>
+</form>

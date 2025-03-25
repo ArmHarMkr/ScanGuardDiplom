@@ -3,6 +3,16 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -394,6 +404,7 @@
                 <li><a asp-action="Scanner" asp-controller="Scan"><i class="fas fa-search"></i> Scanner</a></li>
                 <li><a asp-action="ShowScannedSites" asp-controller="User"><i class="fas fa-list"></i> Scanned Sites</a></li>
                 <li><a asp-action="Index" asp-controller="Chat"><i class="fas fa-comments"></i> Chat</a></li>
+                <li><a asp-action="MyCorp" asp-controller="Corporation"><i class="fas fa-comments"></i>Corporation</a></li>
 
                 @if (SignInManager.IsSignedIn(User))
                 {
