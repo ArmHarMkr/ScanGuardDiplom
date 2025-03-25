@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types;
 using Telegram.Bot;
-using MGOBankApp.Service.Implementations;
+using ScanGuard.Service.Implementations;
 using Microsoft.Identity.Client;
-using MGOBankApp.Service.Interfaces;
-using MGOBankApp.BLL.Services;
+using ScanGuard.Service.Interfaces;
+using ScanGuard.BLL.Services;
 
-namespace MGOBankApp.TelegramBot
+namespace ScanGuard.TelegramBot
 {
     public class MessageSender
     {

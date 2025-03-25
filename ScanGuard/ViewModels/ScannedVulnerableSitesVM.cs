@@ -1,6 +1,6 @@
-﻿using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.Domain.Entity;
 
-namespace MGOBankApp.ViewModels
+namespace ScanGuard.ViewModels
 {
     public class ScannedVulnerableSitesVM
     {

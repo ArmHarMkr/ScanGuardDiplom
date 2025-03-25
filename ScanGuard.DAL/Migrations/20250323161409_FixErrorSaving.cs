@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MGOBankApp.DAL.Migrations
+namespace ScanGuard.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class FixErrorSaving : Migration

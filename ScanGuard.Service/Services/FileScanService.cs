@@ -1,7 +1,7 @@
-﻿using MGOBankApp.BLL.Interfaces;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Domain.Enums;
+﻿using ScanGuard.BLL.Interfaces;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using RestSharp;
@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.BLL.Services;
+namespace ScanGuard.BLL.Services;
 
 public class FileScanService : IFileScanService
 {

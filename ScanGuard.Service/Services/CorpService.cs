@@ -1,5 +1,5 @@
-﻿using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using ScanGuard.BLL.Interfaces;
 using ScanGuard.Domain.Entity;

@@ -5,14 +5,14 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using MGOBankApp.Domain.Entity;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
+namespace ScanGuard.Areas.Identity.Pages.Account.Manage
 {
     [Authorize]
     public class ChangePasswordModel : PageModel

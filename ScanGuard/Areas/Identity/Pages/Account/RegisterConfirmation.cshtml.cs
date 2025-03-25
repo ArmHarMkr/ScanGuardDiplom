@@ -3,17 +3,17 @@
 #nullable disable
 
 using System.Text;
-using MGOBankApp.BLL;
-using MGOBankApp.BLL.Interfaces;
-using MGOBankApp.BLL.Utilities;
-using MGOBankApp.Domain.Entity;
+using ScanGuard.BLL;
+using ScanGuard.BLL.Interfaces;
+using ScanGuard.BLL.Utilities;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace MGOBankApp.Areas.Identity.Pages.Account
+namespace ScanGuard.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel

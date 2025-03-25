@@ -4,7 +4,7 @@ using ScanGuard.Domain.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace MGOBankApp.Domain.Entity
+namespace ScanGuard.Domain.Entity
 {
     public class ApplicationUser : IdentityUser
     {

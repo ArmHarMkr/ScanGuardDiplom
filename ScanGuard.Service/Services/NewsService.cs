@@ -1,6 +1,6 @@
-﻿using MGOBankApp.BLL.Interfaces;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.BLL.Interfaces;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.BLL.Services
+namespace ScanGuard.BLL.Services
 {
     public class NewsService : INewsService
     {

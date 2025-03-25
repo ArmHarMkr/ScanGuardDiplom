@@ -1,9 +1,9 @@
-﻿using MGOBankApp.BLL.Services;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Domain.Roles;
-using MGOBankApp.Service.Interfaces;
-using MGOBankApp.ViewModels;
+﻿using ScanGuard.BLL.Services;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Domain.Roles;
+using ScanGuard.Service.Interfaces;
+using ScanGuard.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace MGOBankApp.Controllers;
+namespace ScanGuard.Controllers;
 
 [Authorize]
 public class UserController : Controller

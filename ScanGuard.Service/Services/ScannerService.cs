@@ -1,14 +1,14 @@
 ﻿using HtmlAgilityPack;
-using MGOBankApp.BLL.Interfaces;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Domain.Enums;
-using MGOBankApp.Models;
-using MGOBankApp.Service.Interfaces;
+using ScanGuard.BLL.Interfaces;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Domain.Enums;
+using ScanGuard.Models;
+using ScanGuard.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-namespace MGOBankApp.Service.Implementations
+namespace ScanGuard.Service.Implementations
 {
     public class ScannerService : IScannerService
     {

@@ -1,6 +1,6 @@
 ﻿using HtmlAgilityPack;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Models;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace MGOBankApp.Service.Interfaces
+namespace ScanGuard.Service.Interfaces
 {
     public interface IScannerService
     {

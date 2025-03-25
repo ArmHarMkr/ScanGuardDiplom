@@ -6,13 +6,13 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MGOBankApp.Areas.Identity.Pages.Account.Manage
+namespace ScanGuard.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {

@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using MGOBankApp.BLL.Interfaces;
-using MGOBankApp.BLL.Utilities;
+using ScanGuard.BLL.Interfaces;
+using ScanGuard.BLL.Utilities;
 using Microsoft.Extensions.Configuration;
 
-namespace MGOBankApp.BLL.Services
+namespace ScanGuard.BLL.Services
 {
     public class EmailService : IEmailService
     {

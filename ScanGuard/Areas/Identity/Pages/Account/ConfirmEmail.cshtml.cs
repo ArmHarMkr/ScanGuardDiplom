@@ -6,14 +6,14 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MGOBankApp.Domain.Entity;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace MGOBankApp.Areas.Identity.Pages.Account
+namespace ScanGuard.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {

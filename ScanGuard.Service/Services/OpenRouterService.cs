@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MGOBankApp.BLL.Services
+namespace ScanGuard.BLL.Services
 {
     public class OpenRouterService
     {

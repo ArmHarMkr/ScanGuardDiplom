@@ -1,6 +1,6 @@
-﻿using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Service.Interfaces;
+﻿using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.BLL.Utilities
+namespace ScanGuard.BLL.Utilities
 {
     public class ScannedSites : IScannedSites
     {

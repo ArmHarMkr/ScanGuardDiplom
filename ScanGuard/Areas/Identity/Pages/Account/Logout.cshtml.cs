@@ -4,7 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
-using MGOBankApp.Domain.Entity;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace MGOBankApp.Areas.Identity.Pages.Account
+namespace ScanGuard.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {
