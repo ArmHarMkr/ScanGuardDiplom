@@ -1,71 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Главная";
-}
-
-@model List<SiteScanCountEntity>
-
-<div class="main-container">
-    <!-- Хедер с IP -->
-    @if (ViewBag.UserIp != null)
-    {
-        <div class="ip-badge">
-            <i class="fas fa-network-wired"></i> Your IP: @ViewBag.UserIp
-        </div>
+﻿@using Microsoft.AspNetCore.Identity
+@model List<MGOBankApp.Domain.Entity.WebsiteScanEntity>
+@inject SignInManager<ApplicationUser> _signInManager
+<style>
+    .register-btn {
+        background-color: var(--accent-color);
+        color: white;
+        box-shadow: 0 2px 10px rgba(239, 35, 60, 0.3);
     }
 
-    <!-- Главный блок -->
-    <div class="hero-section">
-        <div class="title-wrapper">
-            <h1 class="title-glitch">
-                <span>S</span><span>c</span><span>a</span><span>n</span><span>G</span><span>u</span><span>a</span><span>r</span><span>d</span>
-            </h1>
-        </div>
-        
-        <div class="tagline">Your first line of defense in the digital world</div>
-        <p class="description">Advanced security scanning for websites with real-time threat detection</p>
-        
-        <form asp-action="FwdScanner" asp-controller="Scan">
-            <button class="scan-button">
-                <span class="scan-text">Scan Now</span>
-                <span class="scan-icon"><i class="fas fa-shield-alt"></i></span>
-            </button>
-        </form>
-    </div>
+        .register-btn:hover {
+            background-color: #d90429;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 35, 60, 0.4);
+        }
 
-    <!-- Таблица топ сайтов -->
-    <div class="stats-section">
-        <h2 class="stats-title"><i class="fas fa-chart-line"></i> Top Scanned Websites</h2>
-        <div class="table-container">
-            <table class="sites-table">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Website URL</th>
-                        <th>Scan Count</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null && Model.Any())
-                    {
-                        int count = 1;
-                        @foreach (var site in Model)
-                        {
-                            <tr>
-                                <td class="rank">@count</td>
-                                <td class="url">@site.Url</td>
-                                <td class="count">@site.CheckCount</td>
-                            </tr>
-                            count++;
-                        }
-                    }
-                    else
+    .auth-buttons {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+        .auth-buttons a {
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--menu-speed) ease;
+            font-size: 0.95rem;
+        }
+
+</style>
+<div class="stats-section">
+    <h2 class="stats-title"><i class="fas fa-chart-line"></i> Top Scanned Websites</h2>
+    <div class="table-container">
+        <table class="sites-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Website URL</th>
+                    <th>Vulnerability Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0) // Check if there are items to display
+                {
+                    int count = 1;
+                    @foreach (var site in Model)
                     {
                         <tr>
-                            <td colspan="3" class="empty-message">No scanned websites yet. Be the first!</td>
+                            <td class="rank">@count</td>
+                            <td class="url">@site.Url</td>
+                            <td class="count">@site.VulnerablityCount</td>
                         </tr>
+                        count++;
                     }
-                </tbody>
-            </table>
-        </div>
+                }
+                else // Show empty message if no items
+                {
+                    <tr>
+                        <td colspan="3" class="empty-message">No scanned websites yet. Be the first!</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (!_signInManager.IsSignedIn(User))
+        {
+            <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">Show More</a>
+        }
     </div>
 </div>
