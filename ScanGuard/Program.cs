@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using RestSharp;
+using ScanGuard.BLL.Interfaces;
+using ScanGuard.BLL.Services;
 using ScanGuard.TelegramBot;
 using Serilog;
 using System.Globalization;
@@ -62,6 +64,7 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddHttpClient<IFileScanService, FileScanService>();
 builder.Services.AddScoped<IFileScanService, FileScanService>();
 builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<ICorpService, CorpService>();
 builder.Services.AddSingleton<ITelegramBotClient>(provider =>
 {
     var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0"; // ���� �����

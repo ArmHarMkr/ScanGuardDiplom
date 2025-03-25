@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using ScanGuard.Domain.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
@@ -15,6 +16,7 @@ namespace MGOBankApp.Domain.Entity
         public string ProfilePhotoPath { get; set; } = "wwwroot/img/default.jpg";
         public string? RegistrationIpAddress { get; set; }
         public string? LastLoginIpAddress { get; set; }
+        public CorporationEntity? Corporation { get; set; }
         public virtual ICollection<WebsiteScanEntity> WebsiteScans { get; set; } // Если нужно
         public virtual ICollection<NotificationEntity> Notifications { get; set; } // Уведомления
         public virtual ICollection<FileScanEntity> FileScans { get; set; } // Сканирования файлов
