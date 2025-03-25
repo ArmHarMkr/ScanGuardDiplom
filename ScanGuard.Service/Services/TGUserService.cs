@@ -1,13 +1,13 @@
-﻿using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Models;
-using MGOBankApp.Service.Interfaces;
+﻿using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Models;
+using ScanGuard.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
 
-namespace MGOBankApp.BLL.Services
+namespace ScanGuard.BLL.Services
 {
     public class TGUserService
 

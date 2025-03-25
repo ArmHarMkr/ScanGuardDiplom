@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MGOBankApp.Domain.Entity;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Serilog;
-using MGOBankApp.BLL.Interfaces;
+using ScanGuard.BLL.Interfaces;
 using Telegram.Bot.Types;
 
-namespace MGOBankApp.Areas.Identity.Pages.Account
+namespace ScanGuard.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {

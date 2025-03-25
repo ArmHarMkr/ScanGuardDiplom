@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Domain.Roles;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Domain.Roles;
 using Serilog;
 
-namespace MGOBankApp.Areas.Identity.Pages.Account
+namespace ScanGuard.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {

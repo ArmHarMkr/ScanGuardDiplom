@@ -1,10 +1,10 @@
-﻿using MGOBankApp.BLL.Services;
-using MGOBankApp.DAL.Data;
+﻿using ScanGuard.BLL.Services;
+using ScanGuard.DAL.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace MGOBankApp.Controllers
+namespace ScanGuard.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

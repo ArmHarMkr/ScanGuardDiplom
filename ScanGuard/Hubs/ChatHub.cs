@@ -1,10 +1,10 @@
-﻿using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MGOBankApp.Hubs
+namespace ScanGuard.Hubs
 {
     public class ChatHub : Hub
     {

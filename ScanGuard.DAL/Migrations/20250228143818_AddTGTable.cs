@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MGOBankApp.DAL.Migrations
+namespace ScanGuard.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class AddTGTable : Migration

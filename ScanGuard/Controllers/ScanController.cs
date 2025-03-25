@@ -1,12 +1,12 @@
 ﻿using HtmlAgilityPack;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Models;
-using MGOBankApp.Service.Interfaces;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Models;
+using ScanGuard.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MGOBankApp.Controllers;
+namespace ScanGuard.Controllers;
 
 public class ScanController : Controller
 {

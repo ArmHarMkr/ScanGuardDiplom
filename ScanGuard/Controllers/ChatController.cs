@@ -1,11 +1,11 @@
-﻿using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace MGOBankApp.Controllers
+namespace ScanGuard.Controllers
 {
     [Authorize]
     public class ChatController : Controller

@@ -1,4 +1,4 @@
-﻿namespace MGOBankApp.BLL.Interfaces
+﻿namespace ScanGuard.BLL.Interfaces
 {
     public interface IEmailService
     {

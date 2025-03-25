@@ -1,5 +1,5 @@
 ﻿using System;
-﻿using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScanGuard.Domain.Entity;
 
-namespace MGOBankApp.DAL.Data
+namespace ScanGuard.DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

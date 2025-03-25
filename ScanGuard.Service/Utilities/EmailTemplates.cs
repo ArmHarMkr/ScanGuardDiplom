@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.BLL.Utilities
+namespace ScanGuard.BLL.Utilities
 {
     public static class EmailTemplates
     {

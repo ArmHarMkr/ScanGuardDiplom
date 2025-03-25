@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MGOBankApp.Domain.Enums;
+using ScanGuard.Domain.Enums;
 
-namespace MGOBankApp.Domain.Entity
+namespace ScanGuard.Domain.Entity
 {
     public class FileScanEntity
     {

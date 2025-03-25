@@ -1,4 +1,4 @@
-﻿namespace MGOBankApp.Domain.Entity
+﻿namespace ScanGuard.Domain.Entity
 {
     public class SiteScanCountEntity
     {

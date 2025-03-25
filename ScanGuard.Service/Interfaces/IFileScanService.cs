@@ -1,4 +1,4 @@
-﻿using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.BLL.Interfaces
+namespace ScanGuard.BLL.Interfaces
 {
     public interface IFileScanService
     {

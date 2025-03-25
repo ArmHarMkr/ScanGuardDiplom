@@ -1,9 +1,9 @@
 using HtmlAgilityPack;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Domain.Enums;
-using MGOBankApp.Models;
-using MGOBankApp.ViewModels;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Domain.Enums;
+using ScanGuard.Models;
+using ScanGuard.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

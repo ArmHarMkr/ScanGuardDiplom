@@ -1,4 +1,4 @@
-﻿using MGOBankApp.Domain.Entity;
+﻿using ScanGuard.Domain.Entity;
 using ScanGuard.Domain.Entity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace MGOBankApp.Service.Interfaces
+namespace ScanGuard.Service.Interfaces
 {
     public interface IUserService
     {

@@ -1,8 +1,8 @@
 ﻿using HtmlAgilityPack;
-using MGOBankApp.DAL.Data;
-using MGOBankApp.Domain.Entity;
-using MGOBankApp.Domain.Roles;
-using MGOBankApp.Service.Interfaces;
+using ScanGuard.DAL.Data;
+using ScanGuard.Domain.Entity;
+using ScanGuard.Domain.Roles;
+using ScanGuard.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.Service.Implementations
+namespace ScanGuard.Service.Implementations
 {
     public class UserService : IUserService
     {

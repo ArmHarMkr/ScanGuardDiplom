@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGOBankApp.Domain.Entity
+namespace ScanGuard.Domain.Entity
 {
     public class ChatMessageEntity
     {

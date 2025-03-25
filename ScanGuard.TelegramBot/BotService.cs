@@ -7,10 +7,10 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using MGOBankApp.BLL.Services;
+using ScanGuard.BLL.Services;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Logging;
-using MGOBankApp.TelegramBot;
+using ScanGuard.TelegramBot;
 
 namespace ScanGuard.TelegramBot
 {

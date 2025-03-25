@@ -1,7 +1,7 @@
-﻿using MGOBankApp.Domain.Entity;
-using MGOBankApp.Domain.Enums;
+﻿using ScanGuard.Domain.Entity;
+using ScanGuard.Domain.Enums;
 
-namespace MGOBankApp.ViewModels
+namespace ScanGuard.ViewModels
 {
     public class SiteVulnViewModel
     {
