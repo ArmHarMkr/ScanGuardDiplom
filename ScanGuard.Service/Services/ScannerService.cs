@@ -93,7 +93,6 @@ namespace ScanGuard.Service.Implementations
                 // Save scan results to database
                 WebsiteScanEntity websiteScanEntity = new()
                 {
-                    ScanUser = applicationUser,
                     Status = "Scanned",
                     Url = url,
                     VulnerablityCount = _analyzer.CalculateVulnerabilityCount(vulnerability)

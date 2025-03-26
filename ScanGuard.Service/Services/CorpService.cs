@@ -2,12 +2,6 @@
 using ScanGuard.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using ScanGuard.BLL.Interfaces;
-using ScanGuard.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScanGuard.BLL.Services
 {
@@ -45,9 +39,10 @@ namespace ScanGuard.BLL.Services
             await Context.SaveChangesAsync();
         }
 
-        public async Task CreteCorporation(CorporationEntity corporation)
+        public async Task CreteCorporation(CorporationEntity corporation, ApplicationUser applicationUser)
         {
             Context.Corporations.Add(corporation);
+            applicationUser.Corporation = corporation;
             CreateCorpRequestEntity request = new CreateCorpRequestEntity
             {
                 Corporation = corporation
