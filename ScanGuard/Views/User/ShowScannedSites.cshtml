@@ -21,7 +21,20 @@
                 <tr class="scanguard-tr">
                     <td class="scanguard-td">@site.Url</td>
                     <td class="scanguard-td">@site.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td class="scanguard-td">@site.VulnerabilityCount</td>
+                    <td class="scanguard-td scanguard-count">
+                        @{
+                            var badgeClass = "safe";
+                            if (site.VulnerabilityCount > 5)
+                            {
+                                badgeClass = "danger";
+                            }
+                            else if (site.VulnerabilityCount > 0)
+                            {
+                                badgeClass = "warning";
+                            }
+                        }
+                        <span class="scanguard-badge scanguard-badge-@badgeClass">@site.VulnerabilityCount</span>
+                    </td>
                     <td class="scanguard-td">
                         @(site.Vulnerabilities != null && site.Vulnerabilities.Any()
                             ? string.Join(", ", site.Vulnerabilities.Select(v => v.VulnerabilityType))

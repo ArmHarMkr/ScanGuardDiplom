@@ -269,6 +269,8 @@
             transition: all var(--menu-speed) ease;
         }
 
+        
+
             .dropdown-menu a:hover {
                 background-color: rgba(255, 255, 255, 0.05);
                 color: var(--accent-color);
@@ -308,7 +310,6 @@
 
         main {
             flex: 1;
-            max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
             width: 100%;
@@ -446,9 +447,12 @@
                         <span>@currentUser!.FullName</span>
                         <div class="dropdown-menu">
                             <a asp-controller="User" asp-action="UserProfile"><i class="fas fa-user"></i> Profile</a>
-                            <a href="/Identity/Account/Manage/ChangePassword" class="dropdown-item"><i class="fas fa-key"></i> Change Password</a>
-                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                            <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword" class="dropdown-item"><i class="fas fa-key"></i> Change Password</a>
+                            <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+
+                            <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: none;">
                             </form>
                         </div>
                     </div>
