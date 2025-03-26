@@ -1,44 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model List<ScanGuard.Domain.Entity.WebsiteScanEntity>
 @inject SignInManager<ApplicationUser> _signInManager
-<style>
-    .register-btn {
-        background-color: var(--accent-color);
-        color: white;
-        box-shadow: 0 2px 10px rgba(239, 35, 60, 0.3);
-    }
 
-        .register-btn:hover {
-            background-color: #d90429;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(239, 35, 60, 0.4);
-        }
-
-    .auth-buttons {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-        .auth-buttons a {
-            padding: 0.5rem 1.2rem;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all var(--menu-speed) ease;
-            font-size: 0.95rem;
-        }
-
-</style>
-<div class="stats-section">
-    <h2 class="stats-title"><i class="fas fa-chart-line"></i> Top Scanned Websites</h2>
-    <div class="table-container">
-        <table class="sites-table">
+<div class="scanguard-table-container">
+    <h2 class="scanguard-table-title"><i class="fas fa-chart-line"></i> Top Scanned Websites</h2>
+    <div class="scanguard-table-wrapper">
+        <table class="scanguard-table">
             <thead>
                 <tr>
-                    <th>Rank</th>
-                    <th>Website URL</th>
-                    <th>Vulnerability Count</th>
+                    <th scanguard-th>Rank</th>
+                    <th scanguard-th>Website URL</th>
+                    <th scanguard-th>Vulnerability Count</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,10 +19,22 @@
                     int count = 1;
                     @foreach (var site in Model)
                     {
-                        <tr>
-                            <td class="rank">@count</td>
-                            <td class="url">@site.Url</td>
-                            <td class="count">@site.VulnerablityCount</td>
+                        <tr class="scanguard-tr">
+                            <td class="scanguard-td scanguard-rank">@count</td>
+                            <td class="scanguard-td scanguard-url">@site.Url</td>
+                            <td class="scanguard-td scanguard-count">
+                                @{
+                                    var badgeClass = "safe";
+                                    if(site.VulnerablityCount > 3)
+                                    {
+                                        badgeClass = "danger";
+                                    }else if (site.VulnerablityCount > 0)
+                                    {
+                                        badgeClass = "warning";
+                                    }
+                                }
+                                <span class="scanguard-badge scanguard-badge-@badgeClass">@site.VulnerablityCount</span>
+                            </td>
                         </tr>
                         count++;
                     }
@@ -65,7 +49,32 @@
         </table>
         @if (!_signInManager.IsSignedIn(User))
         {
-            <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">Show More</a>
+            <a class="scanguard-btn scanguard-btn-primary scanguard-table-btn"
+               asp-area="Identity"
+               asp-page="/Account/Register"
+               id="showMoreBtn">
+                Show More
+                <i class="fas fa-arrow-right scanguard-btn-icon"></i>
+            </a>
         }
     </div>
 </div>
+<script>
+    // Добавляем эффект ripple для кнопки
+    document.getElementById('showMoreBtn')?.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('scanguard-btn-ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+
+        this.appendChild(ripple);
+
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+</script>

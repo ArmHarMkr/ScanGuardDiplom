@@ -1,8 +1,8 @@
 ﻿body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(180deg, #0a192f, #0d1b2a);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
     min-height: 100vh;
     color: #a3bffa;
     overflow-y: hidden;
@@ -575,5 +575,335 @@
     text-shadow: 0 0 5px rgba(255, 0, 122, 0.5);
     margin: 5px 0;
 }
+/*scanguard table styles //////////////////////////////////////////*/
+.scanguard-table-container {
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(239, 35, 60, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.scanguard-table-title {
+    color: #edf2f4;
+    font-size: 1.5rem;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+    .scanguard-table-title i {
+        color: #ef233c;
+    }
+
+.scanguard-table-wrapper {
+    overflow-x: auto;
+}
+
+.scanguard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(22, 21, 62, 0.5);
+    color: #edf2f4;
+}
+
+.scanguard-th {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    color: #ef233c;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    background: rgba(239, 35, 60, 0.05);
+    position: sticky;
+    top: 0;
+}
+
+.scanguard-td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.scanguard-tr:hover {
+    background: rgba(239, 35, 60, 0.03);
+}
+
+.scanguard-rank {
+    font-weight: 700;
+    color: #ef233c;
+    width: 60px;
+}
+
+.scanguard-url {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.95rem;
+}
+
+.scanguard-count {
+    text-align: right;
+    font-weight: 600;
+}
+
+.scanguard-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+
+.scanguard-badge-danger {
+    background: rgba(239, 35, 60, 0.2);
+    color: #ef233c;
+}
+
+.scanguard-badge-warning {
+    background: rgba(255, 165, 0, 0.2);
+    color: #ffa500;
+}
+
+.scanguard-badge-safe {
+    background: rgba(100, 255, 218, 0.2);
+    color: #64ffda;
+}
+
+.scanguard-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #b8c2cc;
+    font-style: italic;
+}
+
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .scanguard-table-container {
+        padding: 1rem;
+    }
+
+    .scanguard-th,
+    .scanguard-td {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .scanguard-table-title {
+        font-size: 1.3rem;
+    }
+}
+/*scanguard buttons*/
+.scanguard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Стиль для основной акцентной кнопки */
+.scanguard-btn-primary {
+    background-color: #ef233c;
+    color: white;
+    box-shadow: 0 4px 15px rgba(239, 35, 60, 0.3);
+}
+
+    .scanguard-btn-primary:hover {
+        background-color: #d90429;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(239, 35, 60, 0.4);
+    }
+
+    .scanguard-btn-primary:active {
+        transform: translateY(0);
+    }
+
+/* Эффект "волны" при клике */
+.scanguard-btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Специфичный стиль для кнопки в таблице */
+.scanguard-table-btn {
+    margin: 1.5rem auto 0 auto;
+    display: block;
+    width: fit-content;
+}
+
+/* Иконка для кнопки */
+.scanguard-btn-icon {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.scanguard-btn:hover .scanguard-btn-icon {
+    transform: translateX(3px);
+}
+/*scanguard inputs*/
+/* Базовые стили для инпутов ScanGuard */
+.scanguard-input {
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: rgba(22, 21, 62, 0.7);
+    border: 1px solid rgba(239, 35, 60, 0.3);
+    border-radius: 8px;
+    color: #edf2f4;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .scanguard-input:focus {
+        border-color: #ef233c;
+        box-shadow: 0 0 0 3px rgba(239, 35, 60, 0.2);
+        background-color: rgba(26, 26, 46, 0.9);
+    }
+
+    .scanguard-input::placeholder {
+        color: #6b7280;
+        opacity: 1;
+    }
+
+/* Стили для label */
+.scanguard-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #b8c2cc;
+}
+
+/* Стили для input-group (контейнер с label и input) */
+.scanguard-input-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Стили для валидации */
+.scanguard-input.invalid {
+    border-color: #ef233c;
+    background-color: rgba(239, 35, 60, 0.1);
+}
+
+.scanguard-input.valid {
+    border-color: #64ffda;
+}
+
+/* Стили для textarea */
+.scanguard-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Стили для select */
+.scanguard-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef233c'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+/* Стили для checkbox и radio */
+.scanguard-checkbox,
+.scanguard-radio {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    appearance: none;
+    border: 1px solid rgba(239, 35, 60, 0.5);
+    border-radius: 3px;
+    background-color: rgba(22, 21, 62, 0.7);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.scanguard-radio {
+    border-radius: 50%;
+}
+
+    .scanguard-checkbox:checked,
+    .scanguard-radio:checked {
+        background-color: #ef233c;
+        border-color: #ef233c;
+    }
+
+        .scanguard-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 4px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .scanguard-radio:checked::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+
+/* Стили для группы checkbox/radio */
+.scanguard-checkbox-label,
+.scanguard-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 0.5rem;
+}
+
+/* Анимация фокуса */
+@keyframes scanguard-input-focus {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 35, 60, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 0 6px rgba(239, 35, 60, 0);
+    }
+}
+
+.scanguard-input:focus {
+    animation: scanguard-input-focus 0.4s ease-out;
+}
 /* ... (остальные стили остаются без изменений) ... */
