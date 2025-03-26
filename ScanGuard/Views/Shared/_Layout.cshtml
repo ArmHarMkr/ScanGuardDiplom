@@ -443,7 +443,7 @@
 
                     <div class="user-profile">
                         <img src="@profilePhotoPath" alt="User profile">
-                        <span>@User.Identity?.Name</span>
+                        <span>@currentUser.FullName</span>
                         <div class="dropdown-menu">
                             <a asp-controller="User" asp-action="UserProfile"><i class="fas fa-user"></i> Profile</a>
                             <a href="/Identity/Account/Manage/ChangePassword" class="dropdown-item"><i class="fas fa-key"></i> Change Password</a>

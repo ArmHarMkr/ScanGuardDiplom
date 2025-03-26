@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScanGuard.Domain.Entity;
+using System.Reflection.Emit;
 
 namespace ScanGuard.DAL.Data
 {
@@ -31,8 +32,12 @@ namespace ScanGuard.DAL.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
 
+            base.OnModelCreating(builder);
+            builder.Entity<CorporationEntity>()
+        .HasOne(c => c.AdminUser)  // Указываем навигационное свойство
+        .WithOne(u => u.Corporation)  // Указываем обратное навигационное свойство
+        .HasForeignKey<CorporationEntity>(c => c.AdminUserId);
             /*builder.Entity<ApplicationUser>(b =>
             {
                 b.HasKey(u => u.Id);

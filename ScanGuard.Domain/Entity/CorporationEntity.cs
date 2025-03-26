@@ -21,6 +21,7 @@ namespace ScanGuard.Domain.Entity
         public string Country { get; set; }
         public int WorkerCount { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string? AdminUserId { get; set; }
         public ApplicationUser? AdminUser { get; set; }
         public bool IsSubmitted { get; set; } = false;
     }
