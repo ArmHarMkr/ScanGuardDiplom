@@ -803,9 +803,6 @@
 }
 
 /* Стили для input-group (контейнер с label и input) */
-.scanguard-input-group {
-    margin-bottom: 1.5rem;
-}
 
 /* Стили для валидации */
 .scanguard-input.invalid {
