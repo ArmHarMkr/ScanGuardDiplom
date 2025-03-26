@@ -1,11 +1,11 @@
-﻿using ScanGuard.DAL.Data;
-using ScanGuard.Domain.Entity;
+﻿using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ScanGuard.BLL.Interfaces;
 using ScanGuard.BLL.Services;
 using ScanGuard.Domain.Entity;
+using ScanGuard.DAL.Data;
 
 namespace ScanGuard.Controllers
 {
@@ -34,8 +34,8 @@ namespace ScanGuard.Controllers
         public async Task<IActionResult> MyCorporation()
         {
             var currentUser = await UserManager.GetUserAsync(User);
-
-            return View(CorpService.GetUserCorporation(currentUser!));
+            var myCorp = currentUser!.Corporation ?? new CorporationEntity();
+            return View(myCorp);
         }
 
         [HttpGet("AddCorp")]
@@ -49,8 +49,9 @@ namespace ScanGuard.Controllers
         {
             try
             {
+                var currentUser = await UserManager.GetUserAsync(User);
                 corporationEntity.AdminUser = await UserManager.GetUserAsync(User);
-                await CorpService.CreteCorporation(corporationEntity);
+                await CorpService.CreteCorporation(corporationEntity, currentUser);
                 await Context.SaveChangesAsync();
             }
             catch (Exception ex)

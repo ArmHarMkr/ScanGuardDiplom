@@ -5,17 +5,14 @@
     ViewBag.Title = "My Corporation";
 }
 
-@if(Model != null || Model.IsSubmitted == false)
+@if (Model != null)
 {
-    <h1>@Model.CorpName</h1>
-    <h1>@Model.AdminUser.FullName</h1>
-    <h1>@Model.CreatedDate</h1>
+    <h1>
+        @(Model.CorpName ?? "You don't have a corporation")    <p>Don't have a corporation? <a asp-controller="Corporation" asp-action="AddCorp">Create it!</a></p>
+    </h1>
+    <h1>@(Model.AdminUser != null ? Model.AdminUser.FullName : "No Admin Assigned")</h1>
 }
-else if(Model == null)
+else
 {
-    <p>Don't have corporation?<a asp-controller="Corporation" asp-action="CreateCorporation">Create it!</a></p>
-}
-else if(Model.IsSubmitted == false)
-{
-    <p>Your application is under review. Please wait!</p>
+    <p>Don't have a corporation? <a asp-controller="Corporation" asp-action="AddCorp">Create it!</a></p>
 }
