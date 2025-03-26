@@ -34,6 +34,7 @@
 
     <link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/styles.css">
     <link rel="stylesheet" type="text/css" href="~/css/main.css">
     <!--===============================================================================================-->
 </head>
@@ -62,9 +63,9 @@
                         <span asp-for="Input.Password" class="focus-input100" data-placeholder="Password"></span>
                         <span asp-validation-for="Input.Password" class="text-danger small"></span>
                     </div>
-                    <div class="checkbox mb-3">
-                        <label asp-for="Input.RememberMe" class="txt1">
-                            <input class="m-l-2 form-check-input" asp-for="Input.RememberMe" />
+                    <div class="scanguard-input-group">
+                        <label style="color:darkgrey;font-size:15px;" asp-for="Input.RememberMe" class="scanguard-checkbox-label">
+                            <input style="background-color:transparent;" class="scanguard-checkbox" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
                     </div>
