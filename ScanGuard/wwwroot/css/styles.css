@@ -28,7 +28,7 @@
     text-align: center;
     position: relative;
     z-index: 1;
-    max-height: 950px;
+    margin-top:100px; 
     overflow: scroll;
     scrollbar-width: none;
 }
@@ -77,15 +77,7 @@
 
 
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* Уменьшаем отступы навигации */
     background: #1a0005; z-index: 10;
-    box-shadow: 0 2px 10px rgba(0, 212, 255, 0.1);
 }
 
 .nav-logo {
@@ -115,16 +107,7 @@
     padding: 0;
 }
 
-    .nav-links li, .auth-links li {
-        margin-left: 15px; /* Уменьшаем отступ между элементами */
-    }
 
-    .nav-links a, .auth-links .nav-link {
-        color: #a3bffa;
-        font-size: 0.9rem; /* Уменьшаем размер шрифта */
-        text-decoration: none;
-        transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
 
         .nav-links a:hover, .auth-links .nav-link:hover {
             color: #00d4ff;
