@@ -1,1 +1,1 @@
-web: dotnet bin/Release/net8.0/ScanGuard.dll --urls "http://0.0.0.0:$PORT"
+web: cd ScanGuard/bin/Realease && ./ScanGuard --urls "http://*:$PORT"
