@@ -1,1 +1,1 @@
-web: dotnet ScanGuard.dll
+web: dotnet ScanGuard.dll --urls "http://*:$PORT"
