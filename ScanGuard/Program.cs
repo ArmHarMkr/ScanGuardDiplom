@@ -19,6 +19,7 @@ using ScanGuard.TelegramBot;
 using Serilog;
 using System.Globalization;
 using Telegram.Bot;
+using Microsoft.AspNetCore.Diagnostics;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
@@ -106,6 +107,20 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseStaticFiles();
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if (error != null)
+        {
+            Log.Error(error.Error, "Error on {Path}", context.Request.Path);
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync("Server error");
+        }
+    });
+});
 
 app.MapControllerRoute(
         name: "default",
