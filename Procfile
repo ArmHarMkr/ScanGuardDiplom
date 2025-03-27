@@ -1,1 +1,1 @@
-web: cd ScanGuard/bin/Realease && ./ScanGuard --urls "http://*:$PORT"
+web: cd ScanGuard/bin/publish && ./ScanGuard --urls "http://*:$PORT"
