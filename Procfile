@@ -1,1 +1,1 @@
-web: dotnet run --urls "http://*:$PORT" --project ScanGuard/ScanGuard.csproj
+web: dotnet bin/Release/net8.0/ScanGuard.dll --urls "http://0.0.0.0:$PORT"
