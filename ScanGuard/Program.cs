@@ -19,6 +19,7 @@ using ScanGuard.TelegramBot;
 using Serilog;
 using System.Globalization;
 using Telegram.Bot;
+using Microsoft.AspNetCore.Diagnostics;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
@@ -62,6 +63,7 @@ builder.Services.AddScoped<IScannerService, ScannerService>();
 builder.Services.AddScoped<IScannedSites, ScannedSites>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddHttpClient<IFileScanService, FileScanService>();
+
 builder.Services.AddScoped<IFileScanService, FileScanService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<ICorpService, CorpService>();
@@ -101,9 +103,24 @@ app.MapRazorPages();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseStaticFiles();
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if (error != null)
+        {
+            Log.Error(error.Error, "Error on {Path}", context.Request.Path);
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync("Server error");
+        }
+    });
+});
 
 app.MapControllerRoute(
         name: "default",
