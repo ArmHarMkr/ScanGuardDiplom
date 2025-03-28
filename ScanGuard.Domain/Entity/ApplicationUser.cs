@@ -17,8 +17,8 @@ namespace ScanGuard.Domain.Entity
         public string? RegistrationIpAddress { get; set; }
         public string? LastLoginIpAddress { get; set; }
         public CorporationEntity? Corporation { get; set; }
-        public virtual ICollection<WebsiteScanEntity> WebsiteScans { get; set; } // Если нужно
-        public virtual ICollection<NotificationEntity> Notifications { get; set; } // Уведомления
-        public virtual ICollection<FileScanEntity> FileScans { get; set; } // Сканирования файлов
+        public virtual ICollection<WebsiteScanEntity> WebsiteScans { get; set; } 
+        public virtual ICollection<NotificationEntity> Notifications { get; set; } 
+        public virtual ICollection<FileScanEntity> FileScans { get; set; } 
     }
 }

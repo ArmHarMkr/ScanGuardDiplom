@@ -32,10 +32,17 @@ namespace MGOBankAp.Controllers
             bool isSignedIn = SignInManager.IsSignedIn(User);
             int siteCount = isSignedIn ? 30 : 10;
 
-            List<WebsiteScanEntity> mostScanCount = await Context.WebsiteScanEntities
-                .OrderByDescending(x => x.VulnerablityCount)
+            List<SiteScanCountEntity> mostScannedSites = await Context.WebsiteScanEntities
+                .GroupBy(x => x.Url)
+                .Select(g => new SiteScanCountEntity
+                {
+                    Url = g.Key,
+                    CheckCount = g.Count()
+                })
+                .OrderByDescending(x => x.CheckCount)
                 .Take(siteCount)
                 .ToListAsync();
+
 
             // Get local IP
             string userIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
@@ -54,7 +61,7 @@ namespace MGOBankAp.Controllers
 
             ViewBag.UserIp = userIpAddress;
 
-            return View(mostScanCount);
+            return View(mostScannedSites);
         }
 
         private async Task<string> GetPublicIp()
