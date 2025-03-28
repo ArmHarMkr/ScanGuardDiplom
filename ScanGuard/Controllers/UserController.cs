@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing;
-using System.Drawing.Imaging;
-
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
 namespace ScanGuard.Controllers;
 
 [Authorize]
@@ -112,140 +112,138 @@ public class UserController : Controller
         return View(await UserManager.GetUserAsync(User));
     }
 
-    [HttpPost]
-    public async Task<IActionResult> UploadProfilePhoto(IFormFile profilePhoto)
+
+[HttpPost]
+public async Task<IActionResult> UploadProfilePhoto(IFormFile profilePhoto)
+{
+    if (profilePhoto != null && profilePhoto.Length > 0)
     {
-        if (profilePhoto != null && profilePhoto.Length > 0)
+        var user = await UserManager.GetUserAsync(User);
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
+        Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
+
+        var uniqueFileName = $"{user.Id}.jpg"; // User ID as filename
+        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        using (var stream = new MemoryStream())
         {
-            var user = await UserManager.GetUserAsync(User);
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
-            Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
+            await profilePhoto.CopyToAsync(stream);
+            stream.Seek(0, SeekOrigin.Begin);
 
-            var uniqueFileName = $"{user.Id}.jpg"; // User ID as filename
-            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            //changin size of photo
-            //TODO: Refactor this code to a separate method
-            using (var stream = new MemoryStream())
+            using (var originalImage = await Image.LoadAsync(stream))
             {
-                await profilePhoto.CopyToAsync(stream);
-                stream.Seek(0, SeekOrigin.Begin);
+                int originalWidth = originalImage.Width;
+                int originalHeight = originalImage.Height;
 
-                using (var originalImage = Image.FromStream(stream))
+                int cropSize, finalSize;
+
+                if (originalWidth >= 1080 && originalHeight >= 1080)
                 {
-                    int originalWidth = originalImage.Width;
-                    int originalHeight = originalImage.Height;
-
-                    int cropSize, finalSize;
-
-                    if (originalWidth >= 1080 && originalHeight >= 1080)
-                    {
-                        // Если изображение больше 1080x1080, обрезаем и уменьшаем до 1080x1080
-                        cropSize = Math.Min(originalWidth, originalHeight);
-                        finalSize = 1080;
-                    }
-                    else
-                    {
-                        cropSize = Math.Min(originalWidth, originalHeight);
-                        finalSize = cropSize; // Оставляем оригинальный размер
-                    }
-
-                    int x = (originalWidth - cropSize) / 2;
-                    int y = (originalHeight - cropSize) / 2;
-
-                    using (var croppedImage = new Bitmap(cropSize, cropSize))
-                    {
-                        using (var graphics = Graphics.FromImage(croppedImage))
-                        {
-                            graphics.DrawImage(originalImage, new Rectangle(0, 0, cropSize, cropSize),
-                                               new Rectangle(x, y, cropSize, cropSize), GraphicsUnit.Pixel);
-                        }
-
-                        using (var resizedImage = new Bitmap(croppedImage, new Size(finalSize, finalSize)))
-                        {
-                            resizedImage.Save(filePath, ImageFormat.Jpeg); 
-                        }
-                    }
+                    // Если изображение больше 1080x1080, обрезаем и уменьшаем до 1080x1080
+                    cropSize = Math.Min(originalWidth, originalHeight);
+                    finalSize = 1080;
                 }
+                else
+                {
+                    cropSize = Math.Min(originalWidth, originalHeight);
+                    finalSize = cropSize; // Оставляем оригинальный размер
+                }
+
+                int x = (originalWidth - cropSize) / 2;
+                int y = (originalHeight - cropSize) / 2;
+
+                // Обрезка изображения
+                originalImage.Mutate(i => i.Crop(new Rectangle(x, y, cropSize, cropSize)));
+
+                // Изменение размера
+                originalImage.Mutate(i => i.Resize(new ResizeOptions
+                {
+                    Size = new Size(finalSize, finalSize),
+
+                    Mode = ResizeMode.Stretch
+                }));
+
+                // Сохранение в файл
+                await originalImage.SaveAsync(filePath, new JpegEncoder());
             }
-
-
-            user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
-            Context.Update(user);
-            await Context.SaveChangesAsync();
         }
 
-        return RedirectToAction("UserProfile");
+        user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
+        Context.Update(user);
+        await Context.SaveChangesAsync();
     }
 
-    [HttpPost]
-    public async Task<IActionResult> ChangeProfilePhoto(IFormFile newProfilePhoto)
+    return RedirectToAction("UserProfile");
+}
+
+[HttpPost]
+public async Task<IActionResult> ChangeProfilePhoto(IFormFile newProfilePhoto)
+{
+    if (newProfilePhoto != null && newProfilePhoto.Length > 0)
     {
-        if (newProfilePhoto != null && newProfilePhoto.Length > 0)
+        var user = await UserManager.GetUserAsync(User);
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
+        Directory.CreateDirectory(uploadsFolder);
+
+        var uniqueFileName = $"{user.Id}.jpg";
+        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        if (!string.IsNullOrEmpty(user.ProfilePhotoPath))
         {
-            var user = await UserManager.GetUserAsync(User);
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
-            Directory.CreateDirectory(uploadsFolder);
-
-            var uniqueFileName = $"{user.Id}.jpg";
-            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            if (!string.IsNullOrEmpty(user.ProfilePhotoPath))
+            var oldPhotoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePhotoPath);
+            if (System.IO.File.Exists(oldPhotoPath))
             {
-                var oldPhotoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePhotoPath);
-                if (System.IO.File.Exists(oldPhotoPath))
-                {
-                    System.IO.File.Delete(oldPhotoPath);
-                }
+                System.IO.File.Delete(oldPhotoPath);
             }
-            using (var stream = new MemoryStream())
-            {
-                await newProfilePhoto.CopyToAsync(stream);
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (var originalImage = Image.FromStream(stream))
-                {
-                    int originalWidth = originalImage.Width;
-                    int originalHeight = originalImage.Height;
-
-                    int cropSize, finalSize;
-
-                    if (originalWidth >= 1080 && originalHeight >= 1080)
-                    {
-                        cropSize = Math.Min(originalWidth, originalHeight);
-                        finalSize = 1080;
-                    }
-                    else
-                    {
-                        cropSize = Math.Min(originalWidth, originalHeight);
-                        finalSize = cropSize; 
-                    }
-
-                    int x = (originalWidth - cropSize) / 2;
-                    int y = (originalHeight - cropSize) / 2;
-
-                    using (var croppedImage = new Bitmap(cropSize, cropSize))
-                    {
-                        using (var graphics = Graphics.FromImage(croppedImage))
-                        {
-                            graphics.DrawImage(originalImage, new Rectangle(0, 0, cropSize, cropSize),
-                                               new Rectangle(x, y, cropSize, cropSize), GraphicsUnit.Pixel);
-                        }
-
-                        using (var resizedImage = new Bitmap(croppedImage, new Size(finalSize, finalSize)))
-                        {
-                            resizedImage.Save(filePath, ImageFormat.Jpeg);
-                        }
-                    }
-                }
-            }
-
-
-            user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
-            Context.Update(user);
-            await Context.SaveChangesAsync();
         }
 
-        return RedirectToAction("UserProfile");
+        using (var stream = new MemoryStream())
+        {
+            await newProfilePhoto.CopyToAsync(stream);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            using (var originalImage = await Image.LoadAsync(stream))
+            {
+                int originalWidth = originalImage.Width;
+                int originalHeight = originalImage.Height;
+
+                int cropSize, finalSize;
+
+                if (originalWidth >= 1080 && originalHeight >= 1080)
+                {
+                    cropSize = Math.Min(originalWidth, originalHeight);
+                    finalSize = 1080;
+                }
+                else
+                {
+                    cropSize = Math.Min(originalWidth, originalHeight);
+                    finalSize = cropSize;
+                }
+
+                int x = (originalWidth - cropSize) / 2;
+                int y = (originalHeight - cropSize) / 2;
+
+                // Обрезка изображения
+                originalImage.Mutate(i => i.Crop(new Rectangle(x, y, cropSize, cropSize)));
+
+                // Изменение размера
+                originalImage.Mutate(i => i.Resize(new ResizeOptions
+                {
+                    Size = new Size(finalSize, finalSize),
+                    Mode = ResizeMode.Stretch
+                }));
+
+                // Сохранение в файл
+                await originalImage.SaveAsync(filePath, new JpegEncoder());
+            }
+        }
+
+        user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
+        Context.Update(user);
+        await Context.SaveChangesAsync();
     }
+
+    return RedirectToAction("UserProfile");
+}
 
 }
