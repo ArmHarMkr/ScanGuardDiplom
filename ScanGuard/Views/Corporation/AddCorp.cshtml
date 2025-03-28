@@ -5,58 +5,50 @@
     ViewData["Title"] = "Add Corporation";
 }
 
+<link rel="stylesheet" href="~/css/styles.css" />
 <h2>Add Corporation</h2>
 
-<form asp-action="AddCorp" method="post">
-    <div class="form-group">
-        <label asp-for="@Model.CorpName"></label>
-        <input asp-for="@Model.CorpName" class="form-control" required />
-    </div>
+<form style="display:inline-block" asp-action="AddCorp" method="post">
+    <div style="width:300px;"class="scanguard-input-group">
+        <label class="scanguard-label" asp-for="@Model.CorpName"></label>
+        <input asp-for="@Model.CorpName" class="scanguard-input" required />
 
-    <div class="form-group">
-        <label asp-for="@Model.Website"></label>
-        <input asp-for="@Model.Website" type="number" class="form-control" />
-    </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Email"></label>
-        <input asp-for="@Model.Email" type="email" class="form-control" required />
-    </div>
+        <label class="scanguard-label" asp-for="@Model.Website"></label>
+        <input asp-for="@Model.Website" type="number" class="scanguard-input" />
 
-    <div class="form-group">
-        <label asp-for="@Model.Phone"></label>
-        <input asp-for="@Model.Phone" class="form-control" required />
-    </div>
+        <label class="scanguard-label" asp-for="@Model.Email"></label>
+        <input asp-for="@Model.Email" type="email" class="scanguard-input" required />
 
-    <div class="form-group">
-        <label asp-for="@Model.Address"></label>
-        <input asp-for="@Model.Address" class="form-control" required />
-    </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.City"></label>
-        <input asp-for="@Model.City" class="form-control" required />
-    </div>
+        <label class="scanguard-label" asp-for="@Model.Phone"></label>
+        <input asp-for="@Model.Phone" class="scanguard-input" required />
 
-    <div class="form-group">
-        <label asp-for="@Model.State"></label>
-        <input asp-for="@Model.State" class="form-control" required />
-    </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.Zip"></label>
-        <input asp-for="@Model.Zip" class="form-control" />
-    </div>
+        <label class="scanguard-label" asp-for="@Model.Address"></label>
+        <input asp-for="@Model.Address" class="scanguard-input" required />
 
-    <div class="form-group">
-        <label asp-for="@Model.Country"></label>
-        <input asp-for="@Model.Country" class="form-control" required />
-    </div>
 
-    <div class="form-group">
-        <label asp-for="@Model.WorkerCount"></label>
-        <input asp-for="@Model.WorkerCount" type="number" class="form-control" required />
-    </div>
 
-    <button type="submit" class="btn btn-primary">Add Corporation</button>
+        <label class="scanguard-label" asp-for="@Model.City"></label>
+        <input asp-for="@Model.City" class="scanguard-input" required />
+
+
+        <label class="scanguard-label" asp-for="@Model.State"></label>
+        <input asp-for="@Model.State" class="scanguard-input" required />
+
+
+        <label class="scanguard-label" asp-for="@Model.Zip"></label>
+        <input asp-for="@Model.Zip" class="scanguard-input" />
+
+
+        <label class="scanguard-label" asp-for="@Model.Country"></label>
+        <input asp-for="@Model.Country" class="scanguard-input" required />
+
+
+        <label class="scanguard-label" asp-for="@Model.WorkerCount"></label>
+        <input asp-for="@Model.WorkerCount" type="number" class="scanguard-input" required />
+</div>
+
+    <button type="submit" class="scanguard-btn scanguard-btn-primary">Add Corporation</button>
 </form>
