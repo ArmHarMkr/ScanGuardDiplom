@@ -4,7 +4,6 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -269,8 +268,6 @@
             transition: all var(--menu-speed) ease;
         }
 
-        
-
             .dropdown-menu a:hover {
                 background-color: rgba(255, 255, 255, 0.05);
                 color: var(--accent-color);
@@ -315,74 +312,150 @@
             width: 100%;
         }
 
-        /* Responsive styles */
+        /* Improved Responsive Styles */
         @@media (max-width: 992px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background-color: var(--primary-color);
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                padding-top: 2rem;
-                transition: all var(--menu-speed) ease;
-                z-index: 999;
+            .navbar {
+                padding: 1rem 1.5rem;
+                flex-wrap: wrap;
             }
-
-                .nav-links.active {
-                    left: 0;
-                }
-
-                .nav-links li {
-                    margin: 1rem 0;
-                    width: 100%;
-                    text-align: center;
-                }
-
-                .nav-links a {
-                    justify-content: center;
-                    padding: 1rem;
-                    width: 100%;
-                }
 
             .hamburger {
                 display: block;
             }
 
-                .hamburger.active span:nth-child(1) {
-                    transform: rotate(45deg) translate(5px, 5px);
-                }
-
-                .hamburger.active span:nth-child(2) {
-                    opacity: 0;
-                }
-
-                .hamburger.active span:nth-child(3) {
-                    transform: rotate(-45deg) translate(5px, -5px);
-                }
-        }
-
-        @@media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-                padding-right: 1rem;
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                max-width: 320px; /* Ограниченная ширина для удобства */
+                height: calc(100vh - 70px);
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 0;
+                transition: left var(--menu-speed) ease;
+                z-index: 999;
+                overflow-y: auto; /* Скролл для длинного меню */
             }
 
-            .logo {
-                font-size: 1.5rem;
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+                justify-content: flex-start;
+                width: 100%;
             }
 
             .auth-buttons {
                 gap: 0.5rem;
             }
 
-                .auth-buttons a {
-                    padding: 0.5rem;
-                    font-size: 0.9rem;
-                }
+            .user-profile {
+                margin-left: auto;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .user-profile {
+                max-width: 150px;
+            }
+
+            .user-profile img {
+                width: 36px;
+                height: 36px;
+            }
+
+            .user-profile span {
+                max-width: 100px;
+                font-size: 0.95rem;
+            }
+
+            .dropdown-menu {
+                width: 180px;
+            }
+
+            .auth-buttons a {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @@media (max-width: 480px) {
+            .navbar {
+                padding: 0.75rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .hamburger span {
+                width: 22px;
+                height: 2px;
+                margin: 4px 0;
+            }
+
+            .nav-links {
+                max-width: 100%; /* Полная ширина на маленьких экранах */
+            }
+
+            .nav-links a {
+                padding: 0.7rem 1rem;
+                font-size: 1rem;
+            }
+
+            .user-profile img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .user-profile span {
+                max-width: 80px;
+                font-size: 0.9rem;
+            }
+
+            .dropdown-menu {
+                width: 160px;
+            }
+
+            .dropdown-menu a, .dropdown-item {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .auth-buttons a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
