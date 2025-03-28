@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model List<ScanGuard.Domain.Entity.WebsiteScanEntity>
+@model List<ScanGuard.Domain.Entity.SiteScanCountEntity>
 @inject SignInManager<ApplicationUser> _signInManager
 
 <div class="scanguard-table-container">
@@ -25,15 +25,15 @@
                             <td class="scanguard-td scanguard-count">
                                 @{
                                     var badgeClass = "safe";
-                                    if(site.VulnerablityCount > 5)
+                                    if(site.CheckCount > 5)
                                     {
                                         badgeClass = "danger";
-                                    }else if (site.VulnerablityCount > 0)
+                                    }else if (site.CheckCount > 0)
                                     {
                                         badgeClass = "warning";
                                     }
                                 }
-                                <span class="scanguard-badge scanguard-badge-@badgeClass">@site.VulnerablityCount</span>
+                                <span class="scanguard-badge scanguard-badge-@badgeClass">@site.CheckCount</span>
                             </td>
                         </tr>
                         count++;

@@ -67,7 +67,7 @@ builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<ICorpService, CorpService>();
 builder.Services.AddSingleton<ITelegramBotClient>(provider =>
 {
-    var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0"; // ���� �����
+    var token = "7927495133:AAFtVfgk6S72qcDROjDoqyfBzfmMsNrMcV0";
     return new TelegramBotClient(token);
 });
 builder.Services.AddScoped<BotService>();
@@ -120,21 +120,19 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapControllers(); // Maps API controllers
+    endpoints.MapControllers();
 });
 
 
 var logger = app.Services.GetService<ILogger<Program>>();
 logger?.LogInformation("Starting program...");
 
-// ������ ���� � DI
 using (var scope = app.Services.CreateScope())
 {
     var botService = scope.ServiceProvider.GetRequiredService<BotService>();
-    await botService.StartAsync();  // ������� ������ ����
+    await botService.StartAsync();  
 }
 
-// �������� �����
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -149,16 +147,21 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// ���������� ������������ � ����� Admin
 using (var scope = app.Services.CreateScope())
 {
+    var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-    if (await userManager.FindByEmailAsync("har.mkrtchyan2006@gmail.com") != null)
+    string adminEmail = configuration["AdminSettings:AdminEmail"]!;
+
+    if (!string.IsNullOrEmpty(adminEmail))
     {
-        var user = await userManager.FindByEmailAsync("har.mkrtchyan2006@gmail.com");
-        await userManager.RemoveFromRoleAsync(user, SD.Role_Customer);
-        await userManager.AddToRoleAsync(user, SD.Role_Admin);
+        var user = await userManager.FindByEmailAsync(adminEmail);
+        if (user != null)
+        {
+            await userManager.RemoveFromRoleAsync(user, SD.Role_Customer);
+            await userManager.AddToRoleAsync(user, SD.Role_Admin);
+        }
     }
 }
 

@@ -17,8 +17,7 @@ namespace ScanGuard.Domain.Entity
         public bool IsMalicious { get; set; }
         public VulnerabilityType VulnerabilityType { get; set; }
 
-        // Связь с пользователем (опционально)
-        public string? ApplicationUserId { get; set; } // Идентификатор пользователя
-        public virtual ApplicationUser? ScannedByUser { get; set; } // Навигационное свойство
+        public string? ApplicationUserId { get; set; }
+        public virtual ApplicationUser? ScannedByUser { get; set; } 
     }
 }
