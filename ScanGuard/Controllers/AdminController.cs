@@ -5,6 +5,7 @@ using ScanGuard.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ScanGuard.Areas.Admin.Controllers
 {
@@ -16,18 +17,21 @@ namespace ScanGuard.Areas.Admin.Controllers
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IUserService UserService;
         private readonly INewsService _newsService;
+        private readonly ICorpService CorporationService;
 
         public AdminController(ApplicationDbContext context,
                                SignInManager<ApplicationUser> signInManager,
                                UserManager<ApplicationUser> usermanager,
                                IUserService userservice,
-                               INewsService newsService)
+                               INewsService newsService,
+                               ICorpService corpService)
         {
             Context = context;
             SignInManager = signInManager;
             UserManager = usermanager;
             UserService = userservice;
             _newsService = newsService;
+            CorporationService = corpService;
         }
 
 
@@ -99,6 +103,66 @@ namespace ScanGuard.Areas.Admin.Controllers
             if (id == null) return NotFound();
             await _newsService.RemoveNews(id);
             return RedirectToAction("AllNews", "Admin");
+        }
+
+        public async Task<IActionResult> GetAllCorporations()
+        {
+            var requests = await Context.CreateCorpRequests
+                .Include(x => x.Corporation)
+                .Where(x => !x.IsApproved)
+                .ToListAsync();
+            return View(requests);
+        }
+
+        public async Task<IActionResult> AcceptCorporation(string id)
+        {
+            try
+            {
+                var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Id == id);
+                await UserService.ApproveCorp(request!.Corporation);
+                NotificationEntity notification = new NotificationEntity
+                {
+                    NotificationTitle = "Your corporation has been approved",
+                    NotificationContent = "Your corporation has been approved by the admin",
+                    ApplicationUser = request.Corporation.AdminUser!
+                };
+                await Context.NotificationEntities.AddAsync(notification);
+                await Context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            return RedirectToAction("GetAllCorporations");
+        }
+        public async Task<IActionResult> DisapproveCorporation(string id)
+        {
+            try
+            {
+                var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Id == id);
+                await UserService.DisapproveCorp(request!.Corporation);
+                NotificationEntity notification = new NotificationEntity
+                {
+                    NotificationTitle = "Your corporation has been disavvproved",
+                    NotificationContent = "Your corporation has been disavvproved by the admin",
+                    ApplicationUser = request!.Corporation.AdminUser!
+                };
+                await Context.NotificationEntities.AddAsync(notification);
+                await Context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            return RedirectToAction("GetAllCorporations");
+        }
+
+        public async Task<IActionResult> ViewCorporation(string id)
+        {
+            var request = await Context.Corporations.Include(x => x.AdminUser).FirstOrDefaultAsync(x => x.Id == id);
+            if (request == null) return NotFound();
+            return View(request);
         }
     }
 }

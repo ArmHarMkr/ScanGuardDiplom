@@ -31,8 +31,7 @@ namespace ScanGuard.Controllers
 
             OpenRouterService aiService = new OpenRouterService();
             string analysis = await aiService.GetAnalysisAsync(scanResults);
-
-            return Ok(new { analysis }); // Returns JSON automatically
+            return Ok(new { analysis });
         }
     }
 }

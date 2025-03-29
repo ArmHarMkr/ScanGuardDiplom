@@ -64,7 +64,7 @@ public class ScanController : Controller
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = $"Ошибка: {ex.Message}";
+            TempData["ErrorMessage"] = $"{ex.Message}";
             return RedirectToAction("Scanner");
         }
     }

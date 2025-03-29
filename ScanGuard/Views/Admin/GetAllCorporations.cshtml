@@ -1,0 +1,19 @@
+﻿@model List<CreateCorpRequestEntity>
+
+<table>
+    <tr>
+        <th>Corporation Name</th>
+        <th>Requested Time</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var request in Model)
+    {
+        <tr>
+            <td>@request.Corporation.CorpName</td>
+            <td>@request.RequestedTime</td>
+            <td>
+                <a href="@Url.Action("ViewCorporation", new { id = request.Corporation.Id })">View Details</a>
+            </td>
+        </tr>
+    }
+</table>
