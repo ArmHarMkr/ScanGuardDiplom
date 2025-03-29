@@ -94,6 +94,7 @@ namespace ScanGuard.Service.Implementations
                 WebsiteScanEntity websiteScanEntity = new()
                 {
                     Status = "Scanned",
+                    ScanUser = applicationUser,
                     Url = url,
                     VulnerablityCount = _analyzer.CalculateVulnerabilityCount(vulnerability)
                 };

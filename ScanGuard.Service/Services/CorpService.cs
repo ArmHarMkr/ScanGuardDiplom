@@ -98,5 +98,15 @@ namespace ScanGuard.BLL.Services
                 }
             }
         }
+
+        public async Task<CorporationEntity> GetCorpEntity(string id)
+        {
+            var corp = await Context.Corporations.FirstOrDefaultAsync(x => x.Id == id);
+            if (corp == null)
+            {
+                throw new Exception("No Corp found");
+            }
+            return corp;
+        }
     }
 }

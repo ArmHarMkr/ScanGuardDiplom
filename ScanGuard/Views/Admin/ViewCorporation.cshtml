@@ -1,0 +1,11 @@
+﻿@model CorporationEntity
+
+<h2>@Model.CorpName</h2>
+<p>Website: @Model.Website</p>
+<p>Email: @Model.Email</p>
+<p>Phone: @Model.Phone</p>
+<p>Country: @Model.Country</p>
+<p>Address: @Model.Address, @Model.City</p>
+
+<a href="@Url.Action("AcceptCorporation", new { id = Model.Id })">Approve</a>
+<a href="@Url.Action("DisapproveCorporation", new { id = Model.Id })">Disapprove</a>

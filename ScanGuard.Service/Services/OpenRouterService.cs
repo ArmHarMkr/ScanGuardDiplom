@@ -1,16 +1,19 @@
 ﻿using RestSharp;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace ScanGuard.BLL.Services
 {
     public class OpenRouterService
     {
-        private const string apiKey = "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"; // Replace with your real key
+        private readonly string apiKey = "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";
 
         public OpenRouterService()
         {
+
         }
+
 
         public async Task<string> GetAnalysisAsync(string scanResults)
         {
