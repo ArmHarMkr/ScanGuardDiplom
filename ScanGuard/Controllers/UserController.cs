@@ -20,7 +20,6 @@ public class UserController : Controller
     private readonly IScannedSites ScannedSites;
     private readonly UserManager<ApplicationUser> UserManager;
     private readonly ILogger<OpenRouterService> _logger;
-
     public UserController(ApplicationDbContext context, IScannedSites scannedSites, UserManager<ApplicationUser> userManager, ILogger<OpenRouterService> logger)
     {
         Context = context;
