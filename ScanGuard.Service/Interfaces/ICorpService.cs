@@ -11,5 +11,6 @@ namespace ScanGuard.BLL.Interfaces
         CorporationEntity? GetUserCorporation(ApplicationUser appUser);
         Task<List<ApplicationUser>> GetCorpWorkersAsync(ApplicationUser adminUser);
         Task ChangeCorpAdminAsync(ApplicationUser currentAdmin, ApplicationUser newAdmin);
+        Task<CorporationEntity> GetCorpEntity(string id);
     }
 }

@@ -1,17 +1,10 @@
-﻿using HtmlAgilityPack;
-using ScanGuard.DAL.Data;
+﻿using ScanGuard.DAL.Data;
 using ScanGuard.Domain.Entity;
 using ScanGuard.Domain.Roles;
 using ScanGuard.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using ScanGuard.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScanGuard.Service.Implementations
 {
@@ -81,18 +74,27 @@ namespace ScanGuard.Service.Implementations
             }
         }
 
-        public async Task ApproveCorp(CreateCorpRequestEntity request)
+        public async Task ApproveCorp(CorporationEntity corporation)
         {
-            request.IsApproved = true;
-            request.Corporation.IsSubmitted = true;
-            await Context.SaveChangesAsync();
-        }
-        public async Task DisapproveCorp(CreateCorpRequestEntity request)
-        {
-            Context.Corporations.Remove(request.Corporation);
+            var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Corporation == corporation);
+            if(request == null || corporation == null)
+            {
+                throw new Exception("No Corporation found");
+            }
+            corporation.IsSubmitted = true;
             Context.CreateCorpRequests.Remove(request);
             await Context.SaveChangesAsync();
         }
-
+        public async Task DisapproveCorp(CorporationEntity corporation)
+        {
+            var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Corporation == corporation);
+            if(request == null || corporation == null)
+            {
+                throw new Exception("No Corporation found");
+            }
+            Context.Corporations.Remove(corporation);
+            Context.CreateCorpRequests.Remove(request);
+            await Context.SaveChangesAsync();
+        }
     }
 }

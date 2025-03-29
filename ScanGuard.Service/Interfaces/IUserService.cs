@@ -1,10 +1,4 @@
 ﻿using ScanGuard.Domain.Entity;
-using ScanGuard.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace ScanGuard.Service.Interfaces
@@ -19,5 +13,8 @@ namespace ScanGuard.Service.Interfaces
         Task<ApplicationUser> GetApplicationUser(string id);
         Task AddToCorp(CorporationEntity corporationEntity);
         Task RemoveFromCorp(ApplicationUser appUser, CorporationEntity corporationEntity);
+
+        Task ApproveCorp(CorporationEntity corporation);
+        Task DisapproveCorp(CorporationEntity corporation);
     }
 }
