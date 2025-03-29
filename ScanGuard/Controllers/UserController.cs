@@ -117,30 +117,26 @@ public class UserController : Controller
     [HttpPost]
     public async Task<IActionResult> UploadProfilePhoto(IFormFile profilePhoto)
     {
-        //TODO
         try
         {
             if (profilePhoto == null || profilePhoto.Length == 0)
             {
-                TempData["ErrorMessage"] = "Please select a file to upload";
                 return RedirectToAction("UserProfile");
             }
 
             var user = await UserManager.GetUserAsync(User);
             if (user == null)
-            {
+            {      
                 return NotFound("User not found");
             }
 
             user.ProfilePhotoPath = await _blobService.UploadProfilePhotoAsync(profilePhoto, user.Id);
             await Context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Profile photo uploaded successfully";
             return RedirectToAction("UserProfile");
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = $"Error uploading photo: {ex.Message}";
             return RedirectToAction("UserProfile");
         }
     }
@@ -151,7 +147,6 @@ public class UserController : Controller
         {
             if (newProfilePhoto == null || newProfilePhoto.Length == 0)
             {
-                TempData["ErrorMessage"] = "Please select a file to upload";
                 return RedirectToAction("UserProfile");
             }
 
@@ -164,12 +159,10 @@ public class UserController : Controller
             user.ProfilePhotoPath = await _blobService.ChangeProfilePhotoAsync(newProfilePhoto, user.Id);
             await Context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Profile photo changed successfully";
             return RedirectToAction("UserProfile");
         }
         catch (Exception ex)
         {
-            TempData["ErrorMessage"] = $"Error changing photo: {ex.Message}";
             return RedirectToAction("UserProfile");
         }
     }
