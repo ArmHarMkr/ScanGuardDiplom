@@ -1,4 +1,5 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using ScanGuard.BLL.Interfaces;
@@ -8,7 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
-
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using Image = SixLabors.ImageSharp.Image;
 namespace ScanGuard.BLL.Services
 {
     public class AzureStorageService : IStorageService
@@ -18,7 +22,7 @@ namespace ScanGuard.BLL.Services
 
         public AzureStorageService(IConfiguration config)
         {
-            _containerName = config["AzureStorage:ContainerName"];
+            _containerName = config["AzureStorage:ContainerName"]!;
             _blobServiceClient = new BlobServiceClient(config["AzureStorage:ConnectionString"]);
         }
 
