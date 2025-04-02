@@ -45,7 +45,7 @@ namespace ScanGuard.TelegramBot
                 var message = update.Message;
                 if (message!.Type == MessageType.Text)
                 {
-                   await _sender.SendMessage(client, message, token);
+                    _sender.SendMessage(client, message, token);
                    _logger.LogInformation("Telegram {ChatId} : {Message}", message.Chat.Id,message.Text);
                 }
             }

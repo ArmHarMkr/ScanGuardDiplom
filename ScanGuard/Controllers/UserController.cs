@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using ScanGuard.BLL.Interfaces;
 namespace ScanGuard.Controllers;
 
 [Authorize]
@@ -20,13 +21,14 @@ public class UserController : Controller
     private readonly IScannedSites ScannedSites;
     private readonly UserManager<ApplicationUser> UserManager;
     private readonly ILogger<OpenRouterService> _logger;
-
-    public UserController(ApplicationDbContext context, IScannedSites scannedSites, UserManager<ApplicationUser> userManager, ILogger<OpenRouterService> logger)
+    private readonly IStorageService _blobService;
+    public UserController(ApplicationDbContext context, IScannedSites scannedSites, UserManager<ApplicationUser> userManager, ILogger<OpenRouterService> logger, IStorageService blobservice)
     {
         Context = context;
         ScannedSites = scannedSites;
         UserManager = userManager;
         _logger = logger;
+        _blobService = blobservice;
     }
 
 
@@ -113,137 +115,45 @@ public class UserController : Controller
     }
 
 
-[HttpPost]
-public async Task<IActionResult> UploadProfilePhoto(IFormFile profilePhoto)
-{
-    if (profilePhoto != null && profilePhoto.Length > 0)
+    [HttpPost]
+    public async Task<IActionResult> UploadProfilePhoto(IFormFile profilePhoto)
     {
-        var user = await UserManager.GetUserAsync(User);
-        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
-        Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
-
-        var uniqueFileName = $"{user.Id}.jpg"; // User ID as filename
-        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        using (var stream = new MemoryStream())
         {
-            await profilePhoto.CopyToAsync(stream);
-            stream.Seek(0, SeekOrigin.Begin);
-
-            using (var originalImage = await Image.LoadAsync(stream))
             {
-                int originalWidth = originalImage.Width;
-                int originalHeight = originalImage.Height;
-
-                int cropSize, finalSize;
-
-                if (originalWidth >= 1080 && originalHeight >= 1080)
-                {
-                    // Если изображение больше 1080x1080, обрезаем и уменьшаем до 1080x1080
-                    cropSize = Math.Min(originalWidth, originalHeight);
-                    finalSize = 1080;
-                }
+            }
                 else
                 {
                     cropSize = Math.Min(originalWidth, originalHeight);
                     finalSize = cropSize; // Оставляем оригинальный размер
                 }
 
-                int x = (originalWidth - cropSize) / 2;
-                int y = (originalHeight - cropSize) / 2;
-
-                // Обрезка изображения
-                originalImage.Mutate(i => i.Crop(new Rectangle(x, y, cropSize, cropSize)));
-
-                // Изменение размера
-                originalImage.Mutate(i => i.Resize(new ResizeOptions
-                {
-                    Size = new Size(finalSize, finalSize),
-
-                    Mode = ResizeMode.Stretch
-                }));
-
-                // Сохранение в файл
-                await originalImage.SaveAsync(filePath, new JpegEncoder());
+            {      
             }
         }
 
-        user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
-        Context.Update(user);
-        await Context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
     }
 
-    return RedirectToAction("UserProfile");
-}
-
-[HttpPost]
-public async Task<IActionResult> ChangeProfilePhoto(IFormFile newProfilePhoto)
-{
-    if (newProfilePhoto != null && newProfilePhoto.Length > 0)
+            return RedirectToAction("UserProfile");
+        }
+        {
+        }
+    }
     {
-        var user = await UserManager.GetUserAsync(User);
-        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
-        Directory.CreateDirectory(uploadsFolder);
-
-        var uniqueFileName = $"{user.Id}.jpg";
-        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        if (!string.IsNullOrEmpty(user.ProfilePhotoPath))
         {
-            var oldPhotoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePhotoPath);
-            if (System.IO.File.Exists(oldPhotoPath))
             {
-                System.IO.File.Delete(oldPhotoPath);
             }
-        }
 
-        using (var stream = new MemoryStream())
-        {
-            await newProfilePhoto.CopyToAsync(stream);
-            stream.Seek(0, SeekOrigin.Begin);
-
-            using (var originalImage = await Image.LoadAsync(stream))
             {
-                int originalWidth = originalImage.Width;
-                int originalHeight = originalImage.Height;
-
-                int cropSize, finalSize;
-
-                if (originalWidth >= 1080 && originalHeight >= 1080)
-                {
-                    cropSize = Math.Min(originalWidth, originalHeight);
-                    finalSize = 1080;
-                }
-                else
-                {
-                    cropSize = Math.Min(originalWidth, originalHeight);
-                    finalSize = cropSize;
-                }
-
-                int x = (originalWidth - cropSize) / 2;
-                int y = (originalHeight - cropSize) / 2;
-
-                // Обрезка изображения
-                originalImage.Mutate(i => i.Crop(new Rectangle(x, y, cropSize, cropSize)));
-
-                // Изменение размера
-                originalImage.Mutate(i => i.Resize(new ResizeOptions
-                {
-                    Size = new Size(finalSize, finalSize),
-                    Mode = ResizeMode.Stretch
-                }));
-
-                // Сохранение в файл
-                await originalImage.SaveAsync(filePath, new JpegEncoder());
             }
-        }
 
-        user.ProfilePhotoPath = Path.Combine("wwwroot", "img", uniqueFileName).Replace("\\", "/");
-        Context.Update(user);
-        await Context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
     }
 
-    return RedirectToAction("UserProfile");
-}
-
+            return RedirectToAction("UserProfile");
+        }
+        catch (Exception ex)
+        {
+            return RedirectToAction("UserProfile");
+        }
 }
