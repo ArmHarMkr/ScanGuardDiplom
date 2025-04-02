@@ -10,7 +10,7 @@ namespace ScanGuard.Controllers
     [ApiController]
     public class ScanApiController : ControllerBase
     {
-        private readonly ApplicationDbContext Context; // Replace with your actual DbContext
+        private readonly ApplicationDbContext Context;
 
         public ScanApiController(ApplicationDbContext context)
         {
