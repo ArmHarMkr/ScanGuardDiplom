@@ -74,25 +74,27 @@ namespace ScanGuard.Service.Implementations
             }
         }
 
-        public async Task ApproveCorp(CorporationEntity corporation)
+        public async Task ApproveCorp(CreateCorpRequestEntity request)
         {
-            var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Corporation == corporation);
-            if(request == null || corporation == null)
+            var corp = request.Corporation;
+            corp.IsSubmitted = true;
+            if (request == null ||  corp == null)
             {
                 throw new Exception("No Corporation found");
             }
-            corporation.IsSubmitted = true;
             Context.CreateCorpRequests.Remove(request);
             await Context.SaveChangesAsync();
         }
-        public async Task DisapproveCorp(CorporationEntity corporation)
+
+
+        public async Task DisapproveCorp(CreateCorpRequestEntity request)
         {
-            var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Corporation == corporation);
-            if(request == null || corporation == null)
+            var corp = request.Corporation;
+            if (request == null || corp == null)
             {
                 throw new Exception("No Corporation found");
             }
-            Context.Corporations.Remove(corporation);
+            Context.Corporations.Remove(corp);
             Context.CreateCorpRequests.Remove(request);
             await Context.SaveChangesAsync();
         }

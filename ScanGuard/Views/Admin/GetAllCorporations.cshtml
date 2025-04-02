@@ -12,7 +12,7 @@
             <td>@request.Corporation.CorpName</td>
             <td>@request.RequestedTime</td>
             <td>
-                <a href="@Url.Action("ViewCorporation", new { id = request.Corporation.Id })">View Details</a>
+                <a href="@Url.Action("ViewRequest", new { id = request.Id })">View Details</a>
             </td>
         </tr>
     }
