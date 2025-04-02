@@ -369,3 +369,4 @@ appsettings*.json
 appsettings.*.json
 */appsettings.json
 */appsettings.*.json
+/ScanGuard/appsettings.Development.json
