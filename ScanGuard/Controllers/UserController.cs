@@ -1,16 +1,14 @@
-﻿using ScanGuard.BLL.Services;
+﻿using Microsoft.AspNetCore.Authorization;
+using ScanGuard.BLL.Services;
 using ScanGuard.DAL.Data;
 using ScanGuard.Domain.Entity;
 using ScanGuard.Domain.Roles;
 using ScanGuard.Service.Interfaces;
 using ScanGuard.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Formats.Jpeg;
 using ScanGuard.BLL.Interfaces;
 namespace ScanGuard.Controllers;
 
@@ -114,41 +112,24 @@ public class UserController : Controller
         return View(await UserManager.GetUserAsync(User));
     }
 
-
     [HttpPost]
     public async Task<IActionResult> UploadProfilePhoto(IFormFile profilePhoto)
     {
+        try
         {
+            if (profilePhoto == null || profilePhoto.Length == 0)
             {
+                return RedirectToAction("UserProfile");
             }
-                else
-                {
-                    cropSize = Math.Min(originalWidth, originalHeight);
-                    finalSize = cropSize; // Оставляем оригинальный размер
-                }
 
-            {      
+            var user = await UserManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound("User not found");
             }
-        }
 
+            user.ProfilePhotoPath = await _blobService.UploadProfilePhotoAsync(profilePhoto, user.Id);
             await Context.SaveChangesAsync();
-    }
-
-            return RedirectToAction("UserProfile");
-        }
-        {
-        }
-    }
-    {
-        {
-            {
-            }
-
-            {
-            }
-
-            await Context.SaveChangesAsync();
-    }
 
             return RedirectToAction("UserProfile");
         }
@@ -156,4 +137,31 @@ public class UserController : Controller
         {
             return RedirectToAction("UserProfile");
         }
+    }
+    [HttpPost]
+    public async Task<IActionResult> ChangeProfilePhoto(IFormFile newProfilePhoto)
+    {
+        try
+        {
+            if (newProfilePhoto == null || newProfilePhoto.Length == 0)
+            {
+                return RedirectToAction("UserProfile");
+            }
+
+            var user = await UserManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            user.ProfilePhotoPath = await _blobService.ChangeProfilePhotoAsync(newProfilePhoto, user.Id);
+            await Context.SaveChangesAsync();
+
+            return RedirectToAction("UserProfile");
+        }
+        catch (Exception ex)
+        {
+            return RedirectToAction("UserProfile");
+        }
+    }
 }

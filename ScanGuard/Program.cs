@@ -13,15 +13,12 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using RestSharp;
-using ScanGuard.BLL.Interfaces;
-using ScanGuard.BLL.Services;
-using ScanGuard.TelegramBot;
 using Serilog;
 using System.Globalization;
 using Telegram.Bot;
 using Microsoft.AspNetCore.Diagnostics;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
 Log.Logger = new LoggerConfiguration()
 .MinimumLevel.Information()
