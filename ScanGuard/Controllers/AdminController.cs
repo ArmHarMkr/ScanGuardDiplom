@@ -105,6 +105,7 @@ namespace ScanGuard.Areas.Admin.Controllers
             return RedirectToAction("AllNews", "Admin");
         }
 
+        [HttpGet("GetAllCorporations")]
         public async Task<IActionResult> GetAllCorporations()
         {
             var requests = await Context.CreateCorpRequests
@@ -134,7 +135,7 @@ namespace ScanGuard.Areas.Admin.Controllers
             {
                 TempData["ErrorMessage"] = ex.Message;
             }
-            return RedirectToAction("GetAllCorporations");
+            return RedirectToAction("~/Views/Admin/GetAllCorporations");
         }
         public async Task<IActionResult> DisapproveCorporation(string id)
         {
@@ -155,9 +156,10 @@ namespace ScanGuard.Areas.Admin.Controllers
             {
                 TempData["ErrorMessage"] = ex.Message;
             }
-            return RedirectToAction("GetAllCorporations");
+            return RedirectToAction("~/Views/Admin/GetAllCorporations");
         }
 
+        [HttpGet("ViewRequest/{id}")]
         public async Task<IActionResult> ViewRequest(string id)
         {
             var request = await Context.CreateCorpRequests.Include(x => x.Corporation).ThenInclude(x => x.AdminUser).FirstOrDefaultAsync(x => x.Id == id);
