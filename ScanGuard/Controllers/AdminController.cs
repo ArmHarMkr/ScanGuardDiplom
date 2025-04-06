@@ -144,8 +144,8 @@ namespace ScanGuard.Areas.Admin.Controllers
                 await UserService.DisapproveCorp(request!);
                 NotificationEntity notification = new NotificationEntity
                 {
-                    NotificationTitle = "Your corporation has been disavvproved",
-                    NotificationContent = "Your corporation has been disavvproved by the admin",
+                    NotificationTitle = "Your corporation has been disapproved",
+                    NotificationContent = "Your corporation has been disapproved by the admin",
                     ApplicationUser = request!.Corporation.AdminUser!
                 };
                 await Context.NotificationEntities.AddAsync(notification);
@@ -162,7 +162,7 @@ namespace ScanGuard.Areas.Admin.Controllers
         {
             var request = await Context.CreateCorpRequests.Include(x => x.Corporation).ThenInclude(x => x.AdminUser).FirstOrDefaultAsync(x => x.Id == id);
             if (request == null) return NotFound();
-            return View(request);
+            return View("~/Views/Admin/ViewRequest.cshtml", request);
         }
     }
 }
