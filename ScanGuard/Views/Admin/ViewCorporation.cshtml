@@ -1,11 +1,21 @@
-﻿@model CorporationEntity
+﻿@model ScanGuard.Domain.Entity.CreateCorpRequestEntity
 
-<h2>@Model.CorpName</h2>
-<p>Website: @Model.Website</p>
-<p>Email: @Model.Email</p>
-<p>Phone: @Model.Phone</p>
-<p>Country: @Model.Country</p>
-<p>Address: @Model.Address, @Model.City</p>
+<h2>@Model.Corporation.CorpName</h2>
+<p>Website: @Model.Corporation.Website</p>
+<p>Email: @Model.Corporation.Email</p>
+<p>Phone: @Model.Corporation.Phone</p>
+<p>Country: @Model.Corporation.Country</p>
+<p>Address: @Model.Corporation.Address, @Model.Corporation.City</p>
 
-<a href="@Url.Action("AcceptCorporation", new { id = Model.Id })">Approve</a>
-<a href="@Url.Action("DisapproveCorporation", new { id = Model.Id })">Disapprove</a>
+@if (!Model.IsApproved)
+{
+    <form asp-action="AcceptCorporation" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit">Approve</button>
+    </form>
+
+    <form asp-action="DisapproveCorporation" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit">Disapprove</button>
+    </form>
+}

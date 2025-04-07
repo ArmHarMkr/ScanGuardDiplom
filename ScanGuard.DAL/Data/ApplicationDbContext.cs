@@ -35,8 +35,8 @@ namespace ScanGuard.DAL.Data
 
             base.OnModelCreating(builder);
             builder.Entity<CorporationEntity>()
-        .HasOne(c => c.AdminUser)  // Указываем навигационное свойство
-        .WithOne(u => u.Corporation)  // Указываем обратное навигационное свойство
+        .HasOne(c => c.AdminUser)
+        .WithOne(u => u.Corporation)
         .HasForeignKey<CorporationEntity>(c => c.AdminUserId);
             /*builder.Entity<ApplicationUser>(b =>
             {

@@ -1,3 +1,12 @@
-﻿@* @model List<ScanGuard.Models.NotificationEntity>
+﻿@model List<NotificationEntity>
 
-<p>SHOW NOTIFICATIONS</p> *@
+<p>SHOW NOTIFICATIONS</p>
+
+@foreach (var notification in Model)
+{
+    <div>
+        <p>@notification.NotificationTitle</p>
+        <p>@notification.NotificationContent</p>
+        <p>@notification.SentDateTime</p>
+    </div>
+}

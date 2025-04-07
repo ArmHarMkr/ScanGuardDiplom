@@ -105,6 +105,7 @@ namespace ScanGuard.Areas.Admin.Controllers
             return RedirectToAction("AllNews", "Admin");
         }
 
+        [HttpGet("GetAllCorporations")]
         public async Task<IActionResult> GetAllCorporations()
         {
             var requests = await Context.CreateCorpRequests
@@ -119,12 +120,12 @@ namespace ScanGuard.Areas.Admin.Controllers
             try
             {
                 var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Id == id);
-                await UserService.ApproveCorp(request!.Corporation);
+                await UserService.ApproveCorp(request!);
                 NotificationEntity notification = new NotificationEntity
                 {
                     NotificationTitle = "Your corporation has been approved",
                     NotificationContent = "Your corporation has been approved by the admin",
-                    ApplicationUser = request.Corporation.AdminUser!
+                    ApplicationUser = request!.Corporation.AdminUser!
                 };
                 await Context.NotificationEntities.AddAsync(notification);
                 await Context.SaveChangesAsync();
@@ -134,18 +135,18 @@ namespace ScanGuard.Areas.Admin.Controllers
             {
                 TempData["ErrorMessage"] = ex.Message;
             }
-            return RedirectToAction("GetAllCorporations");
+            return RedirectToAction("~/Views/Admin/GetAllCorporations");
         }
         public async Task<IActionResult> DisapproveCorporation(string id)
         {
             try
             {
                 var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Id == id);
-                await UserService.DisapproveCorp(request!.Corporation);
+                await UserService.DisapproveCorp(request!);
                 NotificationEntity notification = new NotificationEntity
                 {
-                    NotificationTitle = "Your corporation has been disavvproved",
-                    NotificationContent = "Your corporation has been disavvproved by the admin",
+                    NotificationTitle = "Your corporation has been disapproved",
+                    NotificationContent = "Your corporation has been disapproved by the admin",
                     ApplicationUser = request!.Corporation.AdminUser!
                 };
                 await Context.NotificationEntities.AddAsync(notification);
@@ -155,14 +156,15 @@ namespace ScanGuard.Areas.Admin.Controllers
             {
                 TempData["ErrorMessage"] = ex.Message;
             }
-            return RedirectToAction("GetAllCorporations");
+            return RedirectToAction("~/Views/Admin/GetAllCorporations");
         }
 
-        public async Task<IActionResult> ViewCorporation(string id)
+        [HttpGet("ViewRequest/{id}")]
+        public async Task<IActionResult> ViewRequest(string id)
         {
-            var request = await Context.Corporations.Include(x => x.AdminUser).FirstOrDefaultAsync(x => x.Id == id);
+            var request = await Context.CreateCorpRequests.Include(x => x.Corporation).ThenInclude(x => x.AdminUser).FirstOrDefaultAsync(x => x.Id == id);
             if (request == null) return NotFound();
-            return View(request);
+            return View("~/Views/Admin/ViewRequest.cshtml", request);
         }
     }
 }

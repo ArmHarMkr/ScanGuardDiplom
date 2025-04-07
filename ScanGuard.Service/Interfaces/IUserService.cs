@@ -14,7 +14,7 @@ namespace ScanGuard.Service.Interfaces
         Task AddToCorp(CorporationEntity corporationEntity);
         Task RemoveFromCorp(ApplicationUser appUser, CorporationEntity corporationEntity);
 
-        Task ApproveCorp(CorporationEntity corporation);
-        Task DisapproveCorp(CorporationEntity corporation);
+        Task ApproveCorp(CreateCorpRequestEntity request);
+        Task DisapproveCorp(CreateCorpRequestEntity request);
     }
 }

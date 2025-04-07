@@ -1,16 +1,14 @@
-﻿using ScanGuard.BLL.Services;
+﻿using Microsoft.AspNetCore.Authorization;
+using ScanGuard.BLL.Services;
 using ScanGuard.DAL.Data;
 using ScanGuard.Domain.Entity;
 using ScanGuard.Domain.Roles;
 using ScanGuard.Service.Interfaces;
 using ScanGuard.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Formats.Jpeg;
 using ScanGuard.BLL.Interfaces;
 namespace ScanGuard.Controllers;
 
@@ -126,7 +124,7 @@ public class UserController : Controller
 
             var user = await UserManager.GetUserAsync(User);
             if (user == null)
-            {      
+            {
                 return NotFound("User not found");
             }
 

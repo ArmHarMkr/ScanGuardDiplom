@@ -101,10 +101,15 @@ namespace ScanGuard.BLL.Services
 
         public async Task<CorporationEntity> GetCorpEntity(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new Exception("Corporation ID is missing");
+            }
+
             var corp = await Context.Corporations.FirstOrDefaultAsync(x => x.Id == id);
             if (corp == null)
             {
-                throw new Exception("No Corp found");
+                throw new Exception($"No corporation found with ID {id}");
             }
             return corp;
         }

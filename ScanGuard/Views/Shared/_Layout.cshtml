@@ -481,7 +481,7 @@
                 <li><a asp-action="History" asp-controller="FileScan"><i class="fas fa-comments"></i>Scanned Files</a></li>
                 <li><a asp-action="Index" asp-controller="Chat"><i class="fas fa-comments"></i> Chat</a></li>
                 <li><a asp-action="MyCorporation" asp-controller="Corporation"><i class="fas fa-comments"></i>Corporation</a></li>
-
+                <li><a asp-action="Index" asp-controller="Notification"><i class="fas fa-comments"></i>Notifications</a></li>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     var currentUser = await UserManager.GetUserAsync(User);
