@@ -71,4 +71,8 @@
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\_Layout.css" />
+  </ItemGroup>
+
 </Project>

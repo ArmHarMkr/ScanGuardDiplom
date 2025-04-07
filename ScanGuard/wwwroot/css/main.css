@@ -21,13 +21,13 @@
 }
 
 :root {
-    --primary-color: black;
-    --secondary-color: #8d99ae;
-    --accent-color: #ef233c;
-    --light-color: #edf2f4;
-    --dark-color: #1a1a2e;
-    --dark-bg: #121212;
-    --card-bg: #1e1e1e;
+    --primary-color: #6B7280; /* Мягкий серо-синий для основных элементов */
+    --secondary-color: #9CA3AF; /* Светло-серый для второстепенных */
+    --accent-color: #3B82F6; /* Приятный синий для акцентов */
+    --light-color: #F8F1E9; /* Кремовый для текста и карточки */
+    --dark-color: #374151; /* Тёмно-серый для текста */
+    --dark-bg: #E5E7EB; /* Серо-голубой фон */
+    --card-bg: #F8F1E9; /* Кремовый для карточки */
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ a {
     font-family: Poppins-Regular;
     font-size: 14px;
     line-height: 1.7;
-    color: lightgrey;
+    color: var(--secondary-color); /* Светло-серый для ссылок */
     margin: 0;
     transition: all 0.4s;
 }
@@ -58,7 +58,7 @@ a {
 
     a:hover {
         text-decoration: none;
-        color: var(--accent-color);
+        color: var(--accent-color); /* Синий при наведении */
     }
 
 h1, h2, h3, h4, h5, h6 {
@@ -106,7 +106,7 @@ input, textarea {
     textarea:-moz-placeholder,
     textarea::-moz-placeholder,
     textarea:-ms-input-placeholder {
-        color: #adadad;
+        color: var(--secondary-color); /* Светло-серый для placeholder */
     }
 
 button {
@@ -128,7 +128,7 @@ iframe {
 .txt1 {
     font-family: Poppins-Regular;
     font-size: 13px;
-    color: grey;
+    color: var(--primary-color); /* Серо-синий для текста */
     line-height: 1.5;
 }
 
@@ -154,18 +154,71 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background: var(--dark-bg);
-    background-image: radial-gradient(circle at 10% 20%, rgba(239, 35, 60, 0.08) 0%, transparent 90%), radial-gradient(circle at 90% 80%, rgba(43, 45, 66, 0.08) 0%, transparent 90%);
+    background: #D1D5DB; /* Базовый серо-голубой для устойчивости */
+    background-image: radial-gradient(circle at 10% 20%, rgba(96, 165, 250, 0.5) 0%, transparent 40%), /* Яркий голубой акцент */
+    radial-gradient(circle at 90% 80%, rgba(167, 139, 250, 0.4) 0%, transparent 50%), /* Лавандовый акцент */
+    linear-gradient(45deg, rgba(252, 231, 193, 0.6) 0%, rgba(96, 165, 250, 0.3) 50%, rgba(167, 139, 250, 0.2) 100%), /* Тёплый градиент с переливом */
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 70%); /* Световой блик в центре */
+    background-size: 200% 200%, 150% 150%, 100% 100%, 120% 120%; /* Увеличенные размеры для анимации */
+    animation: cosmicFlow 12s infinite alternate ease-in-out; /* Плавная анимация движения */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Анимация космического потока */
+@keyframes cosmicFlow {
+    0% {
+        background-position: 0% 0%, 100% 100%, 0% 50%, 50% 50%;
+    }
+
+    50% {
+        background-position: 100% 100%, 0% 0%, 50% 0%, 70% 30%;
+    }
+
+    100% {
+        background-position: 0% 0%, 100% 100%, 100% 50%, 30% 70%;
+    }
+}
+
+/* Добавим псевдоэлемент для дополнительной текстуры */
+.container-login100::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 30%);
+    opacity: 0.5;
+    animation: pulseGlow 8s infinite ease-in-out;
+}
+
+/* Анимация пульсации блика */
+@keyframes pulseGlow {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
 }
 
 .wrap-login100 {
     width: 390px;
-    background: var(--card-bg);
+    background: var(--card-bg); /* Кремовый фон карточки */
     border-radius: 10px;
     overflow: hidden;
     padding: 77px 55px 33px 55px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(107, 114, 128, 0.2); /* Лёгкий серо-синий бордер */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Мягкая тень */
     position: relative;
 }
 
@@ -176,7 +229,7 @@ iframe {
         left: 0;
         width: 100%;
         height: 6px;
-        background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        background: linear-gradient(90deg, var(--accent-color), var(--primary-color)); /* Градиент синего */
     }
 
 .login100-form {
@@ -187,26 +240,27 @@ iframe {
     display: block;
     font-family: Poppins-Bold;
     font-size: 30px;
-    color: var(--light-color);
+    color: var(--dark-color); /* Тёмно-серый текст */
     line-height: 1.2;
     text-align: center;
 }
 
     .login100-form-title i {
         font-size: 60px;
+        color: var(--primary-color); /* Серо-синий для иконки */
     }
 
 .wrap-input100 {
     width: 100%;
     position: relative;
-    border-bottom: 2px solid #adadad;
+    border-bottom: 2px solid var(--secondary-color); /* Светло-серая линия */
     margin-bottom: 37px;
 }
 
 .input100 {
     font-family: Poppins-Regular;
     font-size: 15px;
-    color: lightgray;
+    color: var(--dark-color); /* Тёмно-серый текст ввода */
     line-height: 1.2;
     display: block;
     width: 100%;
@@ -233,13 +287,13 @@ iframe {
         width: 0;
         height: 2px;
         transition: all 0.4s;
-        background: linear-gradient(to right, red, black);
+        background: linear-gradient(to right, var(--accent-color), var(--primary-color)); /* Градиент синего */
     }
 
     .focus-input100::after {
         font-family: Poppins-Regular;
         font-size: 15px;
-        color: #999999;
+        color: var(--secondary-color); /* Светло-серый placeholder */
         line-height: 1.2;
         content: attr(data-placeholder);
         display: block;
@@ -263,7 +317,7 @@ iframe {
 
 .btn-show-pass {
     font-size: 15px;
-    color: #999999;
+    color: var(--secondary-color); /* Светло-серый для иконки глаза */
     display: flex;
     align-items: center;
     position: absolute;
@@ -277,7 +331,7 @@ iframe {
 
     .btn-show-pass:hover,
     .btn-show-pass.active {
-        color: var(--accent-color);
+        color: var(--accent-color); /* Синий при наведении */
     }
 
 .container-login100-form-btn {
@@ -295,7 +349,7 @@ iframe {
     border-radius: 25px;
     overflow: hidden;
     margin: 0 auto;
-    box-shadow: 0 0 30px -12px rgba(224,224,224,0.84);
+    box-shadow: 0 0 30px -12px rgba(107, 114, 128, 0.5); /* Мягкая серая тень */
 }
 
 .login100-form-bgbtn {
@@ -303,7 +357,7 @@ iframe {
     z-index: -1;
     width: 300%;
     height: 100%;
-    background: linear-gradient(to left, red, #151515, red, #151515);
+    background: linear-gradient(to left, var(--accent-color), var(--primary-color), var(--accent-color), var(--primary-color)); /* Синий градиент */
     top: 0;
     left: -100%;
     transition: all 0.4s;
@@ -312,7 +366,7 @@ iframe {
 .login100-form-btn {
     font-family: Poppins-Medium;
     font-size: 15px;
-    color: #fff;
+    color: #FFFFFF; /* Белый текст кнопки */
     line-height: 1.2;
     text-transform: uppercase;
     display: flex;
@@ -328,12 +382,12 @@ iframe {
 }
 
 .text-center a {
-    color: var(--accent-color);
+    color: var(--accent-color); /* Синий для ссылки */
     transition: all 0.3s;
 }
 
     .text-center a:hover {
-        color: var(--light-color);
+        color: var(--primary-color); /* Серо-синий при наведении */
         text-decoration: underline;
     }
 
@@ -345,8 +399,8 @@ iframe {
     content: attr(data-validate);
     position: absolute;
     max-width: 70%;
-    background-color: #fff;
-    border: 1px solid #c80000;
+    background-color: var(--light-color); /* Кремовый фон ошибки */
+    border: 1px solid var(--accent-color); /* Синий бордер ошибки */
     border-radius: 2px;
     padding: 4px 25px 4px 10px;
     top: 50%;
@@ -354,7 +408,7 @@ iframe {
     right: 0;
     pointer-events: none;
     font-family: Poppins-Regular;
-    color: #c80000;
+    color: var(--accent-color); /* Синий текст ошибки */
     font-size: 13px;
     line-height: 1.4;
     text-align: left;
@@ -367,10 +421,10 @@ iframe {
     content: "\f06a";
     font-family: FontAwesome;
     font-size: 16px;
-    color: #c80000;
+    color: var(--accent-color); /* Синяя иконка ошибки */
     display: block;
     position: absolute;
-    background-color: #fff;
+    background-color: var(--light-color); /* Кремовый фон */
     top: 50%;
     transform: translateY(-50%);
     right: 5px;
@@ -393,6 +447,7 @@ iframe {
         padding: 77px 15px 33px 15px;
     }
 }
+
 /*main page*/
 /* Main Page Styles */
 .main-container {

@@ -19,495 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - ScanGuard</title>
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/_Layout.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #1a1a2e; /* Темно-синий */
-            --secondary-color: #16213e; /* Более темный синий */
-            --accent-color: #ef233c; /* Ярко-красный */
-            --light-color: #edf2f4; /* Светло-серый */
-            --dark-color: #0f0f1a; /* Очень темный синий */
-            --card-bg: #1e1e2e; /* Фон карточек */
-            --text-primary: #ffffff; /* Основной текст */
-            --text-secondary: #b8c2cc; /* Вторичный текст */
-            --menu-speed: 0.3s;
-            --border-radius: 8px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background-color: #121212; /* Темный фон страницы */
-            color: var(--text-primary);
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .navbar-container {
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .navbar {
-            max-width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            padding-right: 60px;
-            position: relative;
-        }
-
-        .logo {
-            color: var(--light-color);
-            text-decoration: none;
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-            .logo span {
-                display: inline-block;
-                transition: all 0.3s ease;
-            }
-
-            .logo:hover {
-                transform: translateY(-2px);
-            }
-
-                .logo:hover span {
-                    color: var(--accent-color);
-                }
-
-            .logo span:nth-child(odd):hover {
-                transform: rotate(10deg) translateY(-3px);
-            }
-
-            .logo span:nth-child(even):hover {
-                transform: rotate(-10deg) translateY(-3px);
-            }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            transition: all var(--menu-speed) ease;
-        }
-
-            .nav-links li {
-                margin-left: 1.5rem;
-                position: relative;
-            }
-
-            .nav-links a {
-                color: var(--light-color);
-                text-decoration: none;
-                font-weight: 500;
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
-                border-radius: var(--border-radius);
-                transition: all var(--menu-speed) ease;
-                display: flex;
-                align-items: center;
-                position: relative;
-            }
-
-                .nav-links a i {
-                    margin-right: 0.5rem;
-                    color: var(--accent-color);
-                }
-
-                .nav-links a:hover {
-                    color: var(--accent-color);
-                    background-color: rgba(255, 255, 255, 0.05);
-                    transform: translateY(-2px);
-                }
-
-                .nav-links a::after {
-                    content: '';
-                    position: absolute;
-                    width: 0;
-                    height: 2px;
-                    background: var(--accent-color);
-                    bottom: 0;
-                    left: 0;
-                    transition: width var(--menu-speed) ease;
-                }
-
-                .nav-links a:hover::after {
-                    width: 100%;
-                }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            outline: none;
-            padding: 0.5rem;
-        }
-
-            .hamburger span {
-                display: block;
-                width: 25px;
-                height: 3px;
-                background-color: var(--light-color);
-                margin: 5px 0;
-                transition: all var(--menu-speed) ease;
-                border-radius: 3px;
-            }
-
-        .auth-buttons {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-            .auth-buttons a {
-                padding: 0.5rem 1.2rem;
-                border-radius: var(--border-radius);
-                text-decoration: none;
-                font-weight: 500;
-                transition: all var(--menu-speed) ease;
-                font-size: 0.95rem;
-            }
-
-        .login-btn {
-            color: var(--light-color);
-            border: 1px solid var(--light-color);
-        }
-
-            .login-btn:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-                transform: translateY(-2px);
-            }
-
-        .register-btn {
-            background-color: var(--accent-color);
-            color: white;
-            box-shadow: 0 2px 10px rgba(239, 35, 60, 0.3);
-        }
-
-            .register-btn:hover {
-                background-color: #d90429;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 15px rgba(239, 35, 60, 0.4);
-            }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            color: var(--light-color);
-            cursor: pointer;
-            position: relative;
-            max-width: 200px;
-            transition: all var(--menu-speed) ease;
-        }
-
-            .user-profile:hover {
-                transform: translateY(-2px);
-            }
-
-            .user-profile img {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                margin-right: 0.5rem;
-                object-fit: cover;
-                border: 2px solid var(--accent-color);
-            }
-
-            .user-profile span {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 120px;
-            }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all var(--menu-speed) ease;
-            z-index: 1000;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 0;
-        }
-
-        .user-profile:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(5px);
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all var(--menu-speed) ease;
-        }
-
-            .dropdown-menu a:hover {
-                background-color: rgba(255, 255, 255, 0.05);
-                color: var(--accent-color);
-                padding-left: 1.7rem;
-            }
-
-            .dropdown-menu a i {
-                margin-right: 0.7rem;
-                width: 20px;
-                text-align: center;
-            }
-
-        .dropdown-item {
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
-            padding: 0.75rem 1.5rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all var(--menu-speed) ease;
-        }
-
-            .dropdown-item:hover {
-                background-color: rgba(255, 255, 255, 0.05);
-                color: var(--accent-color);
-                padding-left: 1.7rem;
-            }
-
-            .dropdown-item i {
-                margin-right: 0.7rem;
-                width: 20px;
-                text-align: center;
-            }
-
-        main {
-            flex: 1;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            width: 100%;
-        }
-
-        /* Improved Responsive Styles */
-        @@media (max-width: 1490px) {
-            .navbar {
-                padding: 1rem 1.5rem;
-                flex-wrap: wrap;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                max-width: 320px; /* Ограниченная ширина для удобства */
-                height: calc(100vh - 70px);
-                background-color: var(--primary-color);
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1rem 0;
-                transition: left var(--menu-speed) ease;
-                z-index: 999;
-                overflow-y: auto; /* Скролл для длинного меню */
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .nav-links li {
-                margin: 0.5rem 0;
-                width: 100%;
-            }
-
-            .nav-links a {
-                padding: 0.8rem 1.5rem;
-                font-size: 1.1rem;
-                justify-content: flex-start;
-                width: 100%;
-            }
-
-            .auth-buttons {
-                gap: 0.5rem;
-            }
-
-            .user-profile {
-                margin-left: auto;
-            }
-
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-        }
-
-        @@media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .user-profile {
-                max-width: 150px;
-            }
-
-            .user-profile img {
-                width: 36px;
-                height: 36px;
-            }
-
-            .user-profile span {
-                max-width: 100px;
-                font-size: 0.95rem;
-            }
-
-            .dropdown-menu {
-                width: 180px;
-            }
-
-            .auth-buttons a {
-                padding: 0.4rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        @@media (max-width: 480px) {
-            .navbar {
-                padding: 0.75rem;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-            }
-
-            .hamburger span {
-                width: 22px;
-                height: 2px;
-                margin: 4px 0;
-            }
-
-            .nav-links {
-                max-width: 100%; /* Полная ширина на маленьких экранах */
-            }
-
-            .nav-links a {
-                padding: 0.7rem 1rem;
-                font-size: 1rem;
-            }
-
-            .user-profile img {
-                width: 32px;
-                height: 32px;
-            }
-
-            .user-profile span {
-                max-width: 80px;
-                font-size: 0.9rem;
-            }
-
-            .dropdown-menu {
-                width: 160px;
-            }
-
-            .dropdown-menu a, .dropdown-item {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .auth-buttons a {
-                padding: 0.3rem 0.8rem;
-                font-size: 0.85rem;
-            }
-        }
-        .nav-links .dropdown {
-    position: relative;
-}
-
-.nav-links .dropdown-toggle {
-    display: flex;
-    align-items: center;
-}
-
-.nav-links .dropdown-toggle i.fa-caret-down {
-    margin-left: 0.5rem;
-    color: var(--text-secondary);
-}
-
-.nav-links .dropdown .dropdown-menu {
-    top: 100%;
-    left: 0;
-    width: 220px;
-    transform: translateY(10px);
-}
-
-.nav-links .dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(5px);
-}
-
-/* Adjust for mobile */
-@@media (max-width: 1490px) {
-    .nav-links .dropdown .dropdown-menu {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        border: none;
-        background-color: rgba(255, 255, 255, 0.05);
-        padding-left: 2rem;
-        transform: none;
-        opacity: 1;
-        visibility: visible;
-        display: none; /* Hidden by default */
-    }
-
-    .nav-links.active .dropdown .dropdown-menu {
-        display: block; /* Show when menu is active */
-    }
-
-    .nav-links .dropdown:hover .dropdown-menu {
-        transform: none; /* No transform on mobile */
-    }
-}
-    </style>
 </head>
 <body>
     <div class="navbar-container">
@@ -625,16 +138,51 @@
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
+        // Функция для закрытия меню
+        const closeMenu = () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        };
+
+        // Открытие/закрытие меню через гамбургер
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         });
 
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        // Закрытие меню при клике на затемненный фон
+        document.addEventListener('click', (e) => {
+            if (document.body.classList.contains('menu-open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Закрытие меню при клике на ссылки (но не на dropdown-toggle)
+        document.querySelectorAll('.nav-links a:not(.dropdown-toggle)').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
+                closeMenu();
+            });
+        });
+
+        // Dropdown toggle для мобильных устройств
+        // Dropdown toggle для мобильных устройств
+        document.querySelectorAll('.nav-links .dropdown-toggle').forEach(dropdownToggle => {
+            dropdownToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const parent = dropdownToggle.parentElement;
+                const isActive = parent.classList.contains('active');
+
+                // Закрываем все дропдауны
+                document.querySelectorAll('.nav-links .dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+
+                // Открываем текущий, если он не был активен
+                if (!isActive) {
+                    parent.classList.add('active');
+                }
             });
         });
 
