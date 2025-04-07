@@ -1,11 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model List<ScanGuard.Domain.Entity.SiteScanCountEntity>
 @inject SignInManager<ApplicationUser> _signInManager
+@inject UserManager<ApplicationUser> _userManager
 
-<!-- Главный контейнер страницы -->
+@{
+    var user = await _userManager.GetUserAsync(User);
+    bool isPremium = user != null && await _userManager.IsInRoleAsync(user, "Premium");
+}
+
 <div class="home-container">
-    <!-- Приветственный баннер -->
-    <!-- Приветственный баннер -->
+    <!-- Hero Section -->
     <section class="home-hero-section">
         <div class="home-hero-overlay"></div>
         <div class="home-hero-content">
@@ -36,44 +40,46 @@
                 }
             </div>
         </div>
-        <div class="home-hero-graphic">
-            <svg class="home-hero-shield" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 10 C150 10, 190 50, 190 100 C190 150, 150 190, 100 190 C50 190, 10 150, 10 100 C10 50, 50 10, 100 10 Z" fill="none" stroke="var(--accent-color)" stroke-width="4" />
-                <path d="M70 110 L90 130 L130 90" fill="none" stroke="#64ffda" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-        </div>
     </section>
 
-    <!-- Секция статистики -->
+    <!-- Stats Section -->
     <section class="home-stats-section">
-        <h2 class="home-section-title">Our Impact</h2>
+        <h2 class="home-section-title">Building a Safer Digital World</h2>
         <div class="home-stats-grid">
             <div class="home-stat-card">
                 <i class="fas fa-shield-alt home-stat-icon"></i>
-                <h3 class="home-stat-number">1M+</h3>
-                <p class="home-stat-label">Websites Scanned</p>
+                <div class="home-stat-content">
+                    <h3 class="home-stat-number">1M+</h3>
+                    <p class="home-stat-label">Websites Scanned</p>
+                </div>
             </div>
             <div class="home-stat-card">
                 <i class="fas fa-file-alt home-stat-icon"></i>
-                <h3 class="home-stat-number">500K+</h3>
-                <p class="home-stat-label">Files Analyzed</p>
+                <div class="home-stat-content">
+                    <h3 class="home-stat-number">500K+</h3>
+                    <p class="home-stat-label">Files Analyzed</p>
+                </div>
             </div>
             <div class="home-stat-card">
                 <i class="fas fa-users home-stat-icon"></i>
-                <h3 class="home-stat-number">100K+</h3>
-                <p class="home-stat-label">Happy Users</p>
+                <div class="home-stat-content">
+                    <h3 class="home-stat-number">100K+</h3>
+                    <p class="home-stat-label">Happy Users</p>
+                </div>
             </div>
             <div class="home-stat-card">
                 <i class="fas fa-bug home-stat-icon"></i>
-                <h3 class="home-stat-number">10M+</h3>
-                <p class="home-stat-label">Vulnerabilities Detected</p>
+                <div class="home-stat-content">
+                    <h3 class="home-stat-number">10M+</h3>
+                    <p class="home-stat-label">Vulnerabilities Detected</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Секция "Top Scanned Websites" -->
+    <!-- Top Scanned Websites Section -->
     <section class="home-top-websites-section">
-        <h2 class="home-section-title"><i class="fas fa-chart-line"></i> Top Scanned Websites</h2>
+        <h2 class="home-section-title">Top Security Hotspots</h2>
         <div class="home-table-container">
             <div class="home-table-wrapper">
                 <table class="home-table">
@@ -81,29 +87,23 @@
                         <tr>
                             <th class="home-table-th">Rank</th>
                             <th class="home-table-th">Website URL</th>
-                            <th class="home-table-th">Vulnerability Count</th>
+                            <th class="home-table-th">Scan Count</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (Model != null && Model.Count > 0)
                         {
                             int count = 1;
-                            @foreach (var site in Model.Take(5))
+                            @foreach (var site in Model)
                             {
                                 <tr class="home-table-tr">
                                     <td class="home-table-td home-table-rank">@count</td>
                                     <td class="home-table-td home-table-url">@site.Url</td>
                                     <td class="home-table-td home-table-count">
                                         @{
-                                            var badgeClass = "safe";
-                                            if (site.CheckCount > 5)
-                                            {
-                                                badgeClass = "danger";
-                                            }
-                                            else if (site.CheckCount > 0)
-                                            {
-                                                badgeClass = "warning";
-                                            }
+                                            var badgeClass = "danger";
+                                            if (count > 3 && count < 9) { badgeClass = "warning"; }
+                                            else if(count > 9){ badgeClass = "safe"; }
                                         }
                                         <span class="home-badge home-badge-@badgeClass">@site.CheckCount</span>
                                     </td>
@@ -119,44 +119,46 @@
                         }
                     </tbody>
                 </table>
-                <a class="home-btn home-btn-primary home-table-btn" asp-controller="Scan" asp-action="ShowScannedSites">
-                    View All Scans
-                    <i class="fas fa-arrow-right home-btn-icon"></i>
-                </a>
             </div>
+            @if (user is null){
+            <a class="home-btn home-btn-primary home-table-btn" asp-controller="Scan" asp-action="ShowScannedSites">
+                View More
+                <i class="fas fa-arrow-right home-btn-icon"></i>
+            </a>
+            }
         </div>
     </section>
 
-    <!-- Секция "Почему выбирают ScanGuard" -->
+    <!-- Features Section -->
     <section class="home-features-section">
-        <h2 class="home-section-title">Why Choose ScanGuard?</h2>
+        <h2 class="home-section-title">Your Security Advantage</h2>
         <div class="home-features-grid">
             <div class="home-feature-card">
                 <i class="fas fa-search home-feature-icon"></i>
                 <h3 class="home-feature-title">Advanced Scanning</h3>
-                <p class="home-feature-description">Our cutting-edge technology scans websites and files for vulnerabilities in real-time.</p>
+                <p class="home-feature-description">Real-time vulnerability detection for websites and files.</p>
             </div>
             <div class="home-feature-card">
                 <i class="fas fa-shield-alt home-feature-icon"></i>
                 <h3 class="home-feature-title">Comprehensive Protection</h3>
-                <p class="home-feature-description">Protect your digital assets with our all-in-one cybersecurity solution.</p>
+                <p class="home-feature-description">All-in-one solution for your digital security.</p>
             </div>
             <div class="home-feature-card">
                 <i class="fas fa-clock home-feature-icon"></i>
                 <h3 class="home-feature-title">Real-Time Alerts</h3>
-                <p class="home-feature-description">Get instant notifications about potential threats and vulnerabilities.</p>
+                <p class="home-feature-description">Instant notifications for potential threats.</p>
             </div>
         </div>
     </section>
 
-    <!-- Секция отзывов -->
+    <!-- Testimonials Section -->
     <section class="home-testimonials-section">
-        <h2 class="home-section-title">What Our Users Say</h2>
+        <h2 class="home-section-title">Trusted by Our Community</h2>
         <div class="home-testimonials-grid">
             <div class="home-testimonial-card">
-                <p class="home-testimonial-text">"ScanGuard helped me identify vulnerabilities on my website that I didn’t even know existed. Highly recommend!"</p>
+                <p class="home-testimonial-text">"ScanGuard saved my site from hidden vulnerabilities – a must-have tool!"</p>
                 <div class="home-testimonial-author">
-                    <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="User Avatar" class="home-testimonial-avatar">
+                    <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg" alt="User Avatar" class="home-testimonial-avatar">
                     <div>
                         <p class="home-testimonial-name">Alex Johnson</p>
                         <p class="home-testimonial-role">Web Developer</p>
@@ -164,9 +166,9 @@
                 </div>
             </div>
             <div class="home-testimonial-card">
-                <p class="home-testimonial-text">"The real-time alerts are a game-changer. I feel much safer knowing ScanGuard is watching my back."</p>
+                <p class="home-testimonial-text">"The real-time alerts give me peace of mind. Highly recommended for all!"</p>
                 <div class="home-testimonial-author">
-                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="User Avatar" class="home-testimonial-avatar">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="User Avatar" class="home-testimonial-avatar">
                     <div>
                         <p class="home-testimonial-name">Sarah Miller</p>
                         <p class="home-testimonial-role">Business Owner</p>
@@ -176,49 +178,111 @@
         </div>
     </section>
 
-    <!-- Секция CTA -->
+    <!-- Recent Activity Section -->
+    <section class="home-activity-section">
+        <h2 class="home-section-title">Latest Security Updates</h2>
+        <div class="home-activity-grid">
+            <div class="home-activity-card">
+                <i class="fas fa-shield-alt home-activity-icon"></i>
+                <p class="home-activity-text">Scanned <strong>example.com</strong> - 2 vulnerabilities found</p>
+                <span class="home-activity-time">5 minutes ago</span>
+            </div>
+            <div class="home-activity-card">
+                <i class="fas fa-file-alt home-activity-icon"></i>
+                <p class="home-activity-text">Analyzed <strong>document.pdf</strong> - Clean</p>
+                <span class="home-activity-time">15 minutes ago</span>
+            </div>
+            <div class="home-activity-card">
+                <i class="fas fa-bug home-activity-icon"></i>
+                <p class="home-activity-text">Detected threat on <strong>site.org</strong></p>
+                <span class="home-activity-time">1 hour ago</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section (Hidden for Premium Users) -->
+    @if (!isPremium)
+    {
+        <section class="home-pricing-section">
+            <h2 class="home-section-title">Tailored Plans for Your Needs</h2>
+            <div class="home-pricing-grid">
+                <div class="home-pricing-card">
+                    <h3 class="home-pricing-title">Basic Plan</h3>
+                    <p class="home-pricing-price">$0<span>/mo</span></p>
+                    <p class="home-pricing-description">Perfect for individuals and small projects looking to secure their digital assets with essential tools.</p>
+                    <ul class="home-pricing-features">
+                        <li><i class="fas fa-check"></i> Essential scanning for websites and files</li>
+                        <li><i class="fas fa-check"></i> Basic support via email (response within 48 hours)</li>
+                        <li><i class="fas fa-check"></i> Up to 10 scans per day</li>
+                        <li><i class="fas fa-check"></i> Access to community forums</li>
+                    </ul>
+                </div>
+                <div class="home-pricing-card home-pricing-card-premium">
+                    <h3 class="home-pricing-title">Premium Plan</h3>
+                    <p class="home-pricing-price">$29<span>/mo</span></p>
+                    <p class="home-pricing-description">Ideal for businesses and professionals needing advanced security features and priority support.</p>
+                    <ul class="home-pricing-features">
+                        <li><i class="fas fa-check"></i> Unlimited scans for websites and files</li>
+                        <li><i class="fas fa-check"></i> Telegram bot access with full website features</li>
+                        <li><i class="fas fa-check"></i> Premium community chat with other users</li>
+                        <li><i class="fas fa-check"></i> Security news updates and insights</li>
+                        <li><i class="fas fa-check"></i> Priority support with 24/7 assistance</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics and detailed reports</li>
+                        <li><i class="fas fa-check"></i> Custom scan schedules and automation</li>
+                        <li><i class="fas fa-check"></i> API access for integration with your tools</li>
+                        <li><i class="fas fa-check"></i> Monthly security consultation with experts</li>
+                    </ul>
+                    <a href="#" class="home-btn home-btn-primary">Upgrade to Premium</a>
+                </div>
+            </div>
+        </section>
+    }
+
+    <!-- CTA Section -->
     <section class="home-cta-section">
-        <h2 class="home-cta-title">Ready to Secure Your Online Presence?</h2>
-        <p class="home-cta-subtitle">Join ScanGuard today and take control of your cybersecurity.</p>
-        <a asp-area="Identity" asp-page="/Account/Register" class="home-btn home-btn-primary home-cta-btn">
-            Sign Up Now
-            <i class="fas fa-arrow-right home-btn-icon"></i>
-        </a>
+        @if (_signInManager.IsSignedIn(User))
+        {
+            <h2 class="home-cta-title">Ready to Scan More?</h2>
+            <p class="home-cta-subtitle">Explore advanced tools to secure your digital world.</p>
+            <a href="/Scan/Scanner" class="home-btn home-btn-primary home-cta-btn">
+                Go to Dashboard
+                <i class="fas fa-arrow-right home-btn-icon"></i>
+            </a>
+        }
+        else
+        {
+            <h2 class="home-cta-title">Ready to Secure Your Online Presence?</h2>
+            <p class="home-cta-subtitle">Join ScanGuard today and take control of your cybersecurity.</p>
+            <a asp-area="Identity" asp-page="/Account/Register" class="home-btn home-btn-primary home-cta-btn">
+                Sign Up Now
+                <i class="fas fa-arrow-right home-btn-icon"></i>
+            </a>
+        }
     </section>
 </div>
 
-<!-- JavaScript -->
 <script>
-    // Эффект ripple для всех кнопок
     document.querySelectorAll('.home-btn').forEach(button => {
         button.addEventListener('click', function (e) {
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
             const ripple = document.createElement('span');
             ripple.classList.add('home-btn-ripple');
             ripple.style.left = `${x}px`;
             ripple.style.top = `${y}px`;
-
             this.appendChild(ripple);
-
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
+            setTimeout(() => ripple.remove(), 600);
         });
     });
 
-    // Анимация появления элементов при прокрутке
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('animate');
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.home-stat-card, .home-feature-card, .home-testimonial-card').forEach(card => {
+    document.querySelectorAll('.home-stat-card, .home-feature-card, .home-testimonial-card, .home-activity-card, .home-pricing-card').forEach(card => {
         observer.observe(card);
     });
 </script>
