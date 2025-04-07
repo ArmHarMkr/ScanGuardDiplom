@@ -64,7 +64,7 @@ namespace ScanGuard.TelegramBot
                 }
                 else
                 {
-                    await client.SendPhoto(chatId, new InputFileStream(File.OpenRead(result.profileImageUrl!)), caption: result.profileInfo, cancellationToken: token, parseMode: ParseMode.Html);
+                    await client.SendPhoto(chatId, new InputFileUrl(result.profileImageUrl!), caption: result.profileInfo, cancellationToken: token, parseMode: ParseMode.Html);
                 }
             }else if (text == "/help")
             {
