@@ -313,7 +313,7 @@
         }
 
         /* Improved Responsive Styles */
-        @@media (max-width: 992px) {
+        @@media (max-width: 1490px) {
             .navbar {
                 padding: 1rem 1.5rem;
                 flex-wrap: wrap;
@@ -457,6 +457,56 @@
                 font-size: 0.85rem;
             }
         }
+        .nav-links .dropdown {
+    position: relative;
+}
+
+.nav-links .dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links .dropdown-toggle i.fa-caret-down {
+    margin-left: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.nav-links .dropdown .dropdown-menu {
+    top: 100%;
+    left: 0;
+    width: 220px;
+    transform: translateY(10px);
+}
+
+.nav-links .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(5px);
+}
+
+/* Adjust for mobile */
+@@media (max-width: 1490px) {
+    .nav-links .dropdown .dropdown-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding-left: 2rem;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        display: none; /* Hidden by default */
+    }
+
+    .nav-links.active .dropdown .dropdown-menu {
+        display: block; /* Show when menu is active */
+    }
+
+    .nav-links .dropdown:hover .dropdown-menu {
+        transform: none; /* No transform on mobile */
+    }
+}
     </style>
 </head>
 <body>
@@ -475,13 +525,30 @@
             <ul class="nav-links">
                 <li><a href="/"><i class="fas fa-home"></i> Main</a></li>
                 <li><a asp-action="AboutUs" asp-controller="Home"><i class="fas fa-info-circle"></i> About Us</a></li>
-                <li><a asp-action="Scanner" asp-controller="Scan"><i class="fas fa-search"></i> Scanner</a></li>
-                <li><a asp-action="ShowScannedSites" asp-controller="User"><i class="fas fa-list"></i> Scanned Sites</a></li>
-                <li><a asp-action="Index" asp-controller="FileScan"><i class="fas fa-comments"></i>File Scanner</a></li>
-                <li><a asp-action="History" asp-controller="FileScan"><i class="fas fa-comments"></i>Scanned Files</a></li>
+
+                <!-- Scan Dropdown -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"><i class="fas fa-search"></i> Scan <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a asp-action="Scanner" asp-controller="Scan"><i class="fas fa-search"></i> Scanner</a>
+                        <a asp-action="ShowScannedSites" asp-controller="User"><i class="fas fa-list"></i> Scanned Sites</a>
+                    </div>
+                </li>
+
+                <!-- Files Dropdown -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"><i class="fas fa-file"></i> Files <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> File Scanner</a>
+                        <a asp-action="History" asp-controller="FileScan"><i class="fas fa-history"></i> Scanned Files</a>
+                    </div>
+                </li>
+
                 <li><a asp-action="Index" asp-controller="Chat"><i class="fas fa-comments"></i> Chat</a></li>
-                <li><a asp-action="MyCorporation" asp-controller="Corporation"><i class="fas fa-comments"></i>Corporation</a></li>
-                <li><a asp-action="Index" asp-controller="Notification"><i class="fas fa-comments"></i>Notifications</a></li>
+                <li><a asp-action="MyCorporation" asp-controller="Corporation"><i class="fas fa-building"></i> Corporation</a></li>
+                <li><a asp-action="Index" asp-controller="Notification"><i class="fas fa-bell"></i> Notifications</a></li>
+
+                <!-- Role-Based Dropdown -->
                 @if (SignInManager.IsSignedIn(User))
                 {
                     var currentUser = await UserManager.GetUserAsync(User);
@@ -489,25 +556,31 @@
                     var isPremium = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium);
                     var isCustomer = await UserManager.IsInRoleAsync(currentUser, SD.Role_Customer);
 
-                    @if (isAdmin)
+                    @if (isAdmin || isPremium || isCustomer)
                     {
-                        <li><a href="/Admin/index"><i class="fas fa-users-cog"></i> Users</a></li>
-                        <li><a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a></li>
-                        <li><a asp-action="AllNews" asp-controller="Admin"><i class="fas fa-newspaper"></i> All News</a></li>
-                        <li><a asp-action="GetAllCorporations" asp-controller="Admin"><i class="fas fa-newspaper"></i> Get Corp Requests</a></li>
-                    }
-
-                    @if (isPremium)
-                    {
-                        <li><a asp-action="Index" asp-controller="Premium"><i class="fas fa-file-upload"></i> Scan File</a></li>
-                        <li><a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a></li>
-                        <li><a asp-action="GetAllNews" asp-controller="Premium"><i class="fas fa-newspaper"></i> News</a></li>
-                    }
-
-                    @if (isCustomer)
-                    {
-                        <li><a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> Scan File</a></li>
-                        <li><a asp-action="History" asp-controller="FileScan"><i class="fas fa-history"></i> History</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle"><i class="fas fa-cog"></i> Manage <i class="fas fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                                @if (isAdmin)
+                                {
+                                    <a href="/Admin/index"><i class="fas fa-users-cog"></i> Users</a>
+                                    <a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a>
+                                    <a asp-action="AllNews" asp-controller="Admin"><i class="fas fa-newspaper"></i> All News</a>
+                                    <a asp-action="GetAllCorporations" asp-controller="Admin"><i class="fas fa-building"></i> Get Corp Requests</a>
+                                }
+                                @if (isPremium)
+                                {
+                                    <a asp-action="Index" asp-controller="Premium"><i class="fas fa-file-upload"></i> Scan File</a>
+                                    <a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a>
+                                    <a asp-action="GetAllNews" asp-controller="Premium"><i class="fas fa-newspaper"></i> News</a>
+                                }
+                                @if (isCustomer)
+                                {
+                                    <a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> Scan File</a>
+                                    <a asp-action="History" asp-controller="FileScan"><i class="fas fa-history"></i> History</a>
+                                }
+                            </div>
+                        </li>
                     }
                 }
             </ul>
@@ -527,7 +600,6 @@
                             <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
-
                             <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: none;">
                             </form>
                         </div>
