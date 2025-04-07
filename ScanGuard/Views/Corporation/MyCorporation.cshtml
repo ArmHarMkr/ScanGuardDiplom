@@ -1,18 +1,38 @@
-﻿@using ScanGuard.Domain.Entity
-@model CorporationEntity
-
+﻿@model CorporationEntity
 @{
-    ViewBag.Title = "My Corporation";
+    ViewData["Title"] = "My Corporation";
 }
+
+<h2>My Corporation</h2>
 
 @if (Model != null)
 {
-    <h1>
-        @(Model.CorpName ?? "You don't have a corporation")    <p>Don't have a corporation? <a asp-controller="Corporation" asp-action="AddCorp">Create it!</a></p>
-    </h1>
-    <h1>@(Model.AdminUser != null ? Model.AdminUser.FullName : "No Admin Assigned")</h1>
+    <p>Corporation Name: @Model.CorpName</p>
+    <p>Website: @Model.Website</p>
+    <p>Email: @Model.Email</p>
+    <p>Phone: @Model.Phone</p>
+    <p>Address: @Model.Address</p>
+    <p>City: @Model.City</p>
+    <p>State: @Model.State</p>
+    <p>Country: @Model.Country</p>
+
+    @if (ViewBag.IsRequestInProcess)
+    {
+        <div class="alert alert-warning">
+            Your corporation is currently under request and awaiting approval.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success">
+            Your corporation is approved!
+        </div>
+    }
+
+    <a href="/Corporation/RemoveCorporation" class="btn btn-danger">Remove Corporation</a>
+    <a href="/Corporation/ChangeAdmin" class="btn btn-primary">Change Admin</a>
 }
 else
 {
-    <p>Don't have a corporation? <a asp-controller="Corporation" asp-action="AddCorp">Create it!</a></p>
+    <p>You do not have a corporation.</p>
 }

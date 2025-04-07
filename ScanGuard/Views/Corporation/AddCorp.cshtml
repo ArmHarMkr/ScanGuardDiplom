@@ -1,53 +1,20 @@
-﻿@using ScanGuard.Domain.Entity
-@model CorporationEntity
+﻿@model CorporationEntity
 
-@{
-    ViewData["Title"] = "Add Corporation";
-}
-
-<link rel="stylesheet" href="~/css/styles.css" />
 <h2>Add Corporation</h2>
-
-<form style="display:inline-block" asp-action="AddCorp" method="post">
-    <div style="width:300px;"class="scanguard-input-group">
-        <label class="scanguard-label" asp-for="@Model.CorpName"></label>
-        <input asp-for="@Model.CorpName" class="scanguard-input" required />
-
-
-        <label class="scanguard-label" asp-for="@Model.Website"></label>
-        <input asp-for="@Model.Website" class="scanguard-input" />
-
-        <label class="scanguard-label" asp-for="@Model.Email"></label>
-        <input asp-for="@Model.Email" type="email" class="scanguard-input" required />
-
-
-        <label class="scanguard-label" asp-for="@Model.Phone"></label>
-        <input asp-for="@Model.Phone" class="scanguard-input" required />
-
-
-        <label class="scanguard-label" asp-for="@Model.Address"></label>
-        <input asp-for="@Model.Address" class="scanguard-input" required />
-
-
-        <label class="scanguard-label" asp-for="@Model.Country"></label>
-        <input asp-for="@Model.Country" class="scanguard-input" required />
-
-
-        <label class="scanguard-label" asp-for="@Model.State"></label>
-        <input asp-for="@Model.State" class="scanguard-input" required />
-
-
-        <label class="scanguard-label" asp-for="@Model.City"></label>
-        <input asp-for="@Model.City" class="scanguard-input" required />
-
-
-        <label class="scanguard-label" asp-for="@Model.Zip"></label>
-        <input asp-for="@Model.Zip" class="scanguard-input" />
-
-
-        <label class="scanguard-label" asp-for="@Model.WorkerCount"></label>
-        <input asp-for="@Model.WorkerCount" type="number" class="scanguard-input" required />
-</div>
-
-    <button type="submit" class="scanguard-btn scanguard-btn-primary">Add Corporation</button>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+<form asp-action="AddCorp" method="post">
+    <input asp-for="CorpName" placeholder="Corporation Name" />
+    <input asp-for="Website" placeholder="Website" />
+    <input asp-for="Email" placeholder="Email" />
+    <input asp-for="Phone" placeholder="Phone" />
+    <input asp-for="Address" placeholder="Address" />
+    <input asp-for="City" placeholder="City" />
+    <input asp-for="State" placeholder="State" />
+    <input asp-for="Zip" placeholder="Zip" />
+    <input asp-for="Country" placeholder="Country" />
+    <input asp-for="WorkerCount" placeholder="Worker Count" type="number" />
+    <button type="submit">Submit</button>
 </form>

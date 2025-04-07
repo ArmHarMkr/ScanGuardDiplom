@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ScanGuard.BLL.Interfaces;
 using ScanGuard.BLL.Services;
-using ScanGuard.Domain.Entity;
 using ScanGuard.DAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ScanGuard.Controllers
 {
@@ -13,9 +13,9 @@ namespace ScanGuard.Controllers
     public class CorporationController : Controller
     {
         private readonly ApplicationDbContext Context;
-        private readonly UserManager<ApplicationUser> UserManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> SignInManager;
-        private readonly ICorpService CorpService;
+        private readonly ICorpService _corpService;
         private readonly ILogger<CorpService> Logger;
 
         public CorporationController(ApplicationDbContext context, 
@@ -25,117 +25,150 @@ namespace ScanGuard.Controllers
                                      ILogger<CorpService> _logger)
         {
             Context = context;
-            UserManager = userManager;
+            _userManager = userManager;
             SignInManager = signInamanger;
-            CorpService = corpService;
+            _corpService = corpService;
             Logger = _logger;
         }
 
+        [HttpGet]
         public async Task<IActionResult> MyCorporation()
         {
-            var currentUser = await UserManager.GetUserAsync(User);
-            var myCorp = currentUser!.Corporation ?? new CorporationEntity();
-            return View(myCorp);
-        }
-
-        [HttpGet("AddCorp")]
-        public async Task<IActionResult> AddCorp()
-        {
-            return View();
-        }
-
-        [HttpPost("AddCorp")]
-        public async Task<IActionResult> AddCorp(CorporationEntity corporationEntity)
-        {
-            try
+            var user = await _userManager.GetUserAsync(User);
+            if (user.Corporation == null)
             {
-                var currentUser = await UserManager.GetUserAsync(User);
-                corporationEntity.AdminUser = await UserManager.GetUserAsync(User);
-                await CorpService.CreteCorporation(corporationEntity, currentUser);
-                await Context.SaveChangesAsync();
+                TempData["ErrorMessage"] = "You don't have a corporation.";
             }
-            catch (Exception ex)
+            var corporation = await Context.Corporations.FirstOrDefaultAsync(x => x.AdminUser == user);
+            if(corporation == null)
             {
-                Logger.LogError("Error: {0}", ex.Message);
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("AddCorp", new { id = corporationEntity.Id });
+                TempData["ErrorMessage"] = "You don't have a corporation.";
             }
-            return RedirectToAction("MyCorporation", "Corporation");
-        }
-
-        [HttpGet("EditCorp")]
-        public async Task<IActionResult> EditCorp()
-        {
-            var currentUser = await UserManager.GetUserAsync(User);
-            var corporation = CorpService.GetUserCorporation(currentUser!);
-            if (corporation == null) return NotFound();
-
             return View(corporation);
         }
 
-        [HttpPost("EditCorp")]
-        public async Task<IActionResult> EditCorp(CorporationEntity corporationEntity)
-        {
-            try
-            {
-                if (!ModelState.IsValid) return View(corporationEntity);
-                var currentUser = await UserManager.GetUserAsync(User);
-                await CorpService.UpdateCorporation(corporationEntity, currentUser!);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("Error: {0}", ex.Message);
-                TempData["ErrorMessage"] = ex.Message; // Store exception in TempData
-                return RedirectToAction("EditCorp", new { id = corporationEntity.Id }); // Redirect back to Edit page
-            }
-
-            return RedirectToAction("MyCorporation");
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetCorporationUsers()
+        public async Task<IActionResult> AddCorp()
         {
-            var user = await UserManager.GetUserAsync(User);
-            if (user?.Corporation == null || user.Corporation.AdminUser != user)
+            var user = await _userManager.GetUserAsync(User);
+            if (user.Corporation != null)
             {
-                return Forbid();
+                TempData["ErrorMessage"] = "You already have a corporation.";
+                return RedirectToAction("MyCorporation");
             }
-
-            var users = await CorpService.GetCorpWorkersAsync(user);
-            return Json(users);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangeCorpAdmin([FromBody] ApplicationUser newAdmin)
+        public async Task<IActionResult> AddCorp(CorporationEntity corporation)
         {
-            var currentUser = await UserManager.GetUserAsync(User);
-            if (currentUser?.Corporation == null || currentUser.Corporation.AdminUser != currentUser)
+            var user = await _userManager.GetUserAsync(User);
+            if (user.Corporation != null)
             {
-                return Forbid();
+                TempData["ErrorMessage"] = "You already have a corporation.";
+                return RedirectToAction("MyCorporation");
+            }
+
+            corporation.AdminUserId = user.Id;
+            corporation.AdminUser = user;
+            corporation.CreatedDate = DateTime.Now;
+            await _corpService.CreteCorporation(corporation, user);
+            return RedirectToAction("MyCorporation");
+        }
+
+        public async Task<IActionResult> RemoveCorporation(string corporationId)
+        {
+            var corporation = await _corpService.GetCorpEntity(corporationId);
+
+            if (corporation == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(User.Identity.Name);
+
+            if (user == null || user.Corporation?.Id != corporationId)
+            {
+                return Unauthorized();  // Handle unauthorized users
+            }
+
+            // Ensure the corporation entity is not null
+            if (corporation.AdminUserId != user.Id)
+            {
+                return Unauthorized();  // Only the admin can remove the corporation
             }
 
             try
             {
-                await CorpService.ChangeCorpAdminAsync(currentUser, newAdmin);
-                return Ok(new { message = "Admin changed successfully" });
+                // Proceed with removing the corporation
+                Context.Corporations.Remove(corporation);
+                await Context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                return BadRequest(new { error = ex.Message });
+                // Handle any potential errors
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet("ChangeAdmin")]
-        public async Task<IActionResult> ChangeAdmin()
+
+        public async Task<IActionResult> ChangeAdmin(string corporationId)
         {
-            var currentUser = await UserManager.GetUserAsync(User);
-            if (currentUser?.Corporation == null || currentUser.Corporation.AdminUser != currentUser)
+            var corporation = await _corpService.GetCorpEntity(corporationId);
+
+            if (corporation == null)
             {
-                return Forbid();
+                return NotFound();  // Return 404 if the corporation is not found
             }
 
-            var users = await CorpService.GetCorpWorkersAsync(currentUser);
+            // Fetch the list of users in the corporation, ensure that it's not null
+            var users = await Context.Users
+                .Where(u => u.Corporation.Id == corporationId)
+                .ToListAsync();
+
+            // Guard against null users list
+            if (users == null)
+            {
+                users = new List<ApplicationUser>();  // Assign an empty list if null
+            }
+
             return View(users);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeCorpAdmin([FromBody] dynamic data)
+        {
+            string newAdminId = data.id;
+            var currentUser = await _userManager.GetUserAsync(User);
+            var newAdmin = await Context.Users.FirstOrDefaultAsync(u => u.Id == newAdminId);
+
+            if (newAdmin == null)
+            {
+                return Json(new { message = "User not found." });
+            }
+
+            try
+            {
+                await _corpService.ChangeCorpAdminAsync(currentUser, newAdmin);
+                return Json(new { message = "Admin changed successfully." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = ex.Message });
+            }
+        }
+
+        public async Task<IActionResult> GetAllCorporations()
+        {
+            var corporations = await _corpService.GetAllCorporations();
+            return View(corporations);
+        }
+
+        public async Task<IActionResult> ViewRequest(string id)
+        {
+            var corp = await _corpService.GetCorpEntity(id);
+            return View(corp);
         }
 
 

@@ -105,66 +105,89 @@ namespace ScanGuard.Areas.Admin.Controllers
             return RedirectToAction("AllNews", "Admin");
         }
 
-        [HttpGet("GetAllCorporations")]
-        public async Task<IActionResult> GetAllCorporations()
+        public async Task<IActionResult> ViewRequests()
         {
-            var requests = await Context.CreateCorpRequests
-                .Include(x => x.Corporation)
-                .Where(x => !x.IsApproved)
-                .ToListAsync();
+            var requests = await Context.CreateCorpRequests.Include(c => c.Corporation).ToListAsync();
             return View(requests);
         }
-
-        public async Task<IActionResult> AcceptCorporation(string id)
+        public async Task<IActionResult> ViewCorporation(string id)
         {
+            // Fetch the corporation details
+            var corporation = await CorporationService.GetCorpEntity(id);
+
+            if (corporation == null)
+            {
+                return NotFound();
+            }
+
+            return View(corporation);
+        }
+
+
+
+        public async Task<IActionResult> ApproveCorporation(string corporationId)
+        {
+            var corporation = await CorporationService.GetCorpEntity(corporationId);
+            var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(r => r.Corporation.Id == corporationId);
+
+            if (request == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Id == id);
-                await UserService.ApproveCorp(request!);
-                NotificationEntity notification = new NotificationEntity
+                // Mark corporation as approved and update the request
+                corporation.IsSubmitted = true;
+                request.IsApproved = true;
+
+                // Send notification to the user
+                var notification = new NotificationEntity
                 {
-                    NotificationTitle = "Your corporation has been approved",
-                    NotificationContent = "Your corporation has been approved by the admin",
-                    ApplicationUser = request!.Corporation.AdminUser!
+                    NotificationTitle = "Corporation Approved",
+                    NotificationContent = $"Your corporation {corporation.CorpName} has been approved.",
+                    ApplicationUser = await UserManager.FindByIdAsync(corporation.AdminUserId)
                 };
-                await Context.NotificationEntities.AddAsync(notification);
+                Context.NotificationEntities.Add(notification);
+
+                // Remove the request and save changes
+                Context.CreateCorpRequests.Remove(request);
+                Context.Corporations.Update(corporation);
                 await Context.SaveChangesAsync();
 
+                return RedirectToAction("ViewCorporation", new { id = corporationId });
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
+                // Handle error if needed
+                return BadRequest(ex.Message);
             }
-            return RedirectToAction("~/Views/Admin/GetAllCorporations");
         }
-        public async Task<IActionResult> DisapproveCorporation(string id)
+
+        public async Task<IActionResult> DisapproveCorporation(string corporationId)
         {
+            var corporation = await CorporationService.GetCorpEntity(corporationId);
+            var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(r => r.Corporation.Id == corporationId);
+
+            if (request == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(x => x.Id == id);
-                await UserService.DisapproveCorp(request!);
-                NotificationEntity notification = new NotificationEntity
-                {
-                    NotificationTitle = "Your corporation has been disapproved",
-                    NotificationContent = "Your corporation has been disapproved by the admin",
-                    ApplicationUser = request!.Corporation.AdminUser!
-                };
-                await Context.NotificationEntities.AddAsync(notification);
+                // Delete the request
+                Context.CreateCorpRequests.Remove(request);
                 await Context.SaveChangesAsync();
+
+                return RedirectToAction("ViewCorporation", new { id = corporationId });
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
+                // Handle error if needed
+                return BadRequest(ex.Message);
             }
-            return RedirectToAction("~/Views/Admin/GetAllCorporations");
         }
 
-        [HttpGet("ViewRequest/{id}")]
-        public async Task<IActionResult> ViewRequest(string id)
-        {
-            var request = await Context.CreateCorpRequests.Include(x => x.Corporation).ThenInclude(x => x.AdminUser).FirstOrDefaultAsync(x => x.Id == id);
-            if (request == null) return NotFound();
-            return View("~/Views/Admin/ViewRequest.cshtml", request);
-        }
     }
 }

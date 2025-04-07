@@ -1,12 +1,8 @@
-﻿@model List<ScanGuard.Domain.Entity.ApplicationUser>
-
-@{
-    ViewData["Title"] = "Change Corporation Admin";
-}
+﻿@model List<ApplicationUser>
 
 <h2>Change Corporation Admin</h2>
 
-@if (Model.Any())
+@if (Model != null && Model.Any())
 {
     <table class="table">
         <thead>

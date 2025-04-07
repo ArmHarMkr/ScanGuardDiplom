@@ -1,21 +1,20 @@
-﻿@model ScanGuard.Domain.Entity.CreateCorpRequestEntity
+﻿@model CorporationEntity
 
-<h2>@Model.Corporation.CorpName</h2>
-<p>Website: @Model.Corporation.Website</p>
-<p>Email: @Model.Corporation.Email</p>
-<p>Phone: @Model.Corporation.Phone</p>
-<p>Country: @Model.Corporation.Country</p>
-<p>Address: @Model.Corporation.Address, @Model.Corporation.City</p>
+<h2>@Model.CorpName</h2>
+<p><strong>Website:</strong> @Model.Website</p>
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Phone:</strong> @Model.Phone</p>
+<p><strong>Address:</strong> @Model.Address</p>
+<p><strong>City:</strong> @Model.City</p>
+<p><strong>Country:</strong> @Model.Country</p>
+<p><strong>Worker Count:</strong> @Model.WorkerCount</p>
 
-@if (!Model.IsApproved)
-{
-    <form asp-action="AcceptCorporation" method="post">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit">Approve</button>
-    </form>
+<form asp-action="ApproveCorporation" asp-route-corpId="@Model.Id" method="post">
+    <input type="hidden" name="corporationId" value="@Model.Id" />
+    <button type="submit">Approve</button>
+</form>
 
-    <form asp-action="DisapproveCorporation" method="post">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit">Disapprove</button>
-    </form>
-}
+<form asp-action="DisapproveCorporation" asp-route-corpId="@Model.Id" method="post">
+    <input type="hidden" name="corporationId" value="@Model.Id" />
+    <button type="submit">Disapprove</button>
+</form>

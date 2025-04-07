@@ -1,0 +1,12 @@
+﻿@model List<CreateCorpRequestEntity>
+
+<h2>Corporation Requests</h2>
+<ul>
+    @foreach (var req in Model.Where(r => !r.IsApproved))
+    {
+        <li>
+            <strong>@req.Corporation.CorpName</strong>
+            <a asp-action="ViewCorporation" asp-route-id="@req.Corporation.Id">View</a>
+        </li>
+    }
+</ul>
