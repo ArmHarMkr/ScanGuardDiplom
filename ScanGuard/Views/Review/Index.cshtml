@@ -1,0 +1,45 @@
+﻿@model ReviewViewModel
+@using Microsoft.AspNetCore.Identity
+@using ScanGuard.ViewModels
+@inject UserManager<ApplicationUser> UserManager
+
+<h2>Reviews</h2>
+
+@if (Model.CanAdd)
+{
+    <form asp-action="Add" method="post">
+        <div>
+            <label>Review Text</label><br />
+            <textarea name="reviewText" required></textarea>
+        </div>
+        <div>
+            <label>Is it Good?</label>
+            <input asp-for="@Model.IsGood" type="checkbox" name="isGood" />
+        </div>
+        <button type="submit">Submit Review</button>
+    </form>
+}
+else
+{
+    <p><strong>You already wrote a review.</strong></p>
+}
+
+<hr />
+
+@foreach (var r in Model.Reviews)
+{
+    var color = r.IsGood ? "green" : "red";
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <strong>@r.User.UserName</strong><br />
+        <span style="color: @color">@r.ReviewText</span><br />
+        <small>@r.DateTime.ToString("g")</small>
+
+        @if (UserManager.GetUserId(User) == r.User.Id)
+        {
+            <form asp-action="Delete" method="post" style="margin-top: 5px;">
+                <input type="hidden" name="id" value="@r.Id" />
+                <button type="submit">Remove</button>
+            </form>
+        }
+    </div>
+}

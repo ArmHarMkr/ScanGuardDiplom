@@ -59,7 +59,67 @@ namespace MGOBankAp.Controllers
                 userIpAddress = await GetPublicIp();
             }
 
+
+            var latestWebsiteScan = await Context.WebsiteScanEntities
+                .OrderByDescending(w => w.ScanDate)
+                .FirstOrDefaultAsync();
+
+            var latestFileScan = await Context.FileScanEntities
+                .OrderByDescending(f => f.ScanDate)
+                .FirstOrDefaultAsync();
+
+            var latestThreatSite = await Context.WebsiteScanEntities
+                .Where(w => w.VulnerablityCount > 0)
+                .OrderByDescending(w => w.ScanDate)
+                .FirstOrDefaultAsync();
+
+            ViewBag.LatestWebsiteScan = latestWebsiteScan;
+            ViewBag.LatestFileScan = latestFileScan;
+            ViewBag.LatestThreatSite = latestThreatSite;
+
+
             ViewBag.UserIp = userIpAddress;
+            ViewBag.ReviewOneText = await Context.ReviewEntities
+                .Where(r => r.IsGood)
+                .OrderByDescending(r => r.DateTime)
+                .Select(r => r.ReviewText)
+                .FirstOrDefaultAsync();
+            ViewBag.ReviewOneName = await Context.ReviewEntities
+                .Where(r => r.IsGood)
+                .Include(r => r.User)
+                .OrderByDescending(r => r.DateTime)
+                .Select(r => r.User.UserName)
+                .FirstOrDefaultAsync();
+            ViewBag.ReviewOnePhoto = await Context.ReviewEntities
+                .Where(r => r.IsGood)
+                .Include(r => r.User)
+                .OrderByDescending(r => r.DateTime)
+                .Select(r => r.User.ProfilePhotoPath.Replace("wwwroot", ""))
+                .FirstOrDefaultAsync();
+
+
+            ViewBag.ReviewTwoText = await Context.ReviewEntities
+                .Where(r => r.IsGood)
+                .OrderByDescending(r => r.DateTime)
+                .Skip(1)
+                .Select(r => r.ReviewText)
+                .FirstOrDefaultAsync();
+
+            ViewBag.ReviewTwoName = await Context.ReviewEntities
+                .Where(r => r.IsGood)
+                .Include(r => r.User)
+                .OrderByDescending(r => r.DateTime)
+                .Skip(1)
+                .Select(r => r.User.UserName)
+                .FirstOrDefaultAsync();
+            ViewBag.ReviewTwoPhoto = await Context.ReviewEntities
+                .Where(r => r.IsGood)
+                .Include(r => r.User)
+                .OrderByDescending(r => r.DateTime)
+                .Skip(1)
+                .Select(r => r.User.ProfilePhotoPath.Replace("wwwroot", ""))
+                .FirstOrDefaultAsync();
+
 
             return View(mostScannedSites);
         }

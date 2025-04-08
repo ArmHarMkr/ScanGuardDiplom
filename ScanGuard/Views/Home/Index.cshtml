@@ -103,7 +103,7 @@
                                         @{
                                             var badgeClass = "danger";
                                             if (count > 3 && count < 9) { badgeClass = "warning"; }
-                                            else if(count > 9){ badgeClass = "safe"; }
+                                            else if (count > 9) { badgeClass = "safe"; }
                                         }
                                         <span class="home-badge home-badge-@badgeClass">@site.CheckCount</span>
                                     </td>
@@ -120,11 +120,12 @@
                     </tbody>
                 </table>
             </div>
-            @if (user is null){
-            <a class="home-btn home-btn-primary home-table-btn" asp-controller="Scan" asp-action="ShowScannedSites">
-                View More
-                <i class="fas fa-arrow-right home-btn-icon"></i>
-            </a>
+            @if (user is null)
+            {
+                <a class="home-btn home-btn-primary home-table-btn" asp-controller="Scan" asp-action="ShowScannedSites">
+                    View More
+                    <i class="fas fa-arrow-right home-btn-icon"></i>
+                </a>
             }
         </div>
     </section>
@@ -156,27 +157,44 @@
         <h2 class="home-section-title">Trusted by Our Community</h2>
         <div class="home-testimonials-grid">
             <div class="home-testimonial-card">
-                <p class="home-testimonial-text">"ScanGuard saved my site from hidden vulnerabilities – a must-have tool!"</p>
-                <div class="home-testimonial-author">
-                    <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg" alt="User Avatar" class="home-testimonial-avatar">
-                    <div>
-                        <p class="home-testimonial-name">Alex Johnson</p>
-                        <p class="home-testimonial-role">Web Developer</p>
+                @if (ViewBag.ReviewOneText == null)
+                {
+                    <a href="/Review/Index" class="btn btn-primary">Write a Review</a>
+                }
+                else
+                {
+
+                    <p class="home-testimonial-text">"@ViewBag.ReviewOneText"</p>
+                    <div class="home-testimonial-author">
+                        <img src="@ViewBag.ReviewOnePhoto" alt="User Avatar" class="home-testimonial-avatar">
+                        <div>
+                            <p class="home-testimonial-name">@ViewBag.ReviewOneName</p>
+                            <p class="home-testimonial-role">Verified User</p>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
             <div class="home-testimonial-card">
-                <p class="home-testimonial-text">"The real-time alerts give me peace of mind. Highly recommended for all!"</p>
-                <div class="home-testimonial-author">
-                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="User Avatar" class="home-testimonial-avatar">
-                    <div>
-                        <p class="home-testimonial-name">Sarah Miller</p>
-                        <p class="home-testimonial-role">Business Owner</p>
+                @if (ViewBag.ReviewTwoText == null)
+                {
+                    <a href="/Review/Index" class="btn btn-primary">Write a Review</a>
+                }
+                else
+                {
+                    <p class="home-testimonial-text">"@ViewBag.ReviewTwoText"</p>
+                    <div class="home-testimonial-author">
+                        <img src="@ViewBag.ReviewTwoPhoto" alt="User Avatar" class="home-testimonial-avatar">
+                        <div>
+                            <p class="home-testimonial-name">@ViewBag.ReviewTwoName</p>
+                            <p class="home-testimonial-role">Verified User</p>
+                        </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </section>
+
 
     <!-- Recent Activity Section -->
     <section class="home-activity-section">
@@ -184,21 +202,30 @@
         <div class="home-activity-grid">
             <div class="home-activity-card">
                 <i class="fas fa-shield-alt home-activity-icon"></i>
-                <p class="home-activity-text">Scanned <strong>example.com</strong> - 2 vulnerabilities found</p>
-                <span class="home-activity-time">5 minutes ago</span>
+                <p class="home-activity-text">
+                    Scanned <strong>@ViewBag.LatestWebsiteScan?.Url</strong> -
+                    @ViewBag.LatestWebsiteScan?.VulnerablityCount vulnerabilities found
+                </p>
+                <span class="home-activity-time">@ViewBag.LatestWebsiteScan?.ScanDate.ToString("HH:mm")</span>
             </div>
             <div class="home-activity-card">
                 <i class="fas fa-file-alt home-activity-icon"></i>
-                <p class="home-activity-text">Analyzed <strong>document.pdf</strong> - Clean</p>
-                <span class="home-activity-time">15 minutes ago</span>
+                <p class="home-activity-text">
+                    Analyzed <strong>@ViewBag.LatestFileScan?.FileName</strong> -
+                    @(ViewBag.LatestFileScan?.IsMalicious == true ? "Malicious" : "Clean")
+                </p>
+                <span class="home-activity-time">@ViewBag.LatestFileScan?.ScanDate.ToString("HH:mm")</span>
             </div>
             <div class="home-activity-card">
                 <i class="fas fa-bug home-activity-icon"></i>
-                <p class="home-activity-text">Detected threat on <strong>site.org</strong></p>
-                <span class="home-activity-time">1 hour ago</span>
+                <p class="home-activity-text">
+                    Detected threat on <strong>@ViewBag.LatestThreatSite?.Url</strong>
+                </p>
+                <span class="home-activity-time">@ViewBag.LatestThreatSite?.ScanDate.ToString("HH:mm")</span>
             </div>
         </div>
     </section>
+
 
     <!-- Pricing Section (Hidden for Premium Users) -->
     @if (!isPremium)
@@ -213,7 +240,7 @@
                     <ul class="home-pricing-features">
                         <li><i class="fas fa-check"></i> Essential scanning for websites and files</li>
                         <li><i class="fas fa-check"></i> Basic support via email (response within 48 hours)</li>
-                        <li><i class="fas fa-check"></i> Up to 10 scans per day</li>
+                        <li><i class="fas fa-check"></i> Up to 3 file scans per day</li>
                         <li><i class="fas fa-check"></i> Access to community forums</li>
                     </ul>
                 </div>

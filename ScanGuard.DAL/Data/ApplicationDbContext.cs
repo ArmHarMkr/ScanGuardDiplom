@@ -19,6 +19,7 @@ namespace ScanGuard.DAL.Data
         {
         }
 
+        public DbSet<ReviewEntity> ReviewEntities { get; set; } 
         public DbSet<FileScanEntity> FileScanEntities { get; set; }
         public DbSet<VulnerabilityEntity> VulnerabilityEntities { get; set; }
         public DbSet<NotificationEntity> NotificationEntities { get; set; }
