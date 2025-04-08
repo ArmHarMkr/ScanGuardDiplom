@@ -45,10 +45,12 @@ namespace ScanGuard.BLL.Services
             await client.SendMailAsync(mailMessage);
         }
 
-        public async Task SendSecurityAlertEmail(string userEmail, string userName, string originalIp, string newIp)
+
+        public async Task SendSecurityAlertEmail(string userEmail, string userName, string originalIp, string newIp, string changePasswordUrl)
         {
-            var message = EmailTemplates.GetSecurityAlertMessage(userName, originalIp, newIp);
+            var message = EmailTemplates.GetSecurityAlertMessage(userName, originalIp, newIp, changePasswordUrl);
             await SendEmail(userEmail, "Security Alert: Unusual Login Activity", message);
         }
+
     }
 }

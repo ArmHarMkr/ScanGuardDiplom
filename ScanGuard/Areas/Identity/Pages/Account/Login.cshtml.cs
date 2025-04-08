@@ -135,10 +135,14 @@ namespace ScanGuard.Areas.Identity.Pages.Account
 
                     Log.Information("User {UserName} logged in. IP: {IP}", Input.Email, ip);
 
+                    var changePasswordUrl = Url.PageLink(
+                        pageName: "/Account/Manage/ChangePassword",
+                        values: new { area = "Identity" });
+
                     // Check if IP is different from stored IP
                     if (string.IsNullOrEmpty(user.LastLoginIpAddress) || user.LastLoginIpAddress != ip)
                     {
-                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.LastLoginIpAddress, ip);
+                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.LastLoginIpAddress, ip, changePasswordUrl);
                         Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.LastLoginIpAddress, ip);
 
                         // Update user's stored IP to the new one
