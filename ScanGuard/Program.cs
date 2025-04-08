@@ -138,6 +138,14 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "honeypot",
+        pattern: "honeypot/{action=LoginAttempt}/{id?}");
+});
+
+
 
 var logger = app.Services.GetService<ILogger<Program>>();
 logger?.LogInformation("Starting program...");

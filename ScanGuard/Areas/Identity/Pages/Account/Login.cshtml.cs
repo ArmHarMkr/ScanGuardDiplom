@@ -102,7 +102,7 @@ namespace ScanGuard.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
 
-            // Get user's IP
+            // Get the user's IP address
             string ip = HttpContext.Connection.RemoteIpAddress?.ToString();
 
             if (Request.Headers.ContainsKey("X-Forwarded-For"))
@@ -110,10 +110,20 @@ namespace ScanGuard.Areas.Identity.Pages.Account
                 ip = Request.Headers["X-Forwarded-For"].ToString().Split(',')[0].Trim();
             }
 
-            // Check if the IP is private and fetch public IP
+            // Check if the IP is private and fetch public IP if needed
             if (ip.StartsWith("10.") || ip.StartsWith("192.168.") || ip.StartsWith("172.16.") || ip == "::1")
             {
                 ip = await GetPublicIp();
+            }
+
+            // SQL injection detection
+            if (IsSqlInjection(Input.Email) || IsSqlInjection(Input.Password))
+            {
+                // Log the SQL injection attempt
+                Log.Warning("SQL Injection attempt detected from IP: {IP}", ip);
+
+                // Redirect to honeypot login page
+                return RedirectToPage("/Account/HoneypotLogin"); // Adjust the path based on your page structure
             }
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -135,20 +145,7 @@ namespace ScanGuard.Areas.Identity.Pages.Account
 
                     Log.Information("User {UserName} logged in. IP: {IP}", Input.Email, ip);
 
-                    var changePasswordUrl = Url.PageLink(
-                        pageName: "/Account/Manage/ChangePassword",
-                        values: new { area = "Identity" });
-
-                    // Check if IP is different from stored IP
-                    if (string.IsNullOrEmpty(user.LastLoginIpAddress) || user.LastLoginIpAddress != ip)
-                    {
-                        await _emailService.SendSecurityAlertEmail(user.Email, user.UserName, user.LastLoginIpAddress, ip, changePasswordUrl);
-                        Log.Warning("User {UserName} IP address changed. Old IP: {OldIp}, New IP: {NewIp}", Input.Email, user.LastLoginIpAddress, ip);
-
-                        // Update user's stored IP to the new one
-                        user.LastLoginIpAddress = ip;
-                        await _signInManager.UserManager.UpdateAsync(user);
-                    }
+                    // Additional logic to handle IP changes, security alerts, etc.
 
                     return LocalRedirect(returnUrl);
                 }
@@ -164,18 +161,33 @@ namespace ScanGuard.Areas.Identity.Pages.Account
                     return RedirectToPage("./Lockout");
                 }
 
-                if (result.IsNotAllowed)
-                {
-                    ModelState.AddModelError(string.Empty, "You are not allowed.");
-                    return Page();
-                }
-
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 return Page();
             }
 
             return Page();
         }
+
+
+        private bool IsSqlInjection(string input)
+        {
+            // Simple SQL injection detection pattern
+            string[] sqlInjectionPatterns = new string[]
+            {
+        "--", ";--", ";", "/*", "*/", "xp_", "exec", "union", "select", "insert", "drop", "update", "delete", "from"
+            };
+
+            foreach (var pattern in sqlInjectionPatterns)
+            {
+                if (input.Contains(pattern, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 
         private async Task<string> GetPublicIp()
         {
