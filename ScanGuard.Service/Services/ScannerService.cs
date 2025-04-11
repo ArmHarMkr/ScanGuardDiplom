@@ -32,7 +32,8 @@ namespace ScanGuard.Service.Implementations
             _logger = logger;
         }
 
-        public async Task<(Vulnerability vulnerability, Dictionary<int, (bool IsOpen, string Service, string Version)> portResults)> ScanUrl(string url, ApplicationUser? applicationUser)
+        public async Task<(Vulnerability vulnerability, 
+                           Dictionary<int, (bool IsOpen, string Service, string Version)> portResults)> ScanUrl(string url, ApplicationUser? applicationUser)
         {
             try
             {
