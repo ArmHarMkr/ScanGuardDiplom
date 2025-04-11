@@ -102,7 +102,7 @@
                                     <td class="home-table-td home-table-count">
                                         @{
                                             var badgeClass = "danger";
-                                            if (count > 3 && count < 9) { badgeClass = "warning"; }
+                                            if (count > 3 && count <= 9) { badgeClass = "warning"; }
                                             else if (count > 9) { badgeClass = "safe"; }
                                         }
                                         <span class="home-badge home-badge-@badgeClass">@site.CheckCount</span>

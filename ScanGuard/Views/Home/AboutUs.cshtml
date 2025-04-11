@@ -1,10 +1,730 @@
-﻿@{
-    ViewData["Title"] = "О нас";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover ScanGuard’s mission to secure websites and files with innovative vulnerability scanning tools.">
+    <title>About Us - ScanGuard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <!-- Your existing CSS file -->
+    <style>
+        /* Updated styles for About Us page */
+        .about-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-<div class="subtitle">Кто мы такие?</div>
-<h2 class="title">О ScanGuard</h2>
-<p style="max-width: 600px; margin: 20px auto;">
-    ScanGuard — это инструмент для защиты ваших данных в интернете. Мы помогаем проверять сайты на безопасность, чтобы вы могли спокойно surf'ить в цифровом мире. Наша миссия — сделать интернет безопаснее для всех.
-</p>
-<button class="scanguard-btn scanguard-btn-primary">Узнать больше</button>
+        /* Consistent section styling */
+        .about-intro-section,
+        .about-purpose-section,
+        .about-values-section,
+        .about-why-choose-section,
+        .about-team-section,
+        .about-impact-section,
+        .about-contact-section,
+        .about-cta-section {
+            margin: 4rem 0;
+            padding: 4rem 2rem;
+            border-radius: 15px; /* Unified rounded corners */
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle background pattern for depth */
+        .about-purpose-section::before,
+        .about-values-section::before,
+        .about-team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23ef233c' fill-opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        /* Intro Section */
+        .about-intro-section {
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color); /* #ef233c */
+        }
+
+        .about-intro-title {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark); /* #1f2937 */
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-intro-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted); /* #6b7280 */
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-intro-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .about-stat-item {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            min-width: 180px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-stat-label {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        /* Purpose Section */
+        .about-purpose-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-purpose-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-purpose-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .about-purpose-goals {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .about-purpose-goals li {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .about-purpose-goals li::before {
+            content: '✔';
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .about-purpose-visual {
+            height: 400px;
+            background: linear-gradient(45deg, var(--accent-color), #d90429);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-purpose-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23ffffff' stroke-width='2' opacity='0.3'%3E%3Cpath d='M20 20h60v60H20z'/%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3C/svg%3E");
+            background-size: 40px;
+            animation: pulse 12s ease-in-out infinite;
+        }
+
+        .about-purpose-icon {
+            font-size: 5rem;
+            color: var(--text-primary);
+            z-index: 1;
+        }
+
+        /* Values Section */
+        .about-values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-value-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-value-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-value-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-value-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Why Choose Us Section */
+        .about-why-choose-section {
+            text-align: center;
+        }
+
+        .about-why-choose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-why-choose-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .about-why-choose-card:hover {
+            transform: scale(1.05);
+        }
+
+        .about-why-choose-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-why-choose-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-why-choose-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Team Section */
+        .about-team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-team-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-team-card:hover {
+            transform: scale(1.03);
+        }
+
+        .about-team-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-color), #d90429);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .about-team-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .about-team-role {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .about-team-bio {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Impact Section */
+        .about-impact-section {
+            text-align: center;
+        }
+
+        .about-impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-impact-bar {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-impact-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-impact-progress {
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .about-impact-fill {
+            height: 100%;
+            background: var(--accent-color);
+            width: 0;
+            transition: width 2s ease;
+        }
+
+        /* Contact Section */
+        .about-contact-section {
+            text-align: center;
+        }
+
+        .about-contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-contact-form {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+
+        .about-contact-form h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-contact-form input,
+        .about-contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .about-contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .about-contact-info {
+            padding: 2rem;
+            border-radius: 15px;
+            background: #ffffff;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+
+        .about-contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-contact-info p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .about-contact-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .about-contact-social a {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .about-contact-social a:hover {
+            color: #d90429;
+        }
+
+        /* CTA Section */
+        .about-cta-section {
+            text-align: center;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .about-cta-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @@keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        @@media (max-width: 1024px) {
+            .about-purpose-grid,
+            .about-contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-purpose-visual {
+                height: 300px;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .about-intro-title {
+                font-size: 2.2rem;
+            }
+
+            .about-intro-subtitle,
+            .about-cta-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-purpose-content h2,
+            .about-cta-title {
+                font-size: 2rem;
+            }
+
+            .about-purpose-visual {
+                height: 200px;
+            }
+
+            .about-team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <!-- Intro Section -->
+        <section class="about-intro-section">
+            <h1 class="about-intro-title animate-on-scroll">About ScanGuard</h1>
+            <p class="about-intro-subtitle animate-on-scroll">We’re dedicated to making the digital world safer with powerful tools to scan and secure websites and files from vulnerabilities.</p>
+            <div class="about-intro-stats">
+                <div class="about-stat-item animate-on-scroll">
+                    <div class="about-stat-number" data-count="10000">0</div>
+                    <div class="about-stat-label">Scans Performed</div>
+                </div>
+                <div class="about-stat-item animate-on-scroll">
+                    <div class="about-stat-number" data-count="500">0</div>
+                    <div class="about-stat-label">Clients Protected</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Purpose Section -->
+        <section class="about-purpose-section">
+            <div class="about-purpose-grid">
+                <div class="about-purpose-content">
+                    <h2 class="animate-on-scroll">Our Purpose</h2>
+                    <p class="animate-on-scroll">Founded in 2025, ScanGuard exists to simplify cybersecurity. Our purpose is to empower businesses, developers, and individuals with accessible tools to protect their websites and files from vulnerabilities.</p>
+                    <p class="animate-on-scroll">We’re driven by a commitment to deliver fast, accurate scans that catch threats before they strike. Our goal is a digital world where safety is seamless and universal.</p>
+                    <ul class="about-purpose-goals">
+                        <li class="animate-on-scroll">Provide user-friendly scanning solutions.</li>
+                        <li class="animate-on-scroll">Stay ahead of evolving cyber threats.</li>
+                        <li class="animate-on-scroll">Ensure affordability without compromise.</li>
+                    </ul>
+                    <a href="/get-started" class="home-btn home-btn-primary animate-on-scroll">Join Our Mission</a>
+                </div>
+                <div class="about-purpose-visual animate-on-scroll">
+                    <span class="about-purpose-icon">🔒</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="about-values-section">
+            <h2 class="home-section-title animate-on-scroll">What Drives Us</h2>
+            <div class="about-values-grid">
+                <div class="about-value-card animate-on-scroll">
+                    <span class="about-value-icon">🛡️</span>
+                    <h3 class="about-value-title">Protection</h3>
+                    <p class="about-value-text">Robust scanning to keep your assets secure.</p>
+                </div>
+                <div class="about-value-card animate-on-scroll">
+                    <span class="about-value-icon">⚙️</span>
+                    <h3 class="about-value-title">Precision</h3>
+                    <p class="about-value-text">Accurate detection of every vulnerability.</p>
+                </div>
+                <div class="about-value-card animate-on-scroll">
+                    <span class="about-value-icon">🚀</span>
+                    <h3 class="about-value-title">Innovation</h3>
+                    <p class="about-value-text">Evolving to outpace cyber threats.</p>
+                </div>
+                <div class="about-value-card animate-on-scroll">
+                    <span class="about-value-icon">🌐</span>
+                    <h3 class="about-value-title">Accessibility</h3>
+                    <p class="about-value-text">Cybersecurity for everyone, everywhere.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="about-why-choose-section">
+            <h2 class="home-section-title animate-on-scroll">Why Choose ScanGuard</h2>
+            <div class="about-why-choose-grid">
+                <div class="about-why-choose-card animate-on-scroll">
+                    <span class="about-why-choose-icon">⚡</span>
+                    <h3 class="about-why-choose-title">Fast Scans</h3>
+                    <p class="about-why-choose-text">Get results in seconds, not hours.</p>
+                </div>
+                <div class="about-why-choose-card animate-on-scroll">
+                    <span class="about-why-choose-icon">🤖</span>
+                    <h3 class="about-why-choose-title">AI-Powered</h3>
+                    <p class="about-why-choose-text">Smart tech for smarter detection.</p>
+                </div>
+                <div class="about-why-choose-card animate-on-scroll">
+                    <span class="about-why-choose-icon">💸</span>
+                    <h3 class="about-why-choose-title">Cost-Effective</h3>
+                    <p class="about-why-choose-text">Premium security at fair prices.</p>
+                </div>
+                <div class="about-why-choose-card animate-on-scroll">
+                    <span class="about-why-choose-icon">📞</span>
+                    <h3 class="about-why-choose-title">Support</h3>
+                    <p class="about-why-choose-text">Help whenever you need it.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="about-team-section">
+            <h2 class="home-section-title animate-on-scroll">Our Team</h2>
+            <div class="about-team-grid">
+                <div class="about-team-card animate-on-scroll">
+                    <div class="about-team-placeholder">JD</div>
+                    <h3 class="about-team-name">Jane Doe</h3>
+                    <p class="about-team-role">Founder & CEO</p>
+                    <p class="about-team-bio">Jane launched ScanGuard in 2025 with a vision to make cybersecurity simple. Her expertise in software engineering drives our mission to protect the digital world.</p>
+                </div>
+                <div class="about-team-card animate-on-scroll">
+                    <div class="about-team-placeholder">JS</div>
+                    <h3 class="about-team-name">John Smith</h3>
+                    <p class="about-team-role">Lead Developer</p>
+                    <p class="about-team-bio">John builds the heart of our scanning tools. With a passion for AI and security, he ensures our platform is powerful and intuitive.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="about-impact-section">
+            <h2 class="home-section-title animate-on-scroll">Our Impact</h2>
+            <div class="about-impact-grid">
+                <div class="about-impact-bar animate-on-scroll">
+                    <div class="about-impact-label">Website Scans</div>
+                    <div class="about-impact-progress">
+                        <div class="about-impact-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="about-impact-bar animate-on-scroll">
+                    <div class="about-impact-label">Vulnerabilities Detected</div>
+                    <div class="about-impact-progress">
+                        <div class="about-impact-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="about-impact-bar animate-on-scroll">
+                    <div class="about-impact-label">User Trust</div>
+                    <div class="about-impact-progress">
+                        <div class="about-impact-fill" style="width: 95%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="about-contact-section">
+            <h2 class="home-section-title animate-on-scroll">Get in Touch</h2>
+            <div class="about-contact-grid">
+                <div class="about-contact-form animate-on-scroll">
+                    <h3>Contact Us</h3>
+                    <form action="/contact" method="POST">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="home-btn home-btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="about-contact-info animate-on-scroll">
+                    <h3>Connect with ScanGuard</h3>
+                    <p>Email: <a href="mailto:support@scanguard.com">support@scanguard.com</a></p>
+                    <p>Follow us for updates and tips on staying secure online.</p>
+                    <div class="about-contact-social">
+                        <a href="https://twitter.com/scanguard" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com/company/scanguard" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="about-cta-section">
+            <h2 class="about-cta-title animate-on-scroll">Secure Your Future</h2>
+            <p class="about-cta-subtitle animate-on-scroll">Join ScanGuard to protect your websites and files with confidence.</p>
+            <a href="/get-started" class="home-btn home-btn-primary animate-on-scroll">Start Scanning Now</a>
+        </section>
+    </div>
+
+    <script>
+        // Scroll animations
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        animateElements.forEach(el => observer.observe(el));
+
+        // Animated counters
+        const counters = document.querySelectorAll('.about-stat-number');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-count');
+            let count = 0;
+            const increment = target / 100;
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    counter.textContent = Math.ceil(count);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            observer.observe(counter);
+            counter.addEventListener('animationstart', updateCounter, { once: true });
+        });
+
+        // Progress bar animation
+        const progressBars = document.querySelectorAll('.about-impact-fill');
+        progressBars.forEach(bar => {
+            observer.observe(bar);
+            bar.addEventListener('animationstart', () => {
+                bar.style.transition = 'width 2s ease';
+                bar.style.width = bar.getAttribute('style').match(/width:\s*(\d+)%/)[1] + '%';
+            }, { once: true });
+        });
+    </script>
+</body>
+</html>
