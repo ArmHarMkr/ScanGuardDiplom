@@ -434,7 +434,7 @@
         </section>
 
         <!-- Results Section -->
-        @if (Model != null)
+        @if (ViewBag.PortScanResults != null)
         {
             <section class="scanner-results-section" style="display: block;">
                 <h3 class="scanner-results-title animate-on-scroll">Scan Results</h3>
@@ -539,8 +539,6 @@
                     </div>
                 </div>
 
-                @if (ViewBag.PortScanResults != null)
-                {
                     <div class="scanner-port-results">
                         <h3 class="scanner-results-title animate-on-scroll">Port Scan Results</h3>
                         <div class="scanner-port-grid">
@@ -553,7 +551,6 @@
                             }
                         </div>
                     </div>
-                }
             </section>
         }
 
