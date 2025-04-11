@@ -525,7 +525,6 @@ html {
 :root {
     --primary-bg: #f5f7fa;
     --secondary-bg: #1a1a2e;
-    --accent-color: #ef233c;
     --text-primary: #ffffff;
     --text-secondary: #d1d5db;
     --text-dark: #1f2937;
@@ -537,7 +536,7 @@ html {
 
 body {
     background-color: var(--primary-bg);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .home-container {

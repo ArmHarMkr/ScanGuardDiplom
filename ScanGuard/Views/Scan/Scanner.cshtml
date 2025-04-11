@@ -1,89 +1,678 @@
-﻿ @model ScanGuard.Models.Vulnerability
+﻿@model ScanGuard.Models.Vulnerability
 
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="error">@TempData["ErrorMessage"]</div>
-}
-
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="success">@TempData["SuccessMessage"]</div>
-}
-
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Сканер уязвимостей</title>
-   
-</head>
-<body>
-    <div class="main_container">
-        <h1>Сканер уязвимостей</h1>
-
-        @if (ViewBag.ErrorMessage != null)
-        {
-            <div class="error">@ViewBag.ErrorMessage</div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scan your website for vulnerabilities with ScanGuard’s powerful security tool.">
+    <title>Vulnerability Scanner - ScanGuard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/styles.css"> <!-- Your existing CSS file -->
+    <style>
+        /* Scanner page styles */
+        .scanner-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 100vh;
         }
 
-        <form asp-action="Scanner" method="post" id="scanForm">
-            <div class="scanguard-input-group">
-                <label for="email" class="scanguard-label">URL for scan</label>
-                <input style="width:300px" type="text" id="url" name="url" class="scanguard-input" placeholder="https://example.com"><br><br>
-            <button class="scanguard-btn scanguard-btn-primary" type="submit">Scan</button>
-            </div>
-        </form>
+        /* Section styling */
+        .scanner-intro-section,
+        .scanner-form-section,
+        .scanner-results-section,
+        .scanner-info-section,
+        .scanner-cta-section {
+            margin: 4rem 0;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
 
-        @if (Model != null)
-        {
-            <div class="result-container">
-                <h3>Результаты сканирования:</h3>
-                <p><strong>SQLi:</strong> <span class="@(Model.SQLi ? "error" : "success")">@Model.SQLi</span></p>
-                <p><strong>XSS:</strong> <span class="@(Model.XSS ? "error" : "success")">@Model.XSS</span></p>
-                <p><strong>CSRF:</strong> <span class="@(Model.CSRF ? "error" : "success")">@Model.CSRF</span></p>
-                <p><strong>IDOR:</strong> <span class="@(Model.IDOR ? "error" : "success")">@Model.IDOR</span></p>
-                <p><strong>Broken Authentication:</strong> <span class="@(Model.BrokenAuthentification ? "error" : "success")">@Model.BrokenAuthentification</span></p>
-                <p><strong>Check Weak Password Policy:</strong> <span class="@(Model.CheckWeakPasswordPolicy ? "error" : "success")">@Model.CheckWeakPasswordPolicy</span></p>
-                <p><strong>Security Misconfiguration:</strong> <span class="@(Model.SecurityMisconfiguration ? "error" : "success")">@Model.SecurityMisconfiguration</span></p>
-                <p><strong>Unvalidated Redirect:</strong> <span class="@(Model.UnvalidatedRedirectAndForwards ? "error" : "success")">@Model.UnvalidatedRedirectAndForwards</span></p>
-                <p><strong>Directory Listing:</strong> <span class="@(Model.DirectoryListing ? "error" : "success")">@Model.DirectoryListing</span></p>
-                <p><strong>LFI:</strong> <span class="@(Model.LFI ? "error" : "success")">@Model.LFI</span></p>
-                <p><strong>RFI:</strong> <span class="@(Model.RFI ? "error" : "success")">@Model.RFI</span></p>
-                <p><strong>HTTP Response Splitting:</strong> <span class="@(Model.HTTPResponseSplitting ? "error" : "success")">@Model.HTTPResponseSplitting</span></p>
-                <p><strong>Phishing:</strong> <span class="@(Model.Phishing ? "error" : "success")">@Model.Phishing</span></p>
-                <p><strong>Not Secure Domain:</strong> <span class="@(!Model.HTTPWithoutS ? "success" : "error")">@Model.HTTPWithoutS</span></p>
-            </div>
+            /* Subtle background pattern */
+            .scanner-form-section::before,
+            .scanner-results-section::before,
+            .scanner-info-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23ef233c' fill-opacity='0.05'/%3E%3C/svg%3E");
+                opacity: 0.1;
+                z-index: 0;
+            }
 
-            @if (ViewBag.PortScanResults != null)
-            {
-                <div class="result-container">
-                    <h3>Port Scan Results:</h3>
-                    @foreach (var port in ViewBag.PortScanResults as Dictionary<int, (bool IsOpen, string Service, string Version)>)
-                    {
-                        <p>Port @port.Key: @(port.Value.IsOpen ? "Open" : "Closed") - @port.Value.Service (@port.Value.Version)</p>
-                    }
-                </div>
+        /* Intro Section */
+        .scanner-intro-section {
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        .scanner-intro-title {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark); /* #1f2937 */
+            margin-bottom: 1rem;
+        }
+
+        .scanner-intro-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted); /* #6b7280 */
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Messages */
+        .scanner-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+            .scanner-message.error {
+                background: #fee2e2;
+                color: #dc2626;
+                border: 1px solid #dc2626;
+            }
+
+            .scanner-message.success {
+                background: #d1fae5;
+                color: #059669;
+                border: 1px solid #059669;
+            }
+
+        /* Form Section */
+        .scanner-form-section {
+            text-align: center;
+        }
+
+        .scanner-form-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scanner-form-group {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scanner-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .scanner-input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+            .scanner-input:focus {
+                border-color: var(--accent-color);
+                outline: none;
+            }
+
+        .scanner-btn {
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .scanner-btn-primary {
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            margin-top: 10px; /* Added margin-top */
+        }
+
+            .scanner-btn-primary:hover {
+                background: #d90429;
+                cursor: pointer;    
+            }
+
+        /* Results Section */
+        .scanner-results-section {
+            display: none; /* Hidden until results load */
+        }
+
+        .scanner-results-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scanner-results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scanner-result-item {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+            .scanner-result-item:hover {
+                transform: translateY(-5px);
+            }
+
+        .scanner-result-icon {
+            font-size: 1.5rem;
+        }
+
+        .scanner-result-text {
+            flex: 1;
+        }
+
+        .scanner-result-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .scanner-result-status {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+            .scanner-result-status.error {
+                color: #dc2626;
+            }
+
+            .scanner-result-status.success {
+                color: #059669;
+            }
+
+        /* Port Scan Results */
+        .scanner-port-results {
+            margin-top: 2rem;
+        }
+
+        .scanner-port-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .scanner-port-item {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .scanner-port-status-open {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        .scanner-port-status-closed {
+            color: #059669;
+            font-weight: 600;
+        }
+
+        /* Info Table Section */
+        .scanner-info-section {
+            text-align: center;
+        }
+
+        .scanner-info-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scanner-info-table {
+            width: 100%;
+            border-collapse: collapse;
+            position: relative;
+            z-index: 1;
+            overflow-x: auto; /* Добавь это */
+            display: block; /* Добавь это */
+        }
+
+            .scanner-info-table th,
+            .scanner-info-table td {
+                padding: 1rem;
+                text-align: left;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .scanner-info-table th {
+                background: var(--accent-color);
+                color: var(--text-primary);
+                font-weight: 600;
+            }
+
+            .scanner-info-table td {
+                background: #ffffff;
+                color: var(--text-dark);
+            }
+
+        /* CTA Section */
+        .scanner-cta-section {
+            text-align: center;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .scanner-cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .scanner-cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scanner-cta-section a {
+            text-decoration: none; /* Remove underline */
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e5e7eb;
+            border-top: 5px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
             }
         }
-    </div>
 
-    <div class="loading-overlay" id="loading">
-        <div class="spinner"></div>
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Responsive fixes */
+        @@media (max-width: 768px) {
+            .scanner-intro-title,
+            .scanner-cta-title,
+            .scanner-info-title {
+                font-size: 2rem;
+            }
+
+            .scanner-intro-subtitle,
+            .scanner-cta-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .scanner-form-title,
+            .scanner-results-title {
+                font-size: 1.8rem;
+            }
+
+            .scanner-input {
+                padding: 0.8rem;
+            }
+
+            .scanner-btn {
+                padding: 0.8rem 1.5rem;
+            }
+
+            .scanner-results-grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+
+            .scanner-port-grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+
+            .scanner-result-item,
+            .scanner-port-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanner-container">
+        <!-- Intro Section -->
+        <section class="scanner-intro-section">
+            <h1 class="scanner-intro-title animate-on-scroll">Vulnerability Scanner</h1>
+            <p class="scanner-intro-subtitle animate-on-scroll">Protect your website by identifying security risks with ScanGuard’s advanced scanning technology.</p>
+        </section>
+
+        <!-- Messages -->
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="scanner-message error animate-on-scroll">@TempData["ErrorMessage"]</div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="scanner-message success animate-on-scroll">@TempData["SuccessMessage"]</div>
+        }
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="scanner-message error animate-on-scroll">@ViewBag.ErrorMessage</div>
+        }
+
+        <!-- Form Section -->
+        <section class="scanner-form-section">
+            <h2 class="scanner-form-title animate-on-scroll">Scan Your Website</h2>
+            <form asp-action="Scanner" method="post" id="scanForm" class="scanner-form-group">
+                <label for="url" class="scanner-label">Enter URL to Scan</label>
+                <input type="text" id="url" name="url" class="scanner-input" placeholder="https://example.com" required>
+                <button type="submit" class="scanner-btn scanner-btn-primary animate-on-scroll">Start Scan</button>
+            </form>
+        </section>
+
+        <!-- Results Section -->
+        @if (Model != null)
+        {
+            <section class="scanner-results-section" style="display: block;">
+                <h3 class="scanner-results-title animate-on-scroll">Scan Results</h3>
+                <div class="scanner-results-grid">
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🛡️</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">SQL Injection (SQLi):</span><br>
+                            <span class="scanner-result-status @(Model.SQLi ? "error" : "success")">@(Model.SQLi ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">📜</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Cross-Site Scripting (XSS):</span><br>
+                            <span class="scanner-result-status @(Model.XSS ? "error" : "success")">@(Model.XSS ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🔗</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">CSRF:</span><br>
+                            <span class="scanner-result-status @(Model.CSRF ? "error" : "success")">@(Model.CSRF ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🔍</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">IDOR:</span><br>
+                            <span class="scanner-result-status @(Model.IDOR ? "error" : "success")">@(Model.IDOR ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🔐</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Broken Authentication:</span><br>
+                            <span class="scanner-result-status @(Model.BrokenAuthentification ? "error" : "success")">@(Model.BrokenAuthentification ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🔑</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Weak Password Policy:</span><br>
+                            <span class="scanner-result-status @(Model.CheckWeakPasswordPolicy ? "error" : "success")">@(Model.CheckWeakPasswordPolicy ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">⚙️</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Security Misconfiguration:</span><br>
+                            <span class="scanner-result-status @(Model.SecurityMisconfiguration ? "error" : "success")">@(Model.SecurityMisconfiguration ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">➡️</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Unvalidated Redirects:</span><br>
+                            <span class="scanner-result-status @(Model.UnvalidatedRedirectAndForwards ? "error" : "success")">@(Model.UnvalidatedRedirectAndForwards ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">📁</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Directory Listing:</span><br>
+                            <span class="scanner-result-status @(Model.DirectoryListing ? "error" : "success")">@(Model.DirectoryListing ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">📄</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Local File Inclusion (LFI):</span><br>
+                            <span class="scanner-result-status @(Model.LFI ? "error" : "success")">@(Model.LFI ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🌐</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Remote File Inclusion (RFI):</span><br>
+                            <span class="scanner-result-status @(Model.RFI ? "error" : "success")">@(Model.RFI ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">📡</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">HTTP Response Splitting:</span><br>
+                            <span class="scanner-result-status @(Model.HTTPResponseSplitting ? "error" : "success")">@(Model.HTTPResponseSplitting ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🎣</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Phishing:</span><br>
+                            <span class="scanner-result-status @(Model.Phishing ? "error" : "success")">@(Model.Phishing ? "Detected" : "Not Detected")</span>
+                        </div>
+                    </div>
+                    <div class="scanner-result-item animate-on-scroll">
+                        <span class="scanner-result-icon">🔒</span>
+                        <div class="scanner-result-text">
+                            <span class="scanner-result-label">Not Secure Domain (HTTP):</span><br>
+                            <span class="scanner-result-status @(!Model.HTTPWithoutS ? "success" : "error")">@(!Model.HTTPWithoutS ? "Secure" : "Insecure")</span>
+                        </div>
+                    </div>
+                </div>
+
+                @if (ViewBag.PortScanResults != null)
+                {
+                    <div class="scanner-port-results">
+                        <h3 class="scanner-results-title animate-on-scroll">Port Scan Results</h3>
+                        <div class="scanner-port-grid">
+                            @foreach (var port in ViewBag.PortScanResults as Dictionary<int, (bool IsOpen, string Service, string Version)>)
+                            {
+                                <div class="scanner-port-item animate-on-scroll">
+                                    <p>Port @port.Key: <span class="scanner-port-status-@(port.Value.IsOpen ? "open" : "closed")">@(port.Value.IsOpen ? "Open" : "Closed")</span></p>
+                                    <p>@port.Value.Service (@port.Value.Version)</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </section>
+        }
+
+        <!-- Info Table Section -->
+        <section class="scanner-info-section">
+            <h2 class="scanner-info-title animate-on-scroll">Vulnerability Information</h2>
+            <table class="scanner-info-table">
+                <thead>
+                    <tr>
+                        <th>Vulnerability</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SQL Injection (SQLi)</td>
+                        <td>Allows attackers to inject malicious SQL code into input fields, potentially accessing or altering database content.</td>
+                    </tr>
+                    <tr>
+                        <td>Cross-Site Scripting (XSS)</td>
+                        <td>Enables attackers to inject scripts into web pages, which run in users’ browsers, potentially stealing data or defacing the site.</td>
+                    </tr>
+                    <tr>
+                        <td>CSRF</td>
+                        <td>Tricks authenticated users into performing unintended actions (e.g., changing settings) via forged requests.</td>
+                    </tr>
+                    <tr>
+                        <td>IDOR</td>
+                        <td>Insecure Direct Object References allow attackers to access unauthorized resources by manipulating identifiers.</td>
+                    </tr>
+                    <tr>
+                        <td>Broken Authentication</td>
+                        <td>Weak authentication lets attackers bypass login or hijack sessions, gaining unauthorized access.</td>
+                    </tr>
+                    <tr>
+                        <td>Weak Password Policy</td>
+                        <td>Simple passwords make accounts vulnerable to brute-force or guessing attacks.</td>
+                    </tr>
+                    <tr>
+                        <td>Security Misconfiguration</td>
+                        <td>Improper settings (e.g., open ports, default credentials) expose vulnerabilities in servers or apps.</td>
+                    </tr>
+                    <tr>
+                        <td>Unvalidated Redirects</td>
+                        <td>Untrusted redirect inputs can send users to malicious sites, aiding phishing attacks.</td>
+                    </tr>
+                    <tr>
+                        <td>Directory Listing</td>
+                        <td>Misconfigured servers expose directory contents, revealing sensitive files or structure.</td>
+                    </tr>
+                    <tr>
+                        <td>Local File Inclusion (LFI)</td>
+                        <td>Allows attackers to include local files (e.g., config files), potentially exposing sensitive data.</td>
+                    </tr>
+                    <tr>
+                        <td>Remote File Inclusion (RFI)</td>
+                        <td>Permits inclusion of remote malicious files, often leading to code execution on the server.</td>
+                    </tr>
+                    <tr>
+                        <td>HTTP Response Splitting</td>
+                        <td>Exploits header manipulation to inject content or redirect users to malicious sites.</td>
+                    </tr>
+                    <tr>
+                        <td>Phishing</td>
+                        <td>Deceptive techniques trick users into revealing credentials via fake pages or links.</td>
+                    </tr>
+                    <tr>
+                        <td>Not Secure Domain (HTTP)</td>
+                        <td>Non-HTTPS connections expose data to interception or tampering by attackers.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="scanner-cta-section">
+            <h2 class="scanner-cta-title animate-on-scroll">Stay Secure with ScanGuard</h2>
+            <p class="scanner-cta-subtitle animate-on-scroll">Run regular scans to keep your website safe from vulnerabilities.</p>
+            <a href="/Scan/Scanner" class="scanner-btn scanner-btn-primary animate-on-scroll">Scan Another URL</a>
+        </section>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading">
+            <div class="spinner"></div>
+        </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let loadingOverlay = document.getElementById('loading');
+            const loadingOverlay = document.getElementById('loading');
+            const scanForm = document.getElementById('scanForm');
 
-            document.getElementById('scanForm').addEventListener('submit', function () {
+            scanForm.addEventListener('submit', function () {
                 loadingOverlay.style.display = 'flex';
             });
 
-            // Прячем спиннер после загрузки страницы
+            // Hide spinner on page load or after results
             window.onload = function () {
                 loadingOverlay.style.display = 'none';
             };
+
+            // Show results section if data exists
+            const resultsSection = document.querySelector('.scanner-results-section');
+            if (resultsSection && '@Model' !== '') {
+                resultsSection.style.display = 'block';
+            }
         });
+
+        // Scroll animations
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        animateElements.forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
