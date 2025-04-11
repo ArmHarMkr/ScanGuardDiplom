@@ -88,7 +88,7 @@ namespace MGOBankAp.Controllers
                 .Where(r => r.IsGood)
                 .Include(r => r.User)
                 .OrderByDescending(r => r.DateTime)
-                .Select(r => r.User.UserName)
+                .Select(r => r.User.FullName)
                 .FirstOrDefaultAsync();
             ViewBag.ReviewOnePhoto = await Context.ReviewEntities
                 .Where(r => r.IsGood)
@@ -110,7 +110,7 @@ namespace MGOBankAp.Controllers
                 .Include(r => r.User)
                 .OrderByDescending(r => r.DateTime)
                 .Skip(1)
-                .Select(r => r.User.UserName)
+                .Select(r => r.User.FullName)
                 .FirstOrDefaultAsync();
             ViewBag.ReviewTwoPhoto = await Context.ReviewEntities
                 .Where(r => r.IsGood)
