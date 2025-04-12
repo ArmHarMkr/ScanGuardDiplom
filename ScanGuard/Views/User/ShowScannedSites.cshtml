@@ -1,66 +1,622 @@
 ﻿@using ScanGuard.ViewModels
 @model List<SiteVulnViewModel>
 
-<!-- Подключение CSS -->
-@* <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" /> *@
+<div class="history-container">
+    <!-- Header -->
+    <header class="history-header animate-on-scroll">
+        <h1 class="history-title">Scan History</h1>
+        <p class="history-subtitle">Review and analyze past scans to keep your websites secure with ScanGuard’s AI-powered insights.</p>
+    </header>
 
-<div class="scanguard-table-container">
-    <table class="scanguard-table">
-        <thead>
-            <tr>
-                <th class="scanguard-th">Website URL</th>
-                <th class="scanguard-th">Scan Date</th>
-                <th class="scanguard-th">Vulnerability Count</th>
-                <th class="scanguard-th">Vulnerability Type</th>
-                <th class="scanguard-th">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var site in Model)
-            {
-                <tr class="scanguard-tr">
-                    <td class="scanguard-td">@site.Url</td>
-                    <td class="scanguard-td">@site.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td class="scanguard-td scanguard-count">
-                        @{
-                            var badgeClass = "safe";
-                            if (site.VulnerabilityCount > 5)
-                            {
-                                badgeClass = "danger";
-                            }
-                            else if (site.VulnerabilityCount > 0)
-                            {
-                                badgeClass = "warning";
-                            }
-                        }
-                        <span class="scanguard-badge scanguard-badge-@badgeClass">@site.VulnerabilityCount</span>
-                    </td>
-                    <td class="scanguard-td">
-                        @(site.Vulnerabilities != null && site.Vulnerabilities.Any()
-                            ? string.Join(", ", site.Vulnerabilities.Select(v => v.VulnerabilityType))
-                            : "No vulnerabilities found")
-                    </td>
-                    <td class="scanguard-td">
-                        <form asp-action="RemoveSiteScan" asp-route-id="@site.WebsiteScanId" method="post" class="action-form">
-                            <button type="submit" class="scanguard-btn scanguard-btn-primary">Remove</button>
-                        </form>
+    <!-- Controls -->
+    <div class="history-controls animate-on-scroll">
+        <div class="history-search">
+            <input type="text" class="history-search-input" placeholder="Search by URL..." id="searchInput">
+        </div>
+        <select class="history-filter" id="sortFilter">
+            <option value="recent">Sort by: Recent</option>
+            <option value="vuln-desc">Vulnerabilities (High to Low)</option>
+            <option value="vuln-asc">Vulnerabilities (Low to High)</option>
+            <option value="date-asc">Date (Oldest)</option>
+        </select>
+    </div>
 
-                        @if (site.IsPremium || site.IsAdmin)
-                        {
-                            <button class="btn-custom analyze-btn" onclick="analyzeSite('@site.WebsiteScanId')">Analyze</button>
-                            <div id="result-@site.WebsiteScanId" class="analysis-result"></div>
-                        }
-                    </td>
-
+    <!-- Table -->
+    <div class="history-table-container animate-on-scroll">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th class="history-th">Website URL</th>
+                    <th class="history-th">Scan Date</th>
+                    <th class="history-th">Vulnerability Count</th>
+                    <th class="history-th">Vulnerability Type</th>
+                    <th class="history-th">Actions</th>
                 </tr>
+            </thead>
+            <tbody id="historyTableBody">
+                @foreach (var site in Model)
+                {
+                    <tr class="history-tr" data-vuln-count="@site.VulnerabilityCount" data-scan-date="@site.ScanDate.ToString("yyyy-MM-dd HH:mm")">
+                        <td class="history-td history-url" data-label="Website URL">
+                            <span class="url-text">@site.Url</span>
+                            <span class="url-tooltip">@site.Url</span>
+                        </td>
+                        <td class="history-td history-date" data-label="Scan Date">@site.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="history-td history-count" data-label="Vulnerability Count">
+                            @{
+                                var badgeClass = "safe";
+                                if (site.VulnerabilityCount > 5)
+                                {
+                                    badgeClass = "danger";
+                                }
+                                else if (site.VulnerabilityCount > 0)
+                                {
+                                    badgeClass = "warning";
+                                }
+                            }
+                            <span class="history-badge history-badge-@badgeClass">@site.VulnerabilityCount</span>
+                        </td>
+                        <td class="history-td history-vuln-types" data-label="Vulnerability Type">
+                            <span class="vuln-types-content">
+                                @(site.Vulnerabilities != null && site.Vulnerabilities.Any()
+                                    ? string.Join(", ", site.Vulnerabilities.Select(v => v.VulnerabilityType))
+                                    : "No vulnerabilities found")
+                            </span>
+                        </td>
+                        <td class="history-td history-actions" data-label="Actions">
+                            <div class="action-buttons">
+                                <form style="margin:0px;"asp-action="RemoveSiteScan" asp-route-id="@site.WebsiteScanId" method="post" class="action-form" style="display: inline;">
+                                    <button type="submit" class="history-btn history-btn-remove">
+                                        <span>Remove</span>
+                                    </button>
+                                </form>
+                                @if (site.IsPremium || site.IsAdmin)
+                                {
+                                    <button class="history-btn history-btn-analyze history-btn-premium" onclick="openAnalysisModal('@site.WebsiteScanId')">
+                                        <span>Analyze</span>
+                                    </button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-            }
-        </tbody>
-    </table>
+    <!-- Analysis Modal -->
+    <div class="analysis-modal" id="analysisModal">
+        <div class="analysis-modal-content">
+            <span class="modal-close" onclick="closeAnalysisModal()">×</span>
+            <h3 class="modal-title">AI Analysis</h3>
+            <div class="modal-body" id="modalBody">
+                <div class="modal-spinner"></div>
+                <p id="modalMessage">Loading analysis...</p>
+            </div>
+        </div>
+    </div>
 </div>
 
+<style>
+    .history-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    /* Header */
+    .history-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .history-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+
+    .history-subtitle {
+        font-size: 1.1rem;
+        color: #6b7280;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Controls */
+    .history-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .history-search {
+        flex: 1;
+        max-width: 400px;
+        position: relative;
+    }
+
+    .history-search-input {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #1f2937;
+        background: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .history-search-input:focus {
+        border-color: #059669;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+
+    .history-filter {
+        padding: 0.9rem 1.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: #ffffff;
+        font-size: 1rem;
+        color: #1f2937;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .history-filter:hover {
+        border-color: #059669;
+    }
+
+    /* Table */
+    .history-table-container {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+    }
+
+    .history-th {
+        background: var(--accent-color, #3b82f6);
+        color: #ffffff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 1.2rem;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .history-th:hover {
+        background: #1e40af;
+    }
+
+    /* Column widths */
+
+
+    .history-tr {
+        border-bottom: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+
+    .history-tr:hover {
+        background: #f9f9f9;
+    }
+
+    .history-td {
+        padding: 1.2rem;
+        font-size: 1rem;
+        color: #1f2937;
+        vertical-align: middle;
+    }
+
+    /* URL Truncation */
+    .history-url {
+        position: relative;
+    }
+
+    .url-text {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .url-tooltip {
+        display: none;
+        position: absolute;
+        background: #1f2937;
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        z-index: 10;
+        top: 100%;
+        left: 0;
+        max-width: 300px;
+        white-space: normal;
+        word-break: break-all;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .history-url:hover .url-tooltip {
+        display: block;
+    }
+
+    .history-count {
+        text-align: center;
+    }
+
+    .history-badge {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .history-badge-safe {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .history-badge-warning {
+        background: #fef3c7;
+        color: #d97706;
+    }
+
+    .history-badge-danger {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    /* Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .history-btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .history-btn-remove {
+        background: #dc2626;
+        color: #ffffff;
+    }
+
+    .history-btn-remove:hover {
+        background: #b91c1c;
+    }
+
+    .history-btn-analyze {
+        background: #059669;
+        color: #ffffff;
+    }
+
+    .history-btn-analyze:hover {
+        background: #047857;
+    }
+
+    .history-btn-premium::before {
+        content: '★';
+        margin-right: 0.3rem;
+        color: #fef3c7;
+    }
+
+    .history-btn-analyze.loading::after {
+        content: '';
+        width: 16px;
+        height: 16px;
+        border: 2px solid #ffffff;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-left: 0.5rem;
+    }
+
+    /* Modal */
+    .analysis-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+    }
+
+    .analysis-modal.show {
+        display: flex;
+    }
+
+    .analysis-modal-content {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 90%;
+        padding: 2rem;
+        position: relative;
+        animation: modalFadeIn 0.3s ease;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+        color: #1f2937;
+    }
+
+    .modal-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 1rem;
+    }
+
+    .modal-body {
+        font-size: 1rem;
+        color: #1f2937;
+        line-height: 1.6;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .modal-spinner {
+        width: 24px;
+        height: 24px;
+        border: 3px solid #e5e7eb;
+        border-top: 3px solid #059669;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes modalFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .history-container {
+            padding: 1.5rem 0.5rem;
+        }
+
+        .history-title {
+            font-size: 2rem;
+        }
+
+        .history-subtitle {
+            font-size: 1rem;
+        }
+
+        .history-controls {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.8rem;
+        }
+
+        .history-search {
+            max-width: 100%;
+        }
+
+        .history-search-input, .history-filter {
+            padding: 0.8rem;
+            font-size: 0.95rem;
+            height: 48px;
+        }
+
+        .history-table-container {
+            background: transparent;
+            box-shadow: none;
+            overflow-x: hidden;
+            overflow-y: visible;
+            max-height: none;
+            border-radius: 0;
+        }
+
+        .history-table {
+            display: block;
+            width: 100%;
+            background: transparent;
+        }
+
+        .history-th {
+            display: none;
+        }
+
+        .history-tr {
+            display: block;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            border-bottom: none;
+            position: relative;
+        }
+
+        .history-td {
+            display: block;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .history-url {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .url-text {
+            font-size: 1rem;
+            white-space: normal;
+            word-break: break-all;
+        }
+
+        .url-tooltip {
+            display: none;
+        }
+
+        .history-date::before {
+            content: "Scan Date: ";
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .history-count {
+            margin: 0.5rem 0;
+        }
+
+        .history-count::before {
+            content: "Vulnerabilities: ";
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .history-vuln-types::before {
+            content: "Vulnerability Types: ";
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .history-vuln-types {
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .history-actions {
+            margin-top: 1rem;
+        }
+
+        .action-buttons {
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .history-btn {
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            width: auto;
+            height: 40px;
+        }
+
+        .history-tr::after {
+            content: none;
+        }
+    }
+
+    @@media (max-width: 414px) {
+        .history-container {
+            padding: 1rem 0.5rem;
+        }
+
+        .history-title {
+            font-size: 1.8rem;
+        }
+
+        .history-subtitle {
+            font-size: 0.9rem;
+        }
+
+        .history-tr {
+            padding: 0.75rem;
+        }
+
+        .history-td {
+            font-size: 0.9rem;
+        }
+
+        .url-text {
+            font-size: 0.95rem;
+        }
+
+        .history-btn {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.85rem;
+            height: 36px;
+        }
+    }
+</style>
+
 <script>
-    function analyzeSite(scanId) {
+    function openAnalysisModal(scanId) {
+        const modal = document.getElementById('analysisModal');
+        const modalBody = document.getElementById('modalBody');
+        const modalMessage = document.getElementById('modalMessage');
+        const button = document.querySelector(`button[onclick="openAnalysisModal('${scanId}')"]`);
+
+        modalMessage.textContent = 'Loading analysis...';
+        modalBody.querySelector('.modal-spinner').style.display = 'block';
+        modal.classList.add('show');
+        button.classList.add('loading');
+
         fetch('/api/ScanApi/analyze?scanId=' + scanId, {
             method: 'GET'
         })
@@ -69,11 +625,78 @@
                 return response.json();
             })
             .then(data => {
-                document.getElementById('result-' + scanId).innerHTML = '<b>Analysis:</b> ' + (data.analysis || 'No analysis available');
+                modalMessage.textContent = data.analysis || 'No analysis available';
+                modalBody.querySelector('.modal-spinner').style.display = 'none';
             })
             .catch(error => {
                 console.error('Error:', error);
-                document.getElementById('result-' + scanId).innerHTML = '<b>Error:</b> Failed to load analysis';
+                modalMessage.textContent = 'Failed to load analysis';
+                modalBody.querySelector('.modal-spinner').style.display = 'none';
+            })
+            .finally(() => {
+                button.classList.remove('loading');
             });
+    }
+
+    function closeAnalysisModal() {
+        const modal = document.getElementById('analysisModal');
+        modal.classList.remove('show');
+    }
+
+    // Search Functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('.history-tr');
+        
+        rows.forEach(row => {
+            const url = row.querySelector('.history-url').textContent.toLowerCase();
+            row.style.display = url.includes(searchTerm) ? '' : 'none';
+        });
+    });
+
+    // Sort Functionality
+    document.getElementById('sortFilter').addEventListener('change', function(e) {
+        const sortValue = e.target.value;
+        const tbody = document.getElementById('historyTableBody');
+        const rows = Array.from(tbody.querySelectorAll('.history-tr'));
+
+        rows.sort((a, b) => {
+            if (sortValue === 'vuln-desc') {
+                return b.dataset.vulnCount - a.dataset.vulnCount;
+            } else if (sortValue === 'vuln-asc') {
+                return a.dataset.vulnCount - b.dataset.vulnCount;
+            } else if (sortValue === 'date-asc') {
+                return new Date(a.dataset.scanDate) - new Date(b.dataset.scanDate);
+            } else { // recent
+                return new Date(b.dataset.scanDate) - new Date(a.dataset.scanDate);
+            }
+        });
+
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+    });
+
+    // Scroll Animation
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    animateElements.forEach(el => observer.observe(el));
+
+    // Optimize touch interactions
+    if ('ontouchstart' in window) {
+        document.querySelectorAll('.history-btn').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
     }
 </script>

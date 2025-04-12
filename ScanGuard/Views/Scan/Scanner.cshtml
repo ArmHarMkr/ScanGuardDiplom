@@ -1,6 +1,4 @@
-﻿@model ScanGuard.Models.Vulnerability
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -264,29 +262,58 @@
 
         .scanner-info-table {
             width: 100%;
-            border-collapse: collapse;
             position: relative;
             z-index: 1;
-            overflow-x: auto; /* Добавь это */
-            display: block; /* Добавь это */
+            overflow-x: auto;
+            display: block;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
-            .scanner-info-table th,
-            .scanner-info-table td {
-                padding: 1rem;
-                text-align: left;
-                border-bottom: 1px solid #e5e7eb;
+        .scanner-info-table-header {
+            background: var(--accent-color);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1.2rem;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .scanner-info-table-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .scanner-info-table-row {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.3s ease;
+        }
+
+            .scanner-info-table-row:hover {
+                background: #f9f9f9;
             }
 
-            .scanner-info-table th {
-                background: var(--accent-color);
-                color: var(--text-primary);
+        .scanner-info-table-cell {
+            flex: 1;
+            padding: 1.2rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+
+            .scanner-info-table-cell:first-child {
+                flex: 0.4;
                 font-weight: 600;
-            }
-
-            .scanner-info-table td {
-                background: #ffffff;
                 color: var(--text-dark);
+                border-right: 1px solid #e5e7eb;
             }
 
         /* CTA Section */
@@ -398,6 +425,27 @@
             .scanner-port-item {
                 padding: 1rem;
             }
+
+            .scanner-info-table-header {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .scanner-info-table-row {
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .scanner-info-table-cell {
+                padding: 0.8rem;
+                border-right: none !important;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+                .scanner-info-table-cell:first-child {
+                    border-bottom: none;
+                    font-size: 1rem;
+                }
         }
     </style>
 </head>
@@ -539,90 +587,88 @@
                     </div>
                 </div>
 
-                    <div class="scanner-port-results">
-                        <h3 class="scanner-results-title animate-on-scroll">Port Scan Results</h3>
-                        <div class="scanner-port-grid">
-                            @foreach (var port in ViewBag.PortScanResults as Dictionary<int, (bool IsOpen, string Service, string Version)>)
-                            {
-                                <div class="scanner-port-item animate-on-scroll">
-                                    <p>Port @port.Key: <span class="scanner-port-status-@(port.Value.IsOpen ? "open" : "closed")">@(port.Value.IsOpen ? "Open" : "Closed")</span></p>
-                                    <p>@port.Value.Service (@port.Value.Version)</p>
-                                </div>
-                            }
-                        </div>
+                <div class="scanner-port-results">
+                    <h3 class="scanner-results-title animate-on-scroll">Port Scan Results</h3>
+                    <div class="scanner-port-grid">
+                        @foreach (var port in ViewBag.PortScanResults as Dictionary<int, (bool IsOpen, string Service, string Version)>)
+                        {
+                            <div class="scanner-port-item animate-on-scroll">
+                                <p>Port @port.Key: <span class="scanner-port-status-@(port.Value.IsOpen ? "open" : "closed")">@(port.Value.IsOpen ? "Open" : "Closed")</span></p>
+                                <p>@port.Value.Service (@port.Value.Version)</p>
+                            </div>
+                        }
                     </div>
+                </div>
             </section>
         }
 
         <!-- Info Table Section -->
         <section class="scanner-info-section">
             <h2 class="scanner-info-title animate-on-scroll">Vulnerability Information</h2>
-            <table class="scanner-info-table">
-                <thead>
-                    <tr>
-                        <th>Vulnerability</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>SQL Injection (SQLi)</td>
-                        <td>Allows attackers to inject malicious SQL code into input fields, potentially accessing or altering database content.</td>
-                    </tr>
-                    <tr>
-                        <td>Cross-Site Scripting (XSS)</td>
-                        <td>Enables attackers to inject scripts into web pages, which run in users’ browsers, potentially stealing data or defacing the site.</td>
-                    </tr>
-                    <tr>
-                        <td>CSRF</td>
-                        <td>Tricks authenticated users into performing unintended actions (e.g., changing settings) via forged requests.</td>
-                    </tr>
-                    <tr>
-                        <td>IDOR</td>
-                        <td>Insecure Direct Object References allow attackers to access unauthorized resources by manipulating identifiers.</td>
-                    </tr>
-                    <tr>
-                        <td>Broken Authentication</td>
-                        <td>Weak authentication lets attackers bypass login or hijack sessions, gaining unauthorized access.</td>
-                    </tr>
-                    <tr>
-                        <td>Weak Password Policy</td>
-                        <td>Simple passwords make accounts vulnerable to brute-force or guessing attacks.</td>
-                    </tr>
-                    <tr>
-                        <td>Security Misconfiguration</td>
-                        <td>Improper settings (e.g., open ports, default credentials) expose vulnerabilities in servers or apps.</td>
-                    </tr>
-                    <tr>
-                        <td>Unvalidated Redirects</td>
-                        <td>Untrusted redirect inputs can send users to malicious sites, aiding phishing attacks.</td>
-                    </tr>
-                    <tr>
-                        <td>Directory Listing</td>
-                        <td>Misconfigured servers expose directory contents, revealing sensitive files or structure.</td>
-                    </tr>
-                    <tr>
-                        <td>Local File Inclusion (LFI)</td>
-                        <td>Allows attackers to include local files (e.g., config files), potentially exposing sensitive data.</td>
-                    </tr>
-                    <tr>
-                        <td>Remote File Inclusion (RFI)</td>
-                        <td>Permits inclusion of remote malicious files, often leading to code execution on the server.</td>
-                    </tr>
-                    <tr>
-                        <td>HTTP Response Splitting</td>
-                        <td>Exploits header manipulation to inject content or redirect users to malicious sites.</td>
-                    </tr>
-                    <tr>
-                        <td>Phishing</td>
-                        <td>Deceptive techniques trick users into revealing credentials via fake pages or links.</td>
-                    </tr>
-                    <tr>
-                        <td>Not Secure Domain (HTTP)</td>
-                        <td>Non-HTTPS connections expose data to interception or tampering by attackers.</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="scanner-info-table">
+                <div class="scanner-info-table-header">
+                    <span>Vulnerability</span>
+                    <span>Description</span>
+                </div>
+                <div class="scanner-info-table-body">
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">SQL Injection (SQLi)</div>
+                        <div class="scanner-info-table-cell">Allows attackers to inject malicious SQL code into input fields, potentially accessing or altering database content.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Cross-Site Scripting (XSS)</div>
+                        <div class="scanner-info-table-cell">Enables attackers to inject scripts into web pages, which run in users’ browsers, potentially stealing data or defacing the site.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">CSRF</div>
+                        <div class="scanner-info-table-cell">Tricks authenticated users into performing unintended actions (e.g., changing settings) via forged requests.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">IDOR</div>
+                        <div class="scanner-info-table-cell">Insecure Direct Object References allow attackers to access unauthorized resources by manipulating identifiers.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Broken Authentication</div>
+                        <div class="scanner-info-table-cell">Weak authentication lets attackers bypass login or hijack sessions, gaining unauthorized access.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Weak Password Policy</div>
+                        <div class="scanner-info-table-cell">Simple passwords make accounts vulnerable to brute-force or guessing attacks.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Security Misconfiguration</div>
+                        <div class="scanner-info-table-cell">Improper settings (e.g., open ports, default credentials) expose vulnerabilities in servers or apps.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Unvalidated Redirects</div>
+                        <div class="scanner-info-table-cell">Untrusted redirect inputs can send users to malicious sites, aiding phishing attacks.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Directory Listing</div>
+                        <div class="scanner-info-table-cell">Misconfigured servers expose directory contents, revealing sensitive files or structure.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Local File Inclusion (LFI)</div>
+                        <div class="scanner-info-table-cell">Allows attackers to include local files (e.g., config files), potentially exposing sensitive data.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Remote File Inclusion (RFI)</div>
+                        <div class="scanner-info-table-cell">Permits inclusion of remote malicious files, often leading to code execution on the server.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">HTTP Response Splitting</div>
+                        <div class="scanner-info-table-cell">Exploits header manipulation to inject content or redirect users to malicious sites.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Phishing</div>
+                        <div class="scanner-info-table-cell">Deceptive techniques trick users into revealing credentials via fake pages or links.</div>
+                    </div>
+                    <div class="scanner-info-table-row">
+                        <div class="scanner-info-table-cell">Not Secure Domain (HTTP)</div>
+                        <div class="scanner-info-table-cell">Non-HTTPS connections expose data to interception or tampering by attackers.</div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- CTA Section -->

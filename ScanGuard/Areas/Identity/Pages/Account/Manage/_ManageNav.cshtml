@@ -4,13 +4,342 @@
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 
-<ul class="manage-nav">
-    <li><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    @if (hasExternalLogins)
-    {
-        <li><a class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="external-login" asp-page="./ExternalLogins">External logins</a></li>
+<div class="profile-nav-container">
+    <!-- Mobile Toggle Button -->
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="toggleMobileNav()">
+        <span class="toggle-icon">☰</span>
+    </button>
+
+    <!-- NavMenu -->
+    <nav class="profile-nav" id="profileNav">
+        <!-- Header -->
+        <div class="nav-header animate-on-scroll">
+            <h2 class="nav-title">Profile Settings</h2>
+            <p class="nav-subtitle">Manage your ScanGuard account and preferences</p>
+        </div>
+
+        <!-- Menu Items -->
+        <ul class="nav-menu">
+            <li class="nav-item animate-on-scroll">
+                <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Profile</span>
+                </a>
+            </li>
+            @if (hasExternalLogins)
+            {
+                <li class="nav-item animate-on-scroll">
+                    <a class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="external-login" asp-page="./ExternalLogins">
+                        <span class="nav-icon">🔗</span>
+                        <span class="nav-text">External Logins</span>
+                    </a>
+                </li>
+            }
+            <li class="nav-item animate-on-scroll">
+                <a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">
+                    <span class="nav-icon">🔒</span>
+                    <span class="nav-text">Two-factor Authentication</span>
+                </a>
+            </li>
+            <li class="nav-item animate-on-scroll">
+                <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">Personal Data</span>
+                </a>
+            </li>
+            <li class="nav-item animate-on-scroll">
+                <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+                    <span class="nav-icon">🔑</span>
+                    <span class="nav-text">Change Password</span>
+                </a>
+            </li>
+            <li class="nav-item nav-item-logout animate-on-scroll">
+                <form method="post" asp-area="Identity" asp-page="/Account/Logout" class="logout-form">
+                    <button type="submit" class="nav-link nav-link-logout">
+                        <span class="nav-icon">🚪</span>
+                        <span class="nav-text">Logout</span>
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .profile-nav-container {
+        background: #f9fafb;
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
     }
-    <li><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
-    <li><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./ChangePassword">Change Password</a></li>
-</ul>
+
+    /* Mobile Toggle Button */
+    .mobile-nav-toggle {
+        display: none;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        background: #3b82f6;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-nav-toggle:hover {
+        background: #1e40af;
+    }
+
+    .mobile-nav-toggle.open .toggle-icon {
+        content: '×';
+    }
+
+    /* NavMenu */
+    .profile-nav {
+        width: 280px;
+        background: #ffffff;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.05);
+        padding: 2rem 1.5rem;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transition: all 0.3s ease;
+    }
+
+    .nav-header {
+        margin-bottom: 2rem;
+    }
+
+    .nav-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-subtitle {
+        font-size: 0.95rem;
+        color: #6b7280;
+        line-height: 1.5;
+    }
+
+    .nav-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item {
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #1f2937;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+        background: #f3f4f6;
+        color: #3b82f6;
+    }
+
+    .nav-link.active {
+        background: #3b82f6;
+        color: #ffffff;
+    }
+
+    .nav-icon {
+        font-size: 1.2rem;
+    }
+
+    .nav-text {
+        flex: 1;
+    }
+
+    .nav-item-logout {
+        margin-top: 2rem;
+    }
+
+    .nav-link-logout {
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #dc2626;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link-logout:hover {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-item:nth-child(1) .nav-link { transition-delay: 0.1s; }
+    .nav-item:nth-child(2) .nav-link { transition-delay: 0.2s; }
+    .nav-item:nth-child(3) .nav-link { transition-delay: 0.3s; }
+    .nav-item:nth-child(4) .nav-link { transition-delay: 0.4s; }
+    .nav-item:nth-child(5) .nav-link { transition-delay: 0.5s; }
+    .nav-item:nth-child(6) .nav-link { transition-delay: 0.6s; }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .profile-nav-container {
+            position: relative;
+        }
+
+        .mobile-nav-toggle {
+            display: block;
+        }
+
+        .profile-nav {
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: none;
+            z-index: 999;
+            background: #ffffff;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .profile-nav.open {
+            max-height: 100vh;
+            padding: 5rem 1.5rem 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-title {
+            font-size: 1.6rem;
+        }
+
+        .nav-subtitle {
+            font-size: 0.9rem;
+        }
+
+        .nav-link, .nav-link-logout {
+            padding: 0.8rem 1rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-icon {
+            font-size: 1.1rem;
+        }
+    }
+
+    @@media (max-width: 414px) {
+        .nav-title {
+            font-size: 1.4rem;
+        }
+
+        .nav-subtitle {
+            font-size: 0.85rem;
+        }
+
+        .nav-link, .nav-link-logout {
+            padding: 0.7rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-icon {
+            font-size: 1rem;
+        }
+
+        .profile-nav {
+            padding: 0 1rem;
+        }
+
+        .profile-nav.open {
+            padding: 4.5rem 1rem 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    function toggleMobileNav() {
+        const nav = document.getElementById('profileNav');
+        const toggleButton = document.querySelector('.mobile-nav-toggle');
+        nav.classList.toggle('open');
+        toggleButton.classList.toggle('open');
+        toggleButton.querySelector('.toggle-icon').textContent = nav.classList.contains('open') ? '×' : '☰';
+
+        // Trigger scroll animations for mobile
+        const animateElements = nav.querySelectorAll('.animate-on-scroll');
+        if (nav.classList.contains('open')) {
+            animateElements.forEach(el => el.classList.add('visible'));
+        } else {
+            animateElements.forEach(el => el.classList.remove('visible'));
+        }
+    }
+
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('profileNav');
+        const toggleButton = document.querySelector('.mobile-nav-toggle');
+        if (!nav.contains(e.target) && !toggleButton.contains(e.target) && nav.classList.contains('open')) {
+            toggleMobileNav();
+        }
+    });
+
+    // Scroll Animation for Desktop
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    animateElements.forEach(el => observer.observe(el));
+
+    // Optimize touch interactions
+    if ('ontouchstart' in window) {
+        document.querySelectorAll('.nav-link, .nav-link-logout').forEach(link => {
+            link.addEventListener('touchstart', () => {
+                link.style.transform = 'scale(0.98)';
+            });
+            link.addEventListener('touchend', () => {
+                link.style.transform = 'scale(1)';
+            });
+        });
+    }
+</script>
