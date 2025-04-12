@@ -15,7 +15,7 @@
         <!-- Header -->
         <div class="nav-header animate-on-scroll">
             <h2 class="nav-title">Profile Settings</h2>
-            <p class="nav-subtitle">Manage your ScanGuard account and preferences</p>
+            <p class="nav-subtitle">Manage your ScanGuard account</p>
         </div>
 
         <!-- Menu Items -->
@@ -67,9 +67,8 @@
 
 <style>
     .profile-nav-container {
-        background: #f9fafb;
         font-family: 'Montserrat', sans-serif;
-        min-height: 100vh;
+        background: #f9fafb;
     }
 
     /* Mobile Toggle Button */
@@ -89,13 +88,13 @@
         transition: all 0.3s ease;
     }
 
-    .mobile-nav-toggle:hover {
-        background: #1e40af;
-    }
+        .mobile-nav-toggle:hover {
+            background: #1e40af;
+        }
 
-    .mobile-nav-toggle.open .toggle-icon {
-        content: '×';
-    }
+        .mobile-nav-toggle.open .toggle-icon {
+            content: '×';
+        }
 
     /* NavMenu */
     .profile-nav {
@@ -150,15 +149,15 @@
         transition: all 0.3s ease;
     }
 
-    .nav-link:hover {
-        background: #f3f4f6;
-        color: #3b82f6;
-    }
+        .nav-link:hover {
+            background: #f3f4f6;
+            color: #3b82f6;
+        }
 
-    .nav-link.active {
-        background: #3b82f6;
-        color: #ffffff;
-    }
+        .nav-link.active {
+            background: #3b82f6;
+            color: #ffffff;
+        }
 
     .nav-icon {
         font-size: 1.2rem;
@@ -189,10 +188,10 @@
         transition: all 0.3s ease;
     }
 
-    .nav-link-logout:hover {
-        background: #fee2e2;
-        color: #b91c1c;
-    }
+        .nav-link-logout:hover {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
 
     /* Animations */
     .animate-on-scroll {
@@ -201,19 +200,47 @@
         transition: all 0.6s ease;
     }
 
-    .animate-on-scroll.visible {
-        opacity: 1;
-        transform: translateY(0);
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    .nav-item:nth-child(1) .nav-link {
+        transition-delay: 0.1s;
     }
 
-    .nav-item:nth-child(1) .nav-link { transition-delay: 0.1s; }
-    .nav-item:nth-child(2) .nav-link { transition-delay: 0.2s; }
-    .nav-item:nth-child(3) .nav-link { transition-delay: 0.3s; }
-    .nav-item:nth-child(4) .nav-link { transition-delay: 0.4s; }
-    .nav-item:nth-child(5) .nav-link { transition-delay: 0.5s; }
-    .nav-item:nth-child(6) .nav-link { transition-delay: 0.6s; }
+    .nav-item:nth-child(2) .nav-link {
+        transition-delay: 0.2s;
+    }
 
-    /* Responsive */
+    .nav-item:nth-child(3) .nav-link {
+        transition-delay: 0.3s;
+    }
+
+    .nav-item:nth-child(4) .nav-link {
+        transition-delay: 0.4s;
+    }
+
+    .nav-item:nth-child(5) .nav-link {
+        transition-delay: 0.5s;
+    }
+
+    .nav-item:nth-child(6) .nav-link {
+        transition-delay: 0.6s;
+    }
+
+    @@keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     @@media (max-width: 768px) {
         .profile-nav-container {
             position: relative;
@@ -237,11 +264,11 @@
             transition: max-height 0.3s ease, padding 0.3s ease;
         }
 
-        .profile-nav.open {
-            max-height: 100vh;
-            padding: 5rem 1.5rem 2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+            .profile-nav.open {
+                max-height: 100vh;
+                padding: 5rem 1.5rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
 
         .nav-header {
             margin-bottom: 1.5rem;
@@ -287,9 +314,9 @@
             padding: 0 1rem;
         }
 
-        .profile-nav.open {
-            padding: 4.5rem 1rem 1.5rem;
-        }
+            .profile-nav.open {
+                padding: 4.5rem 1rem 1.5rem;
+            }
     }
 </style>
 
@@ -319,7 +346,7 @@
         }
     });
 
-    // Scroll Animation for Desktop
+    // Scroll Animation
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
