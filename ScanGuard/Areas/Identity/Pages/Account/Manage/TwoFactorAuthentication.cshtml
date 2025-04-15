@@ -3,75 +3,308 @@
 @using ManageNavPages = ScanGuard.Areas.Identity.Pages.Account.Manage.ManageNavPages
 @model TwoFactorAuthenticationModel
 @{
-    ViewData["Title"] = "Two-factor authentication (2FA)";
+    ViewData["Title"] = "Two-Factor Authentication";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
-<div class="manage-container">
-    <h2 class="subtitle">Manage your account</h2>
-    <partial name="_ManageNav" /> <!-- Подключаем навигацию -->
-    <h3 class="form-title">@ViewData["Title"]</h3>
-    <partial name="_StatusMessage" for="StatusMessage" />
+<div class="tfa-content">
+    <section class="tfa-form">
+        <h2 class="tfa-title">@ViewData["Title"]</h2>
+        <p class="tfa-desc">Manage your two-factor authentication settings.</p>
+        <partial name="_StatusMessage" for="StatusMessage" />
 
-    @{
-        var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
-        if (consentFeature?.CanTrack ?? true)
-        {
-            if (Model.Is2faEnabled)
+        @{
+            var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+            if (consentFeature?.CanTrack ?? true)
             {
-                if (Model.RecoveryCodesLeft == 0)
+                if (Model.Is2faEnabled)
                 {
-                    <div class="alert-danger">
-                        <strong>You have no recovery codes left.</strong>
-                        <p>You must <a asp-page="./GenerateRecoveryCodes" class="link-action">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
-                    </div>
-                }
-                else if (Model.RecoveryCodesLeft == 1)
-                {
-                    <div class="alert-danger">
-                        <strong>You have 1 recovery code left.</strong>
-                        <p>You can <a asp-page="./GenerateRecoveryCodes" class="link-action">generate a new set of recovery codes</a>.</p>
-                    </div>
-                }
-                else if (Model.RecoveryCodesLeft <= 3)
-                {
-                    <div class="alert-warning">
-                        <strong>You have @Model.RecoveryCodesLeft recovery codes left.</strong>
-                        <p>You should <a asp-page="./GenerateRecoveryCodes" class="link-action">generate a new set of recovery codes</a>.</p>
+                    if (Model.RecoveryCodesLeft == 0)
+                    {
+                        <div class="tfa-alert tfa-alert-danger">
+                            <i class="fas fa-exclamation-circle tfa-alert-icon"></i>
+                            <div>
+                                <strong>You have no recovery codes left.</strong>
+                                <p>You must <a asp-page="./GenerateRecoveryCodes" class="tfa-link-action">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.RecoveryCodesLeft == 1)
+                    {
+                        <div class="tfa-alert tfa-alert-danger">
+                            <i class="fas fa-exclamation-circle tfa-alert-icon"></i>
+                            <div>
+                                <strong>You have 1 recovery code left.</strong>
+                                <p>You can <a asp-page="./GenerateRecoveryCodes" class="tfa-link-action">generate a new set of recovery codes</a>.</p>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.RecoveryCodesLeft <= 3)
+                    {
+                        <div class="tfa-alert tfa-alert-warning">
+                            <i class="fas fa-exclamation-triangle tfa-alert-icon"></i>
+                            <div>
+                                <strong>You have @Model.RecoveryCodesLeft recovery codes left.</strong>
+                                <p>You should <a asp-page="./GenerateRecoveryCodes" class="tfa-link-action">generate a new set of recovery codes</a>.</p>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="tfa-actions">
+                        @if (Model.IsMachineRemembered)
+                        {
+                            <form method="post" class="tfa-action-form">
+                                <button type="submit" class="tfa-btn tfa-btn-secondary">Forget this browser</button>
+                            </form>
+                        }
+                        <a asp-page="./Disable2fa" class="tfa-btn tfa-btn-danger">Disable 2FA</a>
+                        <a asp-page="./GenerateRecoveryCodes" class="tfa-btn tfa-btn-primary">Reset recovery codes</a>
                     </div>
                 }
 
-                if (Model.IsMachineRemembered)
-                {
-                    <form method="post" style="display: inline-block">
-                        <button type="submit" class="btn-custom">Forget this browser</button>
-                    </form>
-                }
-                <a asp-page="./Disable2fa" class="btn-custom">Disable 2FA</a>
-                <a asp-page="./GenerateRecoveryCodes" class="btn-custom">Reset recovery codes</a>
-            }
-
-            <h4 class="form-subtitle">Authenticator app</h4>
-            if (!Model.HasAuthenticator)
-            {
-                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="auth-link">Add authenticator app</a>
+                <h3 class="tfa-subtitle">Authenticator App</h3>
+                <div class="tfa-auth-links">
+                    @if (!Model.HasAuthenticator)
+                    {
+                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="tfa-auth-link">
+                            <i class="fas fa-mobile-alt tfa-auth-icon"></i> Add authenticator app
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="tfa-auth-link">
+                            <i class="fas fa-mobile-alt tfa-auth-icon"></i> Set up authenticator app
+                        </a>
+                        <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="tfa-auth-link">
+                            <i class="fas fa-sync-alt tfa-auth-icon"></i> Reset authenticator app
+                        </a>
+                    }
+                </div>
             }
             else
             {
-                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="auth-link">Set up authenticator app</a>
-                <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="auth-link">Reset authenticator app</a>
+                <div class="tfa-alert tfa-alert-danger">
+                    <i class="fas fa-exclamation-circle tfa-alert-icon"></i>
+                    <div>
+                        <strong>Privacy and cookie policy have not been accepted.</strong>
+                        <p>You must accept the policy before you can enable two-factor authentication.</p>
+                    </div>
+                </div>
             }
         }
-        else
-        {
-            <div class="alert-danger">
-                <strong>Privacy and cookie policy have not been accepted.</strong>
-                <p>You must accept the policy before you can enable two factor authentication.</p>
-            </div>
-        }
-    }
+    </section>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<style>
+    .tfa-content {
+        font-family: 'Inter', sans-serif;
+        max-width: 480px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .tfa-form {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        animation: tfaFade 0.5s ease-out;
+    }
+
+    .tfa-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #111827;
+        margin: 0 0 0.5rem;
+        text-align: center;
+    }
+
+    .tfa-desc {
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin: 0 0 1.5rem;
+        text-align: center;
+    }
+
+    .tfa-subtitle {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #111827;
+        margin: 1.5rem 0 1rem;
+    }
+
+    .tfa-alert {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tfa-alert-danger {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #f87171;
+    }
+
+    .tfa-alert-warning {
+        background: #fffbeb;
+        color: #854d0e;
+        border: 1px solid #facc15;
+    }
+
+    .tfa-alert-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-top: 0.2rem;
+    }
+
+    .tfa-alert strong {
+        font-weight: 600;
+    }
+
+    .tfa-link-action {
+        color: #3b82f6;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .tfa-link-action:hover {
+            text-decoration: underline;
+            color: #2563eb;
+        }
+
+    .tfa-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin: 1.5rem 0;
+    }
+
+    .tfa-action-form {
+        display: inline-block;
+    }
+
+    .tfa-btn {
+        padding: 0.9rem 1.5rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-radius: 6px;
+        text-decoration: none;
+        text-align: center;
+        transition: background 0.2s ease;
+        cursor: pointer;
+        border: none;
+    }
+
+    .tfa-btn-primary {
+        background: #3b82f6;
+        color: #ffffff;
+    }
+
+        .tfa-btn-primary:hover {
+            background: #2563eb;
+        }
+
+    .tfa-btn-secondary {
+        background: #f1f5f9;
+        color: #6b7280;
+    }
+
+        .tfa-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+    .tfa-btn-danger {
+        background: #ef4444;
+        color: #ffffff;
+    }
+
+        .tfa-btn-danger:hover {
+            background: #dc2626;
+        }
+
+    .tfa-auth-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .tfa-auth-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #374151;
+        text-decoration: none;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+        .tfa-auth-link:hover {
+            color: #3b82f6;
+            border-color: #3b82f6;
+        }
+
+    .tfa-auth-icon {
+        font-size: 1.2rem;
+    }
+
+    @@keyframes tfaFade {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@media (max-width: 414px) {
+        .tfa-form {
+            padding: 1.5rem;
+        }
+
+        .tfa-title {
+            font-size: 1.6rem;
+        }
+
+        .tfa-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .tfa-btn {
+            padding: 0.8rem 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .tfa-auth-link {
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+        }
+
+        .tfa-auth-icon {
+            font-size: 1.1rem;
+        }
+
+        .tfa-alert {
+            font-size: 0.85rem;
+            padding: 0.8rem;
+        }
+
+        .tfa-alert-icon {
+            font-size: 1.1rem;
+        }
+    }
+</style>

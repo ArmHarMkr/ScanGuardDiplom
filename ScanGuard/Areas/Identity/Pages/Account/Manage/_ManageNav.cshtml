@@ -6,9 +6,6 @@
 
 <!-- Sidebar navigation -->
 <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <!-- Надпись убрана -->
-    </div>
     <nav class="sidebar-nav">
         <ul class="sidebar-items">
             <li class="sidebar-item">
@@ -39,7 +36,6 @@
                     <i class="sidebar-icon fas fa-key"></i> Change Password
                 </a>
             </li>
-            
         </ul>
     </nav>
 </aside>
@@ -47,62 +43,41 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('manageMenuToggle');
 
-        if (toggleBtn && sidebar) {
-            toggleBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-                toggleBtn.setAttribute('aria-expanded', sidebar.classList.contains('active'));
-            });
+        if (!sidebar) {
+            console.error('Ошибка: Сайдбар не найден');
+            return;
+        }
 
-            // Закрытие меню при клике вне его на мобильных
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+        console.log('Меню инициализировано');
+
+        // Закрытие меню при клике на ссылку (для мобильных)
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    console.log('Клик по ссылке');
                     sidebar.classList.remove('active');
-                    toggleBtn.setAttribute('aria-expanded', 'false');
                 }
             });
-
-            // Закрытие меню при клике на ссылки
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        sidebar.classList.remove('active');
-                        toggleBtn.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            });
-        }
+        });
     });
 </script>
 
 <style>
-    h1:not(.cp-title),
-    h2:not(.cp-title),hr,
-    .text-center:not(.cp-title):not(.cp-desc) {
-        display: none !important;
-    }
     .sidebar {
-        font-family: 'Inter', sans-serif;
         width: 240px;
         background: #ffffff;
         border-right: 1px solid #e5e7eb;
         position: fixed;
-        top: 60px; /* Начинается ниже navbar */
+        top: 60px;
         left: 0;
-        height: calc(100vh - 60px); /* Учитываем высоту navbar */
-        transition: transform 0.3s ease;
+        height: calc(100vh - 60px);
         z-index: 1000;
-    }
-
-    .sidebar-header {
-        padding: 1rem;
-        border-bottom: 1px solid #e5e7eb;
-        min-height: 1rem; /* Пустой заголовок занимает минимум места */
+        font-family: 'Inter', sans-serif;
     }
 
     .sidebar-nav {
-        padding: 1rem;
+        padding: 2rem 1rem; /* Отступ сверху для десктопа */
     }
 
     .sidebar-items {
@@ -142,39 +117,56 @@
         font-size: 1.2rem;
     }
 
-    .sidebar-logout {
-        background: none;
-        border: none;
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        color: #ef4444;
-    }
-
-        .sidebar-logout:hover {
-            background: #fef2f2;
-            color: #dc2626;
-        }
-
     @@media (max-width: 768px) {
         .sidebar {
-            width: 240px;
-            transform: translateX(-100%);
+            width: 100%;
+            height: auto;
+            top: auto;
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: 1px solid #e5e7eb;
+            background: #ffffff;
+            position: fixed;
+            z-index: 1000;
         }
 
-            .sidebar.active {
-                transform: translateX(0);
-            }
-    }
+        .sidebar-nav {
+            padding: 0.5rem 1rem; /* Меньше отступов для компактности */
+        }
 
-    @@media (max-width: 414px) {
+        .sidebar-items {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .sidebar-item {
+            margin-bottom: 0;
+            flex: 1;
+            text-align: center;
+        }
+
         .sidebar-link {
-            font-size: 0.9rem;
-            padding: 0.6rem 1rem;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 0.5rem;
+            font-size: 0.85rem;
         }
 
         .sidebar-icon {
             font-size: 1.1rem;
+        }
+    }
+
+    @@media (max-width: 414px) {
+        .sidebar-link {
+            font-size: 0.8rem;
+            padding: 0.4rem;
+        }
+
+        .sidebar-icon {
+            font-size: 1rem;
         }
     }
 </style>

@@ -129,17 +129,6 @@
     </div>
 
     <div class="manage-wrapper">
-        <!-- Боковое меню для страниц Manage -->
-        @if (Context.Request.Path.StartsWithSegments("/Identity/Account/Manage"))
-        {
-            <partial name="_ManageNav" />
-            <!-- Кнопка для открытия меню на мобильных -->
-            <button class="manage-menu-toggle" id="manageMenuToggle" aria-label="Toggle manage menu">
-                <i class="fas fa-bars"></i>
-            </button>
-        }
-
-        <!-- Основной контент -->
         <main class="container manage-content">
             @RenderBody()
         </main>
