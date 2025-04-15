@@ -11,6 +11,10 @@ using ScanGuard.Domain.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ScanGuard.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using ScanGuard.BLL.Interfaces;
+using ScanGuard.Domain.Roles;
 
 namespace ScanGuard.Areas.Identity.Pages.Account.Manage
 {
@@ -19,46 +23,33 @@ namespace ScanGuard.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly IStorageService _blobService;
+
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IStorageService blobService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _blobService = blobService;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        public string Username { get; set; }
+        public IndexViewModel ProfileData { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            [Display(Name = "Full Name")]
+            public string FullName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -66,13 +57,25 @@ namespace ScanGuard.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
+            var fullName = user.FullName ?? await _userManager.GetUserNameAsync(user);
+            var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var isAdmin = await _userManager.IsInRoleAsync(user, SD.Role_Admin);
+            var isPremium = await _userManager.IsInRoleAsync(user, SD.Role_Premium);
 
-            Username = userName;
+            ProfileData = new IndexViewModel
+            {
+                FullName = fullName,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                ProfilePhotoPath = user.ProfilePhotoPath,
+                IsAdmin = isAdmin,
+                IsPremium = isPremium
+            };
 
             Input = new InputModel
             {
+                FullName = fullName,
                 PhoneNumber = phoneNumber
             };
         }
@@ -103,6 +106,23 @@ namespace ScanGuard.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            // Обновляем FullName
+            if (Input.FullName != user.FullName)
+            {
+                user.FullName = Input.FullName;
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                {
+                    foreach (var error in updateResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    await LoadAsync(user);
+                    return Page();
+                }
+            }
+
+            // Обновляем номер телефона
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -129,13 +149,57 @@ namespace ScanGuard.Areas.Identity.Pages.Account.Manage
                 userIp = await GetPublicIp();
             }
 
-            if(user.RegistrationIpAddress == null)
+            if (user.RegistrationIpAddress == null)
             {
                 user.RegistrationIpAddress = userIp;
             }
             await _context.SaveChangesAsync();
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostChangePhotoAsync(IFormFile newProfilePhoto)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (newProfilePhoto == null || newProfilePhoto.Length == 0)
+            {
+                StatusMessage = "Please select a valid image file.";
+                return RedirectToPage();
+            }
+
+            // Валидация файла
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+            var extension = Path.GetExtension(newProfilePhoto.FileName).ToLower();
+            if (!allowedExtensions.Contains(extension))
+            {
+                StatusMessage = "Invalid file type. Please upload a JPG, JPEG, PNG, or GIF image.";
+                return RedirectToPage();
+            }
+
+            // Ограничение размера файла (например, 5MB)
+            if (newProfilePhoto.Length > 5 * 1024 * 1024)
+            {
+                StatusMessage = "File size exceeds 5MB limit.";
+                return RedirectToPage();
+            }
+
+            try
+            {
+                user.ProfilePhotoPath = await _blobService.UploadProfilePhotoAsync(newProfilePhoto, user.Id);
+                await _userManager.UpdateAsync(user);
+                StatusMessage = "Profile photo updated successfully.";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Error uploading profile photo: " + ex.Message;
+            }
+
             return RedirectToPage();
         }
 
@@ -151,6 +215,5 @@ namespace ScanGuard.Areas.Identity.Pages.Account.Manage
                 return "Unknown";
             }
         }
-
     }
 }

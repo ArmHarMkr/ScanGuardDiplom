@@ -1,31 +1,406 @@
 ﻿@page
-@model IndexModel
+@model ScanGuard.Areas.Identity.Pages.Account.Manage.IndexModel
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<div class="manage-container">
-   <h3 class="form-title">@ViewData["Title"]</h3>
-    <partial name="_StatusMessage" for="StatusMessage" />
+<div class="profile-container">
+    <div class="profile-content">
+        <!-- Секция с аватаркой и информацией -->
+        <div class="profile-header">
+            <div class="avatar-section">
+                <img src="@(Model.ProfileData.ProfilePhotoPath ?? "/images/default-avatar.png")" alt="Profile Photo" class="avatar-img" />
+                <form id="photo-form" method="post" enctype="multipart/form-data" asp-page-handler="ChangePhoto">
+                    <label for="newProfilePhoto" class="avatar-upload-label">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <input type="file" name="newProfilePhoto" id="newProfilePhoto" accept="image/*" class="avatar-upload-input" onchange="this.form.submit()" />
+                </form>
+            </div>
+            <div class="profile-info">
+                <div class="profile-name-wrapper">
+                    <h4 class="profile-fullname">@Model.ProfileData.FullName</h4>
+                    @if (Model.ProfileData.IsAdmin)
+                    {
+                        <span class="status-badge status-admin">Admin</span>
+                    }
+                    else if (Model.ProfileData.IsPremium)
+                    {
+                        <span class="status-badge status-premium">Premium</span>
+                    }
+                </div>
+                <p class="profile-email">@Model.ProfileData.Email</p>
+            </div>
+        </div>
 
-    <div class="form-container">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username">Username</label>
-                <input asp-for="Username" class="form-input" readonly />
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.PhoneNumber">Phone number</label>
-                <input asp-for="Input.PhoneNumber" class="form-input" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn-custom">Save</button>
-        </form>
+        <!-- Форма редактирования профиля -->
+        <div class="profile-form-container">
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="error-message"></div>
+                <partial name="_StatusMessage" for="StatusMessage" />
+                <div class="form-group">
+                    <label asp-for="Input.FullName">Full Name</label>
+                    <div class="profile-input-wrapper">
+                        <i class="fas fa-user profile-input-icon"></i>
+                        <input asp-for="Input.FullName" class="profile-form-input" placeholder="Enter your full name" />
+                    </div>
+                    <span asp-validation-for="Input.FullName" class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProfileData.Email">Email</label>
+                    <div class="profile-input-wrapper">
+                        <i class="fas fa-envelope profile-input-icon"></i>
+                        <input asp-for="ProfileData.Email" class="profile-form-input" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.PhoneNumber">Phone Number</label>
+                    <div class="profile-input-wrapper">
+                        <i class="fas fa-phone profile-input-icon"></i>
+                        <input asp-for="Input.PhoneNumber" class="profile-form-input" placeholder="Enter your phone number" />
+                    </div>
+                    <span asp-validation-for="Input.PhoneNumber" class="error-message"></span>
+                </div>
+                <button type="submit" class="btn-save">Save Changes</button>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Превью аватарки перед загрузкой
+        document.getElementById('newProfilePhoto').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.querySelector('.avatar-img').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 }
+
+<style>
+    /* Основной контейнер */
+    .profile-container {
+        font-family: 'Inter', sans-serif;
+        max-width: 550px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-content {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+    }
+
+        /* Градиентный акцент */
+        .profile-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+    /* Секция с аватаркой и информацией */
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .avatar-section {
+        position: relative;
+    }
+
+    .avatar-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .avatar-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+    .avatar-upload-label {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #3b82f6;
+        color: #ffffff;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .avatar-upload-label:hover {
+            background: #2563eb;
+            transform: scale(1.1);
+        }
+
+        .avatar-upload-label i {
+            font-size: 1rem;
+        }
+
+    .avatar-upload-input {
+        display: none;
+    }
+
+    .profile-info {
+        flex: 1;
+    }
+
+    .profile-name-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .profile-fullname {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #111827;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .status-badge {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border-radius: 12px;
+        color: #ffffff;
+        display: inline-block;
+    }
+
+    .status-admin {
+        background: #10b981;
+    }
+
+    .status-premium {
+        background: #f59e0b;
+    }
+
+    .profile-email {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin: 0.25rem 0 0;
+        word-break: break-all;
+    }
+
+    /* Форма редактирования профиля */
+    .profile-form-container {
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+    .profile-input-wrapper {
+        position: relative;
+    }
+
+    .profile-input-icon {
+        position: absolute;
+        left: 0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        font-size: 1rem;
+    }
+
+    .profile-form-input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.2rem;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        color: #111827;
+        background: #ffffff !important; /* Явно переопределяем фон */
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .profile-form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .profile-form-input[readonly] {
+            background: #f1f5f9 !important; /* Явно переопределяем фон для readonly */
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .profile-form-input::placeholder {
+            color: #9ca3af;
+        }
+
+    .btn-save {
+        display: block;
+        width: 100%;
+        padding: 0.9rem;
+        background: linear-gradient(to right, #3b82f6, #60a5fa);
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        margin: 0 auto;
+    }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+    .error-message {
+        font-size: 0.85rem;
+        color: #ef4444;
+        margin-bottom: 0.75rem;
+        display: block;
+    }
+
+    /* Анимация появления */
+    .profile-content {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Адаптивность для мобильных */
+    @@media (max-width: 576px) {
+        .profile-container {
+            margin: 1rem auto;
+            padding: 0 0.5rem;
+        }
+
+        .profile-content {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .profile-header {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-img {
+            width: 80px;
+            height: 80px;
+            border-width: 3px;
+        }
+
+        .avatar-upload-label {
+            width: 32px;
+            height: 32px;
+        }
+
+            .avatar-upload-label i {
+                font-size: 0.9rem;
+            }
+
+        .profile-fullname {
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .profile-name-wrapper {
+            justify-content: center;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+        }
+
+        .profile-email {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+            .form-group label {
+                font-size: 0.85rem;
+            }
+
+        .profile-input-icon {
+            left: 0.6rem; /* Уменьшаем отступ для мобильных */
+            font-size: 0.9rem;
+        }
+
+        .profile-form-input {
+            font-size: 0.9rem;
+            padding: 0.65rem 0.9rem 0.65rem 2rem; /* Уменьшаем padding для мобильных */
+            border-radius: 6px;
+        }
+
+        .btn-save {
+            padding: 0.8rem;
+            font-size: 0.9rem;
+            border-radius: 6px;
+        }
+
+        .error-message {
+            font-size: 0.8rem;
+        }
+    }
+</style>
