@@ -58,7 +58,7 @@ body {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .navbar {
@@ -350,6 +350,7 @@ main {
     }
 
     .nav-links {
+        margin-top:8px;
         position: fixed;
         top: 70px;
         left: -100%;

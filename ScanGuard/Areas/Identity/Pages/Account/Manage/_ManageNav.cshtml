@@ -5,44 +5,44 @@
 }
 
 <!-- Sidebar navigation -->
-<aside class="nav-menu">
-    <div class="nav-header">
-        <a href="/" class="nav-logo">ScanGuard</a>
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <!-- Надпись убрана -->
     </div>
-    <nav class="nav-list">
-        <ul class="nav-items">
-            <li class="nav-item">
-                <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="nav-profile" asp-page="./Index">
-                    <span class="nav-icon">👤</span> Profile
+    <nav class="sidebar-nav">
+        <ul class="sidebar-items">
+            <li class="sidebar-item">
+                <a class="sidebar-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+                    <i class="sidebar-icon fas fa-user"></i> Profile
                 </a>
             </li>
             @if (hasExternalLogins)
             {
-                <li class="nav-item">
-                    <a class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="nav-external-login" asp-page="./ExternalLogins">
-                        <span class="nav-icon">🔗</span> External Logins
+                <li class="sidebar-item">
+                    <a class="sidebar-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="external-login" asp-page="./ExternalLogins">
+                        <i class="sidebar-icon fas fa-link"></i> External Logins
                     </a>
                 </li>
             }
-            <li class="nav-item">
-                <a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="nav-two-factor" asp-page="./TwoFactorAuthentication">
-                    <span class="nav-icon">🔒</span> Two-Factor Auth
+            <li class="sidebar-item">
+                <a class="sidebar-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">
+                    <i class="sidebar-icon fas fa-lock"></i> Two-Factor Auth
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="nav-personal-data" asp-page="./PersonalData">
-                    <span class="nav-icon">📋</span> Personal Data
+            <li class="sidebar-item">
+                <a class="sidebar-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
+                    <i class="sidebar-icon fas fa-file-alt"></i> Personal Data
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="nav-change-password" asp-page="./ChangePassword">
-                    <span class="nav-icon">🔑</span> Change Password
+            <li class="sidebar-item">
+                <a class="sidebar-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+                    <i class="sidebar-icon fas fa-key"></i> Change Password
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="sidebar-item">
                 <form method="post" asp-area="Identity" asp-page="/Account/Logout">
-                    <button type="submit" class="nav-link nav-logout">
-                        <span class="nav-icon">🚪</span> Logout
+                    <button type="submit" class="sidebar-link sidebar-logout">
+                        <i class="sidebar-icon fas fa-sign-out-alt"></i> Logout
                     </button>
                 </form>
             </li>
@@ -50,49 +50,73 @@
     </nav>
 </aside>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('manageMenuToggle');
+
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                toggleBtn.setAttribute('aria-expanded', sidebar.classList.contains('active'));
+            });
+
+            // Закрытие меню при клике вне его на мобильных
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Закрытие меню при клике на ссылки
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+    });
+</script>
+
 <style>
-    .nav-menu {
+    .sidebar {
         font-family: 'Inter', sans-serif;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100vh;
+        width: 240px;
         background: #ffffff;
         border-right: 1px solid #e5e7eb;
+        position: fixed;
+        top: 60px; /* Начинается ниже navbar */
+        left: 0;
+        height: calc(100vh - 60px); /* Учитываем высоту navbar */
+        transition: transform 0.3s ease;
         z-index: 1000;
-        display: flex;
-        flex-direction: column;
     }
 
-    .nav-header {
-        padding: 1.5rem 1rem;
+    .sidebar-header {
+        padding: 1rem;
         border-bottom: 1px solid #e5e7eb;
+        min-height: 1rem; /* Пустой заголовок занимает минимум места */
     }
 
-    .nav-logo {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #111827;
-        text-decoration: none;
-    }
-
-    .nav-list {
-        flex: 1;
+    .sidebar-nav {
         padding: 1rem;
     }
 
-    .nav-items {
+    .sidebar-items {
         list-style: none;
         padding: 0;
         margin: 0;
     }
 
-    .nav-item {
+    .sidebar-item {
         margin-bottom: 0.5rem;
     }
 
-    .nav-link {
+    .sidebar-link {
         display: flex;
         align-items: center;
         gap: 0.75rem;
@@ -105,21 +129,21 @@
         transition: background 0.2s ease, color 0.2s ease;
     }
 
-        .nav-link:hover {
+        .sidebar-link:hover {
             background: #f3f4f6;
-            color: #3b82f6;
+            color: #1f2937;
         }
 
-        .nav-link.active {
+        .sidebar-link.active {
             background: #3b82f6;
             color: #ffffff;
         }
 
-    .nav-icon {
+    .sidebar-icon {
         font-size: 1.2rem;
     }
 
-    .nav-logout {
+    .sidebar-logout {
         background: none;
         border: none;
         width: 100%;
@@ -128,52 +152,29 @@
         color: #ef4444;
     }
 
-        .nav-logout:hover {
+        .sidebar-logout:hover {
             background: #fef2f2;
             color: #dc2626;
         }
 
     @@media (max-width: 768px) {
-        .nav-menu {
-            width: 100%;
-            height: auto;
-            position: relative;
-            border-right: none;
-            border-bottom: 1px solid #e5e7eb;
+        .sidebar {
+            width: 240px;
+            transform: translateX(-100%);
         }
 
-        .nav-list {
-            padding: 0.5rem 1rem;
-        }
-
-        .nav-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .nav-item {
-            flex: 1 1 auto;
-            margin-bottom: 0;
-        }
-
-        .nav-link {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.9rem;
-        }
+            .sidebar.active {
+                transform: translateX(0);
+            }
     }
 
     @@media (max-width: 414px) {
-        .nav-logo {
-            font-size: 1.3rem;
+        .sidebar-link {
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
         }
 
-        .nav-link {
-            font-size: 0.85rem;
-            padding: 0.5rem;
-        }
-
-        .nav-icon {
+        .sidebar-icon {
             font-size: 1.1rem;
         }
     }

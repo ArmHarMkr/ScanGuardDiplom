@@ -70,7 +70,7 @@
                     var isPremium = await UserManager.IsInRoleAsync(currentUser, SD.Role_Premium);
                     var isCustomer = await UserManager.IsInRoleAsync(currentUser, SD.Role_Customer);
 
-                    @if (isAdmin || isPremium )
+                    @if (isAdmin || isPremium)
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle"><i class="fas fa-cog"></i> Premium <i class="fas fa-caret-down"></i></a>
@@ -128,14 +128,27 @@
         </nav>
     </div>
 
-    <main class="container">
-        @RenderBody()
-    </main>
+    <div class="manage-wrapper">
+        <!-- Боковое меню для страниц Manage -->
+        @if (Context.Request.Path.StartsWithSegments("/Identity/Account/Manage"))
+        {
+            <partial name="_ManageNav" />
+            <!-- Кнопка для открытия меню на мобильных -->
+            <button class="manage-menu-toggle" id="manageMenuToggle" aria-label="Toggle manage menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        }
+
+        <!-- Основной контент -->
+        <main class="container manage-content">
+            @RenderBody()
+        </main>
+    </div>
 
     @RenderSection("Scripts", required: false)
 
     <script>
-        // Mobile menu toggle
+        // Mobile menu toggle для верхнего меню (оригинальная логика, не трогаем)
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
@@ -167,7 +180,6 @@
             });
         });
 
-        // Dropdown toggle для мобильных устройств
         // Dropdown toggle для мобильных устройств
         document.querySelectorAll('.nav-links .dropdown-toggle').forEach(dropdownToggle => {
             dropdownToggle.addEventListener('click', (e) => {
