@@ -23,7 +23,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: var(--light-color);
+    color: var(--dark-color);
     background-image: radial-gradient(circle at 10% 20%, rgba(239, 35, 60, 0.08) 0%, transparent 90%), radial-gradient(circle at 90% 80%, rgba(43, 45, 66, 0.08) 0%, transparent 90%);
 }
 

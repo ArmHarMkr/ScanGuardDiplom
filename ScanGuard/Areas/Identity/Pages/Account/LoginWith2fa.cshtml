@@ -1,0 +1,180 @@
+﻿@page
+@model LoginWith2faModel
+@{
+    ViewData["Title"] = "Two-factor Authentication";
+    Layout = null;
+}
+<link rel="stylesheet" type="text/css" href="~/css/main.css">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form method="post" asp-route-returnUrl="@Model.ReturnUrl" class="login100-form validate-form">
+                <span class="login100-form-title">
+                    @ViewData["Title"]
+                </span>
+                <p class="login100-form-desc">
+                    Your login is protected with an authenticator app. Enter your authenticator code below.
+                </p>
+
+                <input asp-for="RememberMe" type="hidden" />
+                <div asp-validation-summary="ModelOnly" class="text-danger login100-error" role="alert"></div>
+
+                <div class="wrap-input100 validate-input" data-validate="Please enter a valid 2FA code">
+                    <input asp-for="Input.TwoFactorCode" class="input100" autocomplete="off" />
+                    <span class="focus-input100" data-placeholder="Authenticator Code"></span>
+                    <span asp-validation-for="Input.TwoFactorCode" class="text-danger login100-field-error"></span>
+                </div>
+
+                <div class="login100-checkbox mb-3">
+                    <label asp-for="Input.RememberMachine" class="login100-checkbox-label">
+                        <input asp-for="Input.RememberMachine" class="login100-checkbox-input" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMachine)
+                    </label>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button type="submit" class="login100-form-btn">Log In</button>
+                    </div>
+                </div>
+
+                <div class="text-center pt-3">
+                    <p class="login100-footer-text">
+                        Don't have access to your authenticator device? You can
+                        <a id="recovery-code-login" asp-page="./LoginWithRecoveryCode" asp-route-returnUrl="@Model.ReturnUrl">
+                            log in with a recovery code
+                        </a>.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Добавляем класс has-val для инпутов с заполненным значением
+        document.querySelectorAll('.input100').forEach(input => {
+            input.addEventListener('blur', function () {
+                if (this.value.trim() !== '') {
+                    this.classList.add('has-val');
+                } else {
+                    this.classList.remove('has-val');
+                }
+            });
+
+            // Проверяем при загрузке страницы
+            if (input.value.trim() !== '') {
+                input.classList.add('has-val');
+            }
+        });
+    </script>
+}
+
+<style>
+    /* Скрываем боковое меню (предположительно _ManageNav) */
+    nav[role="navigation"], .nav, .sidebar, .manage-nav {
+        display: none !important;
+    }
+
+    /* Описание */
+    .login100-form-desc {
+        font-family: 'Poppins-Regular', sans-serif;
+        font-size: 14px;
+        color: var(--dark-color);
+        line-height: 1.5;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    /* Чекбокс */
+    .login100-checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login100-checkbox-label {
+        font-family: 'Poppins-Regular', sans-serif;
+        font-size: 14px;
+        color: var(--dark-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .login100-checkbox-input {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+
+    /* Текст под ссылкой */
+    .login100-footer-text {
+        font-family: 'Poppins-Regular', sans-serif;
+        font-size: 14px;
+        color: var(--dark-color);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Ошибки */
+    .login100-error {
+        font-family: 'Poppins-Regular', sans-serif;
+        font-size: 13px;
+        color: #EF4444;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .login100-field-error {
+        font-family: 'Poppins-Regular', sans-serif;
+        font-size: 13px;
+        color: #EF4444;
+        display: block;
+        margin-top: 5px;
+    }
+
+    /* Адаптивность для мобильных */
+    @@media (max-width: 576px) {
+        .login100-form-title {
+            font-size: 26px;
+        }
+
+        .login100-form-desc {
+            font-size: 13px;
+        }
+
+        .login100-checkbox-label {
+            font-size: 13px;
+        }
+
+        .login100-footer-text {
+            font-size: 13px;
+        }
+
+        .input100 {
+            font-size: 14px;
+            height: 40px;
+        }
+
+        .focus-input100::after {
+            font-size: 14px;
+            top: 12px;
+        }
+
+        .input100:focus + .focus-input100::after,
+        .has-val.input100 + .focus-input100::after {
+            top: -12px;
+            font-size: 12px;
+        }
+
+        .login100-form-btn {
+            font-size: 14px;
+            height: 45px;
+        }
+    }
+</style>
