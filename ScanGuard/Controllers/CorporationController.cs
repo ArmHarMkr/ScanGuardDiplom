@@ -39,7 +39,7 @@ namespace ScanGuard.Controllers
             {
                 TempData["ErrorMessage"] = "You don't have a corporation.";
             }
-            var corporation = await Context.Corporations.FirstOrDefaultAsync(x => x.AdminUser == user);
+            CorporationEntity? corporation = await Context.Corporations.FirstOrDefaultAsync(x => x.AdminUser == user);
             if(corporation == null)
             {
                 TempData["ErrorMessage"] = "You don't have a corporation.";

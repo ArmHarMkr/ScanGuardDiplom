@@ -23,6 +23,6 @@ namespace ScanGuard.Domain.Entity
         public DateTime CreatedDate { get; set; }
         public string? AdminUserId { get; set; }
         public ApplicationUser? AdminUser { get; set; }
-        public bool IsSubmitted { get; set; } = false;
+        public bool? IsSubmitted { get; set; } = false;
     }
 }

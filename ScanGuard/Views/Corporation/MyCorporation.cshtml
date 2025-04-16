@@ -7,30 +7,33 @@
 
 @if (Model != null)
 {
-    <p>Corporation Name: @Model.CorpName</p>
-    <p>Website: @Model.Website</p>
-    <p>Email: @Model.Email</p>
-    <p>Phone: @Model.Phone</p>
-    <p>Address: @Model.Address</p>
-    <p>City: @Model.City</p>
-    <p>State: @Model.State</p>
-    <p>Country: @Model.Country</p>
-
-    @if (ViewBag.IsRequestInProcess)
+    if(Model.IsSubmitted == true || Model.IsSubmitted == false)
     {
-        <div class="alert alert-warning">
-            Your corporation is currently under request and awaiting approval.
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-success">
-            Your corporation is approved!
-        </div>
-    }
+        <p>Corporation Name: @Model.CorpName</p>
+        <p>Website: @Model.Website</p>
+        <p>Email: @Model.Email</p>
+        <p>Phone: @Model.Phone</p>
+        <p>Address: @Model.Address</p>
+        <p>City: @Model.City</p>
+        <p>State: @Model.State</p>
+        <p>Country: @Model.Country</p>
 
-    <a href="/Corporation/RemoveCorporation" class="btn btn-danger">Remove Corporation</a>
-    <a href="/Corporation/ChangeAdmin" class="btn btn-primary">Change Admin</a>
+        @if (ViewBag.IsRequestInProcess)
+        {
+            <div class="alert alert-warning">
+                Your corporation is currently under request and awaiting approval.
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-success">
+                Your corporation is approved!
+            </div>
+        }
+
+        <a href="/Corporation/RemoveCorporation" class="btn btn-danger">Remove Corporation</a>
+        <a href="/Corporation/ChangeAdmin" class="btn btn-primary">Change Admin</a>
+    }
 }
 else
 {
