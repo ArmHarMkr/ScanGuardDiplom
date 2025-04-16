@@ -16,7 +16,7 @@
     <p>State: @Model.State</p>
     <p>Country: @Model.Country</p>
 
-    @if (ViewBag.IsRequestInProcess)
+    @if (ViewBag.IsRequestInProcess != null && ViewBag.IsRequestInProcess.HasValue)
     {
         <div class="alert alert-warning">
             Your corporation is currently under request and awaiting approval.
