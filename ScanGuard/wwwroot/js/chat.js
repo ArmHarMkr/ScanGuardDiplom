@@ -1,4 +1,4 @@
-﻿const connection = new signalR.HubConnectionBuilder()
+﻿/*const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .configureLogging(signalR.LogLevel.Information)
     .build();
@@ -6,10 +6,10 @@
 // Start SignalR connection
 connection.start().then(() => {
     document.getElementById("sendButton").disabled = false;
-    loadMessages(); // Load previous messages on page load
+    loadMessages();
 }).catch(err => console.error(err.toString()));
 
-// Function to load past messages from the database
+// Load past messages
 function loadMessages() {
     fetch("/Chat/GetMessages")
         .then(response => response.json())
@@ -19,51 +19,105 @@ function loadMessages() {
         .catch(error => console.error("Error loading messages:", error));
 }
 
-// Event listener for send button
+// Send message on button click
 document.getElementById("sendButton").addEventListener("click", function (event) {
     event.preventDefault();
-
     const userInput = document.getElementById("userInput");
     const user = userInput ? userInput.value : "Anonymous";
     const messageInput = document.getElementById("messageInput");
     const message = messageInput ? messageInput.value.trim() : "";
-
     if (message !== "") {
-        const avatarElement = document.getElementById("userAvatar");
-        const avatarSrc = avatarElement ? avatarElement.src : "/img/default.jpg"; // Default avatar
-
-        connection.invoke("SendMessage", user, message, avatarSrc)
+        connection.invoke("SendMessage", user, message, '@profilePhoto')
             .then(() => {
-                messageInput.value = ""; // Clear message input
+                messageInput.value = "";
             })
             .catch(err => console.error(err.toString()));
     }
 });
 
-// Function to add a message to the chat UI
+// Send typing event
+let typingTimeout;
+document.getElementById("messageInput").addEventListener("input", function () {
+    clearTimeout(typingTimeout);
+    connection.invoke("SendTyping", document.getElementById("userInput").value)
+        .catch(err => console.error(err.toString()));
+    typingTimeout = setTimeout(() => {
+        connection.invoke("StopTyping", document.getElementById("userInput").value)
+            .catch(err => console.error(err.toString()));
+    }, 2000);
+});
+
+// Add message to UI
 function addMessageToChat(user, message, profilePhoto) {
     const isOwnMessage = document.getElementById("userInput").value === user;
-
     const li = document.createElement("li");
-    li.classList.add("message", isOwnMessage ? "own-message" : "other-message");
+    li.classList.add("message-container", isOwnMessage ? "own-message" : "other-message");
 
-    //const avatar = document.createElement("img");
-    //avatar.src = profilePhoto ? profilePhoto : "/img/default.jpg"; // Handle missing avatar
-    //avatar.classList.add("avatar");
+    const header = document.createElement("div");
+    header.classList.add("message-header");
+    header.textContent = user;
+
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message");
+
+    const avatar = document.createElement("img");
+    avatar.src = profilePhoto || "/img/default.jpg";
+    avatar.classList.add("avatar");
 
     const textDiv = document.createElement("div");
     textDiv.classList.add("text");
-    textDiv.innerHTML = `<strong>${user}:</strong> ${message}`;
+    textDiv.textContent = message;
 
-    //li.appendChild(avatar);
-    li.appendChild(textDiv);
+    const timestamp = document.createElement("div");
+    timestamp.classList.add("message-timestamp");
+    const now = new Date();
+    timestamp.textContent = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    if (isOwnMessage) {
+        const status = document.createElement("span");
+        status.classList.add("message-status");
+        status.textContent = "✓✓";
+        timestamp.appendChild(status);
+    }
+
+    if (!isOwnMessage) {
+        messageDiv.appendChild(avatar);
+    }
+    messageDiv.appendChild(textDiv);
+    if (isOwnMessage) {
+        messageDiv.appendChild(avatar);
+    }
+    li.appendChild(header);
+    li.appendChild(messageDiv);
+    li.appendChild(timestamp);
+
     document.getElementById("messagesList").appendChild(li);
-
-    // Auto-scroll to the bottom
-    document.getElementById("messagesList").scrollTop = document.getElementById("messagesList").scrollHeight;
+    document.getElementById("messagesList").scrollTo({ top: document.getElementById("messagesList").scrollHeight, behavior: 'smooth' });
 }
 
-// Listen for new messages from SignalR
+// Receive message
 connection.on("ReceiveMessage", function (user, message, profilePhoto) {
     addMessageToChat(user, message, profilePhoto);
 });
+
+// Handle typing indicator
+connection.on("UserTyping", function (user) {
+    const indicator = document.querySelector(".typing-indicator");
+    indicator.textContent = `${user} is typing...`;
+    indicator.classList.add("active");
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+        indicator.classList.remove("active");
+    }, 2000);
+});
+
+connection.on("UserStoppedTyping", function () {
+    document.querySelector(".typing-indicator").classList.remove("active");
+});
+
+// Send message on Enter
+document.getElementById("messageInput").addEventListener("keypress", function (e) {
+    if (e.key === "Enter" && this.value.trim() !== "") {
+        document.getElementById("sendButton").click();
+        this.value = "";
+    }
+});*/

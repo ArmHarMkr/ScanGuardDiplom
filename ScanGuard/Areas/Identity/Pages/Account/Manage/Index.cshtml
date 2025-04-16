@@ -10,7 +10,7 @@
         <!-- Секция с аватаркой и информацией -->
         <div class="profile-header">
             <div class="avatar-section">
-                <img src="@(Model.ProfileData.ProfilePhotoPath ?? "/images/default-avatar.png")" alt="Profile Photo" class="avatar-img" />
+                <img src="@(Model.ProfileData.ProfilePhotoPath.Replace("wwwroot","") ?? "/img/default.jpg")" alt="Profile Photo" class="avatar-img" />
                 <form id="photo-form" method="post" enctype="multipart/form-data" asp-page-handler="ChangePhoto">
                     <label for="newProfilePhoto" class="avatar-upload-label">
                         <i class="fas fa-camera"></i>
