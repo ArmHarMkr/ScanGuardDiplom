@@ -139,8 +139,19 @@ namespace MGOBankAp.Controllers
 
         public IActionResult AboutUs()
         {
+            var scansPerformed = Context.WebsiteScanEntities.Count();
+            var clientsProtected = Context.WebsiteScanEntities
+                                           .Where(s => s.ScanUser != null)
+                                           .Select(s => s.ScanUser.Id)
+                                           .Distinct()
+                                           .Count();
+
+            ViewBag.ScansPerformed = scansPerformed;
+            ViewBag.ClientsProtected = clientsProtected;
+
             return View();
         }
+
 
         public IActionResult FwdScanner()
         {
