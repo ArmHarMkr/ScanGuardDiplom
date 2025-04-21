@@ -508,3 +508,127 @@ main {
         font-size: 0.85rem;
     }
 }
+.language-selector {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.language-toggle {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+    .language-toggle:hover {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+
+    .language-toggle .flag-icon {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        display: block;
+    }
+
+.language-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 180px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.language-selector.active .language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .language-option:hover {
+        background-color: rgba(59, 130, 246, 0.05);
+        color: #3b82f6;
+    }
+
+    .language-option .flag-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        object-fit: contain;
+        display: block;
+    }
+
+@media (max-width: 768px) {
+    .language-toggle .flag-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .language-menu {
+        width: 160px;
+    }
+
+    .language-option {
+        font-size: 0.95rem;
+        padding: 8px 12px;
+    }
+
+        .language-option .flag-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+}
+
+@media (max-width: 480px) {
+    .language-toggle {
+        padding: 4px;
+    }
+
+        .language-toggle .flag-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+    .language-menu {
+        width: 140px;
+    }
+
+    .language-option {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+
+        .language-option .flag-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+        }
+}
