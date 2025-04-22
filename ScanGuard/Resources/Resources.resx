@@ -252,6 +252,9 @@
   <data name="InstantNotifications" xml:space="preserve">
     <value>Instant notifications for potential threats.</value>
   </data>
+  <data name="JoinOurMission" xml:space="preserve">
+    <value>Join Our Mission</value>
+  </data>
   <data name="JoinScanGuard" xml:space="preserve">
     <value>Join ScanGuard today and take control of your cybersecurity.</value>
   </data>
@@ -426,7 +429,7 @@
   <data name="Your" xml:space="preserve">
     <value>Your</value>
   </data>
-  <data name="Your Email" xml:space="preserve">
+  <data name="YourEmail" xml:space="preserve">
     <value>Your  Email</value>
   </data>
   <data name="YourMessage" xml:space="preserve">

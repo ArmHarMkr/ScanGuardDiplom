@@ -466,6 +466,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Join Our Mission.
+        /// </summary>
+        public static string JoinOurMission {
+            get {
+                return ResourceManager.GetString("JoinOurMission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Join ScanGuard today and take control of your cybersecurity..
         /// </summary>
         public static string JoinScanGuard {
@@ -990,9 +999,9 @@ namespace ScanGuard.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Your  Email.
         /// </summary>
-        public static string Your_Email {
+        public static string YourEmail {
             get {
-                return ResourceManager.GetString("Your Email", resourceCulture);
+                return ResourceManager.GetString("YourEmail", resourceCulture);
             }
         }
         

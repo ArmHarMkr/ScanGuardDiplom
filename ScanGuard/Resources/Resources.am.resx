@@ -252,6 +252,9 @@
   <data name="InstantNotifications" xml:space="preserve">
     <value>Ակնթարթային ծանուցումներ հնարավոր սպառնալիքների վերաբերյալ</value>
   </data>
+  <data name="JoinOurMission" xml:space="preserve">
+    <value>Միացեք մեր առաքելությանը</value>
+  </data>
   <data name="JoinScanGuard" xml:space="preserve">
     <value>Միացեք ScanGuard-ին և կառավարեք ձեր կիբանվտանգությունը</value>
   </data>
@@ -426,7 +429,7 @@
   <data name="Your" xml:space="preserve">
     <value>Քո</value>
   </data>
-  <data name="Your Email" xml:space="preserve">
+  <data name="YourEmail" xml:space="preserve">
     <value>Էլ. փոստ</value>
   </data>
   <data name="YourMessage" xml:space="preserve">
