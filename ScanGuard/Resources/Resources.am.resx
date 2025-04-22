@@ -118,174 +118,174 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessToCommunity" xml:space="preserve">
-    <value>Access to community forums</value>
+    <value>Մուտք դեպի համայնքի ֆորումներ</value>
   </data>
   <data name="AdvancedAnalytics" xml:space="preserve">
-    <value>Advanced analytics and detailed reports</value>
+    <value>Զարգացած վերլուծություն և մանրամասն հաշվետվություններ</value>
   </data>
   <data name="AdvancedScanning" xml:space="preserve">
-    <value>Advanced Scanning</value>
+    <value>Զարգացած սկանավորում</value>
   </data>
   <data name="AllInOne" xml:space="preserve">
-    <value>All-in-one solution for your digital security.</value>
+    <value>Բոլորը մեկում լուծում՝ ձեր թվային անվտանգության համար</value>
   </data>
   <data name="Analyzed" xml:space="preserve">
-    <value>Analyzed</value>
+    <value>Վերլուծվել է</value>
   </data>
   <data name="APIAccess" xml:space="preserve">
-    <value>API access for integration with your tools</value>
+    <value>API հասանելիություն՝ ձեր գործիքների հետ ինտեգրման համար</value>
   </data>
   <data name="BasicSupport" xml:space="preserve">
-    <value>Basic support via email (response within 48 hours)</value>
+    <value>Հիմնական աջակցություն՝ էլ․ փոստով (պատասխան՝ 48 ժամում)</value>
   </data>
   <data name="ComprehensiveProtection" xml:space="preserve">
-    <value>Comprehensive Protection</value>
+    <value>Համապարփակ պաշտպանություն</value>
   </data>
   <data name="CustomScan" xml:space="preserve">
-    <value>Custom scan schedules and automation</value>
+    <value>Անհատական սկանավորման ժամանակացույց և ավտոմատացում</value>
   </data>
   <data name="DetectedThreatOn" xml:space="preserve">
-    <value>Detected threat on</value>
+    <value>Բացահայտված սպառնալիք՝</value>
   </data>
   <data name="Digital" xml:space="preserve">
-    <value>Digital</value>
+    <value>Թվային</value>
   </data>
   <data name="Essential" xml:space="preserve">
-    <value>Essential scanning for websites and files</value>
+    <value>Հիմնական սկանավորում վեբկայքերի և ֆայլերի համար</value>
   </data>
   <data name="ExploreAdvanced" xml:space="preserve">
-    <value>Explore advanced tools to secure your digital world.</value>
+    <value>Ուսումնասիրեք առաջադեմ գործիքները՝ ձեր թվային աշխարհը ապահովելու համար</value>
   </data>
   <data name="FilesAnalyzed" xml:space="preserve">
-    <value>Files Analyzed</value>
+    <value>Վերլուծված ֆայլեր</value>
   </data>
   <data name="GetStarted" xml:space="preserve">
-    <value>Get Started</value>
+    <value>Սկսել</value>
   </data>
   <data name="GoToDashboard" xml:space="preserve">
-    <value>Go to Dashboard</value>
+    <value>Վահանակ</value>
   </data>
   <data name="Guard" xml:space="preserve">
-    <value>Guard</value>
+    <value>Պաշտպանիր</value>
   </data>
   <data name="HappyUsers" xml:space="preserve">
-    <value>Happy Users</value>
+    <value>Գոհ օգտագործողներ</value>
   </data>
   <data name="Home_Empty_Message" xml:space="preserve">
-    <value>No scanned websites yet. Be the first!</value>
+    <value>Դեռևս սկանավորված վեբկայքեր չկան։ Եղեք առաջինը։</value>
   </data>
   <data name="Home_Hero_Subtitle" xml:space="preserve">
-    <value>Advanced cybersecurity solutions with ScanGuard. Protect your websites, files, and data in real-time.</value>
+    <value>Զարգացած կիբանվտանգության լուծումներ ScanGuard-ի հետ։ Պաշտպանեք ձեր վեբկայքերը, ֆայլերը և տվյալները իրական ժամանակում։</value>
   </data>
   <data name="Home_Section_Title" xml:space="preserve">
-    <value>Building a Safer Digital World</value>
+    <value>Ապահով թվային աշխարհի կառուցում</value>
   </data>
   <data name="IdealForBusinesses" xml:space="preserve">
-    <value>Ideal for businesses and professionals needing advanced security features and priority support.</value>
+    <value>Իդեալական է բիզնեսի և մասնագետների համար, որոնք պահանջում են առաջադեմ անվտանգություն և առաջնահերթ աջակցություն</value>
   </data>
   <data name="InstantNotifications" xml:space="preserve">
-    <value>Instant notifications for potential threats.</value>
+    <value>Ակնթարթային ծանուցումներ հնարավոր սպառնալիքների վերաբերյալ</value>
   </data>
   <data name="JoinScanGuard" xml:space="preserve">
-    <value>Join ScanGuard today and take control of your cybersecurity.</value>
+    <value>Միացեք ScanGuard-ին և կառավարեք ձեր կիբանվտանգությունը</value>
   </data>
   <data name="LatestSecurityUpdates" xml:space="preserve">
-    <value>Latest Security Updates</value>
+    <value>Վերջին անվտանգության թարմացումները</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Log In</value>
+    <value>Մուտք</value>
   </data>
   <data name="MonthlySecurity" xml:space="preserve">
-    <value>Monthly security consultation with experts</value>
+    <value>Անվտանգության ամսական խորհրդատվություն փորձագետների հետ</value>
   </data>
   <data name="PerfectFor" xml:space="preserve">
-    <value>Perfect for individuals and small projects looking to secure their digital assets with essential tools.</value>
+    <value>Իդեալական է անհատների և փոքր նախագծերի համար, որոնք ցանկանում են պաշտպանել իրենց թվային ակտիվները հիմնական գործիքներով</value>
   </data>
   <data name="PremiumCommunityChat" xml:space="preserve">
-    <value>Premium community chat with other users</value>
+    <value>Պրեմիում համայնքի չաթ՝ այլ օգտատերերի հետ</value>
   </data>
   <data name="PrioritySupport" xml:space="preserve">
-    <value>Priority support with 24/7 assistance</value>
+    <value>Առաջնահերթ աջակցություն՝ 24/7</value>
   </data>
   <data name="Rank" xml:space="preserve">
-    <value>Rank</value>
+    <value>Վարկանիշ</value>
   </data>
   <data name="ReadyToScan" xml:space="preserve">
-    <value>Ready to Scan More?</value>
+    <value>Պատրաստ եք սկանավորելու ավելին?</value>
   </data>
   <data name="ReadyToSecure" xml:space="preserve">
-    <value>Ready to Secure Your Online Presence?</value>
+    <value>Պատրաստ եք ապահովելու ձեր առցանց ներկայությունը?</value>
   </data>
   <data name="RealTime" xml:space="preserve">
-    <value>Real-time vulnerability detection for websites and files.</value>
+    <value>Իրական ժամանակում խոցելիությունների հայտնաբերում վեբկայքերի և ֆայլերի համար</value>
   </data>
   <data name="RealTimeAlerts" xml:space="preserve">
-    <value>Real-Time Alerts</value>
+    <value>Իրական ժամանակում նախազգուշացումներ</value>
   </data>
   <data name="ScanCount" xml:space="preserve">
-    <value>Scan Count</value>
+    <value>Սկանավորումների քանակ</value>
   </data>
   <data name="Scanned" xml:space="preserve">
-    <value>Scanned</value>
+    <value>Սկանավորվել է</value>
   </data>
   <data name="SecurityNews" xml:space="preserve">
-    <value>Security news updates and insights</value>
+    <value>Անվտանգության նորություններ և վերլուծություններ</value>
   </data>
   <data name="SignUpNow" xml:space="preserve">
-    <value>Sign Up Now</value>
+    <value>Գրանցվիր հիմա</value>
   </data>
   <data name="StartScanning" xml:space="preserve">
-    <value>Start Scanning</value>
+    <value>Սկսել սկանավորումը</value>
   </data>
   <data name="TailoredPlans" xml:space="preserve">
-    <value>Tailored Plans for Your Needs</value>
+    <value>Անհատականացված փաթեթներ՝ ձեր կարիքների համար</value>
   </data>
   <data name="TelegramBot" xml:space="preserve">
-    <value>Telegram bot access with full website features</value>
+    <value>Telegram բոտ՝ ամբողջ վեբկայքի գործառույթներով</value>
   </data>
   <data name="TopSecurityHotspots" xml:space="preserve">
-    <value>Top Security Hotspots</value>
+    <value>Թոփ խոցելի վայրերը</value>
   </data>
   <data name="Trusted" xml:space="preserve">
-    <value>Trusted by Our Community</value>
+    <value>Վստահված է մեր օգտատերերի կողմից</value>
   </data>
   <data name="UnlimitedScans" xml:space="preserve">
-    <value>Unlimited scans for websites and files</value>
+    <value>Անսահմանափակ սկանավորում վեբկայքերի և ֆայլերի համար</value>
   </data>
   <data name="UpgradeToPremium" xml:space="preserve">
-    <value>Upgrade to Premium</value>
+    <value>Անցնել պրեմիում տարբերակի</value>
   </data>
   <data name="UpTo3File" xml:space="preserve">
-    <value>Up to 3 file scans per day</value>
+    <value>Մինչև 3 ֆայլի սկանավորում օրական</value>
   </data>
   <data name="VerifiedUser" xml:space="preserve">
-    <value>Verified User</value>
+    <value>Հաստատված օգտատեր</value>
   </data>
   <data name="ViewMore" xml:space="preserve">
-    <value>View More</value>
+    <value>Դիտել ավելին</value>
   </data>
   <data name="VulnerabilitiesDetected" xml:space="preserve">
-    <value>Vulnerabilities Detected</value>
+    <value>Բացահայտված խոցելիություններ</value>
   </data>
   <data name="VulnerabilitiesFound" xml:space="preserve">
-    <value>vulnerabilities found</value>
+    <value>բացահայտվել է խոցելիություն</value>
   </data>
   <data name="WebsitesScanned" xml:space="preserve">
-    <value>Websites Scanned</value>
+    <value>Սկանավորված վեբկայքեր</value>
   </data>
   <data name="WebsiteURL" xml:space="preserve">
-    <value>Website URL</value>
+    <value>Վեբկայքի URL</value>
   </data>
   <data name="World" xml:space="preserve">
-    <value>World</value>
+    <value>Աշխարհը</value>
   </data>
   <data name="WriteaReview" xml:space="preserve">
-    <value>Write a Review</value>
+    <value>Գրել կարծիք</value>
   </data>
   <data name="Your" xml:space="preserve">
-    <value>Your</value>
+    <value>Քո</value>
   </data>
   <data name="YourSecurityAdvantage" xml:space="preserve">
-    <value>Your Security Advantage</value>
+    <value>Ձեր անվտանգության առավելությունը</value>
   </data>
 </root>

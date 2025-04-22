@@ -61,11 +61,515 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access to community forums.
+        /// </summary>
+        public static string AccessToCommunity {
+            get {
+                return ResourceManager.GetString("AccessToCommunity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced analytics and detailed reports.
+        /// </summary>
+        public static string AdvancedAnalytics {
+            get {
+                return ResourceManager.GetString("AdvancedAnalytics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Scanning.
+        /// </summary>
+        public static string AdvancedScanning {
+            get {
+                return ResourceManager.GetString("AdvancedScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All-in-one solution for your digital security..
+        /// </summary>
+        public static string AllInOne {
+            get {
+                return ResourceManager.GetString("AllInOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzed.
+        /// </summary>
+        public static string Analyzed {
+            get {
+                return ResourceManager.GetString("Analyzed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API access for integration with your tools.
+        /// </summary>
+        public static string APIAccess {
+            get {
+                return ResourceManager.GetString("APIAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic support via email (response within 48 hours).
+        /// </summary>
+        public static string BasicSupport {
+            get {
+                return ResourceManager.GetString("BasicSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comprehensive Protection.
+        /// </summary>
+        public static string ComprehensiveProtection {
+            get {
+                return ResourceManager.GetString("ComprehensiveProtection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom scan schedules and automation.
+        /// </summary>
+        public static string CustomScan {
+            get {
+                return ResourceManager.GetString("CustomScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detected threat on.
+        /// </summary>
+        public static string DetectedThreatOn {
+            get {
+                return ResourceManager.GetString("DetectedThreatOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digital.
+        /// </summary>
+        public static string Digital {
+            get {
+                return ResourceManager.GetString("Digital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Essential scanning for websites and files.
+        /// </summary>
+        public static string Essential {
+            get {
+                return ResourceManager.GetString("Essential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Explore advanced tools to secure your digital world..
+        /// </summary>
+        public static string ExploreAdvanced {
+            get {
+                return ResourceManager.GetString("ExploreAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files Analyzed.
+        /// </summary>
+        public static string FilesAnalyzed {
+            get {
+                return ResourceManager.GetString("FilesAnalyzed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Started.
+        /// </summary>
+        public static string GetStarted {
+            get {
+                return ResourceManager.GetString("GetStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to Dashboard.
+        /// </summary>
+        public static string GoToDashboard {
+            get {
+                return ResourceManager.GetString("GoToDashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guard.
         /// </summary>
         public static string Guard {
             get {
                 return ResourceManager.GetString("Guard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Happy Users.
+        /// </summary>
+        public static string HappyUsers {
+            get {
+                return ResourceManager.GetString("HappyUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No scanned websites yet. Be the first!.
+        /// </summary>
+        public static string Home_Empty_Message {
+            get {
+                return ResourceManager.GetString("Home_Empty_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced cybersecurity solutions with ScanGuard. Protect your websites, files, and data in real-time..
+        /// </summary>
+        public static string Home_Hero_Subtitle {
+            get {
+                return ResourceManager.GetString("Home_Hero_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Building a Safer Digital World.
+        /// </summary>
+        public static string Home_Section_Title {
+            get {
+                return ResourceManager.GetString("Home_Section_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ideal for businesses and professionals needing advanced security features and priority support..
+        /// </summary>
+        public static string IdealForBusinesses {
+            get {
+                return ResourceManager.GetString("IdealForBusinesses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instant notifications for potential threats..
+        /// </summary>
+        public static string InstantNotifications {
+            get {
+                return ResourceManager.GetString("InstantNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join ScanGuard today and take control of your cybersecurity..
+        /// </summary>
+        public static string JoinScanGuard {
+            get {
+                return ResourceManager.GetString("JoinScanGuard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest Security Updates.
+        /// </summary>
+        public static string LatestSecurityUpdates {
+            get {
+                return ResourceManager.GetString("LatestSecurityUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log In.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly security consultation with experts.
+        /// </summary>
+        public static string MonthlySecurity {
+            get {
+                return ResourceManager.GetString("MonthlySecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perfect for individuals and small projects looking to secure their digital assets with essential tools..
+        /// </summary>
+        public static string PerfectFor {
+            get {
+                return ResourceManager.GetString("PerfectFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premium community chat with other users.
+        /// </summary>
+        public static string PremiumCommunityChat {
+            get {
+                return ResourceManager.GetString("PremiumCommunityChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priority support with 24/7 assistance.
+        /// </summary>
+        public static string PrioritySupport {
+            get {
+                return ResourceManager.GetString("PrioritySupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank.
+        /// </summary>
+        public static string Rank {
+            get {
+                return ResourceManager.GetString("Rank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready to Scan More?.
+        /// </summary>
+        public static string ReadyToScan {
+            get {
+                return ResourceManager.GetString("ReadyToScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready to Secure Your Online Presence?.
+        /// </summary>
+        public static string ReadyToSecure {
+            get {
+                return ResourceManager.GetString("ReadyToSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real-time vulnerability detection for websites and files..
+        /// </summary>
+        public static string RealTime {
+            get {
+                return ResourceManager.GetString("RealTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real-Time Alerts.
+        /// </summary>
+        public static string RealTimeAlerts {
+            get {
+                return ResourceManager.GetString("RealTimeAlerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Count.
+        /// </summary>
+        public static string ScanCount {
+            get {
+                return ResourceManager.GetString("ScanCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanned.
+        /// </summary>
+        public static string Scanned {
+            get {
+                return ResourceManager.GetString("Scanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security news updates and insights.
+        /// </summary>
+        public static string SecurityNews {
+            get {
+                return ResourceManager.GetString("SecurityNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign Up Now.
+        /// </summary>
+        public static string SignUpNow {
+            get {
+                return ResourceManager.GetString("SignUpNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Scanning.
+        /// </summary>
+        public static string StartScanning {
+            get {
+                return ResourceManager.GetString("StartScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tailored Plans for Your Needs.
+        /// </summary>
+        public static string TailoredPlans {
+            get {
+                return ResourceManager.GetString("TailoredPlans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telegram bot access with full website features.
+        /// </summary>
+        public static string TelegramBot {
+            get {
+                return ResourceManager.GetString("TelegramBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top Security Hotspots.
+        /// </summary>
+        public static string TopSecurityHotspots {
+            get {
+                return ResourceManager.GetString("TopSecurityHotspots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trusted by Our Community.
+        /// </summary>
+        public static string Trusted {
+            get {
+                return ResourceManager.GetString("Trusted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited scans for websites and files.
+        /// </summary>
+        public static string UnlimitedScans {
+            get {
+                return ResourceManager.GetString("UnlimitedScans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade to Premium.
+        /// </summary>
+        public static string UpgradeToPremium {
+            get {
+                return ResourceManager.GetString("UpgradeToPremium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Up to 3 file scans per day.
+        /// </summary>
+        public static string UpTo3File {
+            get {
+                return ResourceManager.GetString("UpTo3File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verified User.
+        /// </summary>
+        public static string VerifiedUser {
+            get {
+                return ResourceManager.GetString("VerifiedUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View More.
+        /// </summary>
+        public static string ViewMore {
+            get {
+                return ResourceManager.GetString("ViewMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerabilities Detected.
+        /// </summary>
+        public static string VulnerabilitiesDetected {
+            get {
+                return ResourceManager.GetString("VulnerabilitiesDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vulnerabilities found.
+        /// </summary>
+        public static string VulnerabilitiesFound {
+            get {
+                return ResourceManager.GetString("VulnerabilitiesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Websites Scanned.
+        /// </summary>
+        public static string WebsitesScanned {
+            get {
+                return ResourceManager.GetString("WebsitesScanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website URL.
+        /// </summary>
+        public static string WebsiteURL {
+            get {
+                return ResourceManager.GetString("WebsiteURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to World.
+        /// </summary>
+        public static string World {
+            get {
+                return ResourceManager.GetString("World", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write a Review.
+        /// </summary>
+        public static string WriteaReview {
+            get {
+                return ResourceManager.GetString("WriteaReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your.
+        /// </summary>
+        public static string Your {
+            get {
+                return ResourceManager.GetString("Your", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Security Advantage.
+        /// </summary>
+        public static string YourSecurityAdvantage {
+            get {
+                return ResourceManager.GetString("YourSecurityAdvantage", resourceCulture);
             }
         }
     }

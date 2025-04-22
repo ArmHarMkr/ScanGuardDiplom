@@ -1,5 +1,6 @@
 ﻿@using ScanGuard.Domain.Roles
 @using Microsoft.AspNetCore.Identity
+@using System.Globalization
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -114,17 +115,20 @@
             <div class="auth-buttons">
                 <div class="language-selector">
                     <div class="language-toggle" onclick="toggleLanguageMenu()">
-                        <img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" />
+                        <img width="30px" src="@(CultureInfo.CurrentCulture.Name == "en" ? "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" : "https://flagcdn.com/w40/am.png")" alt="@(CultureInfo.CurrentCulture.Name == "en" ? "English" : "Հայերեն")" />
                     </div>
                     <div class="language-menu">
-                        <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="en" name="culture" value="en" class="language-option">
+                        <!-- Ссылка для выбора английского языка -->
+                        <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="en" class="language-option">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" class="flag-icon" /> English
                         </a>
-                        <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="am" name="culture" value="hy" class="language-option">
+                        <!-- Ссылка для выбора армянского языка -->
+                        <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="am" class="language-option">
                             <img src="https://flagcdn.com/w40/am.png" alt="Հայերեն" class="flag-icon" /> Հայերեն
                         </a>
                     </div>
                 </div>
+            </div>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     var currentUser = await UserManager.GetUserAsync(User);

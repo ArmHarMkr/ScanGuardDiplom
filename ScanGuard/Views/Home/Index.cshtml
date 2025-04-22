@@ -6,6 +6,7 @@
 @{
     var user = await _userManager.GetUserAsync(User);
     bool isPremium = user != null && await _userManager.IsInRoleAsync(user, "Premium");
+
 }
 
 <div class="home-container">
@@ -15,27 +16,27 @@
         <div class="home-hero-content">
             <h1 class="home-hero-title">
                 <span class="home-hero-title-word" style="animation-delay: 0s;">@ScanGuard.Resources.Resources.Guard</span>
-                <span class="home-hero-title-word" style="animation-delay: 0.3s;">Your</span>
-                <span class="home-hero-title-word" style="animation-delay: 0.6s;">Digital</span>
-                <span class="home-hero-title-word" style="animation-delay: 0.9s;">World</span>
+                <span class="home-hero-title-word" style="animation-delay: 0.3s;">@ScanGuard.Resources.Resources.Your</span>
+                <span class="home-hero-title-word" style="animation-delay: 0.6s;">@ScanGuard.Resources.Resources.Digital</span>
+                <span class="home-hero-title-word" style="animation-delay: 0.9s;">@ScanGuard.Resources.Resources.World</span>
             </h1>
-            <p class="home-hero-subtitle">Advanced cybersecurity solutions with ScanGuard. Protect your websites, files, and data in real-time.</p>
+            <p class="home-hero-subtitle">@ScanGuard.Resources.Resources.Home_Hero_Subtitle</p>
             <div class="home-hero-buttons">
                 @if (_signInManager.IsSignedIn(User))
                 {
                     <a href="/Scan/Scanner" class="home-btn home-btn-primary home-hero-btn">
-                        Start Scanning
+                        @ScanGuard.Resources.Resources.StartScanning
                         <i class="fas fa-shield-alt home-btn-icon"></i>
                     </a>
                 }
                 else
                 {
                     <a asp-area="Identity" asp-page="/Account/Register" class="home-btn home-btn-primary home-hero-btn">
-                        Get Started
+                        @ScanGuard.Resources.Resources.GetStarted
                         <i class="fas fa-shield-alt home-btn-icon"></i>
                     </a>
                     <a asp-area="Identity" asp-page="/Account/Login" class="home-btn home-btn-secondary home-hero-btn">
-                        Log In
+                        @ScanGuard.Resources.Resources.Login
                     </a>
                 }
             </div>
@@ -44,34 +45,34 @@
 
     <!-- Stats Section -->
     <section class="home-stats-section">
-        <h2 class="home-section-title">Building a Safer Digital World</h2>
+        <h2 class="home-section-title">@ScanGuard.Resources.Resources.Home_Section_Title</h2>
         <div class="home-stats-grid">
             <div class="home-stat-card">
                 <i class="fas fa-shield-alt home-stat-icon"></i>
                 <div class="home-stat-content">
                     <h3 class="home-stat-number">1M+</h3>
-                    <p class="home-stat-label">Websites Scanned</p>
+                    <p class="home-stat-label">@ScanGuard.Resources.Resources.WebsitesScanned</p>
                 </div>
             </div>
             <div class="home-stat-card">
                 <i class="fas fa-file-alt home-stat-icon"></i>
                 <div class="home-stat-content">
                     <h3 class="home-stat-number">500K+</h3>
-                    <p class="home-stat-label">Files Analyzed</p>
+                    <p class="home-stat-label">@ScanGuard.Resources.Resources.FilesAnalyzed</p>
                 </div>
             </div>
             <div class="home-stat-card">
                 <i class="fas fa-users home-stat-icon"></i>
                 <div class="home-stat-content">
                     <h3 class="home-stat-number">100K+</h3>
-                    <p class="home-stat-label">Happy Users</p>
+                    <p class="home-stat-label">@ScanGuard.Resources.Resources.HappyUsers</p>
                 </div>
             </div>
             <div class="home-stat-card">
                 <i class="fas fa-bug home-stat-icon"></i>
                 <div class="home-stat-content">
                     <h3 class="home-stat-number">10M+</h3>
-                    <p class="home-stat-label">Vulnerabilities Detected</p>
+                    <p class="home-stat-label">@ScanGuard.Resources.Resources.VulnerabilitiesDetected</p>
                 </div>
             </div>
         </div>
@@ -79,15 +80,15 @@
 
     <!-- Top Scanned Websites Section -->
     <section class="home-top-websites-section">
-        <h2 class="home-section-title">Top Security Hotspots</h2>
+        <h2 class="home-section-title">@ScanGuard.Resources.Resources.TopSecurityHotspots</h2>
         <div class="home-table-container">
             <div class="home-table-wrapper">
                 <table class="home-table">
                     <thead>
                         <tr>
-                            <th class="home-table-th">Rank</th>
-                            <th class="home-table-th">Website URL</th>
-                            <th class="home-table-th">Scan Count</th>
+                            <th class="home-table-th">@ScanGuard.Resources.Resources.Rank</th>
+                            <th class="home-table-th">@ScanGuard.Resources.Resources.WebsiteURL</th>
+                            <th class="home-table-th">@ScanGuard.Resources.Resources.ScanCount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,7 +115,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="3" class="home-empty-message">No scanned websites yet. Be the first!</td>
+                                <td colspan="3" class="home-empty-message">@ScanGuard.Resources.Resources.Home_Empty_Message</td>
                             </tr>
                         }
                     </tbody>
@@ -123,7 +124,7 @@
             @if (user is null)
             {
                 <a class="home-btn home-btn-primary home-table-btn" asp-controller="Scan" asp-action="ShowScannedSites">
-                    View More
+                    @ScanGuard.Resources.Resources.ViewMore
                     <i class="fas fa-arrow-right home-btn-icon"></i>
                 </a>
             }
@@ -132,34 +133,34 @@
 
     <!-- Features Section -->
     <section class="home-features-section">
-        <h2 class="home-section-title">Your Security Advantage</h2>
+        <h2 class="home-section-title">@ScanGuard.Resources.Resources.YourSecurityAdvantage</h2>
         <div class="home-features-grid">
             <div class="home-feature-card">
                 <i class="fas fa-search home-feature-icon"></i>
-                <h3 class="home-feature-title">Advanced Scanning</h3>
-                <p class="home-feature-description">Real-time vulnerability detection for websites and files.</p>
+                <h3 class="home-feature-title">@ScanGuard.Resources.Resources.AdvancedScanning</h3>
+                <p class="home-feature-description">@ScanGuard.Resources.Resources.RealTime</p>
             </div>
             <div class="home-feature-card">
                 <i class="fas fa-shield-alt home-feature-icon"></i>
-                <h3 class="home-feature-title">Comprehensive Protection</h3>
-                <p class="home-feature-description">All-in-one solution for your digital security.</p>
+                <h3 class="home-feature-title">@ScanGuard.Resources.Resources.ComprehensiveProtection</h3>
+                <p class="home-feature-description">@ScanGuard.Resources.Resources.AllInOne</p>
             </div>
             <div class="home-feature-card">
                 <i class="fas fa-clock home-feature-icon"></i>
-                <h3 class="home-feature-title">Real-Time Alerts</h3>
-                <p class="home-feature-description">Instant notifications for potential threats.</p>
+                <h3 class="home-feature-title">@ScanGuard.Resources.Resources.RealTimeAlerts</h3>
+                <p class="home-feature-description">@ScanGuard.Resources.Resources.InstantNotifications</p>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
     <section class="home-testimonials-section">
-        <h2 class="home-section-title">Trusted by Our Community</h2>
+        <h2 class="home-section-title">@ScanGuard.Resources.Resources.Trusted</h2>
         <div class="home-testimonials-grid">
             <div class="home-testimonial-card">
                 @if (ViewBag.ReviewOneText == null)
                 {
-                    <a href="/Review/Index" class="btn btn-primary">Write a Review</a>
+                    <a href="/Review/Index" class="btn btn-primary">@ScanGuard.Resources.Resources.WriteaReview</a>
                 }
                 else
                 {
@@ -169,7 +170,7 @@
                         <img src="@ViewBag.ReviewOnePhoto" alt="User Avatar" class="home-testimonial-avatar">
                         <div>
                             <p class="home-testimonial-name">@ViewBag.ReviewOneName</p>
-                            <p class="home-testimonial-role">Verified User</p>
+                            <p class="home-testimonial-role">@ScanGuard.Resources.Resources.VerifiedUser</p>
                         </div>
                     </div>
                 }
@@ -177,7 +178,7 @@
             <div class="home-testimonial-card">
                 @if (ViewBag.ReviewTwoText == null)
                 {
-                    <a href="/Review/Index" class="btn btn-primary">Write a Review</a>
+                    <a href="/Review/Index" class="btn btn-primary">@ScanGuard.Resources.Resources.WriteaReview</a>
                 }
                 else
                 {
@@ -186,7 +187,7 @@
                         <img src="@ViewBag.ReviewTwoPhoto" alt="User Avatar" class="home-testimonial-avatar">
                         <div>
                             <p class="home-testimonial-name">@ViewBag.ReviewTwoName</p>
-                            <p class="home-testimonial-role">Verified User</p>
+                            <p class="home-testimonial-role">@ScanGuard.Resources.Resources.VerifiedUser</p>
                         </div>
                     </div>
                 }
@@ -198,20 +199,20 @@
 
     <!-- Recent Activity Section -->
     <section class="home-activity-section">
-        <h2 class="home-section-title">Latest Security Updates</h2>
+        <h2 class="home-section-title">@ScanGuard.Resources.Resources.LatestSecurityUpdates</h2>
         <div class="home-activity-grid">
             <div class="home-activity-card">
                 <i class="fas fa-shield-alt home-activity-icon"></i>
                 <p class="home-activity-text">
-                    Scanned <strong>@ViewBag.LatestWebsiteScan?.Url</strong> -
-                    @ViewBag.LatestWebsiteScan?.VulnerablityCount vulnerabilities found
+                    @ScanGuard.Resources.Resources.Scanned <strong>@ViewBag.LatestWebsiteScan?.Url</strong> -
+                    @ViewBag.LatestWebsiteScan?.VulnerablityCount @ScanGuard.Resources.Resources.VulnerabilitiesFound
                 </p>
                 <span class="home-activity-time">@ViewBag.LatestWebsiteScan?.ScanDate.ToString("HH:mm")</span>
             </div>
             <div class="home-activity-card">
                 <i class="fas fa-file-alt home-activity-icon"></i>
                 <p class="home-activity-text">
-                    Analyzed <strong>@ViewBag.LatestFileScan?.FileName</strong> -
+                    @ScanGuard.Resources.Resources.Analyzed <strong>@ViewBag.LatestFileScan?.FileName</strong> -
                     @(ViewBag.LatestFileScan?.IsMalicious == true ? "Malicious" : "Clean")
                 </p>
                 <span class="home-activity-time">@ViewBag.LatestFileScan?.ScanDate.ToString("HH:mm")</span>
@@ -219,7 +220,7 @@
             <div class="home-activity-card">
                 <i class="fas fa-bug home-activity-icon"></i>
                 <p class="home-activity-text">
-                    Detected threat on <strong>@ViewBag.LatestThreatSite?.Url</strong>
+                    @ScanGuard.Resources.Resources.DetectedThreatOn <strong>@ViewBag.LatestThreatSite?.Url</strong>
                 </p>
                 <span class="home-activity-time">@ViewBag.LatestThreatSite?.ScanDate.ToString("HH:mm")</span>
             </div>
@@ -231,35 +232,35 @@
     @if (!isPremium)
     {
         <section class="home-pricing-section">
-            <h2 class="home-section-title">Tailored Plans for Your Needs</h2>
+            <h2 class="home-section-title">@ScanGuard.Resources.Resources.TailoredPlans</h2>
             <div class="home-pricing-grid">
                 <div class="home-pricing-card">
                     <h3 class="home-pricing-title">Basic Plan</h3>
                     <p class="home-pricing-price">$0<span>/mo</span></p>
-                    <p class="home-pricing-description">Perfect for individuals and small projects looking to secure their digital assets with essential tools.</p>
+                    <p class="home-pricing-description">@ScanGuard.Resources.Resources.PerfectFor</p>
                     <ul class="home-pricing-features">
-                        <li><i class="fas fa-check"></i> Essential scanning for websites and files</li>
-                        <li><i class="fas fa-check"></i> Basic support via email (response within 48 hours)</li>
-                        <li><i class="fas fa-check"></i> Up to 3 file scans per day</li>
-                        <li><i class="fas fa-check"></i> Access to community forums</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.Essential</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.BasicSupport</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.UpTo3File</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.AccessToCommunity</li>
                     </ul>
                 </div>
                 <div class="home-pricing-card home-pricing-card-premium">
                     <h3 class="home-pricing-title">Premium Plan</h3>
                     <p class="home-pricing-price">$29<span>/mo</span></p>
-                    <p class="home-pricing-description">Ideal for businesses and professionals needing advanced security features and priority support.</p>
+                    <p class="home-pricing-description">@ScanGuard.Resources.Resources.IdealForBusinesses</p>
                     <ul class="home-pricing-features">
-                        <li><i class="fas fa-check"></i> Unlimited scans for websites and files</li>
-                        <li><i class="fas fa-check"></i> Telegram bot access with full website features</li>
-                        <li><i class="fas fa-check"></i> Premium community chat with other users</li>
-                        <li><i class="fas fa-check"></i> Security news updates and insights</li>
-                        <li><i class="fas fa-check"></i> Priority support with 24/7 assistance</li>
-                        <li><i class="fas fa-check"></i> Advanced analytics and detailed reports</li>
-                        <li><i class="fas fa-check"></i> Custom scan schedules and automation</li>
-                        <li><i class="fas fa-check"></i> API access for integration with your tools</li>
-                        <li><i class="fas fa-check"></i> Monthly security consultation with experts</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.UnlimitedScans</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.TelegramBot</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.PremiumCommunityChat</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.SecurityNews</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.PrioritySupport</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.AdvancedAnalytics</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.CustomScan</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.APIAccess</li>
+                        <li><i class="fas fa-check"></i> @ScanGuard.Resources.Resources.MonthlySecurity</li>
                     </ul>
-                    <a href="#" class="home-btn home-btn-primary">Upgrade to Premium</a>
+                    <a href="#" class="home-btn home-btn-primary">@ScanGuard.Resources.Resources.UpgradeToPremium</a>
                 </div>
             </div>
         </section>
@@ -269,19 +270,19 @@
     <section class="home-cta-section">
         @if (_signInManager.IsSignedIn(User))
         {
-            <h2 class="home-cta-title">Ready to Scan More?</h2>
-            <p class="home-cta-subtitle">Explore advanced tools to secure your digital world.</p>
+            <h2 class="home-cta-title">@ScanGuard.Resources.Resources.ReadyToScan</h2>
+            <p class="home-cta-subtitle">@ScanGuard.Resources.Resources.ExploreAdvanced</p>
             <a href="/Scan/Scanner" class="home-btn home-btn-primary home-cta-btn">
-                Go to Dashboard
+                @ScanGuard.Resources.Resources.GoToDashboard
                 <i class="fas fa-arrow-right home-btn-icon"></i>
             </a>
         }
         else
         {
-            <h2 class="home-cta-title">Ready to Secure Your Online Presence?</h2>
-            <p class="home-cta-subtitle">Join ScanGuard today and take control of your cybersecurity.</p>
+            <h2 class="home-cta-title">@ScanGuard.Resources.Resources.ReadyToSecure</h2>
+            <p class="home-cta-subtitle">@ScanGuard.Resources.Resources.JoinScanGuard</p>
             <a asp-area="Identity" asp-page="/Account/Register" class="home-btn home-btn-primary home-cta-btn">
-                Sign Up Now
+                @ScanGuard.Resources.Resources.SignUpNow
                 <i class="fas fa-arrow-right home-btn-icon"></i>
             </a>
         }

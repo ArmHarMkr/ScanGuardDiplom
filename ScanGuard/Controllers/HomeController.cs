@@ -329,21 +329,24 @@ namespace MGOBankAp.Controllers
             var responseBody = await response.Content.ReadAsStringAsync();
             return (responseBody, (int)response.StatusCode);
         }
-        public IActionResult SetLanguage(string language) {
-            if(!string.IsNullOrEmpty(language))
+        public IActionResult SetLanguage(string lang)
+        {
+            if (!string.IsNullOrEmpty(lang))
             {
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(language);
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             }
             else
             {
                 Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
             }
-            Response.Cookies.Append("Language", language, new CookieOptions
+
+            Response.Cookies.Append("Language", lang, new CookieOptions
             {
                 Expires = DateTimeOffset.UtcNow.AddDays(30)
             });
+
             return Redirect(Request.GetTypedHeaders().Referer!.ToString());
         }
     }
