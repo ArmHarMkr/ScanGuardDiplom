@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace MGOBankAp.Controllers
 {
@@ -327,6 +328,23 @@ namespace MGOBankAp.Controllers
 
             var responseBody = await response.Content.ReadAsStringAsync();
             return (responseBody, (int)response.StatusCode);
+        }
+        public IActionResult SetLanguage(string language) {
+            if(!string.IsNullOrEmpty(language))
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(language);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
+            }
+            Response.Cookies.Append("Language", language, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddDays(30)
+            });
+            return Redirect(Request.GetTypedHeaders().Referer!.ToString());
         }
     }
 }

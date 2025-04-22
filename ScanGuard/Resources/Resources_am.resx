@@ -117,28 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Balance" xml:space="preserve">
-    <value>Բալանս</value>
-  </data>
-  <data name="Bank Account Number" xml:space="preserve">
-    <value>Հաշվեհամար</value>
-  </data>
-  <data name="Create Card" xml:space="preserve">
-    <value>Ստեղծել Քարտ</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Ամսաթիվ</value>
-  </data>
-  <data name="Money" xml:space="preserve">
-    <value>Բալանս</value>
-  </data>
-  <data name="Operation" xml:space="preserve">
-    <value>Օպերացիա</value>
-  </data>
-  <data name="This card is property of MGO Bank. Call if you have found this card" xml:space="preserve">
-    <value>Քարտը հանդիսանում է Բանկի սեփականությունը։ Գտնելու դեպքում խնդրում ենք վերադրաձնել</value>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Օգտանուն</value>
+  <data name="Guard" xml:space="preserve">
+    <value>Պաշտպանիր</value>
   </data>
 </root>

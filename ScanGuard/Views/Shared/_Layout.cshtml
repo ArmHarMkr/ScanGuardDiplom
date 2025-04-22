@@ -112,25 +112,24 @@
             </ul>
 
             <div class="auth-buttons">
+                <div class="language-selector">
+                    <div class="language-toggle" onclick="toggleLanguageMenu()">
+                        <img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" />
+                    </div>
+                    <div class="language-menu">
+                        <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="en" name="culture" value="en" class="language-option">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" class="flag-icon" /> English
+                        </a>
+                        <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="am" name="culture" value="hy" class="language-option">
+                            <img src="https://flagcdn.com/w40/am.png" alt="Հայերեն" class="flag-icon" /> Հայերեն
+                        </a>
+                    </div>
+                </div>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     var currentUser = await UserManager.GetUserAsync(User);
                     var profilePhotoPath = currentUser?.ProfilePhotoPath.Replace("wwwroot", "");
 
-                    <form id="selectLanguage" asp-action="SetLanguage" asp-controller="Home" method="post" class="language-selector">
-                        <div class="language-toggle" onclick="toggleLanguageMenu()">
-                            <img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"/>
-                        </div>
-                        <div class="language-menu">
-                            <button type="submit" name="culture" value="en" class="language-option">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" class="flag-icon" /> English
-                            </button>
-                            <button type="submit" name="culture" value="hy" class="language-option">
-                                <img src="https://flagcdn.com/w40/am.png" alt="Հայերեն" class="flag-icon" /> Հայերեն
-                            </button>
-                        </div>
-                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                    </form>
                     <a style="font-size: 1.3rem;" href="/Notification/Index" class="notification-bell" title="Notifications">
                             <i class="fas fa-bell"></i>
                         </a>
@@ -233,6 +232,12 @@
                 selector.classList.remove('active');
             }
         });
+
+        // Открытие/закрытие меню
+        function toggleLanguageMenu() {
+            const selector = document.querySelector('.language-selector');
+            selector.classList.toggle('active');
+        }
     </script>
 </body>
 </html>

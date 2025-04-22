@@ -36,21 +36,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddControllersWithViews()
-    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 builder.Services.AddControllers();
-
-builder.Services.AddLocalization(options =>
-{
-    options.ResourcesPath = "Resources";
-});
-
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-    var supportedCultures = new[] { new CultureInfo("hy-AM") };
-    options.DefaultRequestCulture = new RequestCulture("hy-AM");
-    options.SupportedCultures = supportedCultures;
-});
 
 // DI Container
 builder.Services.AddHttpClient();
@@ -89,7 +75,6 @@ builder.Services.AddSingleton<RestSharp.RestClient>(sp =>
 var app = builder.Build();
 
 
-app.UseRequestLocalization();
 
 if (!app.Environment.IsDevelopment())
 {
@@ -101,6 +86,23 @@ app.MapRazorPages();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+//localization middleware
+app.Use(async (context, next) =>
+{
+    string cookie = string.Empty;
+    if (context.Request.Cookies.TryGetValue("Language",out cookie!))
+    {
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(cookie);
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo(cookie);
+    }
+    else
+    {
+        Thread.CurrentThread.CurrentCulture = new CultureInfo("en");
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
+    }
+    await next.Invoke();
+}
+);
 app.UseAuthentication();
 app.UseAuthorization();
 
