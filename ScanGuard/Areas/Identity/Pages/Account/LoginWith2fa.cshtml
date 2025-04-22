@@ -1,7 +1,7 @@
 ﻿@page
 @model LoginWith2faModel
 @{
-    ViewData["Title"] = "Two-factor Authentication";
+    ViewData["Title"] = ScanGuard.Resources.Resources.Login2fa_Title;
     Layout = null;
 }
 <link rel="stylesheet" type="text/css" href="~/css/main.css">
@@ -10,40 +10,40 @@
         <div class="wrap-login100">
             <form method="post" asp-route-returnUrl="@Model.ReturnUrl" class="login100-form validate-form">
                 <span class="login100-form-title">
-                    @ViewData["Title"]
+                    @ScanGuard.Resources.Resources.Login2fa_Title
                 </span>
                 <p class="login100-form-desc">
-                    Your login is protected with an authenticator app. Enter your authenticator code below.
+                    @ScanGuard.Resources.Resources.Login2fa_Description
                 </p>
 
                 <input asp-for="RememberMe" type="hidden" />
                 <div asp-validation-summary="ModelOnly" class="text-danger login100-error" role="alert"></div>
 
-                <div class="wrap-input100 validate-input" data-validate="Please enter a valid 2FA code">
+                <div class="wrap-input100 validate-input" data-validate="@ScanGuard.Resources.Resources.Login2fa_ValidateCode">
                     <input asp-for="Input.TwoFactorCode" class="input100" autocomplete="off" />
-                    <span class="focus-input100" data-placeholder="Authenticator Code"></span>
+                    <span class="focus-input100" data-placeholder="@ScanGuard.Resources.Resources.Login2fa_PlaceholderCode"></span>
                     <span asp-validation-for="Input.TwoFactorCode" class="text-danger login100-field-error"></span>
                 </div>
 
                 <div class="login100-checkbox mb-3">
                     <label asp-for="Input.RememberMachine" class="login100-checkbox-label">
                         <input asp-for="Input.RememberMachine" class="login100-checkbox-input" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMachine)
+                        @ScanGuard.Resources.Resources.Login2fa_LabelRememberMachine
                     </label>
                 </div>
 
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
-                        <button type="submit" class="login100-form-btn">Log In</button>
+                        <button type="submit" class="login100-form-btn">@ScanGuard.Resources.Resources.Login2fa_ButtonSubmit</button>
                     </div>
                 </div>
 
                 <div class="text-center pt-3">
                     <p class="login100-footer-text">
-                        Don't have access to your authenticator device? You can
+                        @ScanGuard.Resources.Resources.Login2fa_FooterText
                         <a id="recovery-code-login" asp-page="./LoginWithRecoveryCode" asp-route-returnUrl="@Model.ReturnUrl">
-                            log in with a recovery code
+                            @ScanGuard.Resources.Resources.Login2fa_LinkRecoveryCode
                         </a>.
                     </p>
                 </div>

@@ -3,14 +3,14 @@
 @using ManageNavPages = ScanGuard.Areas.Identity.Pages.Account.Manage.ManageNavPages
 @model TwoFactorAuthenticationModel
 @{
-    ViewData["Title"] = "Two-Factor Authentication";
+    ViewData["Title"] = ScanGuard.Resources.Resources.Tfa_Title;
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
 <div class="tfa-content">
     <section class="tfa-form">
-        <h2 class="tfa-title">@ViewData["Title"]</h2>
-        <p class="tfa-desc">Manage your two-factor authentication settings.</p>
+        <h2 class="tfa-title">@ScanGuard.Resources.Resources.Tfa_Title</h2>
+        <p class="tfa-desc">@ScanGuard.Resources.Resources.Tfa_Description</p>
         <partial name="_StatusMessage" for="StatusMessage" />
 
         @{
@@ -24,8 +24,8 @@
                         <div class="tfa-alert tfa-alert-danger">
                             <i class="fas fa-exclamation-circle tfa-alert-icon"></i>
                             <div>
-                                <strong>You have no recovery codes left.</strong>
-                                <p>You must <a asp-page="./GenerateRecoveryCodes" class="tfa-link-action">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
+                                <strong>@ScanGuard.Resources.Resources.Tfa_NoRecoveryCodes</strong>
+                                <p>@string.Format(ScanGuard.Resources.Resources.Tfa_NoRecoveryCodesAction, $"<a asp-page=\"./GenerateRecoveryCodes\" class=\"tfa-link-action\">{ScanGuard.Resources.Resources.Tfa_ButtonResetCodes}</a>")</p>
                             </div>
                         </div>
                     }
@@ -34,8 +34,8 @@
                         <div class="tfa-alert tfa-alert-danger">
                             <i class="fas fa-exclamation-circle tfa-alert-icon"></i>
                             <div>
-                                <strong>You have 1 recovery code left.</strong>
-                                <p>You can <a asp-page="./GenerateRecoveryCodes" class="tfa-link-action">generate a new set of recovery codes</a>.</p>
+                                <strong>@ScanGuard.Resources.Resources.Tfa_OneRecoveryCode</strong>
+                                <p>@string.Format(ScanGuard.Resources.Resources.Tfa_OneRecoveryCodeAction, $"<a asp-page=\"./GenerateRecoveryCodes\" class=\"tfa-link-action\">{ScanGuard.Resources.Resources.Tfa_ButtonResetCodes}</a>")</p>
                             </div>
                         </div>
                     }
@@ -44,8 +44,8 @@
                         <div class="tfa-alert tfa-alert-warning">
                             <i class="fas fa-exclamation-triangle tfa-alert-icon"></i>
                             <div>
-                                <strong>You have @Model.RecoveryCodesLeft recovery codes left.</strong>
-                                <p>You should <a asp-page="./GenerateRecoveryCodes" class="tfa-link-action">generate a new set of recovery codes</a>.</p>
+                                <strong>@string.Format(ScanGuard.Resources.Resources.Tfa_FewRecoveryCodes, Model.RecoveryCodesLeft)</strong>
+                                <p>@string.Format(ScanGuard.Resources.Resources.Tfa_FewRecoveryCodesAction, $"<a asp-page=\"./GenerateRecoveryCodes\" class=\"tfa-link-action\">{ScanGuard.Resources.Resources.Tfa_ButtonResetCodes}</a>")</p>
                             </div>
                         </div>
                     }
@@ -54,29 +54,29 @@
                         @if (Model.IsMachineRemembered)
                         {
                             <form method="post" class="tfa-action-form">
-                                <button type="submit" class="tfa-btn tfa-btn-secondary">Forget this browser</button>
+                                <button type="submit" class="tfa-btn tfa-btn-secondary">@ScanGuard.Resources.Resources.Tfa_ButtonForgetBrowser</button>
                             </form>
                         }
-                        <a asp-page="./Disable2fa" class="tfa-btn tfa-btn-danger">Disable 2FA</a>
-                        <a asp-page="./GenerateRecoveryCodes" class="tfa-btn tfa-btn-primary">Reset recovery codes</a>
+                        <a asp-page="./Disable2fa" class="tfa-btn tfa-btn-danger">@ScanGuard.Resources.Resources.Tfa_ButtonDisable2fa</a>
+                        <a asp-page="./GenerateRecoveryCodes" class="tfa-btn tfa-btn-primary">@ScanGuard.Resources.Resources.Tfa_ButtonResetCodes</a>
                     </div>
                 }
 
-                <h3 class="tfa-subtitle">Authenticator App</h3>
+                <h3 class="tfa-subtitle">@ScanGuard.Resources.Resources.Tfa_SubtitleAuthenticator</h3>
                 <div class="tfa-auth-links">
                     @if (!Model.HasAuthenticator)
                     {
                         <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="tfa-auth-link">
-                            <i class="fas fa-mobile-alt tfa-auth-icon"></i> Add authenticator app
+                            <i class="fas fa-mobile-alt tfa-auth-icon"></i> @ScanGuard.Resources.Resources.Tfa_LinkAddAuthenticator
                         </a>
                     }
                     else
                     {
                         <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="tfa-auth-link">
-                            <i class="fas fa-mobile-alt tfa-auth-icon"></i> Set up authenticator app
+                            <i class="fas fa-mobile-alt tfa-auth-icon"></i> @ScanGuard.Resources.Resources.Tfa_LinkSetupAuthenticator
                         </a>
                         <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="tfa-auth-link">
-                            <i class="fas fa-sync-alt tfa-auth-icon"></i> Reset authenticator app
+                            <i class="fas fa-sync-alt tfa-auth-icon"></i> @ScanGuard.Resources.Resources.Tfa_LinkResetAuthenticator
                         </a>
                     }
                 </div>
@@ -86,8 +86,8 @@
                 <div class="tfa-alert tfa-alert-danger">
                     <i class="fas fa-exclamation-circle tfa-alert-icon"></i>
                     <div>
-                        <strong>Privacy and cookie policy have not been accepted.</strong>
-                        <p>You must accept the policy before you can enable two-factor authentication.</p>
+                        <strong>@ScanGuard.Resources.Resources.Tfa_PrivacyNotAccepted</strong>
+                        <p>@ScanGuard.Resources.Resources.Tfa_PrivacyNotAcceptedAction</p>
                     </div>
                 </div>
             }

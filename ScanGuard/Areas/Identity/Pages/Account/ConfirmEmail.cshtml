@@ -1,7 +1,7 @@
 ﻿@page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = ScanGuard.Resources.Resources.ConfirmEmail_Title;
     Layout = null;
 }
 
@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - ScanGuard</title>
+    <title>@ScanGuard.Resources.Resources.ConfirmEmail_Title - ScanGuard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="~/css/authPages.css">
     <link rel="stylesheet" href="~/css/main.css">
@@ -147,25 +147,25 @@
                     <div class="success-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h2 class="login100-form-title">Email Confirmed!</h2>
+                    <h2 class="login100-form-title">@ScanGuard.Resources.Resources.ConfirmEmail_SuccessTitle</h2>
                     <div class="status-message success">
                         <i class="fas fa-check-circle"></i> @Model.StatusMessage
                     </div>
                     <div class="security-badge">
-                        <i class="fas fa-lock"></i> Account Secured
+                        <i class="fas fa-lock"></i> @ScanGuard.Resources.Resources.ConfirmEmail_SecurityBadge
                     </div>
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
                             <a href="/Identity/Account/Login" class="login100-form-btn">
-                                <i class="fas fa-sign-in-alt"></i> Continue to Login
+                                <i class="fas fa-sign-in-alt"></i> @ScanGuard.Resources.Resources.ConfirmEmail_LinkLogin
                             </a>
                         </div>
                     </div>
                 }
                 else
                 {
-                    <h2 class="login100-form-title">Confirmation Error</h2>
+                    <h2 class="login100-form-title">@ScanGuard.Resources.Resources.ConfirmEmail_ErrorTitle</h2>
                     <div class="status-message error">
                         <i class="fas fa-exclamation-circle"></i> @Model.StatusMessage
                     </div>
@@ -173,12 +173,12 @@
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
                             <a href="/" class="login100-form-btn">
-                                <i class="fas fa-home"></i> Return to Home
+                                <i class="fas fa-home"></i> @ScanGuard.Resources.Resources.ConfirmEmail_LinkHome
                             </a>
                         </div>
                     </div>
                 }
-                <div class="slogan">Your first line of defense in the digital world</div>
+                <div class="slogan">@ScanGuard.Resources.Resources.ConfirmEmail_Slogan</div>
             </div>
         </div>
     </div>

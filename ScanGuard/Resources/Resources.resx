@@ -792,4 +792,172 @@
 <data name="Scanner_PortClosed" xml:space="preserve">
   <value>Closed</value>
 </data>
+<data name="Login_Title" xml:space="preserve">
+  <value>Log in</value>
+</data>
+<data name="Login_FormTitle" xml:space="preserve">
+  <value>Log In</value>
+</data>
+<data name="Login_PlaceholderEmail" xml:space="preserve">
+  <value>Email</value>
+</data>
+<data name="Login_PlaceholderPassword" xml:space="preserve">
+  <value>Password</value>
+</data>
+<data name="Login_LabelRememberMe" xml:space="preserve">
+  <value>Remember Me</value>
+</data>
+<data name="Login_ButtonSubmit" xml:space="preserve">
+  <value>Login</value>
+</data>
+<data name="Login_TextNoAccount" xml:space="preserve">
+  <value>Don’t have an account?</value>
+</data>
+<data name="Login_LinkSignUp" xml:space="preserve">
+  <value>Sign up</value>
+</data>
+<data name="Register_Title" xml:space="preserve">
+  <value>Register</value>
+</data>
+<data name="Register_PageTitle" xml:space="preserve">
+  <value>Registration</value>
+</data>
+<data name="Register_FormTitle" xml:space="preserve">
+  <value>Create a new account</value>
+</data>
+<data name="Register_PlaceholderEmail" xml:space="preserve">
+  <value>Email</value>
+</data>
+<data name="Register_PlaceholderFullName" xml:space="preserve">
+  <value>Full name</value>
+</data>
+<data name="Register_PlaceholderPassword" xml:space="preserve">
+  <value>Password</value>
+</data>
+<data name="Register_ButtonSubmit" xml:space="preserve">
+  <value>Register</value>
+</data>
+<data name="Register_TextHaveAccount" xml:space="preserve">
+  <value>Already have an account?</value>
+</data>
+<data name="Register_LinkLogin" xml:space="preserve">
+  <value>Log In</value>
+</data>
+<data name="Login2fa_Title" xml:space="preserve">
+  <value>Two-factor Authentication</value>
+</data>
+<data name="Login2fa_Description" xml:space="preserve">
+  <value>Your login is protected with an authenticator app. Enter your authenticator code below.</value>
+</data>
+<data name="Login2fa_PlaceholderCode" xml:space="preserve">
+  <value>Authenticator Code</value>
+</data>
+<data name="Login2fa_ValidateCode" xml:space="preserve">
+  <value>Please enter a valid 2FA code</value>
+</data>
+<data name="Login2fa_LabelRememberMachine" xml:space="preserve">
+  <value>Remember this machine</value>
+</data>
+<data name="Login2fa_ButtonSubmit" xml:space="preserve">
+  <value>Log In</value>
+</data>
+<data name="Login2fa_FooterText" xml:space="preserve">
+  <value>Don't have access to your authenticator device? You can log in with a recovery code.</value>
+</data>
+<data name="Login2fa_LinkRecoveryCode" xml:space="preserve">
+  <value>log in with a recovery code</value>
+</data>
+<data name="RegisterConfirm_Title" xml:space="preserve">
+  <value>Register confirmation</value>
+</data>
+<data name="RegisterConfirm_FormTitle" xml:space="preserve">
+  <value>Check Your Email</value>
+</data>
+<data name="RegisterConfirm_Description" xml:space="preserve">
+  <value>We've sent a confirmation email to {0}. Please check your inbox and click the confirmation link to activate your ScanGuard account.</value>
+</data>
+<data name="RegisterConfirm_Step1" xml:space="preserve">
+  <value>Open your email inbox</value>
+</data>
+<data name="RegisterConfirm_Step2" xml:space="preserve">
+  <value>Find our email (check spam folder too)</value>
+</data>
+<data name="RegisterConfirm_Step3" xml:space="preserve">
+  <value>Click the confirmation link</value>
+</data>
+<data name="RegisterConfirm_Slogan" xml:space="preserve">
+  <value>Your first line of defense in the digital world</value>
+</data>
+<data name="ConfirmEmail_Title" xml:space="preserve">
+  <value>Confirm email</value>
+</data>
+<data name="ConfirmEmail_SuccessTitle" xml:space="preserve">
+  <value>Email Confirmed!</value>
+</data>
+<data name="ConfirmEmail_ErrorTitle" xml:space="preserve">
+  <value>Confirmation Error</value>
+</data>
+<data name="ConfirmEmail_SecurityBadge" xml:space="preserve">
+  <value>Account Secured</value>
+</data>
+<data name="ConfirmEmail_LinkLogin" xml:space="preserve">
+  <value>Continue to Login</value>
+</data>
+<data name="ConfirmEmail_LinkHome" xml:space="preserve">
+  <value>Return to Home</value>
+</data>
+<data name="ConfirmEmail_Slogan" xml:space="preserve">
+  <value>Your first line of defense in the digital world</value>
+</data>
+<data name="Tfa_Title" xml:space="preserve">
+  <value>Two-Factor Authentication</value>
+</data>
+<data name="Tfa_Description" xml:space="preserve">
+  <value>Manage your two-factor authentication settings.</value>
+</data>
+<data name="Tfa_NoRecoveryCodes" xml:space="preserve">
+  <value>You have no recovery codes left.</value>
+</data>
+<data name="Tfa_NoRecoveryCodesAction" xml:space="preserve">
+  <value>You must generate a new set of recovery codes before you can log in with a recovery code.</value>
+</data>
+<data name="Tfa_OneRecoveryCode" xml:space="preserve">
+  <value>You have 1 recovery code left.</value>
+</data>
+<data name="Tfa_OneRecoveryCodeAction" xml:space="preserve">
+  <value>You can generate a new set of recovery codes.</value>
+</data>
+<data name="Tfa_FewRecoveryCodes" xml:space="preserve">
+  <value>You have {0} recovery codes left.</value>
+</data>
+<data name="Tfa_FewRecoveryCodesAction" xml:space="preserve">
+  <value>You should generate a new set of recovery codes.</value>
+</data>
+<data name="Tfa_ButtonForgetBrowser" xml:space="preserve">
+  <value>Forget this browser</value>
+</data>
+<data name="Tfa_ButtonDisable2fa" xml:space="preserve">
+  <value>Disable 2FA</value>
+</data>
+<data name="Tfa_ButtonResetCodes" xml:space="preserve">
+  <value>Reset recovery codes</value>
+</data>
+<data name="Tfa_SubtitleAuthenticator" xml:space="preserve">
+  <value>Authenticator App</value>
+</data>
+<data name="Tfa_LinkAddAuthenticator" xml:space="preserve">
+  <value>Add authenticator app</value>
+</data>
+<data name="Tfa_LinkSetupAuthenticator" xml:space="preserve">
+  <value>Set up authenticator app</value>
+</data>
+<data name="Tfa_LinkResetAuthenticator" xml:space="preserve">
+  <value>Reset authenticator app</value>
+</data>
+<data name="Tfa_PrivacyNotAccepted" xml:space="preserve">
+  <value>Privacy and cookie policy have not been accepted.</value>
+</data>
+<data name="Tfa_PrivacyNotAcceptedAction" xml:space="preserve">
+  <value>You must accept the policy before you can enable two-factor authentication.</value>
+</data>
 </root>

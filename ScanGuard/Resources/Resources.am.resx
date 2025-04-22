@@ -795,4 +795,172 @@
 	<data name="Scanner_PortClosed" xml:space="preserve">
   <value>Փակ</value>
 </data>
+	<data name="Login_Title" xml:space="preserve">
+  <value>Մուտք գործել</value>
+</data>
+	<data name="Login_FormTitle" xml:space="preserve">
+  <value>Մուտք գործել</value>
+</data>
+	<data name="Login_PlaceholderEmail" xml:space="preserve">
+  <value>Էլ․ փոստ</value>
+</data>
+	<data name="Login_PlaceholderPassword" xml:space="preserve">
+  <value>Գաղտնաբառ</value>
+</data>
+	<data name="Login_LabelRememberMe" xml:space="preserve">
+  <value>Հիշել ինձ</value>
+</data>
+	<data name="Login_ButtonSubmit" xml:space="preserve">
+  <value>Մուտք</value>
+</data>
+	<data name="Login_TextNoAccount" xml:space="preserve">
+  <value>Հաշիվ չունե՞ք:</value>
+</data>
+	<data name="Login_LinkSignUp" xml:space="preserve">
+  <value>Գրանցվել</value>
+</data>
+	<data name="Register_Title" xml:space="preserve">
+  <value>Գրանցվել</value>
+</data>
+	<data name="Register_PageTitle" xml:space="preserve">
+  <value>Գրանցում</value>
+</data>
+	<data name="Register_FormTitle" xml:space="preserve">
+  <value>Ստեղծել նոր հաշիվ</value>
+</data>
+	<data name="Register_PlaceholderEmail" xml:space="preserve">
+  <value>Էլ․ փոստ</value>
+</data>
+	<data name="Register_PlaceholderFullName" xml:space="preserve">
+  <value>Ամբողջական անուն</value>
+</data>
+	<data name="Register_PlaceholderPassword" xml:space="preserve">
+  <value>Գաղտնաբառ</value>
+</data>
+	<data name="Register_ButtonSubmit" xml:space="preserve">
+  <value>Գրանցվել</value>
+</data>
+	<data name="Register_TextHaveAccount" xml:space="preserve">
+  <value>Արդեն ունե՞ք հաշիվ:</value>
+</data>
+	<data name="Register_LinkLogin" xml:space="preserve">
+  <value>Մուտք գործել</value>
+</data>
+	<data name="Login2fa_Title" xml:space="preserve">
+  <value>Երկու գործոնով վավերացում</value>
+</data>
+	<data name="Login2fa_Description" xml:space="preserve">
+  <value>Ձեր մուտքը պաշտպանված է վավերացնող հավելվածով: Ստորև մուտքագրեք Ձեր վավերացման կոդը:</value>
+</data>
+	<data name="Login2fa_PlaceholderCode" xml:space="preserve">
+  <value>Վավերացման կոդ</value>
+</data>
+	<data name="Login2fa_ValidateCode" xml:space="preserve">
+  <value>Խնդրում ենք մուտքագրել վավեր 2FA կոդ</value>
+</data>
+	<data name="Login2fa_LabelRememberMachine" xml:space="preserve">
+  <value>Հիշել այս սարքը</value>
+</data>
+	<data name="Login2fa_ButtonSubmit" xml:space="preserve">
+  <value>Մուտք գործել</value>
+</data>
+	<data name="Login2fa_FooterText" xml:space="preserve">
+  <value>Չունե՞ք մուտք դեպի Ձեր վավերացնող սարքը: Դուք կարող եք մուտք գործել վերականգնման կոդով:</value>
+</data>
+	<data name="Login2fa_LinkRecoveryCode" xml:space="preserve">
+  <value>մուտք գործել վերականգնման կոդով</value>
+</data>
+	<data name="RegisterConfirm_Title" xml:space="preserve">
+  <value>Գրանցման հաստատում</value>
+</data>
+	<data name="RegisterConfirm_FormTitle" xml:space="preserve">
+  <value>Ստուգեք Ձեր էլ․ փոստը</value>
+</data>
+	<data name="RegisterConfirm_Description" xml:space="preserve">
+  <value>Մենք հաստատման նամակ ենք ուղարկել {0} հասցեին: Խնդրում ենք ստուգել Ձեր մուտքի արկղը և սեղմել հաստատման հղումը՝ Ձեր ScanGuard հաշիվն ակտիվացնելու համար:</value>
+</data>
+	<data name="RegisterConfirm_Step1" xml:space="preserve">
+  <value>Բացեք Ձեր էլ․ փոստի մուտքի արկղը</value>
+</data>
+	<data name="RegisterConfirm_Step2" xml:space="preserve">
+  <value>Գտեք մեր նամակը (ստուգեք նաև սպամի թղթապանակը)</value>
+</data>
+	<data name="RegisterConfirm_Step3" xml:space="preserve">
+  <value>Սեղմեք հաստատման հղումը</value>
+</data>
+	<data name="RegisterConfirm_Slogan" xml:space="preserve">
+  <value>Ձեր առաջին պաշտպանության գիծը թվային աշխարհում</value>
+</data>
+	<data name="ConfirmEmail_Title" xml:space="preserve">
+  <value>Հաստատել էլ․ փոստը</value>
+</data>
+	<data name="ConfirmEmail_SuccessTitle" xml:space="preserve">
+  <value>Էլ․ փոստը հաստատված է!</value>
+</data>
+	<data name="ConfirmEmail_ErrorTitle" xml:space="preserve">
+  <value>Հաստատման սխալ</value>
+</data>
+	<data name="ConfirmEmail_SecurityBadge" xml:space="preserve">
+  <value>Հաշիվը պաշտպանված է</value>
+</data>
+	<data name="ConfirmEmail_LinkLogin" xml:space="preserve">
+  <value>Շարունակել մուտք գործել</value>
+</data>
+	<data name="ConfirmEmail_LinkHome" xml:space="preserve">
+  <value>Վերադառնալ գլխավոր էջ</value>
+</data>
+	<data name="ConfirmEmail_Slogan" xml:space="preserve">
+  <value>Ձեր առաջին պաշտպանության գիծը թվային աշխարհում</value>
+</data>
+	<data name="Tfa_Title" xml:space="preserve">
+  <value>Երկու գործոնով վավերացում</value>
+</data>
+	<data name="Tfa_Description" xml:space="preserve">
+  <value>Կառավարեք Ձեր երկու գործոնով վավերացման կարգավորումները:</value>
+</data>
+	<data name="Tfa_NoRecoveryCodes" xml:space="preserve">
+  <value>Դուք չունեք մնացած վերականգնման կոդեր:</value>
+</data>
+	<data name="Tfa_NoRecoveryCodesAction" xml:space="preserve">
+  <value>Դուք պետք է ստեղծեք վերականգնման կոդերի նոր խումբ՝ վերականգնման կոդով մուտք գործելու համար:</value>
+</data>
+	<data name="Tfa_OneRecoveryCode" xml:space="preserve">
+  <value>Դուք ունեք 1 մնացած վերականգնման կոդ:</value>
+</data>
+	<data name="Tfa_OneRecoveryCodeAction" xml:space="preserve">
+  <value>Դուք կարող եք ստեղծել վերականգնման կոդերի նոր խումբ:</value>
+</data>
+	<data name="Tfa_FewRecoveryCodes" xml:space="preserve">
+  <value>Դուք ունեք {0} մնացած վերականգնման կոդ:</value>
+</data>
+	<data name="Tfa_FewRecoveryCodesAction" xml:space="preserve">
+  <value>Դուք պետք է ստեղծեք վերականգնման կոդերի նոր խումբ:</value>
+</data>
+	<data name="Tfa_ButtonForgetBrowser" xml:space="preserve">
+  <value>Մոռանալ այս բրաուզերը</value>
+</data>
+	<data name="Tfa_ButtonDisable2fa" xml:space="preserve">
+  <value>Անջատել 2FA-ն</value>
+</data>
+	<data name="Tfa_ButtonResetCodes" xml:space="preserve">
+  <value>Վերականգնել վերականգնման կոդերը</value>
+</data>
+	<data name="Tfa_SubtitleAuthenticator" xml:space="preserve">
+  <value>Վավերացնող հավելված</value>
+</data>
+	<data name="Tfa_LinkAddAuthenticator" xml:space="preserve">
+  <value>Ավելացնել վավերացնող հավելված</value>
+</data>
+	<data name="Tfa_LinkSetupAuthenticator" xml:space="preserve">
+  <value>Կարգավորել վավերացնող հավելված</value>
+</data>
+	<data name="Tfa_LinkResetAuthenticator" xml:space="preserve">
+  <value>Վերականգնել վավերացնող հավելվածը</value>
+</data>
+	<data name="Tfa_PrivacyNotAccepted" xml:space="preserve">
+  <value>Գաղտնիության և քուքիների քաղաքականությունը ընդունված չէ:</value>
+</data>
+	<data name="Tfa_PrivacyNotAcceptedAction" xml:space="preserve">
+  <value>Դուք պետք է ընդունեք քաղաքականությունը՝ երկու գործոնով վավերացումը միացնելու համար:</value>
+</data>
 </root>

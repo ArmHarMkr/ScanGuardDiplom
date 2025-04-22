@@ -2,14 +2,14 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = ScanGuard.Resources.Resources.Login_Title;
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Log in</title>
+    <title>@ScanGuard.Resources.Resources.Login_Title</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -31,7 +31,6 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-
     <link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/css/styles.css">
@@ -44,7 +43,7 @@
             <div class="wrap-login100">
                 <form class="login100-form" id="account" method="post">
                     <span class="login100-form-title p-b-26">
-                        Log In
+                        @ScanGuard.Resources.Resources.Login_FormTitle
                     </span>
                     <span class="login100-form-title p-b-48">
                         <i class="zmdi zmdi-account-circle"></i>
@@ -52,7 +51,7 @@
 
                     <div class="wrap-input100">
                         <input asp-for="Input.Email" class="input100" autocomplete="username" aria-required="true" />
-                        <span asp-for="Input.Email" class="focus-input100" data-placeholder="Email"></span>
+                        <span asp-for="Input.Email" class="focus-input100" data-placeholder="@ScanGuard.Resources.Resources.Login_PlaceholderEmail"></span>
                         <span asp-validation-for="Input.Email" class="text-danger small"></span>
                     </div>
                     <div class="wrap-input100">
@@ -60,13 +59,13 @@
                             <i class="zmdi zmdi-eye"></i>
                         </span>
                         <input asp-for="Input.Password" class="input100" type="password" aria-required="true" />
-                        <span asp-for="Input.Password" class="focus-input100" data-placeholder="Password"></span>
+                        <span asp-for="Input.Password" class="focus-input100" data-placeholder="@ScanGuard.Resources.Resources.Login_PlaceholderPassword"></span>
                         <span asp-validation-for="Input.Password" class="text-danger small"></span>
                     </div>
                     <div class="scanguard-input-group">
                         <label style="color:darkgrey;font-size:15px;" asp-for="Input.RememberMe" class="scanguard-checkbox-label">
                             <input style="background-color:transparent;" class="scanguard-checkbox" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            @ScanGuard.Resources.Resources.Login_LabelRememberMe
                         </label>
                     </div>
 
@@ -75,16 +74,16 @@
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
                             <button id="login-submit" type="submit" class="login100-form-btn">
-                                Login
+                                @ScanGuard.Resources.Resources.Login_ButtonSubmit
                             </button>
                         </div>
                     </div>
                     <div class="text-center p-t-115">
                         <span class="txt1">
-                            Don’t have an account?
+                            @ScanGuard.Resources.Resources.Login_TextNoAccount
                         </span>
 
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Sign up</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@ScanGuard.Resources.Resources.Login_LinkSignUp</a>
                     </div>
                 </form>
             </div>
@@ -111,8 +110,6 @@
 </body>
 </html>
 
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
 }

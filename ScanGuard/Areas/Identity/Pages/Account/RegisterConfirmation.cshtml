@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = ScanGuard.Resources.Resources.RegisterConfirm_Title;
     Layout = null;
 }
 
@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - ScanGuard</title>
+    <title>@ScanGuard.Resources.Resources.RegisterConfirm_Title - ScanGuard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="~/css/authPages.css">
     <link rel="stylesheet" href="~/css/main.css">
@@ -128,27 +128,27 @@
                 <div class="email-icon">
                     <i class="fas fa-envelope"></i>
                 </div>
-                <h2 class="login100-form-title">Check Your Email</h2>
+                <h2 class="login100-form-title">@ScanGuard.Resources.Resources.RegisterConfirm_FormTitle</h2>
                 <div class="login100-form-desc">
-                    We've sent a confirmation email to <b>@Model.Email.</b> Please check your inbox and click the confirmation link to activate your ScanGuard account.
+                    @string.Format(ScanGuard.Resources.Resources.RegisterConfirm_Description, $"<b>{Model.Email}</b>")
                 </div>
 
                 <div class="steps">
                     <div class="step">
                         <div class="step-number">1</div>
-                        <span>Open your email inbox</span>
+                        <span>@ScanGuard.Resources.Resources.RegisterConfirm_Step1</span>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <span>Find our email (check spam folder too)</span>
+                        <span>@ScanGuard.Resources.Resources.RegisterConfirm_Step2</span>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <span>Click the confirmation link</span>
+                        <span>@ScanGuard.Resources.Resources.RegisterConfirm_Step3</span>
                     </div>
                 </div>
 
-                <div class="slogan">Your first line of defense in the digital world</div>
+                <div class="slogan">@ScanGuard.Resources.Resources.RegisterConfirm_Slogan</div>
             </div>
         </div>
     </div>

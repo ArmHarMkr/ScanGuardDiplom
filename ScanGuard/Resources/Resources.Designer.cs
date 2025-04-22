@@ -349,6 +349,69 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirmation Error.
+        /// </summary>
+        public static string ConfirmEmail_ErrorTitle {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to Home.
+        /// </summary>
+        public static string ConfirmEmail_LinkHome {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_LinkHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue to Login.
+        /// </summary>
+        public static string ConfirmEmail_LinkLogin {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_LinkLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Secured.
+        /// </summary>
+        public static string ConfirmEmail_SecurityBadge {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_SecurityBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your first line of defense in the digital world.
+        /// </summary>
+        public static string ConfirmEmail_Slogan {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_Slogan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Confirmed!.
+        /// </summary>
+        public static string ConfirmEmail_SuccessTitle {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm email.
+        /// </summary>
+        public static string ConfirmEmail_Title {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Follow us for updates and tips on staying secure online..
         /// </summary>
         public static string ConnectText {
@@ -786,6 +849,150 @@ namespace ScanGuard.Resources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("Login_ButtonSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log In.
+        /// </summary>
+        public static string Login_FormTitle {
+            get {
+                return ResourceManager.GetString("Login_FormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember Me.
+        /// </summary>
+        public static string Login_LabelRememberMe {
+            get {
+                return ResourceManager.GetString("Login_LabelRememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign up.
+        /// </summary>
+        public static string Login_LinkSignUp {
+            get {
+                return ResourceManager.GetString("Login_LinkSignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Login_PlaceholderEmail {
+            get {
+                return ResourceManager.GetString("Login_PlaceholderEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Login_PlaceholderPassword {
+            get {
+                return ResourceManager.GetString("Login_PlaceholderPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don’t have an account?.
+        /// </summary>
+        public static string Login_TextNoAccount {
+            get {
+                return ResourceManager.GetString("Login_TextNoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        public static string Login_Title {
+            get {
+                return ResourceManager.GetString("Login_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log In.
+        /// </summary>
+        public static string Login2fa_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("Login2fa_ButtonSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your login is protected with an authenticator app. Enter your authenticator code below..
+        /// </summary>
+        public static string Login2fa_Description {
+            get {
+                return ResourceManager.GetString("Login2fa_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t have access to your authenticator device? You can log in with a recovery code..
+        /// </summary>
+        public static string Login2fa_FooterText {
+            get {
+                return ResourceManager.GetString("Login2fa_FooterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember this machine.
+        /// </summary>
+        public static string Login2fa_LabelRememberMachine {
+            get {
+                return ResourceManager.GetString("Login2fa_LabelRememberMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to log in with a recovery code.
+        /// </summary>
+        public static string Login2fa_LinkRecoveryCode {
+            get {
+                return ResourceManager.GetString("Login2fa_LinkRecoveryCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authenticator Code.
+        /// </summary>
+        public static string Login2fa_PlaceholderCode {
+            get {
+                return ResourceManager.GetString("Login2fa_PlaceholderCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two-factor Authentication.
+        /// </summary>
+        public static string Login2fa_Title {
+            get {
+                return ResourceManager.GetString("Login2fa_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid 2FA code.
+        /// </summary>
+        public static string Login2fa_ValidateCode {
+            get {
+                return ResourceManager.GetString("Login2fa_ValidateCode", resourceCulture);
             }
         }
         
@@ -1272,6 +1479,150 @@ namespace ScanGuard.Resources {
         public static string RealTimeAlerts {
             get {
                 return ResourceManager.GetString("RealTimeAlerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("Register_ButtonSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new account.
+        /// </summary>
+        public static string Register_FormTitle {
+            get {
+                return ResourceManager.GetString("Register_FormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log In.
+        /// </summary>
+        public static string Register_LinkLogin {
+            get {
+                return ResourceManager.GetString("Register_LinkLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration.
+        /// </summary>
+        public static string Register_PageTitle {
+            get {
+                return ResourceManager.GetString("Register_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Register_PlaceholderEmail {
+            get {
+                return ResourceManager.GetString("Register_PlaceholderEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full name.
+        /// </summary>
+        public static string Register_PlaceholderFullName {
+            get {
+                return ResourceManager.GetString("Register_PlaceholderFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Register_PlaceholderPassword {
+            get {
+                return ResourceManager.GetString("Register_PlaceholderPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already have an account?.
+        /// </summary>
+        public static string Register_TextHaveAccount {
+            get {
+                return ResourceManager.GetString("Register_TextHaveAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register_Title {
+            get {
+                return ResourceManager.GetString("Register_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We&apos;ve sent a confirmation email to {0}. Please check your inbox and click the confirmation link to activate your ScanGuard account..
+        /// </summary>
+        public static string RegisterConfirm_Description {
+            get {
+                return ResourceManager.GetString("RegisterConfirm_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check Your Email.
+        /// </summary>
+        public static string RegisterConfirm_FormTitle {
+            get {
+                return ResourceManager.GetString("RegisterConfirm_FormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your first line of defense in the digital world.
+        /// </summary>
+        public static string RegisterConfirm_Slogan {
+            get {
+                return ResourceManager.GetString("RegisterConfirm_Slogan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open your email inbox.
+        /// </summary>
+        public static string RegisterConfirm_Step1 {
+            get {
+                return ResourceManager.GetString("RegisterConfirm_Step1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find our email (check spam folder too).
+        /// </summary>
+        public static string RegisterConfirm_Step2 {
+            get {
+                return ResourceManager.GetString("RegisterConfirm_Step2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click the confirmation link.
+        /// </summary>
+        public static string RegisterConfirm_Step3 {
+            get {
+                return ResourceManager.GetString("RegisterConfirm_Step3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register confirmation.
+        /// </summary>
+        public static string RegisterConfirm_Title {
+            get {
+                return ResourceManager.GetString("RegisterConfirm_Title", resourceCulture);
             }
         }
         
@@ -1767,6 +2118,159 @@ namespace ScanGuard.Resources {
         public static string TelegramBot {
             get {
                 return ResourceManager.GetString("TelegramBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable 2FA.
+        /// </summary>
+        public static string Tfa_ButtonDisable2fa {
+            get {
+                return ResourceManager.GetString("Tfa_ButtonDisable2fa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forget this browser.
+        /// </summary>
+        public static string Tfa_ButtonForgetBrowser {
+            get {
+                return ResourceManager.GetString("Tfa_ButtonForgetBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset recovery codes.
+        /// </summary>
+        public static string Tfa_ButtonResetCodes {
+            get {
+                return ResourceManager.GetString("Tfa_ButtonResetCodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage your two-factor authentication settings..
+        /// </summary>
+        public static string Tfa_Description {
+            get {
+                return ResourceManager.GetString("Tfa_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have {0} recovery codes left..
+        /// </summary>
+        public static string Tfa_FewRecoveryCodes {
+            get {
+                return ResourceManager.GetString("Tfa_FewRecoveryCodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You should generate a new set of recovery codes..
+        /// </summary>
+        public static string Tfa_FewRecoveryCodesAction {
+            get {
+                return ResourceManager.GetString("Tfa_FewRecoveryCodesAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add authenticator app.
+        /// </summary>
+        public static string Tfa_LinkAddAuthenticator {
+            get {
+                return ResourceManager.GetString("Tfa_LinkAddAuthenticator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset authenticator app.
+        /// </summary>
+        public static string Tfa_LinkResetAuthenticator {
+            get {
+                return ResourceManager.GetString("Tfa_LinkResetAuthenticator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set up authenticator app.
+        /// </summary>
+        public static string Tfa_LinkSetupAuthenticator {
+            get {
+                return ResourceManager.GetString("Tfa_LinkSetupAuthenticator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have no recovery codes left..
+        /// </summary>
+        public static string Tfa_NoRecoveryCodes {
+            get {
+                return ResourceManager.GetString("Tfa_NoRecoveryCodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must generate a new set of recovery codes before you can log in with a recovery code..
+        /// </summary>
+        public static string Tfa_NoRecoveryCodesAction {
+            get {
+                return ResourceManager.GetString("Tfa_NoRecoveryCodesAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have 1 recovery code left..
+        /// </summary>
+        public static string Tfa_OneRecoveryCode {
+            get {
+                return ResourceManager.GetString("Tfa_OneRecoveryCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can generate a new set of recovery codes..
+        /// </summary>
+        public static string Tfa_OneRecoveryCodeAction {
+            get {
+                return ResourceManager.GetString("Tfa_OneRecoveryCodeAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy and cookie policy have not been accepted..
+        /// </summary>
+        public static string Tfa_PrivacyNotAccepted {
+            get {
+                return ResourceManager.GetString("Tfa_PrivacyNotAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must accept the policy before you can enable two-factor authentication..
+        /// </summary>
+        public static string Tfa_PrivacyNotAcceptedAction {
+            get {
+                return ResourceManager.GetString("Tfa_PrivacyNotAcceptedAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authenticator App.
+        /// </summary>
+        public static string Tfa_SubtitleAuthenticator {
+            get {
+                return ResourceManager.GetString("Tfa_SubtitleAuthenticator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two-Factor Authentication.
+        /// </summary>
+        public static string Tfa_Title {
+            get {
+                return ResourceManager.GetString("Tfa_Title", resourceCulture);
             }
         }
         
