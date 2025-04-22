@@ -123,7 +123,7 @@
             </div>
             @if (user is null)
             {
-                <a class="home-btn home-btn-primary home-table-btn" asp-controller="Scan" asp-action="ShowScannedSites">
+                <a href="/Identity/Account/Login" class="home-btn home-btn-primary home-table-btn">
                     @ScanGuard.Resources.Resources.ViewMore
                     <i class="fas fa-arrow-right home-btn-icon"></i>
                 </a>

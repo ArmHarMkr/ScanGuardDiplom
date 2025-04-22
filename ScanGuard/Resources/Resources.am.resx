@@ -244,7 +244,7 @@
     <value>Telegram բոտ՝ ամբողջ վեբկայքի գործառույթներով</value>
   </data>
   <data name="TopSecurityHotspots" xml:space="preserve">
-    <value>Թոփ խոցելի վայրերը</value>
+    <value>Թոփ ստուգված կայքերը</value>
   </data>
   <data name="Trusted" xml:space="preserve">
     <value>Վստահված է մեր օգտատերերի կողմից</value>
