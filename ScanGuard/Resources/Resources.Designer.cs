@@ -313,6 +313,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Սկանավորման համար ներմուծեք հղումը.
+        /// </summary>
+        public static string EnterURLtoScan {
+            get {
+                return ResourceManager.GetString("EnterURLtoScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Essential scanning for websites and files.
         /// </summary>
         public static string Essential {
@@ -709,11 +718,29 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Պաշտպանեք ձեր կայքը՝ բացահայտելով անվտանգության ռիսկերը ScanGuard-ի առաջադեմ սկանավորման տեխնոլոգիայի միջոցով:.
+        /// </summary>
+        public static string ScannerText {
+            get {
+                return ResourceManager.GetString("ScannerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scans Performed.
         /// </summary>
         public static string ScansPerformed {
             get {
                 return ResourceManager.GetString("ScansPerformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Սկանավորեք ձեր կայքը.
+        /// </summary>
+        public static string ScanYourWebsite {
+            get {
+                return ResourceManager.GetString("ScanYourWebsite", resourceCulture);
             }
         }
         
@@ -921,6 +948,15 @@ namespace ScanGuard.Resources {
         public static string VulnerabilitiesFound {
             get {
                 return ResourceManager.GetString("VulnerabilitiesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Խոցելիությունների սկանավորում.
+        /// </summary>
+        public static string VulnerabilityScanner {
+            get {
+                return ResourceManager.GetString("VulnerabilityScanner", resourceCulture);
             }
         }
         

@@ -201,6 +201,9 @@
   <data name="Email" xml:space="preserve">
     <value>էլ. փոստ</value>
   </data>
+  <data name="EnterURLtoScan" xml:space="preserve">
+    <value>Սկանավորման համար ներմուծեք հղումը</value>
+  </data>
   <data name="Essential" xml:space="preserve">
     <value>Հիմնական սկանավորում վեբկայքերի և ֆայլերի համար</value>
   </data>
@@ -333,8 +336,14 @@
   <data name="Scanned" xml:space="preserve">
     <value>Սկանավորվել է</value>
   </data>
+  <data name="ScannerText" xml:space="preserve">
+    <value>Պաշտպանեք ձեր կայքը՝ բացահայտելով անվտանգության ռիսկերը ScanGuard-ի առաջադեմ սկանավորման տեխնոլոգիայի միջոցով:</value>
+  </data>
   <data name="ScansPerformed" xml:space="preserve">
     <value>Սկանավորման քանակ</value>
+  </data>
+  <data name="ScanYourWebsite" xml:space="preserve">
+    <value>Սկանավորեք ձեր կայքը</value>
   </data>
   <data name="SecureYourFuture" xml:space="preserve">
     <value>Ապահովիր քո ապագան</value>
@@ -347,6 +356,9 @@
   </data>
   <data name="SignUpNow" xml:space="preserve">
     <value>Գրանցվիր հիմա</value>
+  </data>
+  <data name="StartScan" xml:space="preserve">
+    <value>Սկանավորել</value>
   </data>
   <data name="StartScanning" xml:space="preserve">
     <value>Սկսել սկանավորումը</value>
@@ -404,6 +416,9 @@
   </data>
   <data name="VulnerabilitiesFound" xml:space="preserve">
     <value>բացահայտվել է խոցելիություն</value>
+  </data>
+  <data name="VulnerabilityScanner" xml:space="preserve">
+    <value>Խոցելիությունների սկանավորում</value>
   </data>
   <data name="WebsiteScans" xml:space="preserve">
     <value>Կայքերի սկանավորում</value>
