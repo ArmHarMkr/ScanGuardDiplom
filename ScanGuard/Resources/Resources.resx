@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutScanGuard" xml:space="preserve">
+    <value>About ScanGuard</value>
+  </data>
+  <data name="About_text" xml:space="preserve">
+    <value>We’re dedicated to making the digital world safer with powerful tools to scan and secure websites and files from vulnerabilities.</value>
+  </data>
+  <data name="Accessibility" xml:space="preserve">
+    <value>Accessibility</value>
+  </data>
+  <data name="AccessibilityText" xml:space="preserve">
+    <value>Cybersecurity for everyone, everywhere.</value>
+  </data>
   <data name="AccessToCommunity" xml:space="preserve">
     <value>Access to community forums</value>
   </data>
@@ -138,8 +150,44 @@
   <data name="BasicSupport" xml:space="preserve">
     <value>Basic support via email (response within 48 hours)</value>
   </data>
+  <data name="ChooseAI" xml:space="preserve">
+    <value>AI-Powered</value>
+  </data>
+  <data name="ChooseAIText" xml:space="preserve">
+    <value>Smart tech for smarter detection.</value>
+  </data>
+  <data name="ChooseCost" xml:space="preserve">
+    <value>Cost-Effective</value>
+  </data>
+  <data name="ChooseCostText" xml:space="preserve">
+    <value>Premium security at fair prices.</value>
+  </data>
+  <data name="ChooseFast" xml:space="preserve">
+    <value>Fast Scans</value>
+  </data>
+  <data name="ChooseFastText" xml:space="preserve">
+    <value>Get results in seconds, not hours.</value>
+  </data>
+  <data name="ChooseSupport" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="ChooseSupportText" xml:space="preserve">
+    <value>Help whenever you need it.</value>
+  </data>
+  <data name="ClientsProtected" xml:space="preserve">
+    <value>Clients Protected</value>
+  </data>
   <data name="ComprehensiveProtection" xml:space="preserve">
     <value>Comprehensive Protection</value>
+  </data>
+  <data name="ConnectText" xml:space="preserve">
+    <value>Follow us for updates and tips on staying secure online.</value>
+  </data>
+  <data name="ConnectwithScanGuard" xml:space="preserve">
+    <value>Connect with ScanGuard</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
   </data>
   <data name="CustomScan" xml:space="preserve">
     <value>Custom scan schedules and automation</value>
@@ -150,6 +198,9 @@
   <data name="Digital" xml:space="preserve">
     <value>Digital</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email։</value>
+  </data>
   <data name="Essential" xml:space="preserve">
     <value>Essential scanning for websites and files</value>
   </data>
@@ -158,6 +209,15 @@
   </data>
   <data name="FilesAnalyzed" xml:space="preserve">
     <value>Files Analyzed</value>
+  </data>
+  <data name="FutureStartScanningNow" xml:space="preserve">
+    <value>Start scanning now</value>
+  </data>
+  <data name="FutureText" xml:space="preserve">
+    <value>Join ScanGuard to protect your websites and files with confidence.</value>
+  </data>
+  <data name="GetinTouch" xml:space="preserve">
+    <value>Get in Touch</value>
   </data>
   <data name="GetStarted" xml:space="preserve">
     <value>Get Started</value>
@@ -183,6 +243,12 @@
   <data name="IdealForBusinesses" xml:space="preserve">
     <value>Ideal for businesses and professionals needing advanced security features and priority support.</value>
   </data>
+  <data name="Innovation" xml:space="preserve">
+    <value>Innovation</value>
+  </data>
+  <data name="InnovationText" xml:space="preserve">
+    <value>Evolving to outpace cyber threats.</value>
+  </data>
   <data name="InstantNotifications" xml:space="preserve">
     <value>Instant notifications for potential threats.</value>
   </data>
@@ -198,14 +264,50 @@
   <data name="MonthlySecurity" xml:space="preserve">
     <value>Monthly security consultation with experts</value>
   </data>
+  <data name="OurImpact" xml:space="preserve">
+    <value>Our Impact</value>
+  </data>
+  <data name="OurPurpose" xml:space="preserve">
+    <value>Our Purpose</value>
+  </data>
+  <data name="OurTeam" xml:space="preserve">
+    <value>Our Team</value>
+  </data>
   <data name="PerfectFor" xml:space="preserve">
     <value>Perfect for individuals and small projects looking to secure their digital assets with essential tools.</value>
+  </data>
+  <data name="Precision" xml:space="preserve">
+    <value>Precision</value>
+  </data>
+  <data name="PrecisionText" xml:space="preserve">
+    <value>Accurate detection of every vulnerability.</value>
   </data>
   <data name="PremiumCommunityChat" xml:space="preserve">
     <value>Premium community chat with other users</value>
   </data>
   <data name="PrioritySupport" xml:space="preserve">
     <value>Priority support with 24/7 assistance</value>
+  </data>
+  <data name="Protection" xml:space="preserve">
+    <value>Protection</value>
+  </data>
+  <data name="ProtectionText" xml:space="preserve">
+    <value>Robust scanning to keep your assets secure.</value>
+  </data>
+  <data name="PurposeDotOne" xml:space="preserve">
+    <value>Provide user-friendly scanning solutions.</value>
+  </data>
+  <data name="PurposeDotThree" xml:space="preserve">
+    <value>Ensure affordability without compromise.</value>
+  </data>
+  <data name="PurposeDotTwo" xml:space="preserve">
+    <value>Stay ahead of evolving cyber threats.</value>
+  </data>
+  <data name="PurposeTextOne" xml:space="preserve">
+    <value>Founded in 2025, ScanGuard exists to simplify cybersecurity. Our purpose is to empower businesses, developers, and individuals with accessible tools to protect their websites and files from vulnerabilities.</value>
+  </data>
+  <data name="PurposeTextTwo" xml:space="preserve">
+    <value>We’re driven by a commitment to deliver fast, accurate scans that catch threats before they strike. Our goal is a digital world where safety is seamless and universal.</value>
   </data>
   <data name="Rank" xml:space="preserve">
     <value>Rank</value>
@@ -228,8 +330,17 @@
   <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
   </data>
+  <data name="ScansPerformed" xml:space="preserve">
+    <value>Scans Performed</value>
+  </data>
+  <data name="SecureYourFuture" xml:space="preserve">
+    <value>Secure Your Future</value>
+  </data>
   <data name="SecurityNews" xml:space="preserve">
     <value>Security news updates and insights</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Send Message</value>
   </data>
   <data name="SignUpNow" xml:space="preserve">
     <value>Sign Up Now</value>
@@ -239,6 +350,24 @@
   </data>
   <data name="TailoredPlans" xml:space="preserve">
     <value>Tailored Plans for Your Needs</value>
+  </data>
+  <data name="TeamOneName" xml:space="preserve">
+    <value>Harutyun Mkrtchyan</value>
+  </data>
+  <data name="TeamOneState" xml:space="preserve">
+    <value>Founder &amp; CEO</value>
+  </data>
+  <data name="TeamOneText" xml:space="preserve">
+    <value>Harutyun and Davit launched ScanGuard in 2025 with a vision to make cybersecurity simple. Her expertise in software engineering drives our mission to protect the digital world.</value>
+  </data>
+  <data name="TeamTwoName" xml:space="preserve">
+    <value>Davit Gasparyan</value>
+  </data>
+  <data name="TeamTwoState" xml:space="preserve">
+    <value>Lead Developer</value>
+  </data>
+  <data name="TeamTwoText" xml:space="preserve">
+    <value>Davit and Harutyun build the heart of our scanning tools. With a passion for AI and security, he ensures our platform is powerful and intuitive.</value>
   </data>
   <data name="TelegramBot" xml:space="preserve">
     <value>Telegram bot access with full website features</value>
@@ -258,6 +387,9 @@
   <data name="UpTo3File" xml:space="preserve">
     <value>Up to 3 file scans per day</value>
   </data>
+  <data name="UserTrust" xml:space="preserve">
+    <value>User Trust</value>
+  </data>
   <data name="VerifiedUser" xml:space="preserve">
     <value>Verified User</value>
   </data>
@@ -270,11 +402,20 @@
   <data name="VulnerabilitiesFound" xml:space="preserve">
     <value>vulnerabilities found</value>
   </data>
+  <data name="WebsiteScans" xml:space="preserve">
+    <value>Website Scans</value>
+  </data>
   <data name="WebsitesScanned" xml:space="preserve">
     <value>Websites Scanned</value>
   </data>
   <data name="WebsiteURL" xml:space="preserve">
     <value>Website URL</value>
+  </data>
+  <data name="WhatDrivesUs" xml:space="preserve">
+    <value>What Drives Us</value>
+  </data>
+  <data name="WhyChooseScanGuard" xml:space="preserve">
+    <value>Why Choose ScanGuard</value>
   </data>
   <data name="World" xml:space="preserve">
     <value>World</value>
@@ -284,6 +425,15 @@
   </data>
   <data name="Your" xml:space="preserve">
     <value>Your</value>
+  </data>
+  <data name="Your Email" xml:space="preserve">
+    <value>Your  Email</value>
+  </data>
+  <data name="YourMessage" xml:space="preserve">
+    <value>Your Message</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Your Name</value>
   </data>
   <data name="YourSecurityAdvantage" xml:space="preserve">
     <value>Your Security Advantage</value>

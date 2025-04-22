@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About ScanGuard" xml:space="preserve">
+    <value>ScanGuard-ի մասին</value>
+  </data>
+  <data name="About_text" xml:space="preserve">
+    <value>Մենք նվիրված ենք թվային աշխարհն ավելի ապահով դարձնելուն հզոր գործիքներով՝ կայքերն ու ֆայլերը խոցելիությունից սկանավորելու և պաշտպանելու համար</value>
+  </data>
+  <data name="Accessibility" xml:space="preserve">
+    <value>Հասանելիություն</value>
+  </data>
+  <data name="AccessibilityText" xml:space="preserve">
+    <value>Կիբեռանվտանգություն բոլորի համար, ամենուր:</value>
+  </data>
   <data name="AccessToCommunity" xml:space="preserve">
     <value>Մուտք դեպի համայնքի ֆորումներ</value>
   </data>
@@ -138,8 +150,44 @@
   <data name="BasicSupport" xml:space="preserve">
     <value>Հիմնական աջակցություն՝ էլ․ փոստով (պատասխան՝ 48 ժամում)</value>
   </data>
+  <data name="ChooseAI" xml:space="preserve">
+    <value>Ներդրված ԱԲ</value>
+  </data>
+  <data name="ChooseAIText" xml:space="preserve">
+    <value>Խելացի տեխնոլոգիա ավելի խելացի հայտնաբերման համար:</value>
+  </data>
+  <data name="ChooseCost" xml:space="preserve">
+    <value>Արդյունավետ ծախս</value>
+  </data>
+  <data name="ChooseCostText" xml:space="preserve">
+    <value>Պրեմիում անվտանգություն արդար գներով:</value>
+  </data>
+  <data name="ChooseFast" xml:space="preserve">
+    <value>Արագ սկանավորում</value>
+  </data>
+  <data name="ChooseFastText" xml:space="preserve">
+    <value>Ստացեք արդյունքներ վայրկյանների ընթացքում, ոչ թե ժամերի:</value>
+  </data>
+  <data name="ChooseSupport" xml:space="preserve">
+    <value>Աջակցություն</value>
+  </data>
+  <data name="ChooseSupportText" xml:space="preserve">
+    <value>Ստացեք օգնություն, երբ դրա կարիքը ունեք:</value>
+  </data>
+  <data name="ClientsProtected" xml:space="preserve">
+    <value>Պաշտպանված հաճախորդներ</value>
+  </data>
   <data name="ComprehensiveProtection" xml:space="preserve">
     <value>Համապարփակ պաշտպանություն</value>
+  </data>
+  <data name="ConnectText" xml:space="preserve">
+    <value>Հետևեք մեզ՝ առցանց անվտանգ մնալու թարմացումների և խորհուրդների համար:</value>
+  </data>
+  <data name="ConnectwithScanGuard" xml:space="preserve">
+    <value>Կապ ScanGuard-ի հետ</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Կոնտակներ</value>
   </data>
   <data name="CustomScan" xml:space="preserve">
     <value>Անհատական սկանավորման ժամանակացույց և ավտոմատացում</value>
@@ -150,6 +198,9 @@
   <data name="Digital" xml:space="preserve">
     <value>Թվային</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>էլ. փոստ</value>
+  </data>
   <data name="Essential" xml:space="preserve">
     <value>Հիմնական սկանավորում վեբկայքերի և ֆայլերի համար</value>
   </data>
@@ -158,6 +209,15 @@
   </data>
   <data name="FilesAnalyzed" xml:space="preserve">
     <value>Վերլուծված ֆայլեր</value>
+  </data>
+  <data name="FutureStartScanningNow" xml:space="preserve">
+    <value>Սկսեք սկանավորումը հիմա</value>
+  </data>
+  <data name="FutureText" xml:space="preserve">
+    <value>Միացե՛ք ScanGuard-ին՝ ձեր կայքերն ու ֆայլերը վստահորեն պաշտպանելու համար:</value>
+  </data>
+  <data name="GetinTouch" xml:space="preserve">
+    <value>Կապ մեզ հետ</value>
   </data>
   <data name="GetStarted" xml:space="preserve">
     <value>Սկսել</value>
@@ -183,6 +243,12 @@
   <data name="IdealForBusinesses" xml:space="preserve">
     <value>Իդեալական է բիզնեսի և մասնագետների համար, որոնք պահանջում են առաջադեմ անվտանգություն և առաջնահերթ աջակցություն</value>
   </data>
+  <data name="Innovation" xml:space="preserve">
+    <value>Նորարարություն</value>
+  </data>
+  <data name="InnovationText" xml:space="preserve">
+    <value>Զարգացում՝ կիբեռ սպառնալիքներից առաջ անցնելու համար:</value>
+  </data>
   <data name="InstantNotifications" xml:space="preserve">
     <value>Ակնթարթային ծանուցումներ հնարավոր սպառնալիքների վերաբերյալ</value>
   </data>
@@ -198,14 +264,50 @@
   <data name="MonthlySecurity" xml:space="preserve">
     <value>Անվտանգության ամսական խորհրդատվություն փորձագետների հետ</value>
   </data>
+  <data name="OurImpact" xml:space="preserve">
+    <value>Ազդեցությունը</value>
+  </data>
+  <data name="OurPurpose" xml:space="preserve">
+    <value>Մեր նպատակները</value>
+  </data>
+  <data name="OurTeam" xml:space="preserve">
+    <value>Մեր Թիմը</value>
+  </data>
   <data name="PerfectFor" xml:space="preserve">
     <value>Իդեալական է անհատների և փոքր նախագծերի համար, որոնք ցանկանում են պաշտպանել իրենց թվային ակտիվները հիմնական գործիքներով</value>
+  </data>
+  <data name="Precision" xml:space="preserve">
+    <value>Ճշգրտություն</value>
+  </data>
+  <data name="PrecisionText" xml:space="preserve">
+    <value>Յուրաքանչյուր խոցելիության ճշգրիտ հայտնաբերում:</value>
   </data>
   <data name="PremiumCommunityChat" xml:space="preserve">
     <value>Պրեմիում համայնքի չաթ՝ այլ օգտատերերի հետ</value>
   </data>
   <data name="PrioritySupport" xml:space="preserve">
     <value>Առաջնահերթ աջակցություն՝ 24/7</value>
+  </data>
+  <data name="Protection" xml:space="preserve">
+    <value>Պաշտպանություն</value>
+  </data>
+  <data name="ProtectionText" xml:space="preserve">
+    <value>Ուժեղ սկանավորում՝ ձեր ակտիվները ապահով պահելու համար:</value>
+  </data>
+  <data name="PurposeDotOne" xml:space="preserve">
+    <value>Տրամադրել օգտագործողի համար հարմար սկանավորման լուծումներ:</value>
+  </data>
+  <data name="PurposeDotThree" xml:space="preserve">
+    <value>Ապահովել մատչելիությունը առանց փոխզիջումների</value>
+  </data>
+  <data name="PurposeDotTwo" xml:space="preserve">
+    <value>Մնացեք զարգացող կիբեռ սպառնալիքներից հեռու:</value>
+  </data>
+  <data name="PurposeTextOne" xml:space="preserve">
+    <value>ScanGuard-ը, որը հիմնադրվել է 2025 թվականին, գոյություն ունի կիբերանվտանգությունը պարզեցնելու համար: Մեր նպատակն է հզորացնել ձեռնարկություններին, ծրագրավորողներին և անհատներին հասանելի գործիքներով՝ պաշտպանելու իրենց կայքերն ու ֆայլերը խոցելիությունից:</value>
+  </data>
+  <data name="PurposeTextTwo" xml:space="preserve">
+    <value>Մենք առաջնորդվում ենք արագ, ճշգրիտ սկանավորումներ մատուցելու պարտավորությամբ, որոնք վտանգում են նախքան դրանք հարվածելը: Մեր նպատակը թվային աշխարհն է, որտեղ անվտանգությունն անխափան է և ունիվերսալ:</value>
   </data>
   <data name="Rank" xml:space="preserve">
     <value>Վարկանիշ</value>
@@ -228,8 +330,17 @@
   <data name="Scanned" xml:space="preserve">
     <value>Սկանավորվել է</value>
   </data>
+  <data name="ScansPerformed" xml:space="preserve">
+    <value>Սկանավորման քանակ</value>
+  </data>
+  <data name="SecureYourFuture" xml:space="preserve">
+    <value>Ապահովիր քո ապագան</value>
+  </data>
   <data name="SecurityNews" xml:space="preserve">
     <value>Անվտանգության նորություններ և վերլուծություններ</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Ուղարկել նամակ</value>
   </data>
   <data name="SignUpNow" xml:space="preserve">
     <value>Գրանցվիր հիմա</value>
@@ -239,6 +350,24 @@
   </data>
   <data name="TailoredPlans" xml:space="preserve">
     <value>Անհատականացված փաթեթներ՝ ձեր կարիքների համար</value>
+  </data>
+  <data name="TeamOneName" xml:space="preserve">
+    <value>Հարություն Մկրտչյան</value>
+  </data>
+  <data name="TeamOneState" xml:space="preserve">
+    <value>Հիմնադիր և գործադիր տնօրեն</value>
+  </data>
+  <data name="TeamOneText" xml:space="preserve">
+    <value>Հարությունը և Դավիթը գործարկել են ScanGuard-ը 2025 թվականին՝ կիբեռանվտանգությունը պարզեցնելու տեսլականով: Ծրագրային ապահովման ճարտարագիտության մեջ նրա փորձառությունը մղում է թվային աշխարհը պաշտպանելու մեր առաքելությունը:</value>
+  </data>
+  <data name="TeamTwoName" xml:space="preserve">
+    <value>Դավիթ Գասպարյան</value>
+  </data>
+  <data name="TeamTwoState" xml:space="preserve">
+    <value>Գլխավոր ծրագրավորող</value>
+  </data>
+  <data name="TeamTwoText" xml:space="preserve">
+    <value>Դավիթն ու Հարությունը կերտում են մեր սկանավորման գործիքների սիրտը: Արհեստական ​​ինտելեկտի և անվտանգության հանդեպ կիրք ունենալով՝ նա ապահովում է, որ մեր հարթակը հզոր և ինտուիտիվ է:</value>
   </data>
   <data name="TelegramBot" xml:space="preserve">
     <value>Telegram բոտ՝ ամբողջ վեբկայքի գործառույթներով</value>
@@ -258,6 +387,9 @@
   <data name="UpTo3File" xml:space="preserve">
     <value>Մինչև 3 ֆայլի սկանավորում օրական</value>
   </data>
+  <data name="UserTrust" xml:space="preserve">
+    <value>Օգտատերերի վստահություն</value>
+  </data>
   <data name="VerifiedUser" xml:space="preserve">
     <value>Հաստատված օգտատեր</value>
   </data>
@@ -270,11 +402,20 @@
   <data name="VulnerabilitiesFound" xml:space="preserve">
     <value>բացահայտվել է խոցելիություն</value>
   </data>
+  <data name="WebsiteScans" xml:space="preserve">
+    <value>Կայքերի սկանավորում</value>
+  </data>
   <data name="WebsitesScanned" xml:space="preserve">
     <value>Սկանավորված վեբկայքեր</value>
   </data>
   <data name="WebsiteURL" xml:space="preserve">
     <value>Վեբկայքի URL</value>
+  </data>
+  <data name="WhatDrivesUs" xml:space="preserve">
+    <value>Մեր մոտիվացիան</value>
+  </data>
+  <data name="WhyChooseScanGuard" xml:space="preserve">
+    <value>Ինչու ScanGuard</value>
   </data>
   <data name="World" xml:space="preserve">
     <value>Աշխարհը</value>
@@ -284,6 +425,15 @@
   </data>
   <data name="Your" xml:space="preserve">
     <value>Քո</value>
+  </data>
+  <data name="Your Email" xml:space="preserve">
+    <value>Էլ. փոստ</value>
+  </data>
+  <data name="YourMessage" xml:space="preserve">
+    <value>Ձեր նամակը</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Անուն</value>
   </data>
   <data name="YourSecurityAdvantage" xml:space="preserve">
     <value>Ձեր անվտանգության առավելությունը</value>

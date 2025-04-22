@@ -61,6 +61,42 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We’re dedicated to making the digital world safer with powerful tools to scan and secure websites and files from vulnerabilities..
+        /// </summary>
+        public static string About_text {
+            get {
+                return ResourceManager.GetString("About_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About ScanGuard.
+        /// </summary>
+        public static string AboutScanGuard {
+            get {
+                return ResourceManager.GetString("AboutScanGuard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accessibility.
+        /// </summary>
+        public static string Accessibility {
+            get {
+                return ResourceManager.GetString("Accessibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cybersecurity for everyone, everywhere..
+        /// </summary>
+        public static string AccessibilityText {
+            get {
+                return ResourceManager.GetString("AccessibilityText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Access to community forums.
         /// </summary>
         public static string AccessToCommunity {
@@ -124,11 +160,119 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AI-Powered.
+        /// </summary>
+        public static string ChooseAI {
+            get {
+                return ResourceManager.GetString("ChooseAI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smart tech for smarter detection..
+        /// </summary>
+        public static string ChooseAIText {
+            get {
+                return ResourceManager.GetString("ChooseAIText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost-Effective.
+        /// </summary>
+        public static string ChooseCost {
+            get {
+                return ResourceManager.GetString("ChooseCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premium security at fair prices..
+        /// </summary>
+        public static string ChooseCostText {
+            get {
+                return ResourceManager.GetString("ChooseCostText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast Scans.
+        /// </summary>
+        public static string ChooseFast {
+            get {
+                return ResourceManager.GetString("ChooseFast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get results in seconds, not hours..
+        /// </summary>
+        public static string ChooseFastText {
+            get {
+                return ResourceManager.GetString("ChooseFastText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        public static string ChooseSupport {
+            get {
+                return ResourceManager.GetString("ChooseSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help whenever you need it..
+        /// </summary>
+        public static string ChooseSupportText {
+            get {
+                return ResourceManager.GetString("ChooseSupportText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clients Protected.
+        /// </summary>
+        public static string ClientsProtected {
+            get {
+                return ResourceManager.GetString("ClientsProtected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comprehensive Protection.
         /// </summary>
         public static string ComprehensiveProtection {
             get {
                 return ResourceManager.GetString("ComprehensiveProtection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow us for updates and tips on staying secure online..
+        /// </summary>
+        public static string ConnectText {
+            get {
+                return ResourceManager.GetString("ConnectText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect with ScanGuard.
+        /// </summary>
+        public static string ConnectwithScanGuard {
+            get {
+                return ResourceManager.GetString("ConnectwithScanGuard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Us.
+        /// </summary>
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
             }
         }
         
@@ -160,6 +304,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email։.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Essential scanning for websites and files.
         /// </summary>
         public static string Essential {
@@ -183,6 +336,33 @@ namespace ScanGuard.Resources {
         public static string FilesAnalyzed {
             get {
                 return ResourceManager.GetString("FilesAnalyzed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start scanning now.
+        /// </summary>
+        public static string FutureStartScanningNow {
+            get {
+                return ResourceManager.GetString("FutureStartScanningNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join ScanGuard to protect your websites and files with confidence..
+        /// </summary>
+        public static string FutureText {
+            get {
+                return ResourceManager.GetString("FutureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get in Touch.
+        /// </summary>
+        public static string GetinTouch {
+            get {
+                return ResourceManager.GetString("GetinTouch", resourceCulture);
             }
         }
         
@@ -259,6 +439,24 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Innovation.
+        /// </summary>
+        public static string Innovation {
+            get {
+                return ResourceManager.GetString("Innovation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evolving to outpace cyber threats..
+        /// </summary>
+        public static string InnovationText {
+            get {
+                return ResourceManager.GetString("InnovationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Instant notifications for potential threats..
         /// </summary>
         public static string InstantNotifications {
@@ -304,11 +502,56 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Our Impact.
+        /// </summary>
+        public static string OurImpact {
+            get {
+                return ResourceManager.GetString("OurImpact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our Purpose.
+        /// </summary>
+        public static string OurPurpose {
+            get {
+                return ResourceManager.GetString("OurPurpose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our Team.
+        /// </summary>
+        public static string OurTeam {
+            get {
+                return ResourceManager.GetString("OurTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Perfect for individuals and small projects looking to secure their digital assets with essential tools..
         /// </summary>
         public static string PerfectFor {
             get {
                 return ResourceManager.GetString("PerfectFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Precision.
+        /// </summary>
+        public static string Precision {
+            get {
+                return ResourceManager.GetString("Precision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accurate detection of every vulnerability..
+        /// </summary>
+        public static string PrecisionText {
+            get {
+                return ResourceManager.GetString("PrecisionText", resourceCulture);
             }
         }
         
@@ -327,6 +570,69 @@ namespace ScanGuard.Resources {
         public static string PrioritySupport {
             get {
                 return ResourceManager.GetString("PrioritySupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protection.
+        /// </summary>
+        public static string Protection {
+            get {
+                return ResourceManager.GetString("Protection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Robust scanning to keep your assets secure..
+        /// </summary>
+        public static string ProtectionText {
+            get {
+                return ResourceManager.GetString("ProtectionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provide user-friendly scanning solutions..
+        /// </summary>
+        public static string PurposeDotOne {
+            get {
+                return ResourceManager.GetString("PurposeDotOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ensure affordability without compromise..
+        /// </summary>
+        public static string PurposeDotThree {
+            get {
+                return ResourceManager.GetString("PurposeDotThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stay ahead of evolving cyber threats..
+        /// </summary>
+        public static string PurposeDotTwo {
+            get {
+                return ResourceManager.GetString("PurposeDotTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Founded in 2025, ScanGuard exists to simplify cybersecurity. Our purpose is to empower businesses, developers, and individuals with accessible tools to protect their websites and files from vulnerabilities..
+        /// </summary>
+        public static string PurposeTextOne {
+            get {
+                return ResourceManager.GetString("PurposeTextOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We’re driven by a commitment to deliver fast, accurate scans that catch threats before they strike. Our goal is a digital world where safety is seamless and universal..
+        /// </summary>
+        public static string PurposeTextTwo {
+            get {
+                return ResourceManager.GetString("PurposeTextTwo", resourceCulture);
             }
         }
         
@@ -394,11 +700,38 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scans Performed.
+        /// </summary>
+        public static string ScansPerformed {
+            get {
+                return ResourceManager.GetString("ScansPerformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure Your Future.
+        /// </summary>
+        public static string SecureYourFuture {
+            get {
+                return ResourceManager.GetString("SecureYourFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Security news updates and insights.
         /// </summary>
         public static string SecurityNews {
             get {
                 return ResourceManager.GetString("SecurityNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Message.
+        /// </summary>
+        public static string SendMessage {
+            get {
+                return ResourceManager.GetString("SendMessage", resourceCulture);
             }
         }
         
@@ -426,6 +759,60 @@ namespace ScanGuard.Resources {
         public static string TailoredPlans {
             get {
                 return ResourceManager.GetString("TailoredPlans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harutyun Mkrtchyan.
+        /// </summary>
+        public static string TeamOneName {
+            get {
+                return ResourceManager.GetString("TeamOneName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Founder &amp; CEO.
+        /// </summary>
+        public static string TeamOneState {
+            get {
+                return ResourceManager.GetString("TeamOneState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harutyun and Davit launched ScanGuard in 2025 with a vision to make cybersecurity simple. Her expertise in software engineering drives our mission to protect the digital world..
+        /// </summary>
+        public static string TeamOneText {
+            get {
+                return ResourceManager.GetString("TeamOneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Davit Gasparyan.
+        /// </summary>
+        public static string TeamTwoName {
+            get {
+                return ResourceManager.GetString("TeamTwoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lead Developer.
+        /// </summary>
+        public static string TeamTwoState {
+            get {
+                return ResourceManager.GetString("TeamTwoState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Davit and Harutyun build the heart of our scanning tools. With a passion for AI and security, he ensures our platform is powerful and intuitive..
+        /// </summary>
+        public static string TeamTwoText {
+            get {
+                return ResourceManager.GetString("TeamTwoText", resourceCulture);
             }
         }
         
@@ -484,6 +871,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Trust.
+        /// </summary>
+        public static string UserTrust {
+            get {
+                return ResourceManager.GetString("UserTrust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verified User.
         /// </summary>
         public static string VerifiedUser {
@@ -520,6 +916,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Website Scans.
+        /// </summary>
+        public static string WebsiteScans {
+            get {
+                return ResourceManager.GetString("WebsiteScans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Websites Scanned.
         /// </summary>
         public static string WebsitesScanned {
@@ -534,6 +939,24 @@ namespace ScanGuard.Resources {
         public static string WebsiteURL {
             get {
                 return ResourceManager.GetString("WebsiteURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What Drives Us.
+        /// </summary>
+        public static string WhatDrivesUs {
+            get {
+                return ResourceManager.GetString("WhatDrivesUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Choose ScanGuard.
+        /// </summary>
+        public static string WhyChooseScanGuard {
+            get {
+                return ResourceManager.GetString("WhyChooseScanGuard", resourceCulture);
             }
         }
         
@@ -561,6 +984,33 @@ namespace ScanGuard.Resources {
         public static string Your {
             get {
                 return ResourceManager.GetString("Your", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your  Email.
+        /// </summary>
+        public static string Your_Email {
+            get {
+                return ResourceManager.GetString("Your Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Message.
+        /// </summary>
+        public static string YourMessage {
+            get {
+                return ResourceManager.GetString("YourMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Name.
+        /// </summary>
+        public static string YourName {
+            get {
+                return ResourceManager.GetString("YourName", resourceCulture);
             }
         }
         
