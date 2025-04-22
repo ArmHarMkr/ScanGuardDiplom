@@ -4,20 +4,20 @@
 <div class="history-container">
     <!-- Header -->
     <header class="history-header animate-on-scroll">
-        <h1 class="history-title">Scan History</h1>
-        <p class="history-subtitle">Review and analyze past scans to keep your websites secure with ScanGuard’s AI-powered insights.</p>
+        <h1 class="history-title">@ScanGuard.Resources.Resources.History_Title</h1>
+        <p class="history-subtitle">@ScanGuard.Resources.Resources.History_Subtitle</p>
     </header>
 
     <!-- Controls -->
     <div class="history-controls animate-on-scroll">
         <div class="history-search">
-            <input type="text" class="history-search-input" placeholder="Search by URL..." id="searchInput">
+            <input type="text" class="history-search-input" placeholder="@ScanGuard.Resources.Resources.History_SearchPlaceholder" id="searchInput">
         </div>
         <select class="history-filter" id="sortFilter">
-            <option value="recent">Sort by: Recent</option>
-            <option value="vuln-desc">Vulnerabilities (High to Low)</option>
-            <option value="vuln-asc">Vulnerabilities (Low to High)</option>
-            <option value="date-asc">Date (Oldest)</option>
+            <option value="recent">@ScanGuard.Resources.Resources.History_SortRecent</option>
+            <option value="vuln-desc">@ScanGuard.Resources.Resources.History_SortVulnDesc</option>
+            <option value="vuln-asc">@ScanGuard.Resources.Resources.History_SortVulnAsc</option>
+            <option value="date-asc">@ScanGuard.Resources.Resources.History_SortDateAsc</option>
         </select>
     </div>
 
@@ -26,23 +26,23 @@
         <table class="history-table">
             <thead>
                 <tr>
-                    <th class="history-th">Website URL</th>
-                    <th class="history-th">Scan Date</th>
-                    <th class="history-th">Vulnerability Count</th>
-                    <th class="history-th">Vulnerability Type</th>
-                    <th class="history-th">Actions</th>
+                    <th class="history-th">@ScanGuard.Resources.Resources.History_ColumnWebsiteURL</th>
+                    <th class="history-th">@ScanGuard.Resources.Resources.History_ColumnScanDate</th>
+                    <th class="history-th">@ScanGuard.Resources.Resources.History_ColumnVulnerabilityCount</th>
+                    <th class="history-th">@ScanGuard.Resources.Resources.History_ColumnVulnerabilityType</th>
+                    <th class="history-th">@ScanGuard.Resources.Resources.History_ColumnActions</th>
                 </tr>
             </thead>
             <tbody id="historyTableBody">
                 @foreach (var site in Model)
                 {
                     <tr class="history-tr" data-vuln-count="@site.VulnerabilityCount" data-scan-date="@site.ScanDate.ToString("yyyy-MM-dd HH:mm")">
-                        <td class="history-td history-url" data-label="Website URL">
+                        <td class="history-td history-url" data-label="@ScanGuard.Resources.Resources.History_ColumnWebsiteURL">
                             <span class="url-text">@site.Url</span>
                             <span class="url-tooltip">@site.Url</span>
                         </td>
-                        <td class="history-td history-date" data-label="Scan Date">@site.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
-                        <td class="history-td history-count" data-label="Vulnerability Count">
+                        <td class="history-td history-date" data-label="@ScanGuard.Resources.Resources.History_ColumnScanDate">@site.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="history-td history-count" data-label="@ScanGuard.Resources.Resources.History_ColumnVulnerabilityCount">
                             @{
                                 var badgeClass = "safe";
                                 if (site.VulnerabilityCount > 5)
@@ -56,24 +56,24 @@
                             }
                             <span class="history-badge history-badge-@badgeClass">@site.VulnerabilityCount</span>
                         </td>
-                        <td class="history-td history-vuln-types" data-label="Vulnerability Type">
+                        <td class="history-td history-vuln-types" data-label="@ScanGuard.Resources.Resources.History_ColumnVulnerabilityType">
                             <span class="vuln-types-content">
                                 @(site.Vulnerabilities != null && site.Vulnerabilities.Any()
                                     ? string.Join(", ", site.Vulnerabilities.Select(v => v.VulnerabilityType))
-                                    : "No vulnerabilities found")
+                                    : @ScanGuard.Resources.Resources.History_NoVulnerabilities)
                             </span>
                         </td>
-                        <td class="history-td history-actions" data-label="Actions">
+                        <td class="history-td history-actions" data-label="@ScanGuard.Resources.Resources.History_ColumnActions">
                             <div class="action-buttons">
-                                <form style="margin:0px;"asp-action="RemoveSiteScan" asp-route-id="@site.WebsiteScanId" method="post" class="action-form" style="display: inline;">
+                                <form style="margin:0px;" asp-action="RemoveSiteScan" asp-route-id="@site.WebsiteScanId" method="post" class="action-form" style="display: inline;">
                                     <button type="submit" class="history-btn history-btn-remove">
-                                        <span>Remove</span>
+                                        <span>@ScanGuard.Resources.Resources.History_ButtonRemove</span>
                                     </button>
                                 </form>
                                 @if (site.IsPremium || site.IsAdmin)
                                 {
                                     <button class="history-btn history-btn-analyze history-btn-premium" onclick="openAnalysisModal('@site.WebsiteScanId')">
-                                        <span>Analyze</span>
+                                        <span>@ScanGuard.Resources.Resources.History_ButtonAnalyze</span>
                                     </button>
                                 }
                             </div>
@@ -88,10 +88,10 @@
     <div class="analysis-modal" id="analysisModal">
         <div class="analysis-modal-content">
             <span class="modal-close" onclick="closeAnalysisModal()">×</span>
-            <h3 class="modal-title">AI Analysis</h3>
+            <h3 class="modal-title">@ScanGuard.Resources.Resources.History_ModalTitle</h3>
             <div class="modal-body" id="modalBody">
                 <div class="modal-spinner"></div>
-                <p id="modalMessage">Loading analysis...</p>
+                <p id="modalMessage">@ScanGuard.Resources.Resources.History_ModalLoading</p>
             </div>
         </div>
     </div>
@@ -153,16 +153,16 @@
         transition: all 0.3s ease;
     }
 
-    .history-search-input:focus {
-        border-color: #059669;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
-    }
+        .history-search-input:focus {
+            border-color: #059669;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
 
     .history-filter {
         padding: 0.9rem 1.5rem;
         border: 1px solid #e5e7eb;
-        border-radius: 8px;
+        border-radius: Ralph: 8px;
         background: #ffffff;
         font-size: 1rem;
         color: #1f2937;
@@ -170,9 +170,9 @@
         transition: all 0.3s ease;
     }
 
-    .history-filter:hover {
-        border-color: #059669;
-    }
+        .history-filter:hover {
+            border-color: #059669;
+        }
 
     /* Table */
     .history-table-container {
@@ -206,9 +206,9 @@
         z-index: 2;
     }
 
-    .history-th:hover {
-        background: #1e40af;
-    }
+        .history-th:hover {
+            background: #1e40af;
+        }
 
     /* Column widths */
 
@@ -218,9 +218,9 @@
         transition: all 0.3s ease;
     }
 
-    .history-tr:hover {
-        background: #f9f9f9;
-    }
+        .history-tr:hover {
+            background: #f9f9f9;
+        }
 
     .history-td {
         padding: 1.2rem;
@@ -315,18 +315,18 @@
         color: #ffffff;
     }
 
-    .history-btn-remove:hover {
-        background: #b91c1c;
-    }
+        .history-btn-remove:hover {
+            background: #b91c1c;
+        }
 
     .history-btn-analyze {
         background: #059669;
         color: #ffffff;
     }
 
-    .history-btn-analyze:hover {
-        background: #047857;
-    }
+        .history-btn-analyze:hover {
+            background: #047857;
+        }
 
     .history-btn-premium::before {
         content: '★';
@@ -359,9 +359,9 @@
         z-index: 10000;
     }
 
-    .analysis-modal.show {
-        display: flex;
-    }
+        .analysis-modal.show {
+            display: flex;
+        }
 
     .analysis-modal-content {
         background: #ffffff;
@@ -384,9 +384,9 @@
         transition: all 0.3s ease;
     }
 
-    .modal-close:hover {
-        color: #1f2937;
-    }
+        .modal-close:hover {
+            color: #1f2937;
+        }
 
     .modal-title {
         font-family: 'Montserrat', sans-serif;
@@ -419,6 +419,7 @@
             opacity: 0;
             transform: scale(0.95);
         }
+
         to {
             opacity: 1;
             transform: scale(1);
@@ -426,8 +427,13 @@
     }
 
     @@keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
     }
 
     /* Animations */
@@ -437,10 +443,10 @@
         transition: all 0.6s ease;
     }
 
-    .animate-on-scroll.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
     /* Responsive */
     @@media (max-width: 768px) {
@@ -525,7 +531,7 @@
         }
 
         .history-date::before {
-            content: "Scan Date: ";
+            content: "@ScanGuard.Resources.Resources.History_ColumnScanDate: ";
             font-weight: 600;
             color: #6b7280;
         }
@@ -534,14 +540,14 @@
             margin: 0.5rem 0;
         }
 
-        .history-count::before {
-            content: "Vulnerabilities: ";
-            font-weight: 600;
-            color: #6b7280;
-        }
+            .history-count::before {
+                content: "@ScanGuard.Resources.Resources.History_ColumnVulnerabilityCount: ";
+                font-weight: 600;
+                color: #6b7280;
+            }
 
         .history-vuln-types::before {
-            content: "Vulnerability Types: ";
+            content: "@ScanGuard.Resources.Resources.History_ColumnVulnerabilityType: ";
             font-weight: 600;
             color: #6b7280;
         }
@@ -612,7 +618,7 @@
         const modalMessage = document.getElementById('modalMessage');
         const button = document.querySelector(`button[onclick="openAnalysisModal('${scanId}')"]`);
 
-        modalMessage.textContent = 'Loading analysis...';
+        modalMessage.textContent = '@ScanGuard.Resources.Resources.History_ModalLoading';
         modalBody.querySelector('.modal-spinner').style.display = 'block';
         modal.classList.add('show');
         button.classList.add('loading');
@@ -630,7 +636,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                modalMessage.textContent = 'Failed to load analysis';
+                modalMessage.textContent = '@ScanGuard.Resources.Resources.History_ModalError';
                 modalBody.querySelector('.modal-spinner').style.display = 'none';
             })
             .finally(() => {
@@ -644,10 +650,10 @@
     }
 
     // Search Functionality
-    document.getElementById('searchInput').addEventListener('input', function(e) {
+    document.getElementById('searchInput').addEventListener('input', function (e) {
         const searchTerm = e.target.value.toLowerCase();
         const rows = document.querySelectorAll('.history-tr');
-        
+
         rows.forEach(row => {
             const url = row.querySelector('.history-url').textContent.toLowerCase();
             row.style.display = url.includes(searchTerm) ? '' : 'none';
@@ -655,7 +661,7 @@
     });
 
     // Sort Functionality
-    document.getElementById('sortFilter').addEventListener('change', function(e) {
+    document.getElementById('sortFilter').addEventListener('change', function (e) {
         const sortValue = e.target.value;
         const tbody = document.getElementById('historyTableBody');
         const rows = Array.from(tbody.querySelectorAll('.history-tr'));

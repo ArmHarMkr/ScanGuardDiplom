@@ -10,25 +10,25 @@
         <ul class="sidebar-items">
             <li class="sidebar-item">
                 <a class="sidebar-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
-                    <i class="sidebar-icon fas fa-user"></i> Profile
+                    <i class="sidebar-icon fas fa-user"></i> @ScanGuard.Resources.Resources.Sidebar_Profile
                 </a>
             </li>
             @if (hasExternalLogins)
             {
                 <li class="sidebar-item">
                     <a class="sidebar-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="external-login" asp-page="./ExternalLogins">
-                        <i class="sidebar-icon fas fa-link"></i> External Logins
+                        <i class="sidebar-icon fas fa-link"></i> @ScanGuard.Resources.Resources.Sidebar_ExternalLogins
                     </a>
                 </li>
             }
             <li class="sidebar-item">
                 <a class="sidebar-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">
-                    <i class="sidebar-icon fas fa-lock"></i> Two-Factor Auth
+                    <i class="sidebar-icon fas fa-lock"></i> @ScanGuard.Resources.Resources.Sidebar_TwoFactorAuth
                 </a>
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
-                    <i class="sidebar-icon fas fa-key"></i> Change Password
+                    <i class="sidebar-icon fas fa-key"></i> @ScanGuard.Resources.Resources.Sidebar_ChangePassword
                 </a>
             </li>
         </ul>

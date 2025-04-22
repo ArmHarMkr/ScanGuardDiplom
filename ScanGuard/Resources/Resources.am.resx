@@ -120,6 +120,9 @@
   <data name="About ScanGuard" xml:space="preserve">
     <value>ScanGuard-ի մասին</value>
   </data>
+  <data name="AboutScanGuard" xml:space="preserve">
+    <value>ScanGuard-ի մասին</value>
+  </data>
   <data name="About_text" xml:space="preserve">
     <value>Մենք նվիրված ենք թվային աշխարհն ավելի ապահով դարձնելուն հզոր գործիքներով՝ կայքերն ու ֆայլերը խոցելիությունից սկանավորելու և պաշտպանելու համար</value>
   </data>
@@ -456,4 +459,340 @@
   <data name="YourSecurityAdvantage" xml:space="preserve">
     <value>Ձեր անվտանգության առավելությունը</value>
   </data>
+	<data name="TwoFactor_ConfigureAppTitle" xml:space="preserve">
+  <value>Մուտքի հավելվածի կարգավորում</value>
+</data>
+	<data name="TwoFactor_SetupDescription" xml:space="preserve">
+  <value>Կարգավորեք երկու գործոնով նույնականացումը մուտքի հավելվածի միջոցով:</value>
+</data>
+	<data name="TwoFactor_Step1Title" xml:space="preserve">
+  <value>1. Ներբեռնեք հավելված</value>
+</data>
+	<data name="TwoFactor_Step1Description" xml:space="preserve">
+  <value>Տեղադրեք երկու գործոնով նույնականացման հավելված, ինչպիսիք են Microsoft Authenticator կամ Google Authenticator:</value>
+</data>
+	<data name="TwoFactor_Step2Title" xml:space="preserve">
+  <value>2. Սկանավորեք QR կոդը</value>
+</data>
+	<data name="TwoFactor_Step2Description" xml:space="preserve">
+  <value>Սկանավորեք ստորև ներկայացված QR կոդը կամ մուտքագրեք բանալին Ձեր մուտքի հավելվածում: Բացատներն ու տառերի մեծությունը նշանակություն չունեն:</value>
+</data>
+	<data name="TwoFactor_QRCodeHelpLink" xml:space="preserve">
+  <value>Իմացեք, թե ինչպես միացնել QR կոդի ստեղծումը:</value>
+</data>
+	<data name="TwoFactor_Step3Title" xml:space="preserve">
+  <value>3. Հաստատեք կոդը</value>
+</data>
+	<data name="TwoFactor_Step3Description" xml:space="preserve">
+  <value>Մուտքագրեք Ձեր հաշվիչ հավելվածի կողմից տրամադրված եզակի կոդը՝ կարգավորումն ավարտելու համար:</value>
+</data>
+	<data name="TwoFactor_VerificationCodeLabel" xml:space="preserve">
+  <value>Հաստատման կոդ</value>
+</data>
+	<data name="TwoFactor_VerificationCodePlaceholder" xml:space="preserve">
+  <value>Մուտքագրեք կոդը</value>
+</data>
+	<data name="TwoFactor_VerifyButton" xml:space="preserve">
+  <value>Հաստատել</value>
+</data>
+	<data name="Nav_Main" xml:space="preserve">
+  <value>Գլխավոր</value>
+</data>
+	<data name="Nav_AboutUs" xml:space="preserve">
+  <value>Մեր մասին</value>
+</data>
+	<data name="Nav_Review" xml:space="preserve">
+  <value>Կարծիք</value>
+</data>
+	<data name="Nav_Sites" xml:space="preserve">
+  <value>Կայքեր</value>
+</data>
+	<data name="Nav_Scanner" xml:space="preserve">
+  <value>Սկաներ</value>
+</data>
+	<data name="Nav_ScannedSites" xml:space="preserve">
+  <value>Սկանավորված կայքեր</value>
+</data>
+	<data name="Nav_Files" xml:space="preserve">
+  <value>Ֆայլեր</value>
+</data>
+	<data name="Nav_FileScanner" xml:space="preserve">
+  <value>Ֆայլերի սկաներ</value>
+</data>
+	<data name="Nav_ScannedFiles" xml:space="preserve">
+  <value>Սկանավորված ֆայլեր</value>
+</data>
+	<data name="Nav_Chat" xml:space="preserve">
+  <value>Զրույց</value>
+</data>
+	<data name="Nav_Corporation" xml:space="preserve">
+  <value>Կորպորացիա</value>
+</data>
+	<data name="Nav_Premium" xml:space="preserve">
+  <value>Պրեմիում</value>
+</data>
+	<data name="Nav_Users" xml:space="preserve">
+  <value>Օգտատերեր</value>
+</data>
+	<data name="Nav_GetToken" xml:space="preserve">
+  <value>Ստանալ Տոկեն</value>
+</data>
+	<data name="Nav_AllNews" xml:space="preserve">
+  <value>Բոլոր նորությունները</value>
+</data>
+	<data name="Nav_GetCorpRequests" xml:space="preserve">
+  <value>Ստանալ կորպորատիվ հարցումներ</value>
+</data>
+	<data name="Nav_News" xml:space="preserve">
+  <value>Նորություններ</value>
+</data>
+	<data name="Nav_ScanFile" xml:space="preserve">
+  <value>Սկանավորել ֆայլ</value>
+</data>
+	<data name="Nav_History" xml:space="preserve">
+  <value>Պատմություն</value>
+</data>
+	<data name="Language_English" xml:space="preserve">
+  <value>Անգլերեն</value>
+</data>
+	<data name="Language_Armenian" xml:space="preserve">
+  <value>Հայերեն</value>
+</data>
+	<data name="Nav_Notifications" xml:space="preserve">
+  <value>Ծանուցումներ</value>
+</data>
+	<data name="Nav_Profile" xml:space="preserve">
+  <value>Պրոֆիլ</value>
+</data>
+	<data name="Nav_Logout" xml:space="preserve">
+  <value>Դուրս գալ</value>
+</data>
+	<data name="Nav_Login" xml:space="preserve">
+  <value>Մուտք</value>
+</data>
+	<data name="Nav_Register" xml:space="preserve">
+  <value>Գրանցվել</value>
+</data>
+	<data name="History_Title" xml:space="preserve">
+  <value>Սկանավորման պատմություն</value>
+</data>
+	<data name="History_Subtitle" xml:space="preserve">
+  <value>Դիտեք և վերլուծեք անցյալի սկանավորումները՝ Ձեր կայքերը անվտանգ պահելու համար ScanGuard-ի արհեստական բանականությամբ ապահովված պատկերացումներով:</value>
+</data>
+	<data name="History_SearchPlaceholder" xml:space="preserve">
+  <value>Որոնել URL-ով...</value>
+</data>
+	<data name="History_SortRecent" xml:space="preserve">
+  <value>Դասավորել՝ Վերջին</value>
+</data>
+	<data name="History_SortVulnDesc" xml:space="preserve">
+  <value>Խոցելիություններ (Բարձրից ցածր)</value>
+</data>
+	<data name="History_SortVulnAsc" xml:space="preserve">
+  <value>Խոցելիություններ (Ցածրից բարձր)</value>
+</data>
+	<data name="History_SortDateAsc" xml:space="preserve">
+  <value>Ամսաթիվ (Ամենահին)</value>
+</data>
+	<data name="History_ColumnWebsiteURL" xml:space="preserve">
+  <value>Կայքի URL</value>
+</data>
+	<data name="History_ColumnScanDate" xml:space="preserve">
+  <value>Սկանավորման ամսաթիվ</value>
+</data>
+	<data name="History_ColumnVulnerabilityCount" xml:space="preserve">
+  <value>Խոցելիությունների քանակ</value>
+</data>
+	<data name="History_ColumnVulnerabilityType" xml:space="preserve">
+  <value>Խոցելիության տեսակ</value>
+</data>
+	<data name="History_ColumnActions" xml:space="preserve">
+  <value>Գործողություններ</value>
+</data>
+	<data name="History_NoVulnerabilities" xml:space="preserve">
+  <value>Խոցելիություններ չեն հայտնաբերվել</value>
+</data>
+	<data name="History_ButtonRemove" xml:space="preserve">
+  <value>Հեռացնել</value>
+</data>
+	<data name="History_ButtonAnalyze" xml:space="preserve">
+  <value>Վերլուծել</value>
+</data>
+	<data name="History_ModalTitle" xml:space="preserve">
+  <value>ԱԲ վերլուծություն</value>
+</data>
+	<data name="History_ModalLoading" xml:space="preserve">
+  <value>Վերլուծությունը բեռնվում է...</value>
+</data>
+	<data name="History_ModalError" xml:space="preserve">
+  <value>Չհաջողվեց բեռնել վերլուծությունը</value>
+</data>
+	<data name="Sidebar_Profile" xml:space="preserve">
+  <value>Պրոֆիլ</value>
+</data>
+	<data name="Sidebar_ExternalLogins" xml:space="preserve">
+  <value>Արտաքին մուտքեր</value>
+</data>
+	<data name="Sidebar_TwoFactorAuth" xml:space="preserve">
+  <value>Երկու գործոնով նույնականացում</value>
+</data>
+	<data name="Sidebar_ChangePassword" xml:space="preserve">
+  <value>Փոխել գաղտնաբառը</value>
+</data>
+	<data name="Profile_Title" xml:space="preserve">
+  <value>Պրոֆիլ</value>
+</data>
+	<data name="Profile_StatusAdmin" xml:space="preserve">
+  <value>Ադմին</value>
+</data>
+	<data name="Profile_StatusPremium" xml:space="preserve">
+  <value>Պրեմիում</value>
+</data>
+	<data name="Profile_LabelFullName" xml:space="preserve">
+  <value>Ամբողջական անուն</value>
+</data>
+	<data name="Profile_LabelEmail" xml:space="preserve">
+  <value>Էլ․ փոստ</value>
+</data>
+	<data name="Profile_LabelPhoneNumber" xml:space="preserve">
+  <value>Հեռախոսահամար</value>
+</data>
+	<data name="Profile_PlaceholderFullName" xml:space="preserve">
+  <value>Մուտքագրեք Ձեր ամբողջական անունը</value>
+</data>
+	<data name="Profile_PlaceholderPhoneNumber" xml:space="preserve">
+  <value>Մուտքագրեք Ձեր հեռախոսահամարը</value>
+</data>
+	<data name="Profile_ButtonSave" xml:space="preserve">
+  <value>Պահպանել փոփոխությունները</value>
+</data>
+	<data name="ChangePassword_Title" xml:space="preserve">
+  <value>Փոխել գաղտնաբառը</value>
+</data>
+	<data name="ChangePassword_SectionTitle" xml:space="preserve">
+  <value>Փոխել գաղտնաբառը</value>
+</data>
+	<data name="ChangePassword_Description" xml:space="preserve">
+  <value>Սահմանեք նոր անվտանգ գաղտնաբառ:</value>
+</data>
+	<data name="ChangePassword_LabelCurrentPassword" xml:space="preserve">
+  <value>Ընթացիկ գաղտնաբառ</value>
+</data>
+	<data name="ChangePassword_LabelNewPassword" xml:space="preserve">
+  <value>Նոր գաղտնաբառ</value>
+</data>
+	<data name="ChangePassword_LabelConfirmPassword" xml:space="preserve">
+  <value>Հաստատել գաղտնաբառը</value>
+</data>
+	<data name="ChangePassword_PlaceholderCurrentPassword" xml:space="preserve">
+  <value>Ընթացիկ գաղտնաբառ</value>
+</data>
+	<data name="ChangePassword_PlaceholderNewPassword" xml:space="preserve">
+  <value>Նոր գաղտնաբառ</value>
+</data>
+	<data name="ChangePassword_PlaceholderConfirmPassword" xml:space="preserve">
+  <value>Հաստատել գաղտնաբառը</value>
+</data>
+	<data name="ChangePassword_ButtonUpdate" xml:space="preserve">
+  <value>Թարմացնել</value>
+</data>
+	<data name="ChangePassword_ButtonCancel" xml:space="preserve">
+  <value>Չեղարկել</value>
+</data>
+	<data name="Scanner_Title" xml:space="preserve">
+  <value>Խոցելիության սկաներ</value>
+</data>
+	<data name="Scanner_IntroSubtitle" xml:space="preserve">
+  <value>Պաշտպանեք Ձեր կայքը՝ բացահայտելով անվտանգության ռիսկերը ScanGuard-ի առաջադեմ սկանավորման տեխնոլոգիայով:</value>
+</data>
+	<data name="Scanner_FormTitle" xml:space="preserve">
+  <value>Սկանավորեք Ձեր կայքը</value>
+</data>
+	<data name="Scanner_LabelUrl" xml:space="preserve">
+  <value>Մուտքագրեք սկանավորման URL</value>
+</data>
+	<data name="Scanner_PlaceholderUrl" xml:space="preserve">
+  <value>https://example.com</value>
+</data>
+	<data name="Scanner_ButtonStart" xml:space="preserve">
+  <value>Սկսել սկանավորում</value>
+</data>
+	<data name="Scanner_ResultsTitle" xml:space="preserve">
+  <value>Սկանավորման արդյունքներ</value>
+</data>
+	<data name="Scanner_PortResultsTitle" xml:space="preserve">
+  <value>Պորտերի սկանավորման արդյունքներ</value>
+</data>
+	<data name="Scanner_InfoTitle" xml:space="preserve">
+  <value>Խոցելիությունների մասին տեղեկատվություն</value>
+</data>
+	<data name="Scanner_InfoSQLiDescription" xml:space="preserve">
+  <value>Հաշվիչներին թույլ է տալիս ներարկել վնասակար SQL կոդ մուտքագրման դաշտերում, ինչը կարող է հանգեցնել տվյալների բազայի բովանդակության մուտքի կամ փոփոխման:</value>
+</data>
+	<data name="Scanner_InfoXSSDescription" xml:space="preserve">
+  <value>Հաշվիչներին թույլ է տալիս ներարկել սկրիպտեր վեբ էջերում, որոնք աշխատում են օգտատերերի բրաուզերներում, ինչը կարող է հանգեցնել տվյալների գողության կամ կայքի վնասման:</value>
+</data>
+	<data name="Scanner_InfoCSRFDescription" xml:space="preserve">
+  <value>Խաբում է վավերացված օգտատերերին՝ կատարելով անցանկալի գործողություններ (օրինակ՝ կարգավորումների փոփոխություն) կեղծված հարցումների միջոցով:</value>
+</data>
+	<data name="Scanner_InfoIDORDescription" xml:space="preserve">
+  <value>Անվտանգ օբյեկտների ուղղակի հղումները թույլ են տալիս հաշվիչներին մուտք գործել չթույլատրված ռեսուրսներ՝ մանիպուլյացիայի միջոցով:</value>
+</data>
+	<data name="Scanner_InfoBrokenAuthDescription" xml:space="preserve">
+  <value>Թույլ վավերացումը թույլ է տալիս հաշվիչներին շրջանցել մուտքը կամ գրավել սեանսներ՝ ձեռք բերելով չթույլատրված մուտք:</value>
+</data>
+	<data name="Scanner_InfoWeakPasswordDescription" xml:space="preserve">
+  <value>Պարզ գաղտնաբառերը հաշիվները խոցելի են դարձնում բռնի կոտրումների կամ գուշակությունների համար:</value>
+</data>
+	<data name="Scanner_InfoSecurityMisconfigDescription" xml:space="preserve">
+  <value>Սխալ կարգավորումները (օրինակ՝ բաց պորտեր, լռելյայն հավատարմագրեր) բացահայտում են խոցելիությունները սերվերներում կամ հավելվածներում:</value>
+</data>
+	<data name="Scanner_InfoUnvalidatedRedirectDescription" xml:space="preserve">
+  <value>Չստուգված վերահղման մուտքերը կարող են օգտատերերին ուղարկել վնասակար կայքեր՝ նպաստելով ֆիշինգի հարձակումներին:</value>
+</data>
+	<data name="Scanner_InfoDirectoryListingDescription" xml:space="preserve">
+  <value>Սխալ կարգավորված սերվերները բացահայտում են պանակների բովանդակությունը՝ ցույց տալով զգայուն ֆայլեր կամ կառուցվածք:</value>
+</data>
+	<data name="Scanner_InfoLFIDescription" xml:space="preserve">
+  <value>Հաշվիչներին թույլ է տալիս ներառել տեղային ֆայլեր (օրինակ՝ կոնֆիգուրացիոն ֆայլեր), ինչը կարող է բացահայտել զգայուն տվյալներ:</value>
+</data>
+	<data name="Scanner_InfoRFIDescription" xml:space="preserve">
+  <value>Թույլ է տալիս ներառել հեռակա վնասակար ֆայլեր, հաճախ հանգեցնելով կոդի կատարման սերվերում:</value>
+</data>
+	<data name="Scanner_InfoHTTPResponseSplittingDescription" xml:space="preserve">
+  <value>Օգտագործում է վերնագրերի մանիպուլյացիան՝ բովանդակություն ներարկելու կամ օգտատերերին վերահղելու վնասակար կայքեր:</value>
+</data>
+	<data name="Scanner_InfoPhishingDescription" xml:space="preserve">
+  <value>Խաբուսիկ տեխնիկաները խաբում են օգտատերերին՝ բացահայտելով հավատարմագրերը կեղծ էջերի կամ հղումների միջոցով:</value>
+</data>
+	<data name="Scanner_InfoNotSecureDomainDescription" xml:space="preserve">
+  <value>Ոչ HTTPS կապերը բացահայտում են տվյալները գաղտնալսման կամ փոփոխման համար հաշվիչների կողմից:</value>
+</data>
+	<data name="Scanner_CtaTitle" xml:space="preserve">
+  <value>Մնացեք անվտանգ ScanGuard-ի հետ</value>
+</data>
+	<data name="Scanner_CtaSubtitle" xml:space="preserve">
+  <value>Կատարեք կանոնավոր սկանավորումներ՝ Ձեր կայքը խոցելիություններից պաշտպանելու համար:</value>
+</data>
+	<data name="Scanner_CtaButton" xml:space="preserve">
+  <value>Սկանավորել մեկ այլ URL</value>
+</data>
+	<data name="Scanner_ResultDetected" xml:space="preserve">
+  <value>Հայտնաբերված</value>
+</data>
+	<data name="Scanner_ResultNotDetected" xml:space="preserve">
+  <value>Չի հայտնաբերվել</value>
+</data>
+	<data name="Scanner_ResultSecure" xml:space="preserve">
+  <value>Անվտանգ</value>
+</data>
+	<data name="Scanner_ResultInsecure" xml:space="preserve">
+  <value>Անապահով</value>
+</data>
+	<data name="Scanner_PortOpen" xml:space="preserve">
+  <value>Բաց</value>
+</data>
+	<data name="Scanner_PortClosed" xml:space="preserve">
+  <value>Փակ</value>
+</data>
 </root>

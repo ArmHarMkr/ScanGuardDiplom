@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Scan your website for vulnerabilities with ScanGuard’s powerful security tool.">
-    <title>Vulnerability Scanner - ScanGuard</title>
+    <title>@ScanGuard.Resources.Resources.Scanner_Title - ScanGuard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/styles.css"> <!-- Your existing CSS file -->
     <style>
@@ -151,7 +151,7 @@
 
             .scanner-btn-primary:hover {
                 background: #d90429;
-                cursor: pointer;    
+                cursor: pointer;
             }
 
         /* Results Section */
@@ -453,8 +453,8 @@
     <div class="scanner-container">
         <!-- Intro Section -->
         <section class="scanner-intro-section">
-            <h1 class="scanner-intro-title animate-on-scroll">Vulnerability Scanner</h1>
-            <p class="scanner-intro-subtitle animate-on-scroll">Protect your website by identifying security risks with ScanGuard’s advanced scanning technology.</p>
+            <h1 class="scanner-intro-title animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_Title</h1>
+            <p class="scanner-intro-subtitle animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_IntroSubtitle</p>
         </section>
 
         <!-- Messages -->
@@ -473,11 +473,11 @@
 
         <!-- Form Section -->
         <section class="scanner-form-section">
-            <h2 class="scanner-form-title animate-on-scroll">Scan Your Website</h2>
+            <h2 class="scanner-form-title animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_FormTitle</h2>
             <form asp-action="Scanner" method="post" id="scanForm" class="scanner-form-group">
-                <label for="url" class="scanner-label">Enter URL to Scan</label>
-                <input type="text" id="url" name="url" class="scanner-input" placeholder="https://example.com" required>
-                <button type="submit" class="scanner-btn scanner-btn-primary animate-on-scroll">Start Scan</button>
+                <label for="url" class="scanner-label">@ScanGuard.Resources.Resources.Scanner_LabelUrl</label>
+                <input type="text" id="url" name="url" class="scanner-input" placeholder="@ScanGuard.Resources.Resources.Scanner_PlaceholderUrl" required>
+                <button type="submit" class="scanner-btn scanner-btn-primary animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_ButtonStart</button>
             </form>
         </section>
 
@@ -485,115 +485,115 @@
         @if (ViewBag.PortScanResults != null)
         {
             <section class="scanner-results-section" style="display: block;">
-                <h3 class="scanner-results-title animate-on-scroll">Scan Results</h3>
+                <h3 class="scanner-results-title animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_ResultsTitle</h3>
                 <div class="scanner-results-grid">
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">💉</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">SQL Injection (SQLi):</span><br>
-                            <span class="scanner-result-status @(Model.SQLi ? "error" : "success")">@(Model.SQLi ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.SQLi ? "error" : "success")">@(Model.SQLi ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">📜</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Cross-Site Scripting (XSS):</span><br>
-                            <span class="scanner-result-status @(Model.XSS ? "error" : "success")">@(Model.XSS ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.XSS ? "error" : "success")">@(Model.XSS ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">🔗</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">CSRF:</span><br>
-                            <span class="scanner-result-status @(Model.CSRF ? "error" : "success")">@(Model.CSRF ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.CSRF ? "error" : "success")">@(Model.CSRF ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">🔍</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">IDOR:</span><br>
-                            <span class="scanner-result-status @(Model.IDOR ? "error" : "success")">@(Model.IDOR ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.IDOR ? "error" : "success")">@(Model.IDOR ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">🔐</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Broken Authentication:</span><br>
-                            <span class="scanner-result-status @(Model.BrokenAuthentification ? "error" : "success")">@(Model.BrokenAuthentification ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.BrokenAuthentification ? "error" : "success")">@(Model.BrokenAuthentification ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">🔑</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Weak Password Policy:</span><br>
-                            <span class="scanner-result-status @(Model.CheckWeakPasswordPolicy ? "error" : "success")">@(Model.CheckWeakPasswordPolicy ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.CheckWeakPasswordPolicy ? "error" : "success")">@(Model.CheckWeakPasswordPolicy ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">⚙️</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Security Misconfiguration:</span><br>
-                            <span class="scanner-result-status @(Model.SecurityMisconfiguration ? "error" : "success")">@(Model.SecurityMisconfiguration ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.SecurityMisconfiguration ? "error" : "success")">@(Model.SecurityMisconfiguration ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">➡️</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Unvalidated Redirects:</span><br>
-                            <span class="scanner-result-status @(Model.UnvalidatedRedirectAndForwards ? "error" : "success")">@(Model.UnvalidatedRedirectAndForwards ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.UnvalidatedRedirectAndForwards ? "error" : "success")">@(Model.UnvalidatedRedirectAndForwards ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">📁</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Directory Listing:</span><br>
-                            <span class="scanner-result-status @(Model.DirectoryListing ? "error" : "success")">@(Model.DirectoryListing ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.DirectoryListing ? "error" : "success")">@(Model.DirectoryListing ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">📄</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Local File Inclusion (LFI):</span><br>
-                            <span class="scanner-result-status @(Model.LFI ? "error" : "success")">@(Model.LFI ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.LFI ? "error" : "success")">@(Model.LFI ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">🌐</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Remote File Inclusion (RFI):</span><br>
-                            <span class="scanner-result-status @(Model.RFI ? "error" : "success")">@(Model.RFI ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.RFI ? "error" : "success")">@(Model.RFI ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">📡</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">HTTP Response Splitting:</span><br>
-                            <span class="scanner-result-status @(Model.HTTPResponseSplitting ? "error" : "success")">@(Model.HTTPResponseSplitting ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.HTTPResponseSplitting ? "error" : "success")">@(Model.HTTPResponseSplitting ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">🎣</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Phishing:</span><br>
-                            <span class="scanner-result-status @(Model.Phishing ? "error" : "success")">@(Model.Phishing ? "Detected" : "Not Detected")</span>
+                            <span class="scanner-result-status @(Model.Phishing ? "error" : "success")">@(Model.Phishing ? ScanGuard.Resources.Resources.Scanner_ResultDetected : ScanGuard.Resources.Resources.Scanner_ResultNotDetected)</span>
                         </div>
                     </div>
                     <div class="scanner-result-item animate-on-scroll">
                         <span class="scanner-result-icon">🔒</span>
                         <div class="scanner-result-text">
                             <span class="scanner-result-label">Not Secure Domain (HTTP):</span><br>
-                            <span class="scanner-result-status @(!Model.HTTPWithoutS ? "success" : "error")">@(!Model.HTTPWithoutS ? "Secure" : "Insecure")</span>
+                            <span class="scanner-result-status @(!Model.HTTPWithoutS ? "success" : "error")">@(!Model.HTTPWithoutS ? ScanGuard.Resources.Resources.Scanner_ResultSecure : ScanGuard.Resources.Resources.Scanner_ResultInsecure)</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="scanner-port-results">
-                    <h3 class="scanner-results-title animate-on-scroll">Port Scan Results</h3>
+                    <h3 class="scanner-results-title animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_PortResultsTitle</h3>
                     <div class="scanner-port-grid">
                         @foreach (var port in ViewBag.PortScanResults as Dictionary<int, (bool IsOpen, string Service, string Version)>)
                         {
                             <div class="scanner-port-item animate-on-scroll">
-                                <p>Port @port.Key: <span class="scanner-port-status-@(port.Value.IsOpen ? "open" : "closed")">@(port.Value.IsOpen ? "Open" : "Closed")</span></p>
+                                <p>Port @port.Key: <span class="scanner-port-status-@(port.Value.IsOpen ? "open" : "closed")">@(port.Value.IsOpen ? ScanGuard.Resources.Resources.Scanner_PortOpen : ScanGuard.Resources.Resources.Scanner_PortClosed)</span></p>
                                 <p>@port.Value.Service (@port.Value.Version)</p>
                             </div>
                         }
@@ -604,7 +604,7 @@
 
         <!-- Info Table Section -->
         <section class="scanner-info-section">
-            <h2 class="scanner-info-title animate-on-scroll">Vulnerability Information</h2>
+            <h2 class="scanner-info-title animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_InfoTitle</h2>
             <div class="scanner-info-table">
                 <div class="scanner-info-table-header">
                     <span>Vulnerability</span>
@@ -613,59 +613,59 @@
                 <div class="scanner-info-table-body">
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">SQL Injection (SQLi)</div>
-                        <div class="scanner-info-table-cell">Allows attackers to inject malicious SQL code into input fields, potentially accessing or altering database content.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoSQLiDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Cross-Site Scripting (XSS)</div>
-                        <div class="scanner-info-table-cell">Enables attackers to inject scripts into web pages, which run in users’ browsers, potentially stealing data or defacing the site.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoXSSDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">CSRF</div>
-                        <div class="scanner-info-table-cell">Tricks authenticated users into performing unintended actions (e.g., changing settings) via forged requests.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoCSRFDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">IDOR</div>
-                        <div class="scanner-info-table-cell">Insecure Direct Object References allow attackers to access unauthorized resources by manipulating identifiers.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoIDORDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Broken Authentication</div>
-                        <div class="scanner-info-table-cell">Weak authentication lets attackers bypass login or hijack sessions, gaining unauthorized access.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoBrokenAuthDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Weak Password Policy</div>
-                        <div class="scanner-info-table-cell">Simple passwords make accounts vulnerable to brute-force or guessing attacks.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoWeakPasswordDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Security Misconfiguration</div>
-                        <div class="scanner-info-table-cell">Improper settings (e.g., open ports, default credentials) expose vulnerabilities in servers or apps.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoSecurityMisconfigDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Unvalidated Redirects</div>
-                        <div class="scanner-info-table-cell">Untrusted redirect inputs can send users to malicious sites, aiding phishing attacks.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoUnvalidatedRedirectDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Directory Listing</div>
-                        <div class="scanner-info-table-cell">Misconfigured servers expose directory contents, revealing sensitive files or structure.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoDirectoryListingDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Local File Inclusion (LFI)</div>
-                        <div class="scanner-info-table-cell">Allows attackers to include local files (e.g., config files), potentially exposing sensitive data.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoLFIDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Remote File Inclusion (RFI)</div>
-                        <div class="scanner-info-table-cell">Permits inclusion of remote malicious files, often leading to code execution on the server.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoRFIDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">HTTP Response Splitting</div>
-                        <div class="scanner-info-table-cell">Exploits header manipulation to inject content or redirect users to malicious sites.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoHTTPResponseSplittingDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Phishing</div>
-                        <div class="scanner-info-table-cell">Deceptive techniques trick users into revealing credentials via fake pages or links.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoPhishingDescription</div>
                     </div>
                     <div class="scanner-info-table-row">
                         <div class="scanner-info-table-cell">Not Secure Domain (HTTP)</div>
-                        <div class="scanner-info-table-cell">Non-HTTPS connections expose data to interception or tampering by attackers.</div>
+                        <div class="scanner-info-table-cell">@ScanGuard.Resources.Resources.Scanner_InfoNotSecureDomainDescription</div>
                     </div>
                 </div>
             </div>
@@ -673,9 +673,9 @@
 
         <!-- CTA Section -->
         <section class="scanner-cta-section">
-            <h2 class="scanner-cta-title animate-on-scroll">Stay Secure with ScanGuard</h2>
-            <p class="scanner-cta-subtitle animate-on-scroll">Run regular scans to keep your website safe from vulnerabilities.</p>
-            <a href="/Scan/Scanner" class="scanner-btn scanner-btn-primary animate-on-scroll">Scan Another URL</a>
+            <h2 class="scanner-cta-title animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_CtaTitle</h2>
+            <p class="scanner-cta-subtitle animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_CtaSubtitle</p>
+            <a href="/Scan/Scanner" class="scanner-btn scanner-btn-primary animate-on-scroll">@ScanGuard.Resources.Resources.Scanner_CtaButton</a>
         </section>
 
         <!-- Loading Overlay -->

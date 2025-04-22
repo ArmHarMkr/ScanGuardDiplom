@@ -160,6 +160,105 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string ChangePassword_ButtonCancel {
+            get {
+                return ResourceManager.GetString("ChangePassword_ButtonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string ChangePassword_ButtonUpdate {
+            get {
+                return ResourceManager.GetString("ChangePassword_ButtonUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set a new secure password..
+        /// </summary>
+        public static string ChangePassword_Description {
+            get {
+                return ResourceManager.GetString("ChangePassword_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string ChangePassword_LabelConfirmPassword {
+            get {
+                return ResourceManager.GetString("ChangePassword_LabelConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Password.
+        /// </summary>
+        public static string ChangePassword_LabelCurrentPassword {
+            get {
+                return ResourceManager.GetString("ChangePassword_LabelCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        public static string ChangePassword_LabelNewPassword {
+            get {
+                return ResourceManager.GetString("ChangePassword_LabelNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string ChangePassword_PlaceholderConfirmPassword {
+            get {
+                return ResourceManager.GetString("ChangePassword_PlaceholderConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current password.
+        /// </summary>
+        public static string ChangePassword_PlaceholderCurrentPassword {
+            get {
+                return ResourceManager.GetString("ChangePassword_PlaceholderCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New password.
+        /// </summary>
+        public static string ChangePassword_PlaceholderNewPassword {
+            get {
+                return ResourceManager.GetString("ChangePassword_PlaceholderNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string ChangePassword_SectionTitle {
+            get {
+                return ResourceManager.GetString("ChangePassword_SectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string ChangePassword_Title {
+            get {
+                return ResourceManager.GetString("ChangePassword_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AI-Powered.
         /// </summary>
         public static string ChooseAI {
@@ -412,6 +511,168 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyze.
+        /// </summary>
+        public static string History_ButtonAnalyze {
+            get {
+                return ResourceManager.GetString("History_ButtonAnalyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string History_ButtonRemove {
+            get {
+                return ResourceManager.GetString("History_ButtonRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string History_ColumnActions {
+            get {
+                return ResourceManager.GetString("History_ColumnActions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Date.
+        /// </summary>
+        public static string History_ColumnScanDate {
+            get {
+                return ResourceManager.GetString("History_ColumnScanDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerability Count.
+        /// </summary>
+        public static string History_ColumnVulnerabilityCount {
+            get {
+                return ResourceManager.GetString("History_ColumnVulnerabilityCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerability Type.
+        /// </summary>
+        public static string History_ColumnVulnerabilityType {
+            get {
+                return ResourceManager.GetString("History_ColumnVulnerabilityType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website URL.
+        /// </summary>
+        public static string History_ColumnWebsiteURL {
+            get {
+                return ResourceManager.GetString("History_ColumnWebsiteURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load analysis.
+        /// </summary>
+        public static string History_ModalError {
+            get {
+                return ResourceManager.GetString("History_ModalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading analysis....
+        /// </summary>
+        public static string History_ModalLoading {
+            get {
+                return ResourceManager.GetString("History_ModalLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AI Analysis.
+        /// </summary>
+        public static string History_ModalTitle {
+            get {
+                return ResourceManager.GetString("History_ModalTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No vulnerabilities found.
+        /// </summary>
+        public static string History_NoVulnerabilities {
+            get {
+                return ResourceManager.GetString("History_NoVulnerabilities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by URL....
+        /// </summary>
+        public static string History_SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("History_SearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date (Oldest).
+        /// </summary>
+        public static string History_SortDateAsc {
+            get {
+                return ResourceManager.GetString("History_SortDateAsc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort by: Recent.
+        /// </summary>
+        public static string History_SortRecent {
+            get {
+                return ResourceManager.GetString("History_SortRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerabilities (Low to High).
+        /// </summary>
+        public static string History_SortVulnAsc {
+            get {
+                return ResourceManager.GetString("History_SortVulnAsc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerabilities (High to Low).
+        /// </summary>
+        public static string History_SortVulnDesc {
+            get {
+                return ResourceManager.GetString("History_SortVulnDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review and analyze past scans to keep your websites secure with ScanGuard’s AI-powered insights..
+        /// </summary>
+        public static string History_Subtitle {
+            get {
+                return ResourceManager.GetString("History_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan History.
+        /// </summary>
+        public static string History_Title {
+            get {
+                return ResourceManager.GetString("History_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No scanned websites yet. Be the first!.
         /// </summary>
         public static string Home_Empty_Message {
@@ -493,6 +754,24 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Հայերեն.
+        /// </summary>
+        public static string Language_Armenian {
+            get {
+                return ResourceManager.GetString("Language_Armenian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string Language_English {
+            get {
+                return ResourceManager.GetString("Language_English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latest Security Updates.
         /// </summary>
         public static string LatestSecurityUpdates {
@@ -516,6 +795,222 @@ namespace ScanGuard.Resources {
         public static string MonthlySecurity {
             get {
                 return ResourceManager.GetString("MonthlySecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About Us.
+        /// </summary>
+        public static string Nav_AboutUs {
+            get {
+                return ResourceManager.GetString("Nav_AboutUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All News.
+        /// </summary>
+        public static string Nav_AllNews {
+            get {
+                return ResourceManager.GetString("Nav_AllNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string Nav_Chat {
+            get {
+                return ResourceManager.GetString("Nav_Chat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Corporation.
+        /// </summary>
+        public static string Nav_Corporation {
+            get {
+                return ResourceManager.GetString("Nav_Corporation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files.
+        /// </summary>
+        public static string Nav_Files {
+            get {
+                return ResourceManager.GetString("Nav_Files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Scanner.
+        /// </summary>
+        public static string Nav_FileScanner {
+            get {
+                return ResourceManager.GetString("Nav_FileScanner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Corp Requests.
+        /// </summary>
+        public static string Nav_GetCorpRequests {
+            get {
+                return ResourceManager.GetString("Nav_GetCorpRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Token.
+        /// </summary>
+        public static string Nav_GetToken {
+            get {
+                return ResourceManager.GetString("Nav_GetToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        public static string Nav_History {
+            get {
+                return ResourceManager.GetString("Nav_History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Nav_Login {
+            get {
+                return ResourceManager.GetString("Nav_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string Nav_Logout {
+            get {
+                return ResourceManager.GetString("Nav_Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string Nav_Main {
+            get {
+                return ResourceManager.GetString("Nav_Main", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to News.
+        /// </summary>
+        public static string Nav_News {
+            get {
+                return ResourceManager.GetString("Nav_News", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string Nav_Notifications {
+            get {
+                return ResourceManager.GetString("Nav_Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premium.
+        /// </summary>
+        public static string Nav_Premium {
+            get {
+                return ResourceManager.GetString("Nav_Premium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Nav_Profile {
+            get {
+                return ResourceManager.GetString("Nav_Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Nav_Register {
+            get {
+                return ResourceManager.GetString("Nav_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review.
+        /// </summary>
+        public static string Nav_Review {
+            get {
+                return ResourceManager.GetString("Nav_Review", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan File.
+        /// </summary>
+        public static string Nav_ScanFile {
+            get {
+                return ResourceManager.GetString("Nav_ScanFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanned Files.
+        /// </summary>
+        public static string Nav_ScannedFiles {
+            get {
+                return ResourceManager.GetString("Nav_ScannedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanned Sites.
+        /// </summary>
+        public static string Nav_ScannedSites {
+            get {
+                return ResourceManager.GetString("Nav_ScannedSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanner.
+        /// </summary>
+        public static string Nav_Scanner {
+            get {
+                return ResourceManager.GetString("Nav_Scanner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sites.
+        /// </summary>
+        public static string Nav_Sites {
+            get {
+                return ResourceManager.GetString("Nav_Sites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string Nav_Users {
+            get {
+                return ResourceManager.GetString("Nav_Users", resourceCulture);
             }
         }
         
@@ -588,6 +1083,87 @@ namespace ScanGuard.Resources {
         public static string PrioritySupport {
             get {
                 return ResourceManager.GetString("PrioritySupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        public static string Profile_ButtonSave {
+            get {
+                return ResourceManager.GetString("Profile_ButtonSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Profile_LabelEmail {
+            get {
+                return ResourceManager.GetString("Profile_LabelEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Name.
+        /// </summary>
+        public static string Profile_LabelFullName {
+            get {
+                return ResourceManager.GetString("Profile_LabelFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
+        public static string Profile_LabelPhoneNumber {
+            get {
+                return ResourceManager.GetString("Profile_LabelPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your full name.
+        /// </summary>
+        public static string Profile_PlaceholderFullName {
+            get {
+                return ResourceManager.GetString("Profile_PlaceholderFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your phone number.
+        /// </summary>
+        public static string Profile_PlaceholderPhoneNumber {
+            get {
+                return ResourceManager.GetString("Profile_PlaceholderPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        public static string Profile_StatusAdmin {
+            get {
+                return ResourceManager.GetString("Profile_StatusAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premium.
+        /// </summary>
+        public static string Profile_StatusPremium {
+            get {
+                return ResourceManager.GetString("Profile_StatusPremium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Profile_Title {
+            get {
+                return ResourceManager.GetString("Profile_Title", resourceCulture);
             }
         }
         
@@ -718,6 +1294,294 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Scan.
+        /// </summary>
+        public static string Scanner_ButtonStart {
+            get {
+                return ResourceManager.GetString("Scanner_ButtonStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Another URL.
+        /// </summary>
+        public static string Scanner_CtaButton {
+            get {
+                return ResourceManager.GetString("Scanner_CtaButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run regular scans to keep your website safe from vulnerabilities..
+        /// </summary>
+        public static string Scanner_CtaSubtitle {
+            get {
+                return ResourceManager.GetString("Scanner_CtaSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stay Secure with ScanGuard.
+        /// </summary>
+        public static string Scanner_CtaTitle {
+            get {
+                return ResourceManager.GetString("Scanner_CtaTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Your Website.
+        /// </summary>
+        public static string Scanner_FormTitle {
+            get {
+                return ResourceManager.GetString("Scanner_FormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weak authentication lets attackers bypass login or hijack sessions, gaining unauthorized access..
+        /// </summary>
+        public static string Scanner_InfoBrokenAuthDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoBrokenAuthDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tricks authenticated users into performing unintended actions (e.g., changing settings) via forged requests..
+        /// </summary>
+        public static string Scanner_InfoCSRFDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoCSRFDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misconfigured servers expose directory contents, revealing sensitive files or structure..
+        /// </summary>
+        public static string Scanner_InfoDirectoryListingDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoDirectoryListingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exploits header manipulation to inject content or redirect users to malicious sites..
+        /// </summary>
+        public static string Scanner_InfoHTTPResponseSplittingDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoHTTPResponseSplittingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insecure Direct Object References allow attackers to access unauthorized resources by manipulating identifiers..
+        /// </summary>
+        public static string Scanner_InfoIDORDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoIDORDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allows attackers to include local files (e.g., config files), potentially exposing sensitive data..
+        /// </summary>
+        public static string Scanner_InfoLFIDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoLFIDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Non-HTTPS connections expose data to interception or tampering by attackers..
+        /// </summary>
+        public static string Scanner_InfoNotSecureDomainDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoNotSecureDomainDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deceptive techniques trick users into revealing credentials via fake pages or links..
+        /// </summary>
+        public static string Scanner_InfoPhishingDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoPhishingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permits inclusion of remote malicious files, often leading to code execution on the server..
+        /// </summary>
+        public static string Scanner_InfoRFIDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoRFIDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Improper settings (e.g., open ports, default credentials) expose vulnerabilities in servers or apps..
+        /// </summary>
+        public static string Scanner_InfoSecurityMisconfigDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoSecurityMisconfigDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allows attackers to inject malicious SQL code into input fields, potentially accessing or altering database content..
+        /// </summary>
+        public static string Scanner_InfoSQLiDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoSQLiDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerability Information.
+        /// </summary>
+        public static string Scanner_InfoTitle {
+            get {
+                return ResourceManager.GetString("Scanner_InfoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Untrusted redirect inputs can send users to malicious sites, aiding phishing attacks..
+        /// </summary>
+        public static string Scanner_InfoUnvalidatedRedirectDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoUnvalidatedRedirectDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simple passwords make accounts vulnerable to brute-force or guessing attacks..
+        /// </summary>
+        public static string Scanner_InfoWeakPasswordDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoWeakPasswordDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enables attackers to inject scripts into web pages, which run in users’ browsers, potentially stealing data or defacing the site..
+        /// </summary>
+        public static string Scanner_InfoXSSDescription {
+            get {
+                return ResourceManager.GetString("Scanner_InfoXSSDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protect your website by identifying security risks with ScanGuard’s advanced scanning technology..
+        /// </summary>
+        public static string Scanner_IntroSubtitle {
+            get {
+                return ResourceManager.GetString("Scanner_IntroSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter URL to Scan.
+        /// </summary>
+        public static string Scanner_LabelUrl {
+            get {
+                return ResourceManager.GetString("Scanner_LabelUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://example.com.
+        /// </summary>
+        public static string Scanner_PlaceholderUrl {
+            get {
+                return ResourceManager.GetString("Scanner_PlaceholderUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closed.
+        /// </summary>
+        public static string Scanner_PortClosed {
+            get {
+                return ResourceManager.GetString("Scanner_PortClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string Scanner_PortOpen {
+            get {
+                return ResourceManager.GetString("Scanner_PortOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port Scan Results.
+        /// </summary>
+        public static string Scanner_PortResultsTitle {
+            get {
+                return ResourceManager.GetString("Scanner_PortResultsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detected.
+        /// </summary>
+        public static string Scanner_ResultDetected {
+            get {
+                return ResourceManager.GetString("Scanner_ResultDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insecure.
+        /// </summary>
+        public static string Scanner_ResultInsecure {
+            get {
+                return ResourceManager.GetString("Scanner_ResultInsecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Detected.
+        /// </summary>
+        public static string Scanner_ResultNotDetected {
+            get {
+                return ResourceManager.GetString("Scanner_ResultNotDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure.
+        /// </summary>
+        public static string Scanner_ResultSecure {
+            get {
+                return ResourceManager.GetString("Scanner_ResultSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Results.
+        /// </summary>
+        public static string Scanner_ResultsTitle {
+            get {
+                return ResourceManager.GetString("Scanner_ResultsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerability Scanner.
+        /// </summary>
+        public static string Scanner_Title {
+            get {
+                return ResourceManager.GetString("Scanner_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanner Text.
         /// </summary>
         public static string ScannerText {
@@ -772,6 +1636,42 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string Sidebar_ChangePassword {
+            get {
+                return ResourceManager.GetString("Sidebar_ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External Logins.
+        /// </summary>
+        public static string Sidebar_ExternalLogins {
+            get {
+                return ResourceManager.GetString("Sidebar_ExternalLogins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Sidebar_Profile {
+            get {
+                return ResourceManager.GetString("Sidebar_Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two-Factor Auth.
+        /// </summary>
+        public static string Sidebar_TwoFactorAuth {
+            get {
+                return ResourceManager.GetString("Sidebar_TwoFactorAuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign Up Now.
         /// </summary>
         public static string SignUpNow {
@@ -786,6 +1686,15 @@ namespace ScanGuard.Resources {
         public static string StartScanning {
             get {
                 return ResourceManager.GetString("StartScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About ScanGuard.
+        /// </summary>
+        public static string String1About_ScanGuard {
+            get {
+                return ResourceManager.GetString("String1About ScanGuard", resourceCulture);
             }
         }
         
@@ -876,6 +1785,114 @@ namespace ScanGuard.Resources {
         public static string Trusted {
             get {
                 return ResourceManager.GetString("Trusted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure Authenticator App.
+        /// </summary>
+        public static string TwoFactor_ConfigureAppTitle {
+            get {
+                return ResourceManager.GetString("TwoFactor_ConfigureAppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Learn how to enable QR code generation..
+        /// </summary>
+        public static string TwoFactor_QRCodeHelpLink {
+            get {
+                return ResourceManager.GetString("TwoFactor_QRCodeHelpLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set up two-factor authentication with an authenticator app..
+        /// </summary>
+        public static string TwoFactor_SetupDescription {
+            get {
+                return ResourceManager.GetString("TwoFactor_SetupDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install a two-factor authenticator app like Microsoft Authenticator or Google Authenticator..
+        /// </summary>
+        public static string TwoFactor_Step1Description {
+            get {
+                return ResourceManager.GetString("TwoFactor_Step1Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. Download an App.
+        /// </summary>
+        public static string TwoFactor_Step1Title {
+            get {
+                return ResourceManager.GetString("TwoFactor_Step1Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan the QR code below or enter the key into your authenticator app. Spaces and casing do not matter..
+        /// </summary>
+        public static string TwoFactor_Step2Description {
+            get {
+                return ResourceManager.GetString("TwoFactor_Step2Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. Scan QR Code.
+        /// </summary>
+        public static string TwoFactor_Step2Title {
+            get {
+                return ResourceManager.GetString("TwoFactor_Step2Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the unique code provided by your authenticator app to complete setup..
+        /// </summary>
+        public static string TwoFactor_Step3Description {
+            get {
+                return ResourceManager.GetString("TwoFactor_Step3Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3. Verify Code.
+        /// </summary>
+        public static string TwoFactor_Step3Title {
+            get {
+                return ResourceManager.GetString("TwoFactor_Step3Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verification Code.
+        /// </summary>
+        public static string TwoFactor_VerificationCodeLabel {
+            get {
+                return ResourceManager.GetString("TwoFactor_VerificationCodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter code.
+        /// </summary>
+        public static string TwoFactor_VerificationCodePlaceholder {
+            get {
+                return ResourceManager.GetString("TwoFactor_VerificationCodePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify.
+        /// </summary>
+        public static string TwoFactor_VerifyButton {
+            get {
+                return ResourceManager.GetString("TwoFactor_VerifyButton", resourceCulture);
             }
         }
         

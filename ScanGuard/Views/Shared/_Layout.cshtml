@@ -50,31 +50,31 @@
             </button>
 
             <ul class="nav-links">
-                <li><a href="/"><i class="fas fa-home"></i> Main</a></li>
-                <li><a asp-action="AboutUs" asp-controller="Home"><i class="fas fa-info-circle"></i> About Us</a></li>
-                <li><a asp-action="Index" asp-controller="Review"><i class="fas fa-info-circle"></i> Review</a></li>
+                <li><a href="/"><i class="fas fa-home"></i> @ScanGuard.Resources.Resources.Nav_Main</a></li>
+                <li><a asp-action="AboutUs" asp-controller="Home"><i class="fas fa-info-circle"></i> @ScanGuard.Resources.Resources.Nav_AboutUs</a></li>
+                <li><a asp-action="Index" asp-controller="Review"><i class="fas fa-info-circle"></i> @ScanGuard.Resources.Resources.Nav_Review</a></li>
 
                 <!-- Scan Dropdown -->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle"><i class="fas fa-search"></i> Sites <i class="fas fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-toggle"><i class="fas fa-search"></i> @ScanGuard.Resources.Resources.Nav_Sites <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu">
-                        <a asp-action="Scanner" asp-controller="Scan"><i class="fas fa-search"></i> Scanner</a>
-                        <a asp-action="ShowScannedSites" asp-controller="User"><i class="fas fa-list"></i> Scanned Sites</a>
+                        <a asp-action="Scanner" asp-controller="Scan"><i class="fas fa-search"></i> @ScanGuard.Resources.Resources.Nav_Scanner</a>
+                        <a asp-action="ShowScannedSites" asp-controller="User"><i class="fas fa-list"></i> @ScanGuard.Resources.Resources.Nav_ScannedSites</a>
                     </div>
                 </li>
 
                 <!-- Files Dropdown -->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle"><i class="fas fa-file"></i> Files <i class="fas fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-toggle"><i class="fas fa-file"></i> @ScanGuard.Resources.Resources.Nav_Files <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu">
-                        <a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> File Scanner</a>
-                        <a asp-action="History" asp-controller="FileScan"><i class="fas fa-history"></i> Scanned Files</a>
+                        <a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> @ScanGuard.Resources.Resources.Nav_FileScanner</a>
+                        <a asp-action="History" asp-controller="FileScan"><i class="fas fa-history"></i> @ScanGuard.Resources.Resources.Nav_ScannedFiles</a>
                     </div>
                 </li>
 
-                <li><a asp-action="Index" asp-controller="Chat"><i class="fas fa-comments"></i> Chat</a></li>
-                <li><a asp-action="MyCorporation" asp-controller="Corporation"><i class="fas fa-building"></i> Corporation</a></li>
-                
+                <li><a asp-action="Index" asp-controller="Chat"><i class="fas fa-comments"></i> @ScanGuard.Resources.Resources.Nav_Chat</a></li>
+                <li><a asp-action="MyCorporation" asp-controller="Corporation"><i class="fas fa-building"></i> @ScanGuard.Resources.Resources.Nav_Corporation</a></li>
+
                 <!-- Role-Based Dropdown -->
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -86,25 +86,25 @@
                     @if (isAdmin || isPremium)
                     {
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle"><i class="fas fa-cog"></i> Premium <i class="fas fa-caret-down"></i></a>
+                            <a href="#" class="dropdown-toggle"><i class="fas fa-cog"></i> @ScanGuard.Resources.Resources.Nav_Premium <i class="fas fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 @if (isAdmin)
                                 {
-                                    <a href="/Admin/index"><i class="fas fa-users-cog"></i> Users</a>
-                                    <a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a>
-                                    <a asp-action="AllNews" asp-controller="Admin"><i class="fas fa-newspaper"></i> All News</a>
-                                    <a asp-action="ViewRequests" asp-controller="Admin"><i class="fas fa-building"></i> Get Corp Requests</a>
+                                    <a href="/Admin/index"><i class="fas fa-users-cog"></i> @ScanGuard.Resources.Resources.Nav_Users</a>
+                                    <a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> @ScanGuard.Resources.Resources.Nav_GetToken</a>
+                                    <a asp-action="AllNews" asp-controller="Admin"><i class="fas fa-newspaper"></i> @ScanGuard.Resources.Resources.Nav_AllNews</a>
+                                    <a asp-action="ViewRequests" asp-controller="Admin"><i class="fas fa-building"></i> @ScanGuard.Resources.Resources.Nav_GetCorpRequests</a>
                                 }
                                 @if (isPremium)
                                 {
-                                    <a asp-action="Index" asp-controller="Premium"><i class="fas fa-file-upload"></i> Scan File</a>
-                                    <a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> Get Token</a>
-                                    <a asp-action="GetAllNews" asp-controller="Premium"><i class="fas fa-newspaper"></i> News</a>
+                                    <a asp-action="Index" asp-controller="Premium"><i class="fas fa-file-upload"></i> @ScanGuard.Resources.Resources.Nav_ScanFile</a>
+                                    <a asp-action="GetToken" asp-controller="Premium"><i class="fas fa-key"></i> @ScanGuard.Resources.Resources.Nav_GetToken</a>
+                                    <a asp-action="GetAllNews" asp-controller="Premium"><i class="fas fa-newspaper"></i> @ScanGuard.Resources.Resources.Nav_News</a>
                                 }
                                 @if (isCustomer)
                                 {
-                                    <a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> Scan File</a>
-                                    <a asp-action="History" asp-controller="FileScan"><i class="fas fa-history"></i> History</a>
+                                    <a asp-action="Index" asp-controller="FileScan"><i class="fas fa-file-upload"></i> @ScanGuard.Resources.Resources.Nav_ScanFile</a>
+                                    <a asp-action="History" asp-controller="FileScan"><i class="fas fa-history"></i> @ScanGuard.Resources.Resources.Nav_History</a>
                                 }
                             </div>
                         </li>
@@ -115,48 +115,48 @@
             <div class="auth-buttons">
                 <div class="language-selector">
                     <div class="language-toggle" onclick="toggleLanguageMenu()">
-                        <img width="30px" src="@(CultureInfo.CurrentCulture.Name == "en" ? "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" : "https://flagcdn.com/w40/am.png")" alt="@(CultureInfo.CurrentCulture.Name == "en" ? "English" : "Հայերեն")" />
+                        <img width="30px" src="@(CultureInfo.CurrentCulture.Name == "en" ? "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" : "https://flagcdn.com/w40/am.png")" alt="@(CultureInfo.CurrentCulture.Name == "en" ? ScanGuard.Resources.Resources.Language_English : ScanGuard.Resources.Resources.Language_Armenian)" />
                     </div>
                     <div class="language-menu">
                         <!-- Ссылка для выбора английского языка -->
                         <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="en" class="language-option">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" class="flag-icon" /> English
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="@ScanGuard.Resources.Resources.Language_English" class="flag-icon" /> @ScanGuard.Resources.Resources.Language_English
                         </a>
                         <!-- Ссылка для выбора армянского языка -->
                         <a asp-action="SetLanguage" asp-controller="Home" asp-route-lang="am" class="language-option">
-                            <img src="https://flagcdn.com/w40/am.png" alt="Հայերեն" class="flag-icon" /> Հայերեն
+                            <img src="https://flagcdn.com/w40/am.png" alt="@ScanGuard.Resources.Resources.Language_Armenian" class="flag-icon" /> @ScanGuard.Resources.Resources.Language_Armenian
                         </a>
                     </div>
                 </div>
             </div>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    var currentUser = await UserManager.GetUserAsync(User);
-                    var profilePhotoPath = currentUser?.ProfilePhotoPath.Replace("wwwroot", "");
+            @if (SignInManager.IsSignedIn(User))
+            {
+                var currentUser = await UserManager.GetUserAsync(User);
+                var profilePhotoPath = currentUser?.ProfilePhotoPath.Replace("wwwroot", "");
 
-                    <a style="font-size: 1.3rem;" href="/Notification/Index" class="notification-bell" title="Notifications">
-                            <i class="fas fa-bell"></i>
+                <a style="font-size: 1.3rem;" href="/Notification/Index" class="notification-bell" title="@ScanGuard.Resources.Resources.Nav_Notifications">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="user-profile">
+                    <img src="@profilePhotoPath" alt="User profile">
+                    <span>@currentUser!.FullName</span>
+                    <div class="dropdown-menu">
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" class="dropdown-item"><i class="fas fa-key"></i> @ScanGuard.Resources.Resources.Nav_Profile</a>
+                        <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> @ScanGuard.Resources.Resources.Nav_Logout
                         </a>
-                    <div class="user-profile">
-                        <img src="@profilePhotoPath" alt="User profile">
-                        <span>@currentUser!.FullName</span>
-                        <div class="dropdown-menu">
-                            <a asp-area="Identity" asp-page="/Account/Manage/Index" class="dropdown-item"><i class="fas fa-key"></i> Profile</a>
-                            <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                            <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: none;">
-                            </form>
-                        </div>
+                        <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: none;">
+                        </form>
                     </div>
-                }
-                else
-                {
-                    <a class="login-btn" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                    <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                }
-            </div>
-        </nav>
+                </div>
+            }
+            else
+            {
+                <a class="login-btn" asp-area="Identity" asp-page="/Account/Login">@ScanGuard.Resources.Resources.Nav_Login</a>
+                <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">@ScanGuard.Resources.Resources.Nav_Register</a>
+            }
+    </div>
+    </nav>
     </div>
 
     <div class="manage-wrapper">

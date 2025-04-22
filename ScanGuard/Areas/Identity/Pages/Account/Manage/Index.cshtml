@@ -1,7 +1,7 @@
 ﻿@page
 @model ScanGuard.Areas.Identity.Pages.Account.Manage.IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = ScanGuard.Resources.Resources.Profile_Title;
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
@@ -23,11 +23,11 @@
                     <h4 class="profile-fullname">@Model.ProfileData.FullName</h4>
                     @if (Model.ProfileData.IsAdmin)
                     {
-                        <span class="status-badge status-admin">Admin</span>
+                        <span class="status-badge status-admin">@ScanGuard.Resources.Resources.Profile_StatusAdmin</span>
                     }
                     else if (Model.ProfileData.IsPremium)
                     {
-                        <span class="status-badge status-premium">Premium</span>
+                        <span class="status-badge status-premium">@ScanGuard.Resources.Resources.Profile_StatusPremium</span>
                     }
                 </div>
                 <p class="profile-email">@Model.ProfileData.Email</p>
@@ -40,29 +40,29 @@
                 <div asp-validation-summary="ModelOnly" class="error-message"></div>
                 <partial name="_StatusMessage" for="StatusMessage" />
                 <div class="form-group">
-                    <label asp-for="Input.FullName">Full Name</label>
+                    <label asp-for="Input.FullName">@ScanGuard.Resources.Resources.Profile_LabelFullName</label>
                     <div class="profile-input-wrapper">
                         <i class="fas fa-user profile-input-icon"></i>
-                        <input asp-for="Input.FullName" class="profile-form-input" placeholder="Enter your full name" />
+                        <input asp-for="Input.FullName" class="profile-form-input" placeholder="@ScanGuard.Resources.Resources.Profile_PlaceholderFullName" />
                     </div>
                     <span asp-validation-for="Input.FullName" class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ProfileData.Email">Email</label>
+                    <label asp-for="ProfileData.Email">@ScanGuard.Resources.Resources.Profile_LabelEmail</label>
                     <div class="profile-input-wrapper">
                         <i class="fas fa-envelope profile-input-icon"></i>
                         <input asp-for="ProfileData.Email" class="profile-form-input" readonly />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.PhoneNumber">Phone Number</label>
+                    <label asp-for="Input.PhoneNumber">@ScanGuard.Resources.Resources.Profile_LabelPhoneNumber</label>
                     <div class="profile-input-wrapper">
                         <i class="fas fa-phone profile-input-icon"></i>
-                        <input asp-for="Input.PhoneNumber" class="profile-form-input" placeholder="Enter your phone number" />
+                        <input asp-for="Input.PhoneNumber" class="profile-form-input" placeholder="@ScanGuard.Resources.Resources.Profile_PlaceholderPhoneNumber" />
                     </div>
                     <span asp-validation-for="Input.PhoneNumber" class="error-message"></span>
                 </div>
-                <button type="submit" class="btn-save">Save Changes</button>
+                <button type="submit" class="btn-save">@ScanGuard.Resources.Resources.Profile_ButtonSave</button>
             </form>
         </div>
     </div>

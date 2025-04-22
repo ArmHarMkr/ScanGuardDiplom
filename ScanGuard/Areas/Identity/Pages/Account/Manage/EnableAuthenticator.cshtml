@@ -2,23 +2,23 @@
 @using ScanGuard.Areas.Identity.Pages.Account.Manage
 @model EnableAuthenticatorModel
 @{
-    ViewData["Title"] = "Configure Authenticator App";
+    ViewData["Title"] = @ScanGuard.Resources.Resources.TwoFactor_ConfigureAppTitle;
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
 <div class="ea-content">
     <section class="ea-form">
         <h2 class="ea-title">@ViewData["Title"]</h2>
-        <p class="ea-desc">Set up two-factor authentication with an authenticator app.</p>
+        <p class="ea-desc">@ScanGuard.Resources.Resources.TwoFactor_SetupDescription</p>
         <partial name="_StatusMessage" for="StatusMessage" />
 
         <div class="ea-step">
             <div class="ea-step-header">
                 <i class="fas fa-download ea-step-icon"></i>
-                <h3 class="ea-step-title">1. Download an App</h3>
+                <h3 class="ea-step-title">@ScanGuard.Resources.Resources.TwoFactor_Step1Title</h3>
             </div>
             <p class="ea-step-desc">
-                Install a two-factor authenticator app like Microsoft Authenticator or Google Authenticator.
+                @ScanGuard.Resources.Resources.TwoFactor_Step1Description
             </p>
             <div class="ea-app-links">
                 <a href="https://go.microsoft.com/fwlink/?Linkid=825072" class="ea-app-link">
@@ -39,10 +39,10 @@
         <div class="ea-step">
             <div class="ea-step-header">
                 <i class="fas fa-qrcode ea-step-icon"></i>
-                <h3 class="ea-step-title">2. Scan QR Code</h3>
+                <h3 class="ea-step-title">@ScanGuard.Resources.Resources.TwoFactor_Step2Title</h3>
             </div>
             <p class="ea-step-desc">
-                Scan the QR code below or enter the key <kbd class="ea-key">@Model.SharedKey</kbd> into your authenticator app. Spaces and casing do not matter.
+                @ScanGuard.Resources.Resources.TwoFactor_Step2Description <kbd class="ea-key">@Model.SharedKey</kbd>
             </p>
             <div class="ea-qr-container">
                 <div id="qrCode"></div>
@@ -51,7 +51,7 @@
             <div class="ea-alert ea-alert-info">
                 <i class="fas fa-info-circle ea-alert-icon"></i>
                 <div>
-                    Learn how to <a href="https://go.microsoft.com/fwlink/?Linkid=852423" class="ea-link-action">enable QR code generation</a>.
+                    @ScanGuard.Resources.Resources.TwoFactor_QRCodeHelpLink <a href="https://go.microsoft.com/fwlink/?Linkid=852423" class="ea-link-action">enable QR code generation</a>.
                 </div>
             </div>
         </div>
@@ -59,19 +59,19 @@
         <div class="ea-step">
             <div class="ea-step-header">
                 <i class="fas fa-check-circle ea-step-icon"></i>
-                <h3 class="ea-step-title">3. Verify Code</h3>
+                <h3 class="ea-step-title">@ScanGuard.Resources.Resources.TwoFactor_Step3Title</h3>
             </div>
             <p class="ea-step-desc">
-                Enter the unique code provided by your authenticator app to complete setup.
+                @ScanGuard.Resources.Resources.TwoFactor_Step3Description
             </p>
             <form id="send-code" method="post" class="ea-form-inner">
                 <div class="ea-field">
-                    <label asp-for="Input.Code" class="ea-label">Verification Code</label>
-                    <input asp-for="Input.Code" class="ea-input" autocomplete="off" placeholder="Enter code" />
+                    <label asp-for="Input.Code" class="ea-label">@ScanGuard.Resources.Resources.TwoFactor_VerificationCodeLabel</label>
+                    <input asp-for="Input.Code" class="ea-input" autocomplete="off" placeholder="@ScanGuard.Resources.Resources.TwoFactor_VerificationCodePlaceholder" />
                     <span asp-validation-for="Input.Code" class="ea-error"></span>
                 </div>
                 <div asp-validation-summary="ModelOnly" class="ea-error" role="alert"></div>
-                <button type="submit" class="ea-btn ea-btn-primary">Verify</button>
+                <button type="submit" class="ea-btn ea-btn-primary">@ScanGuard.Resources.Resources.TwoFactor_VerifyButton</button>
             </form>
         </div>
     </section>
