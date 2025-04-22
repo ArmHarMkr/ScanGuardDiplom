@@ -313,7 +313,7 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Սկանավորման համար ներմուծեք հղումը.
+        ///   Looks up a localized string similar to Enter URL to Scan.
         /// </summary>
         public static string EnterURLtoScan {
             get {
@@ -718,7 +718,7 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Պաշտպանեք ձեր կայքը՝ բացահայտելով անվտանգության ռիսկերը ScanGuard-ի առաջադեմ սկանավորման տեխնոլոգիայի միջոցով:.
+        ///   Looks up a localized string similar to Scanner Text.
         /// </summary>
         public static string ScannerText {
             get {
@@ -736,7 +736,7 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Սկանավորեք ձեր կայքը.
+        ///   Looks up a localized string similar to Scan Your Website.
         /// </summary>
         public static string ScanYourWebsite {
             get {
@@ -952,7 +952,7 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Խոցելիությունների սկանավորում.
+        ///   Looks up a localized string similar to Vulnerability Scanner.
         /// </summary>
         public static string VulnerabilityScanner {
             get {
