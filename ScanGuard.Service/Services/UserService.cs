@@ -65,7 +65,8 @@ namespace ScanGuard.Service.Implementations
             await Context.SaveChangesAsync();
         }
 
-        public async Task RemoveFromCorp(ApplicationUser appUser, CorporationEntity corporationEntity)
+        public async Task RemoveFromCorp(ApplicationUser appUser, 
+            CorporationEntity corporationEntity)
         {
             if(appUser.Corporation == corporationEntity)
             {

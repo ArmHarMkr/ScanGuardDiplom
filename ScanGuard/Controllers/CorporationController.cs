@@ -120,18 +120,16 @@ namespace ScanGuard.Controllers
 
             if (corporation == null)
             {
-                return NotFound();  // Return 404 if the corporation is not found
+                return NotFound();  
             }
 
-            // Fetch the list of users in the corporation, ensure that it's not null
             var users = await Context.Users
                 .Where(u => u.Corporation.Id == corporationId)
                 .ToListAsync();
 
-            // Guard against null users list
             if (users == null)
             {
-                users = new List<ApplicationUser>();  // Assign an empty list if null
+                users = new List<ApplicationUser>(); 
             }
 
             return View(users);

@@ -51,7 +51,8 @@ namespace ScanGuard.TelegramBot
             }
         }
 
-        private Task HandleErrorAsync(ITelegramBotClient client, Exception exception, HandleErrorSource source, CancellationToken token)
+        private Task HandleErrorAsync(ITelegramBotClient client, Exception exception, 
+            HandleErrorSource source, CancellationToken token)
         {
             _logger.LogError("Telegram Error: {Message}",exception.Message);
             return Task.CompletedTask;

@@ -167,7 +167,8 @@ namespace ScanGuard.Areas.Admin.Controllers
         public async Task<IActionResult> DisapproveCorporation(string corporationId)
         {
             var corporation = await CorporationService.GetCorpEntity(corporationId);
-            var request = await Context.CreateCorpRequests.FirstOrDefaultAsync(r => r.Corporation.Id == corporationId);
+            var request = await Context.CreateCorpRequests
+                            .FirstOrDefaultAsync(r => r.Corporation.Id == corporationId);
 
             if (request == null)
             {
@@ -176,7 +177,6 @@ namespace ScanGuard.Areas.Admin.Controllers
 
             try
             {
-                // Delete the request
                 Context.CreateCorpRequests.Remove(request);
                 await Context.SaveChangesAsync();
 

@@ -86,7 +86,6 @@ app.MapRazorPages();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-//localization middleware
 app.Use(async (context, next) =>
 {
     string cookie = string.Empty;
