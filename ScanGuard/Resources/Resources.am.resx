@@ -385,7 +385,7 @@
     <value>Գլխավոր ծրագրավորող</value>
   </data>
   <data name="TeamTwoText" xml:space="preserve">
-    <value>Դավիթն ու Հարությունը կերտում են մեր սկանավորման գործիքների սիրտը: Արհեստական ​​ինտելեկտի և անվտանգության հանդեպ կիրք ունենալով՝ նա ապահովում է, որ մեր հարթակը հզոր և ինտուիտիվ է:</value>
+    <value>Դավիթն ու Հարությունը կերտում են մեր սկանավորման գործիքների սիրտը: Անվտանգության և ԱԲ հանդեպ կիրք ունենալով՝ նրանք ապահովում են, որ մեր հարթակը լինին հզոր և ինտուիտիվ պարզ։</value>
   </data>
   <data name="TelegramBot" xml:space="preserve">
     <value>Telegram բոտ՝ ամբողջ վեբկայքի գործառույթներով</value>
@@ -484,7 +484,7 @@
   <value>3. Հաստատեք կոդը</value>
 </data>
 	<data name="TwoFactor_Step3Description" xml:space="preserve">
-  <value>Մուտքագրեք Ձեր հաշվիչ հավելվածի կողմից տրամադրված եզակի կոդը՝ կարգավորումն ավարտելու համար:</value>
+  <value>Մուտքագրեք Ձեր հավելվածի կողմից տրամադրված եզակի կոդը՝ կարգավորումն ավարտելու համար:</value>
 </data>
 	<data name="TwoFactor_VerificationCodeLabel" xml:space="preserve">
   <value>Հաստատման կոդ</value>
@@ -541,7 +541,7 @@
   <value>Բոլոր նորությունները</value>
 </data>
 	<data name="Nav_GetCorpRequests" xml:space="preserve">
-  <value>Ստանալ կորպորատիվ հարցումներ</value>
+  <value>Կորպորացիա ստեղծելու հարցումներ</value>
 </data>
 	<data name="Nav_News" xml:space="preserve">
   <value>Նորություններ</value>
@@ -727,22 +727,22 @@
   <value>Խոցելիությունների մասին տեղեկատվություն</value>
 </data>
 	<data name="Scanner_InfoSQLiDescription" xml:space="preserve">
-  <value>Հաշվիչներին թույլ է տալիս ներարկել վնասակար SQL կոդ մուտքագրման դաշտերում, ինչը կարող է հանգեցնել տվյալների բազայի բովանդակության մուտքի կամ փոփոխման:</value>
+  <value>Թույլ է տալիս ներարկել վնասակար SQL կոդ մուտքագրման դաշտերում, ինչը կարող է հանգեցնել տվյալների բազայի հասանելիության կամ փոփոխման:</value>
 </data>
 	<data name="Scanner_InfoXSSDescription" xml:space="preserve">
-  <value>Հաշվիչներին թույլ է տալիս ներարկել սկրիպտեր վեբ էջերում, որոնք աշխատում են օգտատերերի բրաուզերներում, ինչը կարող է հանգեցնել տվյալների գողության կամ կայքի վնասման:</value>
+  <value>Թույլ է տալիս ներարկել սկրիպտեր վեբ էջերում, որոնք աշխատում են օգտատերերի բրաուզերներում, ինչը կարող է հանգեցնել տվյալների գողության կամ կայքի վնասման:</value>
 </data>
 	<data name="Scanner_InfoCSRFDescription" xml:space="preserve">
   <value>Խաբում է վավերացված օգտատերերին՝ կատարելով անցանկալի գործողություններ (օրինակ՝ կարգավորումների փոփոխություն) կեղծված հարցումների միջոցով:</value>
 </data>
 	<data name="Scanner_InfoIDORDescription" xml:space="preserve">
-  <value>Անվտանգ օբյեկտների ուղղակի հղումները թույլ են տալիս հաշվիչներին մուտք գործել չթույլատրված ռեսուրսներ՝ մանիպուլյացիայի միջոցով:</value>
+  <value>Անվտանգ օբյեկտների ուղղակի հղումները թույլ են տալիս մուտք գործել չթույլատրված ռեսուրսներ՝ մանիպուլյացիայի միջոցով:</value>
 </data>
 	<data name="Scanner_InfoBrokenAuthDescription" xml:space="preserve">
-  <value>Թույլ վավերացումը թույլ է տալիս հաշվիչներին շրջանցել մուտքը կամ գրավել սեանսներ՝ ձեռք բերելով չթույլատրված մուտք:</value>
+  <value>Թույլ վավերացումը թույլ է տալիս շրջանցել մուտքը կամ գրավել սեանսներ՝ ձեռք բերելով չթույլատրված մուտք:</value>
 </data>
 	<data name="Scanner_InfoWeakPasswordDescription" xml:space="preserve">
-  <value>Պարզ գաղտնաբառերը հաշիվները խոցելի են դարձնում բռնի կոտրումների կամ գուշակությունների համար:</value>
+  <value>Պարզ գաղտնաբառերը հաշիվները խոցելի են դարձնում brute force կամ հայտնի գաղտնաբառերը գուշակելու համար:</value>
 </data>
 	<data name="Scanner_InfoSecurityMisconfigDescription" xml:space="preserve">
   <value>Սխալ կարգավորումները (օրինակ՝ բաց պորտեր, լռելյայն հավատարմագրեր) բացահայտում են խոցելիությունները սերվերներում կամ հավելվածներում:</value>
@@ -751,10 +751,10 @@
   <value>Չստուգված վերահղման մուտքերը կարող են օգտատերերին ուղարկել վնասակար կայքեր՝ նպաստելով ֆիշինգի հարձակումներին:</value>
 </data>
 	<data name="Scanner_InfoDirectoryListingDescription" xml:space="preserve">
-  <value>Սխալ կարգավորված սերվերները բացահայտում են պանակների բովանդակությունը՝ ցույց տալով զգայուն ֆայլեր կամ կառուցվածք:</value>
+  <value>Սխալ կարգավորված սերվերները բացահայտում են պանակների բովանդակությունը՝ ցույց տալով գաղտնի տվյալներ կամ կառուցվածքը:</value>
 </data>
 	<data name="Scanner_InfoLFIDescription" xml:space="preserve">
-  <value>Հաշվիչներին թույլ է տալիս ներառել տեղային ֆայլեր (օրինակ՝ կոնֆիգուրացիոն ֆայլեր), ինչը կարող է բացահայտել զգայուն տվյալներ:</value>
+  <value>Թույլ է տալիս ներառել տեղային ֆայլեր (օրինակ՝ կոնֆիգուրացիոն ֆայլեր), ինչը կարող է բացահայտել զգայուն տվյալներ:</value>
 </data>
 	<data name="Scanner_InfoRFIDescription" xml:space="preserve">
   <value>Թույլ է տալիս ներառել հեռակա վնասակար ֆայլեր, հաճախ հանգեցնելով կոդի կատարման սերվերում:</value>
@@ -766,7 +766,7 @@
   <value>Խաբուսիկ տեխնիկաները խաբում են օգտատերերին՝ բացահայտելով հավատարմագրերը կեղծ էջերի կամ հղումների միջոցով:</value>
 </data>
 	<data name="Scanner_InfoNotSecureDomainDescription" xml:space="preserve">
-  <value>Ոչ HTTPS կապերը բացահայտում են տվյալները գաղտնալսման կամ փոփոխման համար հաշվիչների կողմից:</value>
+  <value>Ոչ Secure - անվտանգ կապերը բացահայտում են տվյալների գաղտնալսման կամ փոփոխման համար:</value>
 </data>
 	<data name="Scanner_CtaTitle" xml:space="preserve">
   <value>Մնացեք անվտանգ ScanGuard-ի հետ</value>
@@ -832,7 +832,7 @@
   <value>Էլ․ փոստ</value>
 </data>
 	<data name="Register_PlaceholderFullName" xml:space="preserve">
-  <value>Ամբողջական անուն</value>
+  <value>Անուն Ազգանուն</value>
 </data>
 	<data name="Register_PlaceholderPassword" xml:space="preserve">
   <value>Գաղտնաբառ</value>
@@ -847,7 +847,7 @@
   <value>Մուտք գործել</value>
 </data>
 	<data name="Login2fa_Title" xml:space="preserve">
-  <value>Երկու գործոնով վավերացում</value>
+  <value>Երկգործով վավերացում</value>
 </data>
 	<data name="Login2fa_Description" xml:space="preserve">
   <value>Ձեր մուտքը պաշտպանված է վավերացնող հավելվածով: Ստորև մուտքագրեք Ձեր վավերացման կոդը:</value>
@@ -877,7 +877,7 @@
   <value>Ստուգեք Ձեր էլ․ փոստը</value>
 </data>
 	<data name="RegisterConfirm_Description" xml:space="preserve">
-  <value>Մենք հաստատման նամակ ենք ուղարկել {0} հասցեին: Խնդրում ենք ստուգել Ձեր մուտքի արկղը և սեղմել հաստատման հղումը՝ Ձեր ScanGuard հաշիվն ակտիվացնելու համար:</value>
+  <value>Մենք հաստատման նամակ ենք ուղարկել {0} հասցեին: Խնդրում ենք ստուգել Ձեր էլ․ փոստը և սեղմել հաստատման հղումը՝ Ձեր ScanGuard հաշիվն ակտիվացնելու համար:</value>
 </data>
 	<data name="RegisterConfirm_Step1" xml:space="preserve">
   <value>Բացեք Ձեր էլ․ փոստի մուտքի արկղը</value>
