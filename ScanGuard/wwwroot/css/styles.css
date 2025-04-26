@@ -422,17 +422,6 @@ html {
 
 /* ... (предыдущие стили остаются без изменений) ... */
 
-.table-container {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background: rgba(10, 25, 47, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-    overflow: scroll;
-    max-height: 600px;
-    overflow-x: hidden
-}
 
 .cyber-table {
     width: 100%;

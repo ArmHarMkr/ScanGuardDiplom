@@ -1,25 +1,486 @@
-﻿@model TGUserEntity
+﻿
+@model TGUserEntity
 
-<h1>Get Token for TG</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Access your exclusive Telegram token for ScanGuard Premium and connect to our premium bot for real-time notifications.">
+    <title>ScanGuard Premium Telegram Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
 
-@if (Model == null)
-{
-    <form asp-action="ShowToken" asp-controller="Premium">
-        <button type="submit">Get Token</button>
-    </form>
-}
-else
-{
-    <h1 id="tgToken">@Model.TGUserToken</h1>
-    <button onclick="copyToClipboard()">Copy Token</button>
-}
 
-<script>
-    function copyToClipboard() {
-        const tokenText = document.getElementById("tgToken").innerText;
-        navigator.clipboard.writeText(tokenText).then(() => {
-        }).catch(err => {
-            console.error("Failed to copy:", err);
+        .premium-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Header Section */
+        .premium-header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .premium-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .premium-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Token Section */
+        .token-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+
+        .token-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .token-box {
+            display: inline-block;
+            background: #f9f9f9;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            font-size: 1.2rem;
+            color: #1f2937;
+            word-break: break-all;
+            margin-bottom: 1.5rem;
+        }
+
+        .token-btn {
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+            .token-btn:hover {
+                background: #2563eb;
+            }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 3rem 2rem;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+
+        .benefits-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: #f9f9f9;
+            transition: transform 0.3s ease;
+        }
+
+            .benefit-item:hover {
+                transform: translateY(-5px);
+            }
+
+        .benefit-icon {
+            font-size: 2rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-text {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Guide Section */
+        .guide-section {
+            padding: 3rem 2rem;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+
+        .guide-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .guide-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-step-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            background: #e6f0fa;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .guide-step-content {
+            flex: 1;
+        }
+
+        .guide-step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-step-text {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .guide-code {
+            display: inline-block;
+            background: #f9f9f9;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #1f2937;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #ffffff;
+            color: #3b82f6;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+            .cta-btn:hover {
+                background: #f9f9f9;
+                color: #2563eb;
+            }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            background: #059669;
+            color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+            .toast.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .premium-header {
+                padding: 3rem 1rem;
+            }
+
+            .premium-title,
+            .benefits-title,
+            .guide-title,
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .premium-subtitle,
+            .cta-text {
+                font-size: 1.1rem;
+            }
+
+            .token-section,
+            .benefits-section,
+            .guide-section,
+            .cta-section {
+                padding: 2rem 1rem;
+            }
+
+            .token-btn,
+            .cta-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .guide-step-number {
+                margin-bottom: 1rem;
+            }
+        }
+
+        @@media (max-width: 414px) {
+            .premium-container {
+                padding: 1rem;
+            }
+
+            .premium-title,
+            .benefits-title,
+            .guide-title,
+            .cta-title {
+                font-size: 1.8rem;
+            }
+
+            .premium-subtitle,
+            .cta-text {
+                font-size: 1rem;
+            }
+
+            .token-box {
+                font-size: 1rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .token-btn,
+            .cta-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.95rem;
+            }
+
+            .guide-step-title {
+                font-size: 1.1rem;
+            }
+
+            .guide-step-text {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="premium-container">
+        <!-- Header Section -->
+        <section class="premium-header animate-on-scroll">
+            <h1 class="premium-title">Welcome to ScanGuard Premium</h1>
+            <p class="premium-subtitle">Unlock exclusive features and connect to our Telegram bot for real-time security notifications.</p>
+        </section>
+
+        <!-- Token Section -->
+        <section class="token-section animate-on-scroll">
+            <h2 class="token-title">Your Telegram Token</h2>
+            @if (Model == null)
+            {
+                <form asp-action="ShowToken" asp-controller="Premium">
+                    <button type="submit" class="token-btn">Get Token</button>
+                </form>
+            }
+            else
+            {
+                <div class="token-box" id="tgToken">@Model.TGUserToken</div>
+                <button class="token-btn" onclick="copyToClipboard()">Copy Token</button>
+            }
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section animate-on-scroll">
+            <h2 class="benefits-title">Why Choose ScanGuard Premium?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-bell benefit-icon"></i>
+                    <h3 class="benefit-title">Real-Time Alerts</h3>
+                    <p class="benefit-text">Receive instant Telegram notifications about security threats and scan results.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-star benefit-icon"></i>
+                    <h3 class="benefit-title">Priority Support</h3>
+                    <p class="benefit-text">Get dedicated assistance from our expert team whenever you need it.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-shield-alt benefit-icon"></i>
+                    <h3 class="benefit-title">Advanced Security</h3>
+                    <p class="benefit-text">Access exclusive tools and deeper scans for ultimate protection.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guide Section -->
+        <section class="guide-section animate-on-scroll">
+            <h2 class="guide-title">How to Connect to Our Telegram Bot</h2>
+            <div class="guide-step">
+                <span class="guide-step-number">1</span>
+                <div class="guide-step-content">
+                    <h3 class="guide-step-title">Get Your Token</h3>
+                    <p class="guide-step-text">Click "Get Token" above or copy your existing token using the "Copy Token" button.</p>
+                </div>
+            </div>
+            <div class="guide-step">
+                <span class="guide-step-number">2</span>
+                <div class="guide-step-content">
+                    <h3 class="guide-step-title">Start the Bot</h3>
+                    <p style="margin-bottom:20px" class="guide-step-text">Open Telegram and start our premium bot by clicking the button below.</p>
+                    <a href="https://t.me/ScanGuardPremiumBot" target="_blank" class="token-btn">Go to @@ScanGuardPremiumBot</a>
+                </div>
+            </div>
+            <div class="guide-step">
+                <span class="guide-step-number">3</span>
+                <div class="guide-step-content">
+                    <h3 class="guide-step-title">Connect Your Account</h3>
+                    <p class="guide-step-text">In the bot, send the command <span class="guide-code">/connect @Model?.TGUserToken</span> to link your ScanGuard account.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section animate-on-scroll">
+            <h2 class="cta-title">Maximize Your Security</h2>
+            <p class="cta-text">Stay ahead of threats with ScanGuard Premium. Enjoy exclusive features and seamless Telegram integration.</p>
+        </section>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">Token copied to clipboard!</div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const tokenText = document.getElementById('tgToken')?.innerText;
+            if (tokenText) {
+                navigator.clipboard.writeText(tokenText).then(() => {
+                    const toast = document.getElementById('toast');
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 3000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                });
+            }
+        }
+
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            animateElements.forEach(el => observer.observe(el));
         });
-    }
-</script>
+    </script>
+</body>
+</html>

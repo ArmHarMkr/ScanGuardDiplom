@@ -1,73 +1,551 @@
-﻿@using ScanGuard.Domain.Entity
+﻿
+@using ScanGuard.Domain.Entity
 @using ScanGuard.Domain.Roles
 @using Microsoft.AspNetCore.Identity
 @model List<ApplicationUser>
-@inject UserManager<ApplicationUser> userManager
+@inject UserManager<ApplicationUser> UserManager
 
-<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage users and their roles in the ScanGuard admin panel.">
+    <title>User Management - ScanGuard Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
 
-<div class="table-container">
-    <table class="cyber-table">
-        <thead>
-            <tr>
-                <th class="cyber-header">Id</th>
-                <th class="cyber-header">Employee Name</th>
-                <th class="cyber-header">Employee Email</th>
-                <th class="cyber-header">User Role</th>
-                <th class="cyber-header">Employee Registered time</th>
-                <th class="cyber-header">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr class="cyber-row">
-                    <td class="cyber-cell">@item.Id</td>
-                    <td class="cyber-cell">@item.FullName</td>
-                    <td class="cyber-cell">@item.Email</td>
-                    <td class="cyber-cell">
-                        @foreach (var role in await userManager.GetRolesAsync(item))
-                        {
-                            <span class="role-tag">@role</span>
-                        }
-                    </td>
-                    <td class="cyber-cell">@item.UserCreatedDate</td>
-                    <td class="cyber-cell">
-                        @if (await userManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id != (await userManager.GetUserAsync(User)).Id)
-                        {
-                            <form asp-controller="Admin" asp-action="GivePremiumRole" asp-route-id="@item.Id" class="action-form">
-                                <button type="submit" class="btn-custom">Give Premium Role</button>
-                            </form>
-                            <form asp-controller="Admin" asp-action="GiveCustomerRole" asp-route-id="@item.Id" class="action-form">
-                                <button type="submit" class="btn-custom">Give Customer Role</button>
-                            </form>
-                        }
-                        else if (await userManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id == (await userManager.GetUserAsync(User)).Id)
-                        {
-                            <p class="admin-note">Admin Role (Current User)</p>
-                        }
-                        else if (await userManager.IsInRoleAsync(item, SD.Role_Customer))
-                        {
-                            <form asp-controller="Admin" asp-action="GivePremiumRole" asp-route-id="@item.Id" class="action-form">
-                                <button type="submit" class="btn-custom">Give Premium Role</button>
-                            </form>
-                            <form asp-controller="Admin" asp-action="GiveAdminRole" asp-route-id="@item.Id" class="action-form">
-                                <button type="submit" class="btn-custom">Give Admin Role</button>
-                            </form>
-                        }
-                        else if (await userManager.IsInRoleAsync(item, SD.Role_Premium))
-                        {
-                            <form asp-controller="Admin" asp-action="GiveAdminRole" asp-route-id="@item.Id" class="action-form">
-                                <button type="submit" class="btn-custom">Give Admin Role</button>
-                            </form>
-                            <form asp-controller="Admin" asp-action="GiveCustomerRole" asp-route-id="@item.Id" class="action-form">
-                                <button type="submit" class="btn-custom">Give Customer Role</button>
-                            </form>
+        /* Header */
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-                        }
-                    </td>
-                </tr>
+        .admin-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Controls */
+        .table-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.9rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1f2937;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+            min-width: 200px;
+        }
+
+            .search-input:focus {
+                border-color: #3b82f6;
+                outline: none;
             }
-        </tbody>
-    </table>
-</div>
+
+        .filter-select {
+            padding: 0.9rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1f2937;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+            min-width: 150px;
+        }
+
+            .filter-select:focus {
+                border-color: #3b82f6;
+                outline: none;
+            }
+
+        /* Table */
+        .table-container {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .cyber-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cyber-header {
+            background: #3b82f6;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1.2rem;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+            .cyber-header:hover {
+                background: #2563eb;
+            }
+
+        .cyber-row {
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.3s ease;
+        }
+
+            .cyber-row:hover {
+                background: #f9f9f9;
+            }
+
+        .cyber-cell {
+            padding: 1.2rem;
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .role-tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .role-tag-admin {
+            background: #ede9fe;
+            color: #6b46c1;
+        }
+
+        .role-tag-premium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .role-tag-customer {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .action-form {
+            display: inline-block;
+            margin: 0.3rem 0;
+        }
+
+        .btn-custom {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+            .btn-custom:hover {
+                background: #2563eb;
+            }
+
+        .admin-note {
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .pagination-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+            .pagination-btn:hover {
+                background: #2563eb;
+            }
+
+            .pagination-btn:disabled {
+                background: #e5e7eb;
+                color: #6b7280;
+                cursor: not-allowed;
+            }
+
+        .pagination-info {
+            font-size: 1rem;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .admin-container {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .admin-title {
+                font-size: 2rem;
+            }
+
+            .admin-subtitle {
+                font-size: 1rem;
+            }
+
+            .table-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input,
+            .filter-select {
+                width: 100%;
+            }
+
+            .cyber-header {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .cyber-cell {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .btn-custom {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @@media (max-width: 414px) {
+            .admin-title {
+                font-size: 1.8rem;
+            }
+
+            .admin-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .cyber-header {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .cyber-cell {
+                font-size: 0.9rem;
+            }
+
+            .role-tag,
+            .btn-custom {
+                font-size: 0.85rem;
+            }
+
+            .pagination-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header animate-on-scroll">
+            <h1 class="admin-title">User Management</h1>
+            <p class="admin-subtitle">View and manage user roles in the ScanGuard admin panel</p>
+        </header>
+
+        <!-- Table Controls -->
+        <div class="table-controls animate-on-scroll">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by ID, Name, or Email...">
+            <select id="roleFilter" class="filter-select">
+                <option value="">All Roles</option>
+                <option value="Admin">Admin</option>
+                <option value="Premium">Premium</option>
+                <option value="Customer">Customer</option>
+            </select>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container animate-on-scroll">
+            <table class="cyber-table" id="userTable">
+                <thead>
+                    <tr>
+                        <th class="cyber-header" data-sort="id">Id</th>
+                        <th class="cyber-header" data-sort="name">Employee Name</th>
+                        <th class="cyber-header" data-sort="email">Employee Email</th>
+                        <th class="cyber-header">User Role</th>
+                        <th class="cyber-header" data-sort="date">Employee Registered Time</th>
+                        <th class="cyber-header">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    @foreach (var item in Model)
+                    {
+                        var roles = await UserManager.GetRolesAsync(item);
+                        var rolesJson = System.Text.Json.JsonSerializer.Serialize(roles);
+                        <tr class="cyber-row" data-id="@item.Id" data-name="@item.FullName" data-email="@item.Email" data-date="@item.UserCreatedDate.ToString("o")" data-roles="@rolesJson">
+                            <td class="cyber-cell">@item.Id</td>
+                            <td class="cyber-cell">@item.FullName</td>
+                            <td class="cyber-cell">@item.Email</td>
+                            <td class="cyber-cell">
+                                @foreach (var role in roles)
+                                {
+                                    var roleClass = role switch
+                                    {
+                                        "Admin" => "admin",
+                                        "Premium" => "premium",
+                                        "Customer" => "customer",
+                                        _ => "customer"
+                                    };
+                                    <span class="role-tag role-tag-@roleClass" data-role="@role">@role</span>
+                                }
+                            </td>
+                            <td class="cyber-cell">@item.UserCreatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td class="cyber-cell">
+                                @if (await UserManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id != (await UserManager.GetUserAsync(User)).Id)
+                                {
+                                    <form asp-controller="Admin" asp-action="GivePremiumRole" asp-route-id="@item.Id" class="action-form">
+                                        <button type="submit" class="btn-custom">Give Premium Role</button>
+                                    </form>
+                                    <form asp-controller="Admin" asp-action="GiveCustomerRole" asp-route-id="@item.Id" class="action-form">
+                                        <button type="submit" class="btn-custom">Give Customer Role</button>
+                                    </form>
+                                }
+                                else if (await UserManager.IsInRoleAsync(item, SD.Role_Admin) && item.Id == (await UserManager.GetUserAsync(User)).Id)
+                                {
+                                    <p class="admin-note">Admin Role (Current User)</p>
+                                }
+                                else if (await UserManager.IsInRoleAsync(item, SD.Role_Customer))
+                                {
+                                    <form asp-controller="Admin" asp-action="GivePremiumRole" asp-route-id="@item.Id" class="action-form">
+                                        <button type="submit" class="btn-custom">Give Premium Role</button>
+                                    </form>
+                                    <form asp-controller="Admin" asp-action="GiveAdminRole" asp-route-id="@item.Id" class="action-form">
+                                        <button type="submit" class="btn-custom">Give Admin Role</button>
+                                    </form>
+                                }
+                                else if (await UserManager.IsInRoleAsync(item, SD.Role_Premium))
+                                {
+                                    <form asp-controller="Admin" asp-action="GiveAdminRole" asp-route-id="@item.Id" class="action-form">
+                                        <button type="submit" class="btn-custom">Give Admin Role</button>
+                                    </form>
+                                    <form asp-controller="Admin" asp-action="GiveCustomerRole" asp-route-id="@item.Id" class="action-form">
+                                        <button type="submit" class="btn-custom">Give Customer Role</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container animate-on-scroll">
+            <button class="pagination-btn" id="prevPage" disabled>Previous</button>
+            <span class="pagination-info" id="paginationInfo">Page 1</span>
+            <button class="pagination-btn" id="nextPage">Next</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const roleFilter = document.getElementById('roleFilter');
+            const userTableBody = document.getElementById('userTableBody');
+            const rows = Array.from(userTableBody.querySelectorAll('.cyber-row'));
+            const headers = document.querySelectorAll('.cyber-header[data-sort]');
+            const prevPageBtn = document.getElementById('prevPage');
+            const nextPageBtn = document.getElementById('nextPage');
+            const paginationInfo = document.getElementById('paginationInfo');
+            const rowsPerPage = 10;
+            let currentPage = 1;
+            let sortColumn = 'id';
+            let sortDirection = 'asc';
+
+            // Filter rows based on search and role
+            function filterRows() {
+                const searchText = searchInput.value.toLowerCase().trim();
+                const selectedRole = roleFilter.value;
+
+                return rows.filter(row => {
+                    // Get row data
+                    const id = row.dataset.id.toLowerCase();
+                    const name = row.dataset.name ? row.dataset.name.toLowerCase() : '';
+                    const email = row.dataset.email ? row.dataset.email.toLowerCase() : '';
+                    const roles = row.dataset.roles ? JSON.parse(row.dataset.roles) : [];
+
+                    // Search filter
+                    const matchesSearch = !searchText ||
+                        id.includes(searchText) ||
+                        name.includes(searchText) ||
+                        email.includes(searchText);
+
+                    // Role filter
+                    const matchesRole = !selectedRole || roles.includes(selectedRole);
+
+                    return matchesSearch && matchesRole;
+                });
+            }
+
+            // Sort rows
+            function sortRows(rowsToSort) {
+                return rowsToSort.sort((a, b) => {
+                    let aValue, bValue;
+                    if (sortColumn === 'id') {
+                        aValue = a.dataset.id;
+                        bValue = b.dataset.id;
+                    } else if (sortColumn === 'name') {
+                        aValue = (a.dataset.name || '').toLowerCase();
+                        bValue = (b.dataset.name || '').toLowerCase();
+                    } else if (sortColumn === 'email') {
+                        aValue = (a.dataset.email || '').toLowerCase();
+                        bValue = (b.dataset.email || '').toLowerCase();
+                    } else if (sortColumn === 'date') {
+                        aValue = new Date(a.dataset.date || '1970-01-01');
+                        bValue = new Date(b.dataset.date || '1970-01-01');
+                    }
+
+                    if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+                    if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+                    return 0;
+                });
+            }
+
+            // Update table display
+            function updateTable() {
+                let filteredRows = filterRows();
+                filteredRows = sortRows(filteredRows);
+
+                const totalPages = Math.ceil(filteredRows.length / rowsPerPage) || 1;
+                currentPage = Math.min(currentPage, totalPages);
+
+                // Show/hide rows based on pagination
+                rows.forEach(row => {
+                    row.style.display = 'none';
+                });
+                filteredRows.forEach((row, index) => {
+                    if (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) {
+                        row.style.display = '';
+                    }
+                });
+
+                // Update pagination info
+                paginationInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+                prevPageBtn.disabled = currentPage === 1;
+                nextPageBtn.disabled = currentPage === totalPages;
+            }
+
+            // Event listeners
+            searchInput.addEventListener('input', () => {
+                currentPage = 1;
+                updateTable();
+            });
+
+            roleFilter.addEventListener('change', () => {
+                currentPage = 1;
+                updateTable();
+            });
+
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const newSortColumn = header.dataset.sort;
+                    if (newSortColumn === sortColumn) {
+                        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        sortColumn = newSortColumn;
+                        sortDirection = 'asc';
+                    }
+                    headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+                    header.classList.add(`sort-${sortDirection}`);
+                    updateTable();
+                });
+            });
+
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateTable();
+                }
+            });
+
+            nextPageBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(filterRows().length / rowsPerPage) || 1;
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updateTable();
+                }
+            });
+
+            // Initial table update
+            updateTable();
+
+            // Scroll animations
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            animateElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
