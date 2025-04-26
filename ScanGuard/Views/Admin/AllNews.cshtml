@@ -5,148 +5,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity & Innovation News</title>
-    @* <link rel="stylesheet" href="~/css/styles.css"> *@
+    <meta name="description" content="Manage cybersecurity and innovation news in the ScanGuard admin panel.">
+    <title>Cybersecurity & Innovation News - ScanGuard Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background: linear-gradient(135deg, #0a0f24 0%, #1a2a44 100%);
-            color: #e0e0e0;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            overflow-y: auto; /* Allow scrolling */
-            scrollbar-width: none; /* Firefox: Hide scrollbar */
-            -ms-overflow-style: none; /* IE and Edge: Hide scrollbar */
+        .news-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
-            /* Chrome, Safari, and Edge: Hide scrollbar */
-            body::-webkit-scrollbar {
-                display: none;
-            }
-
-        .container {
-            width: 70%;
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 30px;
-            background: rgba(20, 30, 50, 0.85);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            min-height: calc(100vh - 120px); /* Ensure container takes up available space */
-            overflow-y: auto; /* Allow scrolling within container if needed */
-            scrollbar-width: none; /* Firefox: Hide scrollbar */
-            -ms-overflow-style: none; /* IE and Edge: Hide scrollbar */
-        }
-
-            /* Chrome, Safari, and Edge: Hide scrollbar for container */
-            .container::-webkit-scrollbar {
-                display: none;
-            }
-
+        /* Header */
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 3rem;
         }
 
             .header h1 {
-                font-size: 2.5em;
-                color: #00ffff;
-                text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-                margin: 0;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 2.8rem;
+                font-weight: 800;
+                color: #1f2937;
+                margin-bottom: 0.5rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+                color: #6b7280;
+                max-width: 600px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+        /* Controls */
+        .news-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .date-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+            .date-filter label {
+                font-size: 1rem;
+                color: #1f2937;
+                font-weight: 600;
+                margin-bottom: 0.3rem;
+            }
+
+        .date-input {
+            padding: 0.9rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1f2937;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+            width: 160px;
+        }
+
+            .date-input:focus {
+                border-color: #3b82f6;
+                outline: none;
+            }
+
+        .clear-filter-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: #6b7280;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+            .clear-filter-btn:hover {
+                background: #4b5563;
             }
 
         .add-news-btn {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
-            color: #fff;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #3b82f6;
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
             .add-news-btn:hover {
+                background: #2563eb;
                 transform: scale(1.05);
-                box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             }
 
+        /* News Item */
         .news-item {
-            padding: 20px;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
             .news-item:hover {
                 transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             }
 
         .news-time {
-            font-size: 0.9em;
-            color: #00ffff;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
         .news-title {
-            font-size: 1.6em;
-            font-weight: bold;
-            color: #ffffff;
-            margin: 5px 0;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0.5rem 0;
         }
 
         .news-text {
-            font-size: 1.1em;
-            color: #d0d0d0;
-            line-height: 1.5;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
         .remove-btn {
-            padding: 8px 16px;
-            background: linear-gradient(45deg, #ff0066, #ff00cc);
-            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: #dc2626;
+            color: #ffffff;
             border: none;
-            border-radius: 20px;
             cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
             .remove-btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0 0 10px rgba(255, 0, 102, 0.7);
+                background: #b91c1c;
+                transform: scale(1.05);
             }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .news-container {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .news-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .date-filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .date-input {
+                width: 100%;
+            }
+
+            .add-news-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .clear-filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+
+            .news-title {
+                font-size: 1.4rem;
+            }
+
+            .news-text {
+                font-size: 0.95rem;
+            }
+
+            .remove-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @@media (max-width: 414px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+            }
+
+            .news-title {
+                font-size: 1.2rem;
+            }
+
+            .news-text {
+                font-size: 0.9rem;
+            }
+
+            .add-news-btn,
+            .remove-btn,
+            .clear-filter-btn {
+                font-size: 0.85rem;
+            }
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+    <div class="news-container">
+        <div class="header animate-on-scroll">
             <h1>Cybersecurity & Innovation News</h1>
+            <p>Manage news content for ScanGuard users</p>
         </div>
-        <a asp-action="AddNews" asp-controller="Admin" class="add-news-btn">Add News</a>
 
-        @foreach (var item in Model)
-        {
-            <div class="news-item">
-                <div class="news-time">@item.CreatedTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
-                <div class="news-title">@item.Title</div>
-                <div class="news-text">@item.Text</div>
-                <form asp-action="RemoveNews" asp-controller="Admin" asp-route-id="@item.Id" method="post">
-                    <button type="submit" class="remove-btn">Remove News</button>
-                </form>
+        <!-- Controls -->
+        <div class="news-controls animate-on-scroll">
+            <div class="date-filter">
+                <div>
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" class="date-input" placeholder="Start Date">
+                </div>
+                <div>
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" class="date-input" placeholder="End Date">
+                </div>
+                <button class="clear-filter-btn" id="clearFilters">Clear Filters</button>
             </div>
-        }
+            <a asp-action="AddNews" asp-controller="Admin" class="add-news-btn"><i class="fas fa-plus"></i> Add News</a>
+        </div>
+
+        <!-- News List -->
+        <div class="news-list" id="newsList">
+            @foreach (var item in Model)
+            {
+                <div class="news-item animate-on-scroll" data-date="@item.CreatedTime.ToString("o")">
+                    <div class="news-time">@item.CreatedTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                    <div class="news-title">@item.Title</div>
+                    <div class="news-text">@item.Text</div>
+                    <form asp-action="RemoveNews" asp-controller="Admin" asp-route-id="@item.Id" method="post">
+                        <button type="submit" class="remove-btn"><i class="fas fa-trash"></i> Remove News</button>
+                    </form>
+                </div>
+            }
+        </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            const clearFiltersBtn = document.getElementById('clearFilters');
+            const newsList = document.getElementById('newsList');
+            const newsItems = Array.from(newsList.querySelectorAll('.news-item'));
+
+            // Filter news items by date
+            function filterItems() {
+                const startDate = startDateInput.value ? new Date(startDateInput.value + 'T00:00:00') : null;
+                const endDate = endDateInput.value ? new Date(endDateInput.value + 'T23:59:59.999') : null;
+
+                newsItems.forEach(item => {
+                    const itemDate = new Date(item.dataset.date);
+                    let matchesDate = true;
+
+                    if (startDate && itemDate < startDate) {
+                        matchesDate = false;
+                    }
+                    if (endDate && itemDate > endDate) {
+                        matchesDate = false;
+                    }
+
+                    item.style.display = matchesDate ? '' : 'none';
+                });
+            }
+
+            // Event listeners for date filters
+            startDateInput.addEventListener('change', filterItems);
+            endDateInput.addEventListener('change', filterItems);
+
+            // Clear filters
+            clearFiltersBtn.addEventListener('click', () => {
+                startDateInput.value = '';
+                endDateInput.value = '';
+                filterItems();
+            });
+
+            // Initial filter (show all)
+            filterItems();
+
+            // Scroll animations
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            animateElements.forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>

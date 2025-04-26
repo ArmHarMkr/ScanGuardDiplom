@@ -5,134 +5,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add News - ScanGuard</title>
+    <meta name="description" content="Add new cybersecurity and innovation news in the ScanGuard admin panel.">
+    <title>Add News - ScanGuard Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background: linear-gradient(135deg, #0a0f24 0%, #1a2a44 100%);
-            color: #e0e0e0;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            overflow-y: auto;
-            scrollbar-width: none; /* Firefox: Hide scrollbar */
-            -ms-overflow-style: none; /* IE and Edge: Hide scrollbar */
-        }
-
-            body::-webkit-scrollbar {
-                display: none; /* Chrome, Safari, Edge: Hide scrollbar */
-            }
-
-        .container {
-            width: 50%;
+        .form-container {
             max-width: 600px;
-            margin: 60px auto;
-            padding: 30px;
-            background: rgba(20, 30, 50, 0.85);
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        h2 {
+        /* Header */
+        .form-header {
             text-align: center;
-            font-size: 2.2em;
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-            margin-bottom: 30px;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
+            margin-bottom: 2rem;
         }
 
-            h2:hover {
-                color: #ff00ff;
-                text-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
-            }
+        .form-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
 
+        .form-subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Form */
         .news-form {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
         }
 
-        label {
-            display: block;
-            font-size: 1.1em;
-            color: #a3bffa;
-            margin-bottom: 8px;
-            text-shadow: 0 0 5px rgba(163, 191, 250, 0.3);
-        }
-
-        input, textarea {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            font-size: 1em;
-            border-radius: 5px;
-            border: 1px solid #00ffff;
-            background: rgba(10, 25, 47, 0.8);
-            color: #ffffff;
-            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box;
-        }
-
-            input:focus, textarea:focus {
-                border-color: #ff00ff;
-                box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-                outline: none;
+            .form-group label {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: #1f2937;
+                margin-bottom: 0.5rem;
             }
 
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
+            .form-group input,
+            .form-group textarea {
+                padding: 0.9rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                font-size: 1rem;
+                color: #1f2937;
+                background: #f9f9f9;
+                transition: border-color 0.3s ease;
+            }
 
-        button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            font-size: 1.1em;
-            font-weight: bold;
+                .form-group input:focus,
+                .form-group textarea:focus {
+                    border-color: #3b82f6;
+                    outline: none;
+                }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 120px;
+            }
+
+        .submit-btn {
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #3b82f6;
             color: #ffffff;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
             border: none;
-            border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
-            button:hover {
+            .submit-btn:hover {
+                background: #2563eb;
                 transform: scale(1.05);
-                box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
             }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+                margin: 1.5rem;
+            }
+
+            .form-title {
+                font-size: 1.8rem;
+            }
+
+            .form-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .form-group label {
+                font-size: 1rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .submit-btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+
+        @@media (max-width: 414px) {
+            .form-container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+
+            .form-title {
+                font-size: 1.6rem;
+            }
+
+            .form-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .form-group label {
+                font-size: 0.95rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                padding: 0.7rem;
+                font-size: 0.95rem;
+            }
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h2>Add News</h2>
-        <div class="news-form">
+    <div class="form-container">
+        <div class="form-header animate-on-scroll">
+            <h1 class="form-title">Add News</h1>
+            <p class="form-subtitle">Create new cybersecurity and innovation news for ScanGuard users</p>
+        </div>
+        <div class="news-form animate-on-scroll">
             <form asp-action="AddNews" asp-controller="Admin" method="POST">
                 <div class="form-group">
-                    <label for="title">News Title:</label>
-                    <input type="text" id="title" name="Title" placeholder="Enter news title" required>
+                    <label for="title">News Title</label>
+                    <input style="margin-right:auto;margin-left:auto;"type="text" id="title" name="Title" placeholder="Enter news title" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="text">News Content:</label>
+                    <label for="text">News Content</label>
                     <textarea id="text" name="Text" placeholder="Enter news content" rows="5" required></textarea>
                 </div>
-
-                <button type="submit">Submit News</button>
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit News</button>
             </form>
         </div>
     </div>
+
+    <script>
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            animateElements.forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
