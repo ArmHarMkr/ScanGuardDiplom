@@ -1,45 +1,600 @@
-﻿@model ReviewViewModel
+﻿
+@model ReviewViewModel
 @using Microsoft.AspNetCore.Identity
 @using ScanGuard.ViewModels
 @inject UserManager<ApplicationUser> UserManager
 
-<h2>Reviews</h2>
+<div class="review-container">
+    <!-- Header -->
+    <header class="review-header animate-on-scroll">
+        <h1 class="review-title">User Reviews</h1>
+        <p class="review-subtitle">Share your experience with our platform and read feedback from others</p>
+    </header>
 
-@if (Model.CanAdd)
-{
-    <form asp-action="Add" method="post">
-        <div>
-            <label>Review Text</label><br />
-            <textarea name="reviewText" required></textarea>
-        </div>
-        <div>
-            <label>Is it Good?</label>
-            <input asp-for="@Model.IsGood" type="checkbox" name="isGood" />
-        </div>
-        <button type="submit">Submit Review</button>
-    </form>
-}
-else
-{
-    <p><strong>You already wrote a review.</strong></p>
-}
-
-<hr />
-
-@foreach (var r in Model.Reviews)
-{
-    var color = r.IsGood ? "green" : "red";
-    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-        <strong>@r.User.UserName</strong><br />
-        <span style="color: @color">@r.ReviewText</span><br />
-        <small>@r.DateTime.ToString("g")</small>
-
-        @if (UserManager.GetUserId(User) == r.User.Id)
-        {
-            <form asp-action="Delete" method="post" style="margin-top: 5px;">
-                <input type="hidden" name="id" value="@r.Id" />
-                <button type="submit">Remove</button>
+    <!-- Review Form -->
+    @if (Model.CanAdd)
+    {
+        <div class="review-form-container animate-on-scroll">
+            <h3 class="form-title">Leave Your Feedback</h3>
+            <form asp-action="Add" method="post" class="review-form">
+                <div class="form-group">
+                    <label for="reviewText" class="form-label">Your Review</label>
+                    <textarea name="reviewText" id="reviewText" class="form-textarea" placeholder="Write your thoughts here..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Review Type</label>
+                    <div class="review-type-selector">
+                        <label class="review-type-option">
+                            <input type="radio" name="isGood" value="true" required>
+                            <span class="review-type-btn review-type-positive">Positive</span>
+                        </label>
+                        <label class="review-type-option">
+                            <input type="radio" name="isGood" value="false">
+                            <span class="review-type-btn review-type-negative">Negative</span>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="review-submit-btn">Submit Review</button>
             </form>
+        </div>
+    }
+    else
+    {
+        <div class="review-message animate-on-scroll">
+            <p class="message-text">You have already submitted a review.</p>
+        </div>
+    }
+
+    <!-- Reviews List -->
+    <div class="reviews-list animate-on-scroll">
+        <h3 class="reviews-title">Community Feedback</h3>
+        @if (!Model.Reviews.Any())
+        {
+            <p class="no-reviews">No reviews yet. Be the first to share your feedback!</p>
+        }
+        else
+        {
+            <div class="reviews-grid" id="reviewsGrid">
+                @foreach (var r in Model.Reviews)
+                {
+                    var badgeClass = r.IsGood ? "positive" : "negative";
+                    <div class="review-card" data-review-id="@r.Id">
+                        <div class="review-header">
+                            <span class="review-username">
+                                <span class="username-text">@r.User.UserName</span>
+                                <span class="username-tooltip">@r.User.UserName</span>
+                            </span>
+                            <span class="review-badge review-badge-@badgeClass">@(r.IsGood ? "Positive" : "Negative")</span>
+                        </div>
+                        <p class="review-text">@r.ReviewText</p>
+                        <div class="review-footer">
+                            <span class="review-date">@r.DateTime.ToString("yyyy-MM-dd HH:mm")</span>
+                            @if (UserManager.GetUserId(User) == r.User.Id)
+                            {
+                                <form asp-action="Delete" method="post" class="review-delete-form">
+                                    <input type="hidden" name="id" value="@r.Id" />
+                                    <button type="submit" class="review-delete-btn">Remove</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <button class="pagination-btn" id="prevPage" disabled>Previous</button>
+                <span class="pagination-info" id="paginationInfo">Page 1</span>
+                <button class="pagination-btn" id="nextPage">Next</button>
+            </div>
         }
     </div>
-}
+</div>
+
+<style>
+    .review-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    /* Header */
+    .review-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .review-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+
+    .review-subtitle {
+        font-size: 1.1rem;
+        color: #6b7280;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Review Form */
+    .review-form-container {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .form-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 1.5rem;
+    }
+
+    .review-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .form-textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 0.9rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #1f2937;
+        background: #ffffff;
+        resize: vertical;
+        transition: all 0.3s ease;
+    }
+
+        .form-textarea:focus {
+            border-color: #059669;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+    .review-type-selector {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .review-type-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .review-type-btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .review-type-positive {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+        .review-type-positive:hover {
+            background: #059669;
+            color: #ffffff;
+        }
+
+    .review-type-negative {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+        .review-type-negative:hover {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+    .review-type-option input[type="radio"] {
+        display: none;
+    }
+
+        .review-type-option input[type="radio"]:checked + .review-type-btn {
+            background: #059669;
+            color: #ffffff;
+        }
+
+        .review-type-option input[type="radio"][value="false"]:checked + .review-type-btn {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+    .review-submit-btn {
+        padding: 0.9rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        background: #059669;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        align-self: flex-start;
+    }
+
+        .review-submit-btn:hover {
+            background: #047857;
+        }
+
+    /* Review Message */
+    .review-message {
+        text-align: center;
+        padding: 1.5rem;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 3rem;
+    }
+
+    .message-text {
+        font-size: 1.1rem;
+        color: #1f2937;
+        font-weight: 600;
+    }
+
+    /* Reviews List */
+    .reviews-list {
+        margin-top: 2rem;
+    }
+
+    .reviews-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 1.5rem;
+    }
+
+    .no-reviews {
+        font-size: 1.1rem;
+        color: #6b7280;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .review-card {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .review-username {
+        position: relative;
+        max-width: 50%;
+    }
+
+    .username-text {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1f2937;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .username-tooltip {
+        display: none;
+        position: absolute;
+        background: #1f2937;
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        z-index: 10;
+        top: 100%;
+        left: 0;
+        max-width: 200px;
+        white-space: normal;
+        word-break: break-all;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-username:hover .username-tooltip {
+        display: block;
+    }
+
+    .review-badge {
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .review-badge-positive {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .review-badge-negative {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .review-text {
+        font-size: 1rem;
+        color: #1f2937;
+        line-height: 1.6;
+        word-break: break-word;
+    }
+
+    .review-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .review-date {
+        font-size: 0.9rem;
+        color: #6b7280;
+    }
+
+    .review-delete-form {
+        margin: 0;
+    }
+
+    .review-delete-btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        background: #dc2626;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .review-delete-btn:hover {
+            background: #b91c1c;
+        }
+
+    /* Pagination */
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .pagination-btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        background: #3b82f6;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .pagination-btn:hover {
+            background: #1e40af;
+        }
+
+        .pagination-btn:disabled {
+            background: #e5e7eb;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+    .pagination-info {
+        font-size: 1rem;
+        color: #1f2937;
+        font-weight: 600;
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .review-container {
+            padding: 1.5rem 0.5rem;
+        }
+
+        .review-title {
+            font-size: 2rem;
+        }
+
+        .review-subtitle {
+            font-size: 1rem;
+        }
+
+        .review-form-container {
+            padding: 1.5rem;
+        }
+
+        .form-title, .reviews-title {
+            font-size: 1.6rem;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+        }
+
+        .review-type-selector {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .review-submit-btn {
+            width: 100%;
+            align-self: stretch;
+        }
+
+        .reviews-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .review-card {
+            padding: 1.2rem;
+        }
+
+        .review-username {
+            max-width: 60%;
+        }
+    }
+
+    @@media (max-width: 414px) {
+        .review-container {
+            padding: 1rem 0.5rem;
+        }
+
+        .review-title {
+            font-size: 1.8rem;
+        }
+
+        .review-subtitle {
+            font-size: 0.9rem;
+        }
+
+        .form-title, .reviews-title {
+            font-size: 1.4rem;
+        }
+
+        .review-username, .review-text {
+            font-size: 0.95rem;
+        }
+
+        .review-date, .review-badge {
+            font-size: 0.85rem;
+        }
+
+        .review-delete-btn, .pagination-btn {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .review-username {
+            max-width: 50%;
+        }
+    }
+</style>
+
+<script>
+    // Scroll Animation
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    animateElements.forEach(el => observer.observe(el));
+
+    // Optimize touch interactions
+    if ('ontouchstart' in window) {
+        document.querySelectorAll('.review-submit-btn, .review-delete-btn, .review-type-btn, .pagination-btn').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    }
+
+    // Pagination
+    const reviewsPerPage = 10;
+    const reviewsGrid = document.getElementById('reviewsGrid');
+    const reviewCards = Array.from(reviewsGrid.querySelectorAll('.review-card'));
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const paginationInfo = document.getElementById('paginationInfo');
+    let currentPage = 1;
+
+    function updatePagination() {
+        const totalPages = Math.ceil(reviewCards.length / reviewsPerPage);
+        reviewCards.forEach((card, index) => {
+            card.style.display = (index >= (currentPage - 1) * reviewsPerPage && index < currentPage * reviewsPerPage) ? 'block' : 'none';
+        });
+        paginationInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+        prevPageBtn.disabled = currentPage === 1;
+        nextPageBtn.disabled = currentPage === totalPages;
+    }
+
+    prevPageBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePagination();
+        }
+    });
+
+    nextPageBtn.addEventListener('click', () => {
+        if (currentPage < Math.ceil(reviewCards.length / reviewsPerPage)) {
+            currentPage++;
+            updatePagination();
+        }
+    });
+
+    updatePagination();
+</script>

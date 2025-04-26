@@ -1,30 +1,447 @@
-﻿@using ScanGuard.Domain.Entity 
+﻿@using ScanGuard.ViewModels
 @model List<FileScanEntity>
 
-<!-- Подключение CSS -->
+<div class="history-container">
+    <!-- Header -->
+    <header class="history-header animate-on-scroll">
+        <h1 class="history-title">File Scan History</h1>
+        <p class="history-subtitle">View the history of your scanned files and their security details</p>
+    </header>
 
-<div class="table-container">
-    <table class="cyber-table">
-        <thead>
-            <tr>
-                <th class="cyber-header">File Name</th>
-                <th class="cyber-header">Scan Date</th>
-                <th class="cyber-header">File Hash</th>
-                <th class="cyber-header">Vulnerability Type</th>
-                <th class="cyber-header">Malicious</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var file in Model)
-            {
-                <tr class="cyber-row">
-                    <td class="cyber-cell">@file.FileName</td>
-                    <td class="cyber-cell">@file.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td class="cyber-cell">@file.FileHash</td>
-                    <td class="cyber-cell">@file.VulnerabilityType</td>
-                    <td class="cyber-cell">@(file.IsMalicious ? "Yes" : "No")</td>
+    <!-- Controls -->
+    <div class="history-controls animate-on-scroll">
+        <div class="history-search">
+            <input type="text" class="history-search-input" placeholder="Search by file name..." id="searchInput">
+        </div>
+        <select class="history-filter" id="sortFilter">
+            <option value="recent">Sort by Recent</option>
+            <option value="malicious-desc">Sort by Malicious Desc</option>
+            <option value="malicious-asc">Sort by Malicious Asc</option>
+            <option value="date-asc">Sort by Date Asc</option>
+        </select>
+    </div>
+
+    <!-- Table -->
+    <div class="history-table-container animate-on-scroll">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th class="history-th">File Name</th>
+                    <th class="history-th">Scan Date</th>
+                    <th class="history-th">File Hash</th>
+                    <th class="history-th">Vulnerability Type</th>
+                    <th class="history-th">Malicious</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="historyTableBody">
+                @foreach (var file in Model)
+                {
+                    <tr class="history-tr" data-malicious="@file.IsMalicious" data-scan-date="@file.ScanDate.ToString("yyyy-MM-dd HH:mm")">
+                        <td class="history-td history-url" data-label="File Name">
+                            <span class="url-text">@file.FileName</span>
+                            <span class="url-tooltip">@file.FileName</span>
+                        </td>
+                        <td class="history-td history-date" data-label="Scan Date">@file.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="history-td history-hash" data-label="File Hash">
+                            <span class="url-text">@file.FileHash</span>
+                            <span class="url-tooltip">@file.FileHash</span>
+                        </td>
+                        <td class="history-td history-vuln-types" data-label="Vulnerability Type">
+                            <span class="vuln-types-content">
+                                @(string.IsNullOrEmpty(file.VulnerabilityType.ToString()) ? "None" : file.VulnerabilityType)
+                            </span>
+                        </td>
+                        <td class="history-td history-malicious" data-label="Malicious">
+                            @{
+                                var badgeClass = file.IsMalicious ? "danger" : "safe";
+                            }
+                            <span class="history-badge history-badge-@badgeClass">@(file.IsMalicious ? "Yes" : "No")</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<style>
+    .history-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    /* Header */
+    .history-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .history-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+
+    .history-subtitle {
+        font-size: 1.1rem;
+        color: #6b7280;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Controls */
+    .history-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .history-search {
+        flex: 1;
+        max-width: 400px;
+        position: relative;
+    }
+
+    .history-search-input {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #1f2937;
+        background: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .history-search-input:focus {
+        border-color: #059669;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+
+    .history-filter {
+        padding: 0.9rem 1.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: #ffffff;
+        font-size: 1rem;
+        color: #1f2937;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .history-filter:hover {
+        border-color: #059669;
+    }
+
+    /* Table */
+    .history-table-container {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+    }
+
+    .history-th {
+        background: var(--accent-color, #3b82f6);
+        color: #ffffff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 1.2rem;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .history-th:hover {
+        background: #1e40af;
+    }
+
+    .history-tr {
+        border-bottom: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+
+    .history-tr:hover {
+        background: #f9f9f9;
+    }
+
+    .history-td {
+        padding: 1.2rem;
+        font-size: 1rem;
+        color: #1f2937;
+        vertical-align: middle;
+    }
+
+    /* URL and Hash Truncation */
+    .history-url, .history-hash {
+        position: relative;
+    }
+
+    .url-text {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .url-tooltip {
+        display: none;
+        position: absolute;
+        background: #1f2937;
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        z-index: 10;
+        top: 100%;
+        left: 0;
+        max-width: 300px;
+        white-space: normal;
+        word-break: break-all;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .history-url:hover .url-tooltip, .history-hash:hover .url-tooltip {
+        display: block;
+    }
+
+    .history-malicious {
+        text-align: center;
+    }
+
+    .history-badge {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .history-badge-safe {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .history-badge-danger {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .history-container {
+            padding: 1.5rem 0.5rem;
+        }
+
+        .history-title {
+            font-size: 2rem;
+        }
+
+        .history-subtitle {
+            font-size: 1rem;
+        }
+
+        .history-controls {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.8rem;
+        }
+
+        .history-search {
+            max-width: 100%;
+        }
+
+        .history-search-input, .history-filter {
+            padding: 0.8rem;
+            font-size: 0.95rem;
+            height: 48px;
+        }
+
+        .history-table-container {
+            background: transparent;
+            box-shadow: none;
+            overflow-x: hidden;
+            overflow-y: visible;
+            max-height: none;
+            border-radius: 0;
+        }
+
+        .history-table {
+            display: block;
+            width: 100%;
+            background: transparent;
+        }
+
+        .history-th {
+            display: none;
+        }
+
+        .history-tr {
+            display: block;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            border-bottom: none;
+            position: relative;
+        }
+
+        .history-td {
+            display: block;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .history-url {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .url-text {
+            font-size: 1rem;
+            white-space: normal;
+            word-break: break-all;
+        }
+
+        .url-tooltip {
+            display: none;
+        }
+
+        .history-date::before {
+            content: "Scan Date: ";
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .history-hash::before {
+            content: "File Hash: ";
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .history-vuln-types::before {
+            content: "Vulnerability Type: ";
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .history-malicious::before {
+            content: "Malicious: ";
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .history-vuln-types, .history-malicious {
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+    }
+
+    @@media (max-width: 414px) {
+        .history-container {
+            padding: 1rem 0.5rem;
+        }
+
+        .history-title {
+            font-size: 1.8rem;
+        }
+
+        .history-subtitle {
+            font-size: 0.9rem;
+        }
+
+        .history-tr {
+            padding: 0.75rem;
+        }
+
+        .history-td {
+            font-size: 0.9rem;
+        }
+
+        .url-text {
+            font-size: 0.95rem;
+        }
+    }
+</style>
+
+<script>
+    // Search Functionality
+    document.getElementById('searchInput').addEventListener('input', function (e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('.history-tr');
+
+        rows.forEach(row => {
+            const fileName = row.querySelector('.history-url').textContent.toLowerCase();
+            row.style.display = fileName.includes(searchTerm) ? '' : 'none';
+        });
+    });
+
+    // Sort Functionality
+    document.getElementById('sortFilter').addEventListener('change', function (e) {
+        const sortValue = e.target.value;
+        const tbody = document.getElementById('historyTableBody');
+        const rows = Array.from(tbody.querySelectorAll('.history-tr'));
+
+        rows.sort((a, b) => {
+            if (sortValue === 'malicious-desc') {
+                return (b.dataset.malicious === 'true' ? 1 : 0) - (a.dataset.malicious === 'true' ? 1 : 0);
+            } else if (sortValue === 'malicious-asc') {
+                return (a.dataset.malicious === 'true' ? 1 : 0) - (b.dataset.malicious === 'true' ? 1 : 0);
+            } else if (sortValue === 'date-asc') {
+                return new Date(a.dataset.scanDate) - new Date(b.dataset.scanDate);
+            } else { // recent
+                return new Date(b.dataset.scanDate) - new Date(a.dataset.scanDate);
+            }
+        });
+
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+    });
+
+    // Scroll Animation
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    animateElements.forEach(el => observer.observe(el));
+</script>

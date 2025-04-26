@@ -1,20 +1,401 @@
 ﻿@model string
-@{
-    ViewData["Title"] = "Сканирование файла";
-}
 
-<h2>Загрузить файл для проверки</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scan your files for malware and vulnerabilities with ScanGuard’s powerful security tool.">
+    <title>File Scanner - ScanGuard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* File Scanner page styles */
+        .scanner-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 100vh;
+        }
 
-<form asp-action="Upload" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="file">Выберите файл:</label>
-        <input type="file" name="file" class="form-control" />
+        /* Section styling */
+        .scanner-intro-section,
+        .scanner-form-section,
+        .scanner-cta-section {
+            margin: 4rem 0;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+            /* Subtle background pattern */
+            .scanner-form-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23ef233c' fill-opacity='0.05'/%3E%3C/svg%3E");
+                opacity: 0.1;
+                z-index: 0;
+            }
+
+        /* Intro Section */
+        .scanner-intro-section {
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color, #ef233c);
+        }
+
+        .scanner-intro-title {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .scanner-intro-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Messages */
+        .scanner-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+            .scanner-message.error {
+                background: #fee2e2;
+                color: #dc2626;
+                border: 1px solid #dc2626;
+            }
+
+            .scanner-message.warning {
+                background: #fef3c7;
+                color: #d97706;
+                border: 1px solid #d97706;
+            }
+
+        /* Form Section */
+        .scanner-form-section {
+            text-align: center;
+        }
+
+        .scanner-form-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scanner-form-group {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scanner-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .scanner-file-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .scanner-input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1f2937;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+            .scanner-input:focus {
+                border-color: #ef233c;
+                outline: none;
+            }
+
+        .scanner-file-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            background: #f9f9f9;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+
+            .scanner-file-btn:hover {
+                border-color: #ef233c;
+                background: #fff;
+            }
+
+            .scanner-file-btn::before {
+                content: '📎';
+                font-size: 1.2rem;
+            }
+
+        .scanner-file-name {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            text-align: left;
+            word-break: break-all;
+        }
+
+        .scanner-btn {
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #ef233c;
+            color: #ffffff;
+            border: none;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+            .scanner-btn:hover {
+                background: #d90429;
+            }
+
+        /* CTA Section */
+        .scanner-cta-section {
+            text-align: center;
+            border-top: 4px solid #ef233c;
+        }
+
+        .scanner-cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .scanner-cta-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scanner-cta-section a {
+            text-decoration: none;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e5e7eb;
+            border-top: 5px solid #ef233c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .scanner-intro-title,
+            .scanner-cta-title {
+                font-size: 2rem;
+            }
+
+            .scanner-intro-subtitle,
+            .scanner-cta-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .scanner-form-title {
+                font-size: 1.8rem;
+            }
+
+            .scanner-file-btn,
+            .scanner-btn {
+                padding: 0.8rem;
+            }
+
+            .scanner-form-group {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @@media (max-width: 414px) {
+            .scanner-container {
+                padding: 0 10px;
+            }
+
+            .scanner-intro-title,
+            .scanner-cta-title {
+                font-size: 1.8rem;
+            }
+
+            .scanner-form-title {
+                font-size: 1.6rem;
+            }
+
+            .scanner-label {
+                font-size: 1rem;
+            }
+
+            .scanner-file-btn,
+            .scanner-btn {
+                font-size: 1rem;
+                padding: 0.7rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanner-container">
+        <!-- Intro Section -->
+        <section class="scanner-intro-section">
+            <h1 class="scanner-intro-title animate-on-scroll">File Scanner</h1>
+            <p class="scanner-intro-subtitle animate-on-scroll">Upload your files to check for malware, vulnerabilities, and security threats with ScanGuard’s advanced scanning technology.</p>
+        </section>
+
+        <!-- Messages -->
+        @if (TempData["Notification"] != null)
+        {
+            <div class="scanner-message warning animate-on-scroll">@TempData["Notification"]</div>
+        }
+        @if (!string.IsNullOrEmpty(Model))
+        {
+            <div class="scanner-message error animate-on-scroll">@Model</div>
+        }
+
+        <!-- Form Section -->
+        <section class="scanner-form-section">
+            <h2 class="scanner-form-title animate-on-scroll">Upload File for Scanning</h2>
+            <form asp-action="Upload" method="post" enctype="multipart/form-data" id="scanForm" class="scanner-form-group">
+                <label for="file" class="scanner-label">Select File:</label>
+                <div class="scanner-file-wrapper">
+                    <input type="file" name="file" id="file" class="scanner-input" required>
+                    <label for="file" class="scanner-file-btn">Choose File</label>
+                </div>
+                <div class="scanner-file-name" id="fileName">No file selected</div>
+                <button type="submit" class="scanner-btn animate-on-scroll">Scan File</button>
+            </form>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="scanner-cta-section">
+            <h2 class="scanner-cta-title animate-on-scroll">Keep Your Files Secure</h2>
+            <p class="scanner-cta-subtitle animate-on-scroll">Regularly scan your files to ensure they are free from threats. Try our website scanner for comprehensive security.</p>
+            <a href="/Scan/Scanner" class="scanner-btn animate-on-scroll">Scan Website</a>
+        </section>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading">
+            <div class="spinner"></div>
+        </div>
     </div>
 
-    @if (!string.IsNullOrEmpty(Model))
-    {
-        <div class="alert alert-danger">@Model</div>
-    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loadingOverlay = document.getElementById('loading');
+            const scanForm = document.getElementById('scanForm');
+            const fileInput = document.getElementById('file');
+            const fileNameDisplay = document.getElementById('fileName');
 
-    <button type="submit" class="btn btn-primary">Сканировать</button>
-</form>
+            scanForm.addEventListener('submit', function () {
+                loadingOverlay.style.display = 'flex';
+            });
+
+            // Update file name display
+            fileInput.addEventListener('change', function () {
+                fileNameDisplay.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file selected';
+            });
+
+            // Hide spinner on page load
+            window.onload = function () {
+                loadingOverlay.style.display = 'none';
+            };
+        });
+
+        // Scroll animations
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        animateElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
