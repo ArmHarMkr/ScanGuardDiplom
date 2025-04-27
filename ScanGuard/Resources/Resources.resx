@@ -1008,4 +1008,91 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="CommunityFeedback" xml:space="preserve">
+    <value>Community Feedback</value>
+  </data>
+  <data name="ConnectAccountText" xml:space="preserve">
+    <value>In the bot, send the command /connect TOKEN to link your ScanGuard account.</value>
+  </data>
+  <data name="ConnectYourAccount" xml:space="preserve">
+    <value>Connect Your Account</value>
+  </data>
+  <data name="CopyToken" xml:space="preserve">
+    <value>Copy Token</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Maximize Your Security</value>
+  </data>
+  <data name="FooterText" xml:space="preserve">
+    <value>Մնացեք սպառնալիքներից առաջ ScanGuard Premium-ի միջոցով: Վայելեք բացառիկ հնարավորությունները և Telegram-ի անխափան ինտեգրումը:</value>
+  </data>
+  <data name="GetYourToken" xml:space="preserve">
+    <value>Get Your Token</value>
+  </data>
+  <data name="GetYourTokenText" xml:space="preserve">
+    <value>Click "Get Token" above or copy your existing token using the "Copy Token" button.</value>
+  </data>
+  <data name="LeaveYourFeedback" xml:space="preserve">
+    <value>Leave Your Feedback</value>
+  </data>
+  <data name="Negative" xml:space="preserve">
+    <value>Negative</value>
+  </data>
+  <data name="Positive" xml:space="preserve">
+    <value>Positive</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ReviewText" xml:space="preserve">
+    <value>Share your experience with our platform and read feedback from others</value>
+  </data>
+  <data name="ReviewType" xml:space="preserve">
+    <value>Review Type</value>
+  </data>
+  <data name="StartBot" xml:space="preserve">
+    <value>Start the Bot</value>
+  </data>
+  <data name="StartBotText" xml:space="preserve">
+    <value>Open Telegram and start our premium bot by clicking the button below.</value>
+  </data>
+  <data name="TGChoosePrem" xml:space="preserve">
+    <value>Why Choose ScanGuard Premium?</value>
+  </data>
+  <data name="TGChoosePremOne" xml:space="preserve">
+    <value>Real-Time Alerts</value>
+  </data>
+  <data name="TGChoosePremOneText" xml:space="preserve">
+    <value>Receive instant Telegram notifications about security threats and scan results.</value>
+  </data>
+  <data name="TGChoosePremThree" xml:space="preserve">
+    <value>Advanced Security</value>
+  </data>
+  <data name="TGChoosePremThreeText" xml:space="preserve">
+    <value>Access exclusive tools and deeper scans for ultimate protection.</value>
+  </data>
+  <data name="TGChoosePremTwo" xml:space="preserve">
+    <value>Priority Support</value>
+  </data>
+  <data name="TGChoosePremTwoText" xml:space="preserve">
+    <value>Get dedicated assistance from our expert team whenever you need it.</value>
+  </data>
+  <data name="TGConnectText" xml:space="preserve">
+    <value>How to Connect to Our Telegram Bot</value>
+  </data>
+  <data name="TGTokenText" xml:space="preserve">
+    <value>Your Telegram Token</value>
+  </data>
+  <data name="TGWelcome" xml:space="preserve">
+    <value>Welcome to ScanGuard Premium</value>
+  </data>
+  <data name="TGWelcomeText" xml:space="preserve">
+    <value>Unlock exclusive features and connect to our Telegram bot for real-time security notifications.</value>
+  </data>
+  <data name="UserReview" xml:space="preserve">
+    <value>User Reviews</value>
+  </data>
+  <data name="Youhavealreadysubmittedareview." xml:space="preserve">
+    <value>You have already submitted a review.</value>
+  </data>
 </root>

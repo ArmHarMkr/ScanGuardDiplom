@@ -375,83 +375,139 @@
     <div class="premium-container">
         <!-- Header Section -->
         <section class="premium-header animate-on-scroll">
-            <h1 class="premium-title">Welcome to ScanGuard Premium</h1>
-            <p class="premium-subtitle">Unlock exclusive features and connect to our Telegram bot for real-time security notifications.</p>
+            <h1 class="premium-title">
+                <span class="home-hero-title-word" style="animation-delay: 0s;">
+                    @ScanGuard.Resources.Resources.TGWelcome
+                </span>
+            </h1>
+            <p class="premium-subtitle">
+                @ScanGuard.Resources.Resources.TGWelcomeText
+            </p>
         </section>
 
         <!-- Token Section -->
         <section class="token-section animate-on-scroll">
-            <h2 class="token-title">Your Telegram Token</h2>
+            <h2 class="token-title">
+                <span class="home-hero-title-word" style="animation-delay: 0s;">
+                    @ScanGuard.Resources.Resources.TGTokenText
+                </span>
+            </h2>
             @if (Model == null)
             {
                 <form asp-action="ShowToken" asp-controller="Premium">
-                    <button type="submit" class="token-btn">Get Token</button>
+                    <button type="submit" class="token-btn">
+                        @ScanGuard.Resources.Resources.GetYourToken
+                    </button>
                 </form>
             }
             else
             {
                 <div class="token-box" id="tgToken">@Model.TGUserToken</div>
-                <button class="token-btn" onclick="copyToClipboard()">Copy Token</button>
+                <button class="token-btn" onclick="copyToClipboard()">
+                    @ScanGuard.Resources.Resources.CopyToken
+                </button>
             }
         </section>
 
         <!-- Benefits Section -->
         <section class="benefits-section animate-on-scroll">
-            <h2 class="benefits-title">Why Choose ScanGuard Premium?</h2>
+            <h2 class="benefits-title">
+                <span class="home-hero-title-word" style="animation-delay: 0s;">
+                    @ScanGuard.Resources.Resources.TGChoosePrem
+                </span>
+            </h2>
             <div class="benefits-grid">
                 <div class="benefit-item">
                     <i class="fas fa-bell benefit-icon"></i>
-                    <h3 class="benefit-title">Real-Time Alerts</h3>
-                    <p class="benefit-text">Receive instant Telegram notifications about security threats and scan results.</p>
+                    <h3 class="benefit-title">
+                        @ScanGuard.Resources.Resources.TGChoosePremOne
+                    </h3>
+                    <p class="benefit-text">
+                        @ScanGuard.Resources.Resources.TGChoosePremOneText
+                    </p>
                 </div>
                 <div class="benefit-item">
                     <i class="fas fa-star benefit-icon"></i>
-                    <h3 class="benefit-title">Priority Support</h3>
-                    <p class="benefit-text">Get dedicated assistance from our expert team whenever you need it.</p>
+                    <h3 class="benefit-title">
+                        @ScanGuard.Resources.Resources.TGChoosePremTwo
+                    </h3>
+                    <p class="benefit-text">
+                        @ScanGuard.Resources.Resources.TGChoosePremTwoText
+                    </p>
                 </div>
                 <div class="benefit-item">
                     <i class="fas fa-shield-alt benefit-icon"></i>
-                    <h3 class="benefit-title">Advanced Security</h3>
-                    <p class="benefit-text">Access exclusive tools and deeper scans for ultimate protection.</p>
+                    <h3 class="benefit-title">
+                        @ScanGuard.Resources.Resources.TGChoosePremThree
+                    </h3>
+                    <p class="benefit-text">
+                        @ScanGuard.Resources.Resources.TGChoosePremThreeText
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- Guide Section -->
         <section class="guide-section animate-on-scroll">
-            <h2 class="guide-title">How to Connect to Our Telegram Bot</h2>
+            <h2 class="guide-title">
+                <span class="home-hero-title-word" style="animation-delay: 0s;">
+                    @ScanGuard.Resources.Resources.TGConnectText
+                </span>
+            </h2>
             <div class="guide-step">
                 <span class="guide-step-number">1</span>
                 <div class="guide-step-content">
-                    <h3 class="guide-step-title">Get Your Token</h3>
-                    <p class="guide-step-text">Click "Get Token" above or copy your existing token using the "Copy Token" button.</p>
+                    <h3 class="guide-step-title">
+                        @ScanGuard.Resources.Resources.GetYourToken
+                    </h3>
+                    <p class="guide-step-text">
+                        @ScanGuard.Resources.Resources.GetYourTokenText
+                    </p>
                 </div>
             </div>
             <div class="guide-step">
                 <span class="guide-step-number">2</span>
                 <div class="guide-step-content">
-                    <h3 class="guide-step-title">Start the Bot</h3>
-                    <p style="margin-bottom:20px" class="guide-step-text">Open Telegram and start our premium bot by clicking the button below.</p>
-                    <a href="https://t.me/ScanGuardPremiumBot" target="_blank" class="token-btn">Go to @@ScanGuardPremiumBot</a>
+                    <h3 class="guide-step-title">
+                        @ScanGuard.Resources.Resources.StartBot
+                    </h3>
+                    <p style="margin-bottom:20px" class="guide-step-text">
+                        @ScanGuard.Resources.Resources.StartBotText
+                    </p>
+                    <a href="https://t.me/ScanGuardPremiumBot" target="_blank" class="token-btn">
+                        @ScanGuard.Resources.Resources.StartBot
+                    </a>
                 </div>
             </div>
             <div class="guide-step">
                 <span class="guide-step-number">3</span>
                 <div class="guide-step-content">
-                    <h3 class="guide-step-title">Connect Your Account</h3>
-                    <p class="guide-step-text">In the bot, send the command <span class="guide-code">/connect @Model?.TGUserToken</span> to link your ScanGuard account.</p>
+                    <h3 class="guide-step-title">
+                        @ScanGuard.Resources.Resources.ConnectYourAccount
+                    </h3>
+                    <p class="guide-step-text">
+                        @ScanGuard.Resources.Resources.ConnectAccountText
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- CTA Section -->
         <section class="cta-section animate-on-scroll">
-            <h2 class="cta-title">Maximize Your Security</h2>
-            <p class="cta-text">Stay ahead of threats with ScanGuard Premium. Enjoy exclusive features and seamless Telegram integration.</p>
+            <h2 class="cta-title">
+                <span class="home-hero-title-word" style="animation-delay: 0s;">
+                    @ScanGuard.Resources.Resources.Footer
+                </span>
+            </h2>
+            <p class="cta-text">
+                @ScanGuard.Resources.Resources.FooterText
+            </p>
         </section>
 
         <!-- Toast Notification -->
-        <div class="toast" id="toast">Token copied to clipboard!</div>
+        <div class="toast" id="toast">
+            @ScanGuard.Resources.Resources.CopyToken
+        </div>
     </div>
 
     <script>

@@ -1011,4 +1011,91 @@
   <data name="Yes" xml:space="preserve">
     <value>Այո</value>
   </data>
+  <data name="CommunityFeedback" xml:space="preserve">
+    <value>Այլ օգտատերերի արձագանքներ</value>
+  </data>
+  <data name="ConnectAccountText" xml:space="preserve">
+    <value>Բոտում ուղարկեք /connect TOKEN  հրամանը՝ ձեր ScanGuard հաշիվը կապելու համար։</value>
+  </data>
+  <data name="ConnectYourAccount" xml:space="preserve">
+    <value>Միացրեք ձեր հաշիվը</value>
+  </data>
+  <data name="CopyToken" xml:space="preserve">
+    <value>Պատճենել թոքենը</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Առավելագույնի հասցրեք ձեր անվտանգությունը</value>
+  </data>
+  <data name="FooterText" xml:space="preserve">
+    <value>Մնացեք սպառնալիքներից առաջ ScanGuard Premium-ի միջոցով: Վայելեք բացառիկ հնարավորությունները և Telegram-ի անխափան ինտեգրումը:</value>
+  </data>
+  <data name="GetYourToken" xml:space="preserve">
+    <value>Ստացիր քո թոքենը</value>
+  </data>
+  <data name="GetYourTokenText" xml:space="preserve">
+    <value>Սեղմեք վերևում «Ստանալ թոքեն» կամ պատճենեք ձեր առկա թոքենը՝ օգտագործելով «Պատճենել թոքենը» կոճակը։</value>
+  </data>
+  <data name="LeaveYourFeedback" xml:space="preserve">
+    <value>Գրիր քո կարծիքը</value>
+  </data>
+  <data name="Negative" xml:space="preserve">
+    <value>Բացասական</value>
+  </data>
+  <data name="Positive" xml:space="preserve">
+    <value>Դրական</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Ջնջել</value>
+  </data>
+  <data name="ReviewText" xml:space="preserve">
+    <value>Կիսվեք ձեր փորձով մեր հարթակի հետ և կարդացեք ուրիշների կարծիքները</value>
+  </data>
+  <data name="ReviewType" xml:space="preserve">
+    <value>Տեսակը</value>
+  </data>
+  <data name="StartBot" xml:space="preserve">
+    <value>Միացրեք բոտը</value>
+  </data>
+  <data name="StartBotText" xml:space="preserve">
+    <value>Բացեք Telegram-ը և գործարկեք մեր պրեմիում բոտը՝ սեղմելով ստորև նշված կոճակը։</value>
+  </data>
+  <data name="TGChoosePrem" xml:space="preserve">
+    <value>Ինչո՞ւ ընտրել ScanGuard Premium-ը։</value>
+  </data>
+  <data name="TGChoosePremOne" xml:space="preserve">
+    <value>Իրական ժամանակի ծանուցումներ</value>
+  </data>
+  <data name="TGChoosePremOneText" xml:space="preserve">
+    <value>Ստացեք ակնթարթային Telegram ծանուցումներ անվտանգության սպառնալիքների և սկանավորման արդյունքների մասին։</value>
+  </data>
+  <data name="TGChoosePremThree" xml:space="preserve">
+    <value>Ընդլայնված անվտանգություն</value>
+  </data>
+  <data name="TGChoosePremThreeText" xml:space="preserve">
+    <value>Մուտք գործեք բացառիկ գործիքների և ավելի խորը սկանավորման՝ առավելագույն պաշտպանության համար։</value>
+  </data>
+  <data name="TGChoosePremTwo" xml:space="preserve">
+    <value>Առաջնահերթ աջակցություն</value>
+  </data>
+  <data name="TGChoosePremTwoText" xml:space="preserve">
+    <value>Ստացեք նվիրված օգնություն մեր մասնագիտական ​​​​թիմից, երբ դրա կարիքը ունեք։</value>
+  </data>
+  <data name="TGConnectText" xml:space="preserve">
+    <value>Ինչպես միանալ մեր Telegram Bot-ին</value>
+  </data>
+  <data name="TGTokenText" xml:space="preserve">
+    <value>Ձեր Telegram թոքենը</value>
+  </data>
+  <data name="TGWelcome" xml:space="preserve">
+    <value>Բարի գալուստ ScanGuard Premium</value>
+  </data>
+  <data name="TGWelcomeText" xml:space="preserve">
+    <value>Բացեք բացառիկ հնարավորությունները և միացեք մեր Telegram բոտին՝ իրական ժամանակում անվտանգության ծանուցումներ ստանալու համար։</value>
+  </data>
+  <data name="UserReview" xml:space="preserve">
+    <value>Օգտատերերի Կարծիքները</value>
+  </data>
+  <data name="Youhavealreadysubmittedareview." xml:space="preserve">
+    <value>Դուք արդեն ներկայացրել եք կարծիք</value>
+  </data>
 </root>

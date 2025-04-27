@@ -340,6 +340,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Community Feedback.
+        /// </summary>
+        public static string CommunityFeedback {
+            get {
+                return ResourceManager.GetString("CommunityFeedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comprehensive Protection.
         /// </summary>
         public static string ComprehensiveProtection {
@@ -412,6 +421,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In the bot, send the command /connect TOKEN to link your ScanGuard account..
+        /// </summary>
+        public static string ConnectAccountText {
+            get {
+                return ResourceManager.GetString("ConnectAccountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Follow us for updates and tips on staying secure online..
         /// </summary>
         public static string ConnectText {
@@ -430,11 +448,29 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect Your Account.
+        /// </summary>
+        public static string ConnectYourAccount {
+            get {
+                return ResourceManager.GetString("ConnectYourAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact Us.
         /// </summary>
         public static string ContactUs {
             get {
                 return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Token.
+        /// </summary>
+        public static string CopyToken {
+            get {
+                return ResourceManager.GetString("CopyToken", resourceCulture);
             }
         }
         
@@ -583,6 +619,24 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximize Your Security.
+        /// </summary>
+        public static string Footer {
+            get {
+                return ResourceManager.GetString("Footer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Մնացեք սպառնալիքներից առաջ ScanGuard Premium-ի միջոցով: Վայելեք բացառիկ հնարավորությունները և Telegram-ի անխափան ինտեգրումը:.
+        /// </summary>
+        public static string FooterText {
+            get {
+                return ResourceManager.GetString("FooterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start scanning now.
         /// </summary>
         public static string FutureStartScanningNow {
@@ -615,6 +669,24 @@ namespace ScanGuard.Resources {
         public static string GetStarted {
             get {
                 return ResourceManager.GetString("GetStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Your Token.
+        /// </summary>
+        public static string GetYourToken {
+            get {
+                return ResourceManager.GetString("GetYourToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &quot;Get Token&quot; above or copy your existing token using the &quot;Copy Token&quot; button..
+        /// </summary>
+        public static string GetYourTokenText {
+            get {
+                return ResourceManager.GetString("GetYourTokenText", resourceCulture);
             }
         }
         
@@ -930,6 +1002,15 @@ namespace ScanGuard.Resources {
         public static string LatestSecurityUpdates {
             get {
                 return ResourceManager.GetString("LatestSecurityUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave Your Feedback.
+        /// </summary>
+        public static string LeaveYourFeedback {
+            get {
+                return ResourceManager.GetString("LeaveYourFeedback", resourceCulture);
             }
         }
         
@@ -1321,6 +1402,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Negative.
+        /// </summary>
+        public static string Negative {
+            get {
+                return ResourceManager.GetString("Negative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
@@ -1362,6 +1452,15 @@ namespace ScanGuard.Resources {
         public static string PerfectFor {
             get {
                 return ResourceManager.GetString("PerfectFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Positive.
+        /// </summary>
+        public static string Positive {
+            get {
+                return ResourceManager.GetString("Positive", resourceCulture);
             }
         }
         
@@ -1731,6 +1830,33 @@ namespace ScanGuard.Resources {
         public static string RegisterConfirm_Title {
             get {
                 return ResourceManager.GetString("RegisterConfirm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share your experience with our platform and read feedback from others.
+        /// </summary>
+        public static string ReviewText {
+            get {
+                return ResourceManager.GetString("ReviewText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review Type.
+        /// </summary>
+        public static string ReviewType {
+            get {
+                return ResourceManager.GetString("ReviewType", resourceCulture);
             }
         }
         
@@ -2158,6 +2284,24 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start the Bot.
+        /// </summary>
+        public static string StartBot {
+            get {
+                return ResourceManager.GetString("StartBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Telegram and start our premium bot by clicking the button below..
+        /// </summary>
+        public static string StartBotText {
+            get {
+                return ResourceManager.GetString("StartBotText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Scanning.
         /// </summary>
         public static string StartScanning {
@@ -2401,6 +2545,105 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Why Choose ScanGuard Premium?.
+        /// </summary>
+        public static string TGChoosePrem {
+            get {
+                return ResourceManager.GetString("TGChoosePrem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real-Time Alerts.
+        /// </summary>
+        public static string TGChoosePremOne {
+            get {
+                return ResourceManager.GetString("TGChoosePremOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive instant Telegram notifications about security threats and scan results..
+        /// </summary>
+        public static string TGChoosePremOneText {
+            get {
+                return ResourceManager.GetString("TGChoosePremOneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Security.
+        /// </summary>
+        public static string TGChoosePremThree {
+            get {
+                return ResourceManager.GetString("TGChoosePremThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access exclusive tools and deeper scans for ultimate protection..
+        /// </summary>
+        public static string TGChoosePremThreeText {
+            get {
+                return ResourceManager.GetString("TGChoosePremThreeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priority Support.
+        /// </summary>
+        public static string TGChoosePremTwo {
+            get {
+                return ResourceManager.GetString("TGChoosePremTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get dedicated assistance from our expert team whenever you need it..
+        /// </summary>
+        public static string TGChoosePremTwoText {
+            get {
+                return ResourceManager.GetString("TGChoosePremTwoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to Connect to Our Telegram Bot.
+        /// </summary>
+        public static string TGConnectText {
+            get {
+                return ResourceManager.GetString("TGConnectText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Telegram Token.
+        /// </summary>
+        public static string TGTokenText {
+            get {
+                return ResourceManager.GetString("TGTokenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to ScanGuard Premium.
+        /// </summary>
+        public static string TGWelcome {
+            get {
+                return ResourceManager.GetString("TGWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock exclusive features and connect to our Telegram bot for real-time security notifications..
+        /// </summary>
+        public static string TGWelcomeText {
+            get {
+                return ResourceManager.GetString("TGWelcomeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Top Security Hotspots.
         /// </summary>
         public static string TopSecurityHotspots {
@@ -2554,6 +2797,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Reviews.
+        /// </summary>
+        public static string UserReview {
+            get {
+                return ResourceManager.GetString("UserReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Trust.
         /// </summary>
         public static string UserTrust {
@@ -2685,6 +2937,15 @@ namespace ScanGuard.Resources {
         public static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have already submitted a review..
+        /// </summary>
+        public static string Youhavealreadysubmittedareview_ {
+            get {
+                return ResourceManager.GetString("Youhavealreadysubmittedareview.", resourceCulture);
             }
         }
         

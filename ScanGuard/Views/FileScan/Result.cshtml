@@ -195,11 +195,17 @@
     {
         <div class="modal-overlay show" id="scanResultModal">
             <div class="modal-content">
-                <button class="modal-close-btn" onclick="closeModal()">&times;</button>
-                <h2 class="modal-title">File Scan Result</h2>
+                <button class="modal-close-btn" onclick="closeModal()">×</button>
+                <h2 class="modal-title">
+                    <span class="home-hero-title-word" style="animation-delay: 0s;">
+                        @ScanGuard.Resources.Resources.FileScanner
+                    </span>
+                </h2>
                 <div class="modal-body">
                     <div class="modal-field">
-                        <span class="modal-label">File Name:</span>
+                        <span class="modal-label">
+                            @ScanGuard.Resources.Resources.FileName
+                        </span>
                         <span class="modal-value">@Model.FileName</span>
                     </div>
                     <div class="modal-field">
@@ -207,7 +213,9 @@
                         <span class="modal-value">@Model.ScanDate.ToString("yyyy-MM-dd HH:mm")</span>
                     </div>
                     <div class="modal-field">
-                        <span class="modal-label">File Hash:</span>
+                        <span class="modal-label">
+                            @ScanGuard.Resources.Resources.FileHash
+                        </span>
                         <span class="modal-value">@Model.FileHash</span>
                     </div>
                     <div class="modal-field">
@@ -232,7 +240,6 @@
             </div>
         </div>
     }
-
     <script>
         function closeModal() {
             const modal = document.getElementById('scanResultModal');

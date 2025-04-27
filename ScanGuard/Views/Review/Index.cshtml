@@ -7,50 +7,78 @@
 <div class="review-container">
     <!-- Header -->
     <header class="review-header animate-on-scroll">
-        <h1 class="review-title">User Reviews</h1>
-        <p class="review-subtitle">Share your experience with our platform and read feedback from others</p>
+        <h1 class="review-title">
+            <span class="home-hero-title-word" style="animation-delay: 0s;">
+                @ScanGuard.Resources.Resources.UserReview
+            </span>
+        </h1>
+        <p class="review-subtitle">
+            @ScanGuard.Resources.Resources.ReviewText
+        </p>
     </header>
 
     <!-- Review Form -->
     @if (Model.CanAdd)
     {
         <div class="review-form-container animate-on-scroll">
-            <h3 class="form-title">Leave Your Feedback</h3>
+            <h3 class="form-title">
+                <span class="home-hero-title-word" style="animation-delay: 0s;">
+                    @ScanGuard.Resources.Resources.LeaveYourFeedback
+                </span>
+            </h3>
             <form asp-action="Add" method="post" class="review-form">
                 <div class="form-group">
-                    <label for="reviewText" class="form-label">Your Review</label>
-                    <textarea name="reviewText" id="reviewText" class="form-textarea" placeholder="Write your thoughts here..." required></textarea>
+                    <label for="reviewText" class="form-label">
+                        @ScanGuard.Resources.Resources.LeaveYourFeedback
+                    </label>
+                    <textarea name="reviewText" id="reviewText" class="form-textarea" placeholder="@ScanGuard.Resources.Resources.LeaveYourFeedback" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Review Type</label>
+                    <label class="form-label">
+                        @ScanGuard.Resources.Resources.ReviewType
+                    </label>
                     <div class="review-type-selector">
                         <label class="review-type-option">
                             <input type="radio" name="isGood" value="true" required>
-                            <span class="review-type-btn review-type-positive">Positive</span>
+                            <span class="review-type-btn review-type-positive">
+                                @ScanGuard.Resources.Resources.Positive
+                            </span>
                         </label>
                         <label class="review-type-option">
                             <input type="radio" name="isGood" value="false">
-                            <span class="review-type-btn review-type-negative">Negative</span>
+                            <span class="review-type-btn review-type-negative">
+                                @ScanGuard.Resources.Resources.Negative
+                            </span>
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="review-submit-btn">Submit Review</button>
+                <button type="submit" class="review-submit-btn">
+                    @ScanGuard.Resources.Resources.LeaveYourFeedback
+                </button>
             </form>
         </div>
     }
     else
     {
         <div class="review-message animate-on-scroll">
-            <p class="message-text">You have already submitted a review.</p>
+            <p class="message-text">
+                @ScanGuard.Resources.Resources.Youhavealreadysubmittedareview_
+            </p>
         </div>
     }
 
     <!-- Reviews List -->
     <div class="reviews-list animate-on-scroll">
-        <h3 class="reviews-title">Community Feedback</h3>
+        <h3 class="reviews-title">
+            <span class="home-hero-title-word" style="animation-delay: 0s;">
+                @ScanGuard.Resources.Resources.CommunityFeedback
+            </span>
+        </h3>
         @if (!Model.Reviews.Any())
         {
-            <p class="no-reviews">No reviews yet. Be the first to share your feedback!</p>
+            <p class="no-reviews">
+                @ScanGuard.Resources.Resources.ReviewText
+            </p>
         }
         else
         {
@@ -64,7 +92,9 @@
                                 <span class="username-text">@r.User.UserName</span>
                                 <span class="username-tooltip">@r.User.UserName</span>
                             </span>
-                            <span class="review-badge review-badge-@badgeClass">@(r.IsGood ? "Positive" : "Negative")</span>
+                            <span class="review-badge review-badge-@badgeClass">
+                                @(r.IsGood ? ScanGuard.Resources.Resources.Positive : ScanGuard.Resources.Resources.Negative)
+                            </span>
                         </div>
                         <p class="review-text">@r.ReviewText</p>
                         <div class="review-footer">
@@ -73,7 +103,9 @@
                             {
                                 <form asp-action="Delete" method="post" class="review-delete-form">
                                     <input type="hidden" name="id" value="@r.Id" />
-                                    <button type="submit" class="review-delete-btn">Remove</button>
+                                    <button type="submit" class="review-delete-btn">
+                                        @ScanGuard.Resources.Resources.Remove
+                                    </button>
                                 </form>
                             }
                         </div>
