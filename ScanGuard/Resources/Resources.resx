@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,905 +59,953 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="AboutScanGuard" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutScanGuard" xml:space="preserve">
     <value>About ScanGuard</value>
   </data>
-	<data name="About_text" xml:space="preserve">
+  <data name="About_text" xml:space="preserve">
     <value>We’re dedicated to making the digital world safer with powerful tools to scan and secure websites and files from vulnerabilities.</value>
   </data>
-	<data name="Accessibility" xml:space="preserve">
+  <data name="Accessibility" xml:space="preserve">
     <value>Accessibility</value>
   </data>
-	<data name="AccessibilityText" xml:space="preserve">
+  <data name="AccessibilityText" xml:space="preserve">
     <value>Cybersecurity for everyone, everywhere.</value>
   </data>
-	<data name="AccessToCommunity" xml:space="preserve">
+  <data name="AccessToCommunity" xml:space="preserve">
     <value>Access to community forums</value>
   </data>
-	<data name="AdvancedAnalytics" xml:space="preserve">
+  <data name="AdvancedAnalytics" xml:space="preserve">
     <value>Advanced analytics and detailed reports</value>
   </data>
-	<data name="AdvancedScanning" xml:space="preserve">
+  <data name="AdvancedScanning" xml:space="preserve">
     <value>Advanced Scanning</value>
   </data>
-	<data name="AllInOne" xml:space="preserve">
+  <data name="AllInOne" xml:space="preserve">
     <value>All-in-one solution for your digital security.</value>
   </data>
-	<data name="Analyzed" xml:space="preserve">
+  <data name="Analyzed" xml:space="preserve">
     <value>Analyzed</value>
   </data>
-	<data name="APIAccess" xml:space="preserve">
+  <data name="APIAccess" xml:space="preserve">
     <value>API access for integration with your tools</value>
   </data>
-	<data name="BasicSupport" xml:space="preserve">
+  <data name="BasicSupport" xml:space="preserve">
     <value>Basic support via email (response within 48 hours)</value>
   </data>
-	<data name="ChooseAI" xml:space="preserve">
+  <data name="ChooseAI" xml:space="preserve">
     <value>AI-Powered</value>
   </data>
-	<data name="ChooseAIText" xml:space="preserve">
+  <data name="ChooseAIText" xml:space="preserve">
     <value>Smart tech for smarter detection.</value>
   </data>
-	<data name="ChooseCost" xml:space="preserve">
+  <data name="ChooseCost" xml:space="preserve">
     <value>Cost-Effective</value>
   </data>
-	<data name="ChooseCostText" xml:space="preserve">
+  <data name="ChooseCostText" xml:space="preserve">
     <value>Premium security at fair prices.</value>
   </data>
-	<data name="ChooseFast" xml:space="preserve">
+  <data name="ChooseFast" xml:space="preserve">
     <value>Fast Scans</value>
   </data>
-	<data name="ChooseFastText" xml:space="preserve">
+  <data name="ChooseFastText" xml:space="preserve">
     <value>Get results in seconds, not hours.</value>
   </data>
-	<data name="ChooseSupport" xml:space="preserve">
+  <data name="ChooseSupport" xml:space="preserve">
     <value>Support</value>
   </data>
-	<data name="ChooseSupportText" xml:space="preserve">
+  <data name="ChooseSupportText" xml:space="preserve">
     <value>Help whenever you need it.</value>
   </data>
-	<data name="ClientsProtected" xml:space="preserve">
+  <data name="ClientsProtected" xml:space="preserve">
     <value>Clients Protected</value>
   </data>
-	<data name="ComprehensiveProtection" xml:space="preserve">
+  <data name="ComprehensiveProtection" xml:space="preserve">
     <value>Comprehensive Protection</value>
   </data>
-	<data name="ConnectText" xml:space="preserve">
+  <data name="ConnectText" xml:space="preserve">
     <value>Follow us for updates and tips on staying secure online.</value>
   </data>
-	<data name="ConnectwithScanGuard" xml:space="preserve">
+  <data name="ConnectwithScanGuard" xml:space="preserve">
     <value>Connect with ScanGuard</value>
   </data>
-	<data name="ContactUs" xml:space="preserve">
+  <data name="ContactUs" xml:space="preserve">
     <value>Contact Us</value>
   </data>
-	<data name="CustomScan" xml:space="preserve">
+  <data name="CustomScan" xml:space="preserve">
     <value>Custom scan schedules and automation</value>
   </data>
-	<data name="DetectedThreatOn" xml:space="preserve">
+  <data name="DetectedThreatOn" xml:space="preserve">
     <value>Detected threat on</value>
   </data>
-	<data name="Digital" xml:space="preserve">
+  <data name="Digital" xml:space="preserve">
     <value>Digital</value>
   </data>
-	<data name="Email" xml:space="preserve">
+  <data name="Email" xml:space="preserve">
     <value>Email։</value>
   </data>
-	<data name="EnterURLtoScan" xml:space="preserve">
+  <data name="EnterURLtoScan" xml:space="preserve">
     <value>Enter URL to Scan</value>
   </data>
-	<data name="Essential" xml:space="preserve">
+  <data name="Essential" xml:space="preserve">
     <value>Essential scanning for websites and files</value>
   </data>
-	<data name="ExploreAdvanced" xml:space="preserve">
+  <data name="ExploreAdvanced" xml:space="preserve">
     <value>Explore advanced tools to secure your digital world.</value>
   </data>
-	<data name="FilesAnalyzed" xml:space="preserve">
+  <data name="FilesAnalyzed" xml:space="preserve">
     <value>Files Analyzed</value>
   </data>
-	<data name="FutureStartScanningNow" xml:space="preserve">
+  <data name="FutureStartScanningNow" xml:space="preserve">
     <value>Start scanning now</value>
   </data>
-	<data name="FutureText" xml:space="preserve">
+  <data name="FutureText" xml:space="preserve">
     <value>Join ScanGuard to protect your websites and files with confidence.</value>
   </data>
-	<data name="GetinTouch" xml:space="preserve">
+  <data name="GetinTouch" xml:space="preserve">
     <value>Get in Touch</value>
   </data>
-	<data name="GetStarted" xml:space="preserve">
+  <data name="GetStarted" xml:space="preserve">
     <value>Get Started</value>
   </data>
-	<data name="GoToDashboard" xml:space="preserve">
+  <data name="GoToDashboard" xml:space="preserve">
     <value>Go to Dashboard</value>
   </data>
-	<data name="Guard" xml:space="preserve">
+  <data name="Guard" xml:space="preserve">
     <value>Guard</value>
   </data>
-	<data name="HappyUsers" xml:space="preserve">
+  <data name="HappyUsers" xml:space="preserve">
     <value>Happy Users</value>
   </data>
-	<data name="Home_Empty_Message" xml:space="preserve">
+  <data name="Home_Empty_Message" xml:space="preserve">
     <value>No scanned websites yet. Be the first!</value>
   </data>
-	<data name="Home_Hero_Subtitle" xml:space="preserve">
+  <data name="Home_Hero_Subtitle" xml:space="preserve">
     <value>Advanced cybersecurity solutions with ScanGuard. Protect your websites, files, and data in real-time.</value>
   </data>
-	<data name="Home_Section_Title" xml:space="preserve">
+  <data name="Home_Section_Title" xml:space="preserve">
     <value>Building a Safer Digital World</value>
   </data>
-	<data name="IdealForBusinesses" xml:space="preserve">
+  <data name="IdealForBusinesses" xml:space="preserve">
     <value>Ideal for businesses and professionals needing advanced security features and priority support.</value>
   </data>
-	<data name="Innovation" xml:space="preserve">
+  <data name="Innovation" xml:space="preserve">
     <value>Innovation</value>
   </data>
-	<data name="InnovationText" xml:space="preserve">
+  <data name="InnovationText" xml:space="preserve">
     <value>Evolving to outpace cyber threats.</value>
   </data>
-	<data name="InstantNotifications" xml:space="preserve">
+  <data name="InstantNotifications" xml:space="preserve">
     <value>Instant notifications for potential threats.</value>
   </data>
-	<data name="JoinOurMission" xml:space="preserve">
+  <data name="JoinOurMission" xml:space="preserve">
     <value>Join Our Mission</value>
   </data>
-	<data name="JoinScanGuard" xml:space="preserve">
+  <data name="JoinScanGuard" xml:space="preserve">
     <value>Join ScanGuard today and take control of your cybersecurity.</value>
   </data>
-	<data name="LatestSecurityUpdates" xml:space="preserve">
+  <data name="LatestSecurityUpdates" xml:space="preserve">
     <value>Latest Security Updates</value>
   </data>
-	<data name="Login" xml:space="preserve">
+  <data name="Login" xml:space="preserve">
     <value>Log In</value>
   </data>
-	<data name="MonthlySecurity" xml:space="preserve">
+  <data name="MonthlySecurity" xml:space="preserve">
     <value>Monthly security consultation with experts</value>
   </data>
-	<data name="OurImpact" xml:space="preserve">
+  <data name="OurImpact" xml:space="preserve">
     <value>Our Impact</value>
   </data>
-	<data name="OurPurpose" xml:space="preserve">
+  <data name="OurPurpose" xml:space="preserve">
     <value>Our Purpose</value>
   </data>
-	<data name="OurTeam" xml:space="preserve">
+  <data name="OurTeam" xml:space="preserve">
     <value>Our Team</value>
   </data>
-	<data name="PerfectFor" xml:space="preserve">
+  <data name="PerfectFor" xml:space="preserve">
     <value>Perfect for individuals and small projects looking to secure their digital assets with essential tools.</value>
   </data>
-	<data name="Precision" xml:space="preserve">
+  <data name="Precision" xml:space="preserve">
     <value>Precision</value>
   </data>
-	<data name="PrecisionText" xml:space="preserve">
+  <data name="PrecisionText" xml:space="preserve">
     <value>Accurate detection of every vulnerability.</value>
   </data>
-	<data name="PremiumCommunityChat" xml:space="preserve">
+  <data name="PremiumCommunityChat" xml:space="preserve">
     <value>Premium community chat with other users</value>
   </data>
-	<data name="PrioritySupport" xml:space="preserve">
+  <data name="PrioritySupport" xml:space="preserve">
     <value>Priority support with 24/7 assistance</value>
   </data>
-	<data name="Protection" xml:space="preserve">
+  <data name="Protection" xml:space="preserve">
     <value>Protection</value>
   </data>
-	<data name="ProtectionText" xml:space="preserve">
+  <data name="ProtectionText" xml:space="preserve">
     <value>Robust scanning to keep your assets secure.</value>
   </data>
-	<data name="PurposeDotOne" xml:space="preserve">
+  <data name="PurposeDotOne" xml:space="preserve">
     <value>Provide user-friendly scanning solutions.</value>
   </data>
-	<data name="PurposeDotThree" xml:space="preserve">
+  <data name="PurposeDotThree" xml:space="preserve">
     <value>Ensure affordability without compromise.</value>
   </data>
-	<data name="PurposeDotTwo" xml:space="preserve">
+  <data name="PurposeDotTwo" xml:space="preserve">
     <value>Stay ahead of evolving cyber threats.</value>
   </data>
-	<data name="PurposeTextOne" xml:space="preserve">
+  <data name="PurposeTextOne" xml:space="preserve">
     <value>Founded in 2025, ScanGuard exists to simplify cybersecurity. Our purpose is to empower businesses, developers, and individuals with accessible tools to protect their websites and files from vulnerabilities.</value>
   </data>
-	<data name="PurposeTextTwo" xml:space="preserve">
+  <data name="PurposeTextTwo" xml:space="preserve">
     <value>We’re driven by a commitment to deliver fast, accurate scans that catch threats before they strike. Our goal is a digital world where safety is seamless and universal.</value>
   </data>
-	<data name="Rank" xml:space="preserve">
+  <data name="Rank" xml:space="preserve">
     <value>Rank</value>
   </data>
-	<data name="ReadyToScan" xml:space="preserve">
+  <data name="ReadyToScan" xml:space="preserve">
     <value>Ready to Scan More?</value>
   </data>
-	<data name="ReadyToSecure" xml:space="preserve">
+  <data name="ReadyToSecure" xml:space="preserve">
     <value>Ready to Secure Your Online Presence?</value>
   </data>
-	<data name="RealTime" xml:space="preserve">
+  <data name="RealTime" xml:space="preserve">
     <value>Real-time vulnerability detection for websites and files.</value>
   </data>
-	<data name="RealTimeAlerts" xml:space="preserve">
+  <data name="RealTimeAlerts" xml:space="preserve">
     <value>Real-Time Alerts</value>
   </data>
-	<data name="ScanCount" xml:space="preserve">
+  <data name="ScanCount" xml:space="preserve">
     <value>Scan Count</value>
   </data>
-	<data name="Scanned" xml:space="preserve">
+  <data name="Scanned" xml:space="preserve">
     <value>Scanned</value>
   </data>
-	<data name="ScannerText" xml:space="preserve">
+  <data name="ScannerText" xml:space="preserve">
     <value>Scanner Text</value>
   </data>
-	<data name="ScansPerformed" xml:space="preserve">
+  <data name="ScansPerformed" xml:space="preserve">
     <value>Scans Performed</value>
   </data>
-	<data name="ScanYourWebsite" xml:space="preserve">
+  <data name="ScanYourWebsite" xml:space="preserve">
     <value>Scan Your Website</value>
   </data>
-	<data name="SecureYourFuture" xml:space="preserve">
+  <data name="SecureYourFuture" xml:space="preserve">
     <value>Secure Your Future</value>
   </data>
-	<data name="SecurityNews" xml:space="preserve">
+  <data name="SecurityNews" xml:space="preserve">
     <value>Security news updates and insights</value>
   </data>
-	<data name="SendMessage" xml:space="preserve">
+  <data name="SendMessage" xml:space="preserve">
     <value>Send Message</value>
   </data>
-	<data name="SignUpNow" xml:space="preserve">
+  <data name="SignUpNow" xml:space="preserve">
     <value>Sign Up Now</value>
   </data>
-	<data name="StartScanning" xml:space="preserve">
+  <data name="StartScanning" xml:space="preserve">
     <value>Start Scanning</value>
   </data>
-	<data name="String1About ScanGuard" xml:space="preserve">
+  <data name="String1About ScanGuard" xml:space="preserve">
     <value>About ScanGuard</value>
   </data>
-	<data name="TailoredPlans" xml:space="preserve">
+  <data name="TailoredPlans" xml:space="preserve">
     <value>Tailored Plans for Your Needs</value>
   </data>
-	<data name="TeamOneName" xml:space="preserve">
+  <data name="TeamOneName" xml:space="preserve">
     <value>Harutyun Mkrtchyan</value>
   </data>
-	<data name="TeamOneState" xml:space="preserve">
+  <data name="TeamOneState" xml:space="preserve">
     <value>Founder &amp; CEO</value>
   </data>
-	<data name="TeamOneText" xml:space="preserve">
+  <data name="TeamOneText" xml:space="preserve">
     <value>Harutyun and Davit launched ScanGuard in 2025 with a vision to make cybersecurity simple. Her expertise in software engineering drives our mission to protect the digital world.</value>
   </data>
-	<data name="TeamTwoName" xml:space="preserve">
+  <data name="TeamTwoName" xml:space="preserve">
     <value>Davit Gasparyan</value>
   </data>
-	<data name="TeamTwoState" xml:space="preserve">
+  <data name="TeamTwoState" xml:space="preserve">
     <value>Lead Developer</value>
   </data>
-	<data name="TeamTwoText" xml:space="preserve">
+  <data name="TeamTwoText" xml:space="preserve">
     <value>Davit and Harutyun build the heart of our scanning tools. With a passion for AI and security, he ensures our platform is powerful and intuitive.</value>
   </data>
-	<data name="TelegramBot" xml:space="preserve">
+  <data name="TelegramBot" xml:space="preserve">
     <value>Telegram bot access with full website features</value>
   </data>
-	<data name="TopSecurityHotspots" xml:space="preserve">
+  <data name="TopSecurityHotspots" xml:space="preserve">
     <value>Top Security Hotspots</value>
   </data>
-	<data name="Trusted" xml:space="preserve">
+  <data name="Trusted" xml:space="preserve">
     <value>Trusted by Our Community</value>
   </data>
-	<data name="UnlimitedScans" xml:space="preserve">
+  <data name="UnlimitedScans" xml:space="preserve">
     <value>Unlimited scans for websites and files</value>
   </data>
-	<data name="UpgradeToPremium" xml:space="preserve">
+  <data name="UpgradeToPremium" xml:space="preserve">
     <value>Upgrade to Premium</value>
   </data>
-	<data name="UpTo3File" xml:space="preserve">
+  <data name="UpTo3File" xml:space="preserve">
     <value>Up to 3 file scans per day</value>
   </data>
-	<data name="UserTrust" xml:space="preserve">
+  <data name="UserTrust" xml:space="preserve">
     <value>User Trust</value>
   </data>
-	<data name="VerifiedUser" xml:space="preserve">
+  <data name="VerifiedUser" xml:space="preserve">
     <value>Verified User</value>
   </data>
-	<data name="ViewMore" xml:space="preserve">
+  <data name="ViewMore" xml:space="preserve">
     <value>View More</value>
   </data>
-	<data name="VulnerabilitiesDetected" xml:space="preserve">
+  <data name="VulnerabilitiesDetected" xml:space="preserve">
     <value>Vulnerabilities Detected</value>
   </data>
-	<data name="VulnerabilitiesFound" xml:space="preserve">
+  <data name="VulnerabilitiesFound" xml:space="preserve">
     <value>vulnerabilities found</value>
   </data>
-	<data name="VulnerabilityScanner" xml:space="preserve">
+  <data name="VulnerabilityScanner" xml:space="preserve">
     <value>Vulnerability Scanner</value>
   </data>
-	<data name="WebsiteScans" xml:space="preserve">
+  <data name="WebsiteScans" xml:space="preserve">
     <value>Website Scans</value>
   </data>
-	<data name="WebsitesScanned" xml:space="preserve">
+  <data name="WebsitesScanned" xml:space="preserve">
     <value>Websites Scanned</value>
   </data>
-	<data name="WebsiteURL" xml:space="preserve">
+  <data name="WebsiteURL" xml:space="preserve">
     <value>Website URL</value>
   </data>
-	<data name="WhatDrivesUs" xml:space="preserve">
+  <data name="WhatDrivesUs" xml:space="preserve">
     <value>What Drives Us</value>
   </data>
-	<data name="WhyChooseScanGuard" xml:space="preserve">
+  <data name="WhyChooseScanGuard" xml:space="preserve">
     <value>Why Choose ScanGuard</value>
   </data>
-	<data name="World" xml:space="preserve">
+  <data name="World" xml:space="preserve">
     <value>World</value>
   </data>
-	<data name="WriteaReview" xml:space="preserve">
+  <data name="WriteaReview" xml:space="preserve">
     <value>Write a Review</value>
   </data>
-	<data name="Your" xml:space="preserve">
+  <data name="Your" xml:space="preserve">
     <value>Your</value>
   </data>
-	<data name="YourEmail" xml:space="preserve">
+  <data name="YourEmail" xml:space="preserve">
     <value>Your  Email</value>
   </data>
-	<data name="YourMessage" xml:space="preserve">
+  <data name="YourMessage" xml:space="preserve">
     <value>Your Message</value>
   </data>
-	<data name="YourName" xml:space="preserve">
+  <data name="YourName" xml:space="preserve">
     <value>Your Name</value>
   </data>
-	<data name="YourSecurityAdvantage" xml:space="preserve">
+  <data name="YourSecurityAdvantage" xml:space="preserve">
     <value>Your Security Advantage</value>
   </data>
-	<data name="TwoFactor_ConfigureAppTitle" xml:space="preserve">
-  <value>Configure Authenticator App</value>
-</data>
-	<data name="TwoFactor_SetupDescription" xml:space="preserve">
-  <value>Set up two-factor authentication with an authenticator app.</value>
-</data>
-	<data name="TwoFactor_Step1Title" xml:space="preserve">
-  <value>1. Download an App</value>
-</data>
-	<data name="TwoFactor_Step1Description" xml:space="preserve">
-  <value>Install a two-factor authenticator app like Microsoft Authenticator or Google Authenticator.</value>
-</data>
-	<data name="TwoFactor_Step2Title" xml:space="preserve">
-  <value>2. Scan QR Code</value>
-</data>
-	<data name="TwoFactor_Step2Description" xml:space="preserve">
-  <value>Scan the QR code below or enter the key into your authenticator app. Spaces and casing do not matter.</value>
-</data>
-	<data name="TwoFactor_QRCodeHelpLink" xml:space="preserve">
-  <value>Learn how to enable QR code generation.</value>
-</data>
-	<data name="TwoFactor_Step3Title" xml:space="preserve">
-  <value>3. Verify Code</value>
-</data>
-	<data name="TwoFactor_Step3Description" xml:space="preserve">
-  <value>Enter the unique code provided by your authenticator app to complete setup.</value>
-</data>
-	<data name="TwoFactor_VerificationCodeLabel" xml:space="preserve">
-  <value>Verification Code</value>
-</data>
-	<data name="TwoFactor_VerificationCodePlaceholder" xml:space="preserve">
-  <value>Enter code</value>
-</data>
-	<data name="TwoFactor_VerifyButton" xml:space="preserve">
-  <value>Verify</value>
-</data>
-<data name="Nav_Main" xml:space="preserve">
-  <value>Main</value>
-</data>
-<data name="Nav_AboutUs" xml:space="preserve">
-  <value>About Us</value>
-</data>
-<data name="Nav_Review" xml:space="preserve">
-  <value>Review</value>
-</data>
-<data name="Nav_Sites" xml:space="preserve">
-  <value>Sites</value>
-</data>
-<data name="Nav_Scanner" xml:space="preserve">
-  <value>Scanner</value>
-</data>
-<data name="Nav_ScannedSites" xml:space="preserve">
-  <value>Scanned Sites</value>
-</data>
-<data name="Nav_Files" xml:space="preserve">
-  <value>Files</value>
-</data>
-<data name="Nav_FileScanner" xml:space="preserve">
-  <value>File Scanner</value>
-</data>
-<data name="Nav_ScannedFiles" xml:space="preserve">
-  <value>Scanned Files</value>
-</data>
-<data name="Nav_Chat" xml:space="preserve">
-  <value>Chat</value>
-</data>
-<data name="Nav_Corporation" xml:space="preserve">
-  <value>Corporation</value>
-</data>
-<data name="Nav_Premium" xml:space="preserve">
-  <value>Premium</value>
-</data>
-<data name="Nav_Users" xml:space="preserve">
-  <value>Users</value>
-</data>
-<data name="Nav_GetToken" xml:space="preserve">
-  <value>Get Token</value>
-</data>
-<data name="Nav_AllNews" xml:space="preserve">
-  <value>All News</value>
-</data>
-<data name="Nav_GetCorpRequests" xml:space="preserve">
-  <value>Get Corp Requests</value>
-</data>
-<data name="Nav_News" xml:space="preserve">
-  <value>News</value>
-</data>
-<data name="Nav_ScanFile" xml:space="preserve">
-  <value>Scan File</value>
-</data>
-<data name="Nav_History" xml:space="preserve">
-  <value>History</value>
-</data>
-<data name="Language_English" xml:space="preserve">
-  <value>English</value>
-</data>
-<data name="Language_Armenian" xml:space="preserve">
-  <value>Հայերեն</value>
-</data>
-<data name="Nav_Notifications" xml:space="preserve">
-  <value>Notifications</value>
-</data>
-<data name="Nav_Profile" xml:space="preserve">
-  <value>Profile</value>
-</data>
-<data name="Nav_Logout" xml:space="preserve">
-  <value>Logout</value>
-</data>
-<data name="Nav_Login" xml:space="preserve">
-  <value>Login</value>
-</data>
-<data name="Nav_Register" xml:space="preserve">
-  <value>Register</value>
-</data>
-<data name="History_Title" xml:space="preserve">
-  <value>Scan History</value>
-</data>
-<data name="History_Subtitle" xml:space="preserve">
-  <value>Review and analyze past scans to keep your websites secure with ScanGuard’s AI-powered insights.</value>
-</data>
-<data name="History_SearchPlaceholder" xml:space="preserve">
-  <value>Search by URL...</value>
-</data>
-<data name="History_SortRecent" xml:space="preserve">
-  <value>Sort by: Recent</value>
-</data>
-<data name="History_SortVulnDesc" xml:space="preserve">
-  <value>Vulnerabilities (High to Low)</value>
-</data>
-<data name="History_SortVulnAsc" xml:space="preserve">
-  <value>Vulnerabilities (Low to High)</value>
-</data>
-<data name="History_SortDateAsc" xml:space="preserve">
-  <value>Date (Oldest)</value>
-</data>
-<data name="History_ColumnWebsiteURL" xml:space="preserve">
-  <value>Website URL</value>
-</data>
-<data name="History_ColumnScanDate" xml:space="preserve">
-  <value>Scan Date</value>
-</data>
-<data name="History_ColumnVulnerabilityCount" xml:space="preserve">
-  <value>Vulnerability Count</value>
-</data>
-<data name="History_ColumnVulnerabilityType" xml:space="preserve">
-  <value>Vulnerability Type</value>
-</data>
-<data name="History_ColumnActions" xml:space="preserve">
-  <value>Actions</value>
-</data>
-<data name="History_NoVulnerabilities" xml:space="preserve">
-  <value>No vulnerabilities found</value>
-</data>
-<data name="History_ButtonRemove" xml:space="preserve">
-  <value>Remove</value>
-</data>
-<data name="History_ButtonAnalyze" xml:space="preserve">
-  <value>Analyze</value>
-</data>
-<data name="History_ModalTitle" xml:space="preserve">
-  <value>AI Analysis</value>
-</data>
-<data name="History_ModalLoading" xml:space="preserve">
-  <value>Loading analysis...</value>
-</data>
-<data name="History_ModalError" xml:space="preserve">
-  <value>Failed to load analysis</value>
-</data>
-<data name="Sidebar_Profile" xml:space="preserve">
-  <value>Profile</value>
-</data>
-<data name="Sidebar_ExternalLogins" xml:space="preserve">
-  <value>External Logins</value>
-</data>
-<data name="Sidebar_TwoFactorAuth" xml:space="preserve">
-  <value>Two-Factor Auth</value>
-</data>
-<data name="Sidebar_ChangePassword" xml:space="preserve">
-  <value>Change Password</value>
-</data>
-<data name="Profile_Title" xml:space="preserve">
-  <value>Profile</value>
-</data>
-<data name="Profile_StatusAdmin" xml:space="preserve">
-  <value>Admin</value>
-</data>
-<data name="Profile_StatusPremium" xml:space="preserve">
-  <value>Premium</value>
-</data>
-<data name="Profile_LabelFullName" xml:space="preserve">
-  <value>Full Name</value>
-</data>
-<data name="Profile_LabelEmail" xml:space="preserve">
-  <value>Email</value>
-</data>
-<data name="Profile_LabelPhoneNumber" xml:space="preserve">
-  <value>Phone Number</value>
-</data>
-<data name="Profile_PlaceholderFullName" xml:space="preserve">
-  <value>Enter your full name</value>
-</data>
-<data name="Profile_PlaceholderPhoneNumber" xml:space="preserve">
-  <value>Enter your phone number</value>
-</data>
-<data name="Profile_ButtonSave" xml:space="preserve">
-  <value>Save Changes</value>
-</data>
-<data name="ChangePassword_Title" xml:space="preserve">
-  <value>Change Password</value>
-</data>
-<data name="ChangePassword_SectionTitle" xml:space="preserve">
-  <value>Change Password</value>
-</data>
-<data name="ChangePassword_Description" xml:space="preserve">
-  <value>Set a new secure password.</value>
-</data>
-<data name="ChangePassword_LabelCurrentPassword" xml:space="preserve">
-  <value>Current Password</value>
-</data>
-<data name="ChangePassword_LabelNewPassword" xml:space="preserve">
-  <value>New Password</value>
-</data>
-<data name="ChangePassword_LabelConfirmPassword" xml:space="preserve">
-  <value>Confirm Password</value>
-</data>
-<data name="ChangePassword_PlaceholderCurrentPassword" xml:space="preserve">
-  <value>Current password</value>
-</data>
-<data name="ChangePassword_PlaceholderNewPassword" xml:space="preserve">
-  <value>New password</value>
-</data>
-<data name="ChangePassword_PlaceholderConfirmPassword" xml:space="preserve">
-  <value>Confirm password</value>
-</data>
-<data name="ChangePassword_ButtonUpdate" xml:space="preserve">
-  <value>Update</value>
-</data>
-<data name="ChangePassword_ButtonCancel" xml:space="preserve">
-  <value>Cancel</value>
-</data>
-<data name="Scanner_Title" xml:space="preserve">
-  <value>Vulnerability Scanner</value>
-</data>
-<data name="Scanner_IntroSubtitle" xml:space="preserve">
-  <value>Protect your website by identifying security risks with ScanGuard’s advanced scanning technology.</value>
-</data>
-<data name="Scanner_FormTitle" xml:space="preserve">
-  <value>Scan Your Website</value>
-</data>
-<data name="Scanner_LabelUrl" xml:space="preserve">
-  <value>Enter URL to Scan</value>
-</data>
-<data name="Scanner_PlaceholderUrl" xml:space="preserve">
-  <value>https://example.com</value>
-</data>
-<data name="Scanner_ButtonStart" xml:space="preserve">
-  <value>Start Scan</value>
-</data>
-<data name="Scanner_ResultsTitle" xml:space="preserve">
-  <value>Scan Results</value>
-</data>
-<data name="Scanner_PortResultsTitle" xml:space="preserve">
-  <value>Port Scan Results</value>
-</data>
-<data name="Scanner_InfoTitle" xml:space="preserve">
-  <value>Vulnerability Information</value>
-</data>
-<data name="Scanner_InfoSQLiDescription" xml:space="preserve">
-  <value>Allows attackers to inject malicious SQL code into input fields, potentially accessing or altering database content.</value>
-</data>
-<data name="Scanner_InfoXSSDescription" xml:space="preserve">
-  <value>Enables attackers to inject scripts into web pages, which run in users’ browsers, potentially stealing data or defacing the site.</value>
-</data>
-<data name="Scanner_InfoCSRFDescription" xml:space="preserve">
-  <value>Tricks authenticated users into performing unintended actions (e.g., changing settings) via forged requests.</value>
-</data>
-<data name="Scanner_InfoIDORDescription" xml:space="preserve">
-  <value>Insecure Direct Object References allow attackers to access unauthorized resources by manipulating identifiers.</value>
-</data>
-<data name="Scanner_InfoBrokenAuthDescription" xml:space="preserve">
-  <value>Weak authentication lets attackers bypass login or hijack sessions, gaining unauthorized access.</value>
-</data>
-<data name="Scanner_InfoWeakPasswordDescription" xml:space="preserve">
-  <value>Simple passwords make accounts vulnerable to brute-force or guessing attacks.</value>
-</data>
-<data name="Scanner_InfoSecurityMisconfigDescription" xml:space="preserve">
-  <value>Improper settings (e.g., open ports, default credentials) expose vulnerabilities in servers or apps.</value>
-</data>
-<data name="Scanner_InfoUnvalidatedRedirectDescription" xml:space="preserve">
-  <value>Untrusted redirect inputs can send users to malicious sites, aiding phishing attacks.</value>
-</data>
-<data name="Scanner_InfoDirectoryListingDescription" xml:space="preserve">
-  <value>Misconfigured servers expose directory contents, revealing sensitive files or structure.</value>
-</data>
-<data name="Scanner_InfoLFIDescription" xml:space="preserve">
-  <value>Allows attackers to include local files (e.g., config files), potentially exposing sensitive data.</value>
-</data>
-<data name="Scanner_InfoRFIDescription" xml:space="preserve">
-  <value>Permits inclusion of remote malicious files, often leading to code execution on the server.</value>
-</data>
-<data name="Scanner_InfoHTTPResponseSplittingDescription" xml:space="preserve">
-  <value>Exploits header manipulation to inject content or redirect users to malicious sites.</value>
-</data>
-<data name="Scanner_InfoPhishingDescription" xml:space="preserve">
-  <value>Deceptive techniques trick users into revealing credentials via fake pages or links.</value>
-</data>
-<data name="Scanner_InfoNotSecureDomainDescription" xml:space="preserve">
-  <value>Non-HTTPS connections expose data to interception or tampering by attackers.</value>
-</data>
-<data name="Scanner_CtaTitle" xml:space="preserve">
-  <value>Stay Secure with ScanGuard</value>
-</data>
-<data name="Scanner_CtaSubtitle" xml:space="preserve">
-  <value>Run regular scans to keep your website safe from vulnerabilities.</value>
-</data>
-<data name="Scanner_CtaButton" xml:space="preserve">
-  <value>Scan Another URL</value>
-</data>
-<data name="Scanner_ResultDetected" xml:space="preserve">
-  <value>Detected</value>
-</data>
-<data name="Scanner_ResultNotDetected" xml:space="preserve">
-  <value>Not Detected</value>
-</data>
-<data name="Scanner_ResultSecure" xml:space="preserve">
-  <value>Secure</value>
-</data>
-<data name="Scanner_ResultInsecure" xml:space="preserve">
-  <value>Insecure</value>
-</data>
-<data name="Scanner_PortOpen" xml:space="preserve">
-  <value>Open</value>
-</data>
-<data name="Scanner_PortClosed" xml:space="preserve">
-  <value>Closed</value>
-</data>
-<data name="Login_Title" xml:space="preserve">
-  <value>Log in</value>
-</data>
-<data name="Login_FormTitle" xml:space="preserve">
-  <value>Log In</value>
-</data>
-<data name="Login_PlaceholderEmail" xml:space="preserve">
-  <value>Email</value>
-</data>
-<data name="Login_PlaceholderPassword" xml:space="preserve">
-  <value>Password</value>
-</data>
-<data name="Login_LabelRememberMe" xml:space="preserve">
-  <value>Remember Me</value>
-</data>
-<data name="Login_ButtonSubmit" xml:space="preserve">
-  <value>Login</value>
-</data>
-<data name="Login_TextNoAccount" xml:space="preserve">
-  <value>Don’t have an account?</value>
-</data>
-<data name="Login_LinkSignUp" xml:space="preserve">
-  <value>Sign up</value>
-</data>
-<data name="Register_Title" xml:space="preserve">
-  <value>Register</value>
-</data>
-<data name="Register_PageTitle" xml:space="preserve">
-  <value>Registration</value>
-</data>
-<data name="Register_FormTitle" xml:space="preserve">
-  <value>Create a new account</value>
-</data>
-<data name="Register_PlaceholderEmail" xml:space="preserve">
-  <value>Email</value>
-</data>
-<data name="Register_PlaceholderFullName" xml:space="preserve">
-  <value>Full name</value>
-</data>
-<data name="Register_PlaceholderPassword" xml:space="preserve">
-  <value>Password</value>
-</data>
-<data name="Register_ButtonSubmit" xml:space="preserve">
-  <value>Register</value>
-</data>
-<data name="Register_TextHaveAccount" xml:space="preserve">
-  <value>Already have an account?</value>
-</data>
-<data name="Register_LinkLogin" xml:space="preserve">
-  <value>Log In</value>
-</data>
-<data name="Login2fa_Title" xml:space="preserve">
-  <value>Two-factor Authentication</value>
-</data>
-<data name="Login2fa_Description" xml:space="preserve">
-  <value>Your login is protected with an authenticator app. Enter your authenticator code below.</value>
-</data>
-<data name="Login2fa_PlaceholderCode" xml:space="preserve">
-  <value>Authenticator Code</value>
-</data>
-<data name="Login2fa_ValidateCode" xml:space="preserve">
-  <value>Please enter a valid 2FA code</value>
-</data>
-<data name="Login2fa_LabelRememberMachine" xml:space="preserve">
-  <value>Remember this machine</value>
-</data>
-<data name="Login2fa_ButtonSubmit" xml:space="preserve">
-  <value>Log In</value>
-</data>
-<data name="Login2fa_FooterText" xml:space="preserve">
-  <value>Don't have access to your authenticator device? You can log in with a recovery code.</value>
-</data>
-<data name="Login2fa_LinkRecoveryCode" xml:space="preserve">
-  <value>log in with a recovery code</value>
-</data>
-<data name="RegisterConfirm_Title" xml:space="preserve">
-  <value>Register confirmation</value>
-</data>
-<data name="RegisterConfirm_FormTitle" xml:space="preserve">
-  <value>Check Your Email</value>
-</data>
-<data name="RegisterConfirm_Description" xml:space="preserve">
-  <value>We've sent a confirmation email to {0}. Please check your inbox and click the confirmation link to activate your ScanGuard account.</value>
-</data>
-<data name="RegisterConfirm_Step1" xml:space="preserve">
-  <value>Open your email inbox</value>
-</data>
-<data name="RegisterConfirm_Step2" xml:space="preserve">
-  <value>Find our email (check spam folder too)</value>
-</data>
-<data name="RegisterConfirm_Step3" xml:space="preserve">
-  <value>Click the confirmation link</value>
-</data>
-<data name="RegisterConfirm_Slogan" xml:space="preserve">
-  <value>Your first line of defense in the digital world</value>
-</data>
-<data name="ConfirmEmail_Title" xml:space="preserve">
-  <value>Confirm email</value>
-</data>
-<data name="ConfirmEmail_SuccessTitle" xml:space="preserve">
-  <value>Email Confirmed!</value>
-</data>
-<data name="ConfirmEmail_ErrorTitle" xml:space="preserve">
-  <value>Confirmation Error</value>
-</data>
-<data name="ConfirmEmail_SecurityBadge" xml:space="preserve">
-  <value>Account Secured</value>
-</data>
-<data name="ConfirmEmail_LinkLogin" xml:space="preserve">
-  <value>Continue to Login</value>
-</data>
-<data name="ConfirmEmail_LinkHome" xml:space="preserve">
-  <value>Return to Home</value>
-</data>
-<data name="ConfirmEmail_Slogan" xml:space="preserve">
-  <value>Your first line of defense in the digital world</value>
-</data>
-<data name="Tfa_Title" xml:space="preserve">
-  <value>Two-Factor Authentication</value>
-</data>
-<data name="Tfa_Description" xml:space="preserve">
-  <value>Manage your two-factor authentication settings.</value>
-</data>
-<data name="Tfa_NoRecoveryCodes" xml:space="preserve">
-  <value>You have no recovery codes left.</value>
-</data>
-<data name="Tfa_NoRecoveryCodesAction" xml:space="preserve">
-  <value>You must generate a new set of recovery codes before you can log in with a recovery code.</value>
-</data>
-<data name="Tfa_OneRecoveryCode" xml:space="preserve">
-  <value>You have 1 recovery code left.</value>
-</data>
-<data name="Tfa_OneRecoveryCodeAction" xml:space="preserve">
-  <value>You can generate a new set of recovery codes.</value>
-</data>
-<data name="Tfa_FewRecoveryCodes" xml:space="preserve">
-  <value>You have {0} recovery codes left.</value>
-</data>
-<data name="Tfa_FewRecoveryCodesAction" xml:space="preserve">
-  <value>You should generate a new set of recovery codes.</value>
-</data>
-<data name="Tfa_ButtonForgetBrowser" xml:space="preserve">
-  <value>Forget this browser</value>
-</data>
-<data name="Tfa_ButtonDisable2fa" xml:space="preserve">
-  <value>Disable 2FA</value>
-</data>
-<data name="Tfa_ButtonResetCodes" xml:space="preserve">
-  <value>Reset recovery codes</value>
-</data>
-<data name="Tfa_SubtitleAuthenticator" xml:space="preserve">
-  <value>Authenticator App</value>
-</data>
-<data name="Tfa_LinkAddAuthenticator" xml:space="preserve">
-  <value>Add authenticator app</value>
-</data>
-<data name="Tfa_LinkSetupAuthenticator" xml:space="preserve">
-  <value>Set up authenticator app</value>
-</data>
-<data name="Tfa_LinkResetAuthenticator" xml:space="preserve">
-  <value>Reset authenticator app</value>
-</data>
-<data name="Tfa_PrivacyNotAccepted" xml:space="preserve">
-  <value>Privacy and cookie policy have not been accepted.</value>
-</data>
-<data name="Tfa_PrivacyNotAcceptedAction" xml:space="preserve">
-  <value>You must accept the policy before you can enable two-factor authentication.</value>
-</data>
+  <data name="TwoFactor_ConfigureAppTitle" xml:space="preserve">
+    <value>Configure Authenticator App</value>
+  </data>
+  <data name="TwoFactor_SetupDescription" xml:space="preserve">
+    <value>Set up two-factor authentication with an authenticator app.</value>
+  </data>
+  <data name="TwoFactor_Step1Title" xml:space="preserve">
+    <value>1. Download an App</value>
+  </data>
+  <data name="TwoFactor_Step1Description" xml:space="preserve">
+    <value>Install a two-factor authenticator app like Microsoft Authenticator or Google Authenticator.</value>
+  </data>
+  <data name="TwoFactor_Step2Title" xml:space="preserve">
+    <value>2. Scan QR Code</value>
+  </data>
+  <data name="TwoFactor_Step2Description" xml:space="preserve">
+    <value>Scan the QR code below or enter the key into your authenticator app. Spaces and casing do not matter.</value>
+  </data>
+  <data name="TwoFactor_QRCodeHelpLink" xml:space="preserve">
+    <value>Learn how to enable QR code generation.</value>
+  </data>
+  <data name="TwoFactor_Step3Title" xml:space="preserve">
+    <value>3. Verify Code</value>
+  </data>
+  <data name="TwoFactor_Step3Description" xml:space="preserve">
+    <value>Enter the unique code provided by your authenticator app to complete setup.</value>
+  </data>
+  <data name="TwoFactor_VerificationCodeLabel" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="TwoFactor_VerificationCodePlaceholder" xml:space="preserve">
+    <value>Enter code</value>
+  </data>
+  <data name="TwoFactor_VerifyButton" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="Nav_Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Nav_AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="Nav_Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="Nav_Sites" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="Nav_Scanner" xml:space="preserve">
+    <value>Scanner</value>
+  </data>
+  <data name="Nav_ScannedSites" xml:space="preserve">
+    <value>Scanned Sites</value>
+  </data>
+  <data name="Nav_Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Nav_FileScanner" xml:space="preserve">
+    <value>File Scanner</value>
+  </data>
+  <data name="Nav_ScannedFiles" xml:space="preserve">
+    <value>Scanned Files</value>
+  </data>
+  <data name="Nav_Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="Nav_Corporation" xml:space="preserve">
+    <value>Corporation</value>
+  </data>
+  <data name="Nav_Premium" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="Nav_Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Nav_GetToken" xml:space="preserve">
+    <value>Get Token</value>
+  </data>
+  <data name="Nav_AllNews" xml:space="preserve">
+    <value>All News</value>
+  </data>
+  <data name="Nav_GetCorpRequests" xml:space="preserve">
+    <value>Get Corp Requests</value>
+  </data>
+  <data name="Nav_News" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="Nav_ScanFile" xml:space="preserve">
+    <value>Scan File</value>
+  </data>
+  <data name="Nav_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Armenian" xml:space="preserve">
+    <value>Հայերեն</value>
+  </data>
+  <data name="Nav_Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Nav_Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Nav_Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Nav_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Nav_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>Scan History</value>
+  </data>
+  <data name="History_Subtitle" xml:space="preserve">
+    <value>Review and analyze past scans to keep your websites secure with ScanGuard’s AI-powered insights.</value>
+  </data>
+  <data name="History_SearchPlaceholder" xml:space="preserve">
+    <value>Search by URL...</value>
+  </data>
+  <data name="History_SortRecent" xml:space="preserve">
+    <value>Sort by: Recent</value>
+  </data>
+  <data name="History_SortVulnDesc" xml:space="preserve">
+    <value>Vulnerabilities (High to Low)</value>
+  </data>
+  <data name="History_SortVulnAsc" xml:space="preserve">
+    <value>Vulnerabilities (Low to High)</value>
+  </data>
+  <data name="History_SortDateAsc" xml:space="preserve">
+    <value>Date (Oldest)</value>
+  </data>
+  <data name="History_ColumnWebsiteURL" xml:space="preserve">
+    <value>Website URL</value>
+  </data>
+  <data name="History_ColumnScanDate" xml:space="preserve">
+    <value>Scan Date</value>
+  </data>
+  <data name="History_ColumnVulnerabilityCount" xml:space="preserve">
+    <value>Vulnerability Count</value>
+  </data>
+  <data name="History_ColumnVulnerabilityType" xml:space="preserve">
+    <value>Vulnerability Type</value>
+  </data>
+  <data name="History_ColumnActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="History_NoVulnerabilities" xml:space="preserve">
+    <value>No vulnerabilities found</value>
+  </data>
+  <data name="History_ButtonRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="History_ButtonAnalyze" xml:space="preserve">
+    <value>Analyze</value>
+  </data>
+  <data name="History_ModalTitle" xml:space="preserve">
+    <value>AI Analysis</value>
+  </data>
+  <data name="History_ModalLoading" xml:space="preserve">
+    <value>Loading analysis...</value>
+  </data>
+  <data name="History_ModalError" xml:space="preserve">
+    <value>Failed to load analysis</value>
+  </data>
+  <data name="Sidebar_Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Sidebar_ExternalLogins" xml:space="preserve">
+    <value>External Logins</value>
+  </data>
+  <data name="Sidebar_TwoFactorAuth" xml:space="preserve">
+    <value>Two-Factor Auth</value>
+  </data>
+  <data name="Sidebar_ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Profile_Title" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Profile_StatusAdmin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Profile_StatusPremium" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="Profile_LabelFullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Profile_LabelEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Profile_LabelPhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Profile_PlaceholderFullName" xml:space="preserve">
+    <value>Enter your full name</value>
+  </data>
+  <data name="Profile_PlaceholderPhoneNumber" xml:space="preserve">
+    <value>Enter your phone number</value>
+  </data>
+  <data name="Profile_ButtonSave" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="ChangePassword_Title" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ChangePassword_SectionTitle" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ChangePassword_Description" xml:space="preserve">
+    <value>Set a new secure password.</value>
+  </data>
+  <data name="ChangePassword_LabelCurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="ChangePassword_LabelNewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="ChangePassword_LabelConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="ChangePassword_PlaceholderCurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="ChangePassword_PlaceholderNewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="ChangePassword_PlaceholderConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="ChangePassword_ButtonUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="ChangePassword_ButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Scanner_Title" xml:space="preserve">
+    <value>Vulnerability Scanner</value>
+  </data>
+  <data name="Scanner_IntroSubtitle" xml:space="preserve">
+    <value>Protect your website by identifying security risks with ScanGuard’s advanced scanning technology.</value>
+  </data>
+  <data name="Scanner_FormTitle" xml:space="preserve">
+    <value>Scan Your Website</value>
+  </data>
+  <data name="Scanner_LabelUrl" xml:space="preserve">
+    <value>Enter URL to Scan</value>
+  </data>
+  <data name="Scanner_PlaceholderUrl" xml:space="preserve">
+    <value>https://example.com</value>
+  </data>
+  <data name="Scanner_ButtonStart" xml:space="preserve">
+    <value>Start Scan</value>
+  </data>
+  <data name="Scanner_ResultsTitle" xml:space="preserve">
+    <value>Scan Results</value>
+  </data>
+  <data name="Scanner_PortResultsTitle" xml:space="preserve">
+    <value>Port Scan Results</value>
+  </data>
+  <data name="Scanner_InfoTitle" xml:space="preserve">
+    <value>Vulnerability Information</value>
+  </data>
+  <data name="Scanner_InfoSQLiDescription" xml:space="preserve">
+    <value>Allows attackers to inject malicious SQL code into input fields, potentially accessing or altering database content.</value>
+  </data>
+  <data name="Scanner_InfoXSSDescription" xml:space="preserve">
+    <value>Enables attackers to inject scripts into web pages, which run in users’ browsers, potentially stealing data or defacing the site.</value>
+  </data>
+  <data name="Scanner_InfoCSRFDescription" xml:space="preserve">
+    <value>Tricks authenticated users into performing unintended actions (e.g., changing settings) via forged requests.</value>
+  </data>
+  <data name="Scanner_InfoIDORDescription" xml:space="preserve">
+    <value>Insecure Direct Object References allow attackers to access unauthorized resources by manipulating identifiers.</value>
+  </data>
+  <data name="Scanner_InfoBrokenAuthDescription" xml:space="preserve">
+    <value>Weak authentication lets attackers bypass login or hijack sessions, gaining unauthorized access.</value>
+  </data>
+  <data name="Scanner_InfoWeakPasswordDescription" xml:space="preserve">
+    <value>Simple passwords make accounts vulnerable to brute-force or guessing attacks.</value>
+  </data>
+  <data name="Scanner_InfoSecurityMisconfigDescription" xml:space="preserve">
+    <value>Improper settings (e.g., open ports, default credentials) expose vulnerabilities in servers or apps.</value>
+  </data>
+  <data name="Scanner_InfoUnvalidatedRedirectDescription" xml:space="preserve">
+    <value>Untrusted redirect inputs can send users to malicious sites, aiding phishing attacks.</value>
+  </data>
+  <data name="Scanner_InfoDirectoryListingDescription" xml:space="preserve">
+    <value>Misconfigured servers expose directory contents, revealing sensitive files or structure.</value>
+  </data>
+  <data name="Scanner_InfoLFIDescription" xml:space="preserve">
+    <value>Allows attackers to include local files (e.g., config files), potentially exposing sensitive data.</value>
+  </data>
+  <data name="Scanner_InfoRFIDescription" xml:space="preserve">
+    <value>Permits inclusion of remote malicious files, often leading to code execution on the server.</value>
+  </data>
+  <data name="Scanner_InfoHTTPResponseSplittingDescription" xml:space="preserve">
+    <value>Exploits header manipulation to inject content or redirect users to malicious sites.</value>
+  </data>
+  <data name="Scanner_InfoPhishingDescription" xml:space="preserve">
+    <value>Deceptive techniques trick users into revealing credentials via fake pages or links.</value>
+  </data>
+  <data name="Scanner_InfoNotSecureDomainDescription" xml:space="preserve">
+    <value>Non-HTTPS connections expose data to interception or tampering by attackers.</value>
+  </data>
+  <data name="Scanner_CtaTitle" xml:space="preserve">
+    <value>Stay Secure with ScanGuard</value>
+  </data>
+  <data name="Scanner_CtaSubtitle" xml:space="preserve">
+    <value>Run regular scans to keep your website safe from vulnerabilities.</value>
+  </data>
+  <data name="Scanner_CtaButton" xml:space="preserve">
+    <value>Scan Another URL</value>
+  </data>
+  <data name="Scanner_ResultDetected" xml:space="preserve">
+    <value>Detected</value>
+  </data>
+  <data name="Scanner_ResultNotDetected" xml:space="preserve">
+    <value>Not Detected</value>
+  </data>
+  <data name="Scanner_ResultSecure" xml:space="preserve">
+    <value>Secure</value>
+  </data>
+  <data name="Scanner_ResultInsecure" xml:space="preserve">
+    <value>Insecure</value>
+  </data>
+  <data name="Scanner_PortOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Scanner_PortClosed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Login_Title" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Login_FormTitle" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="Login_PlaceholderEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Login_PlaceholderPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login_LabelRememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="Login_ButtonSubmit" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login_TextNoAccount" xml:space="preserve">
+    <value>Don’t have an account?</value>
+  </data>
+  <data name="Login_LinkSignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="Register_Title" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Register_PageTitle" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Register_FormTitle" xml:space="preserve">
+    <value>Create a new account</value>
+  </data>
+  <data name="Register_PlaceholderEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Register_PlaceholderFullName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="Register_PlaceholderPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Register_ButtonSubmit" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Register_TextHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="Register_LinkLogin" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="Login2fa_Title" xml:space="preserve">
+    <value>Two-factor Authentication</value>
+  </data>
+  <data name="Login2fa_Description" xml:space="preserve">
+    <value>Your login is protected with an authenticator app. Enter your authenticator code below.</value>
+  </data>
+  <data name="Login2fa_PlaceholderCode" xml:space="preserve">
+    <value>Authenticator Code</value>
+  </data>
+  <data name="Login2fa_ValidateCode" xml:space="preserve">
+    <value>Please enter a valid 2FA code</value>
+  </data>
+  <data name="Login2fa_LabelRememberMachine" xml:space="preserve">
+    <value>Remember this machine</value>
+  </data>
+  <data name="Login2fa_ButtonSubmit" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="Login2fa_FooterText" xml:space="preserve">
+    <value>Don't have access to your authenticator device? You can log in with a recovery code.</value>
+  </data>
+  <data name="Login2fa_LinkRecoveryCode" xml:space="preserve">
+    <value>log in with a recovery code</value>
+  </data>
+  <data name="RegisterConfirm_Title" xml:space="preserve">
+    <value>Register confirmation</value>
+  </data>
+  <data name="RegisterConfirm_FormTitle" xml:space="preserve">
+    <value>Check Your Email</value>
+  </data>
+  <data name="RegisterConfirm_Description" xml:space="preserve">
+    <value>We've sent a confirmation email to {0}. Please check your inbox and click the confirmation link to activate your ScanGuard account.</value>
+  </data>
+  <data name="RegisterConfirm_Step1" xml:space="preserve">
+    <value>Open your email inbox</value>
+  </data>
+  <data name="RegisterConfirm_Step2" xml:space="preserve">
+    <value>Find our email (check spam folder too)</value>
+  </data>
+  <data name="RegisterConfirm_Step3" xml:space="preserve">
+    <value>Click the confirmation link</value>
+  </data>
+  <data name="RegisterConfirm_Slogan" xml:space="preserve">
+    <value>Your first line of defense in the digital world</value>
+  </data>
+  <data name="ConfirmEmail_Title" xml:space="preserve">
+    <value>Confirm email</value>
+  </data>
+  <data name="ConfirmEmail_SuccessTitle" xml:space="preserve">
+    <value>Email Confirmed!</value>
+  </data>
+  <data name="ConfirmEmail_ErrorTitle" xml:space="preserve">
+    <value>Confirmation Error</value>
+  </data>
+  <data name="ConfirmEmail_SecurityBadge" xml:space="preserve">
+    <value>Account Secured</value>
+  </data>
+  <data name="ConfirmEmail_LinkLogin" xml:space="preserve">
+    <value>Continue to Login</value>
+  </data>
+  <data name="ConfirmEmail_LinkHome" xml:space="preserve">
+    <value>Return to Home</value>
+  </data>
+  <data name="ConfirmEmail_Slogan" xml:space="preserve">
+    <value>Your first line of defense in the digital world</value>
+  </data>
+  <data name="Tfa_Title" xml:space="preserve">
+    <value>Two-Factor Authentication</value>
+  </data>
+  <data name="Tfa_Description" xml:space="preserve">
+    <value>Manage your two-factor authentication settings.</value>
+  </data>
+  <data name="Tfa_NoRecoveryCodes" xml:space="preserve">
+    <value>You have no recovery codes left.</value>
+  </data>
+  <data name="Tfa_NoRecoveryCodesAction" xml:space="preserve">
+    <value>You must generate a new set of recovery codes before you can log in with a recovery code.</value>
+  </data>
+  <data name="Tfa_OneRecoveryCode" xml:space="preserve">
+    <value>You have 1 recovery code left.</value>
+  </data>
+  <data name="Tfa_OneRecoveryCodeAction" xml:space="preserve">
+    <value>You can generate a new set of recovery codes.</value>
+  </data>
+  <data name="Tfa_FewRecoveryCodes" xml:space="preserve">
+    <value>You have {0} recovery codes left.</value>
+  </data>
+  <data name="Tfa_FewRecoveryCodesAction" xml:space="preserve">
+    <value>You should generate a new set of recovery codes.</value>
+  </data>
+  <data name="Tfa_ButtonForgetBrowser" xml:space="preserve">
+    <value>Forget this browser</value>
+  </data>
+  <data name="Tfa_ButtonDisable2fa" xml:space="preserve">
+    <value>Disable 2FA</value>
+  </data>
+  <data name="Tfa_ButtonResetCodes" xml:space="preserve">
+    <value>Reset recovery codes</value>
+  </data>
+  <data name="Tfa_SubtitleAuthenticator" xml:space="preserve">
+    <value>Authenticator App</value>
+  </data>
+  <data name="Tfa_LinkAddAuthenticator" xml:space="preserve">
+    <value>Add authenticator app</value>
+  </data>
+  <data name="Tfa_LinkSetupAuthenticator" xml:space="preserve">
+    <value>Set up authenticator app</value>
+  </data>
+  <data name="Tfa_LinkResetAuthenticator" xml:space="preserve">
+    <value>Reset authenticator app</value>
+  </data>
+  <data name="Tfa_PrivacyNotAccepted" xml:space="preserve">
+    <value>Privacy and cookie policy have not been accepted.</value>
+  </data>
+  <data name="Tfa_PrivacyNotAcceptedAction" xml:space="preserve">
+    <value>You must accept the policy before you can enable two-factor authentication.</value>
+  </data>
+  <data name="FileHash" xml:space="preserve">
+    <value>File Hash</value>
+  </data>
+  <data name="FileHistoryText" xml:space="preserve">
+    <value>View the history of your scanned files and their security details</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="FileScanButton" xml:space="preserve">
+    <value>Scan File</value>
+  </data>
+  <data name="FileScanHistory" xml:space="preserve">
+    <value>File Scan History</value>
+  </data>
+  <data name="FileScanner" xml:space="preserve">
+    <value>File Scanner</value>
+  </data>
+  <data name="FileScannerText" xml:space="preserve">
+    <value>Upload your files to check for malware, vulnerabilities, and security threats with ScanGuard’s advanced scanning technology.</value>
+  </data>
+  <data name="FileUpload" xml:space="preserve">
+    <value>Upload File for Scanning</value>
+  </data>
+  <data name="Keep Your Files SecureText" xml:space="preserve">
+    <value>Regularly scan your files to ensure they are free from threats. Try our website scanner for comprehensive security.</value>
+  </data>
+  <data name="KeepYourFilesSecure" xml:space="preserve">
+    <value>Keep Your Files Secure</value>
+  </data>
+  <data name="Malicious" xml:space="preserve">
+    <value>Malicious</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ScanDate" xml:space="preserve">
+    <value>Scan Date</value>
+  </data>
+  <data name="ScanWebButton" xml:space="preserve">
+    <value>Scan Website</value>
+  </data>
+  <data name="VulnerabilityType" xml:space="preserve">
+    <value>Vulnerability Type</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

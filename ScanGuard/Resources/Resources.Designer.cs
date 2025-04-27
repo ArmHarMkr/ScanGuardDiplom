@@ -502,11 +502,83 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Hash.
+        /// </summary>
+        public static string FileHash {
+            get {
+                return ResourceManager.GetString("FileHash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View the history of your scanned files and their security details.
+        /// </summary>
+        public static string FileHistoryText {
+            get {
+                return ResourceManager.GetString("FileHistoryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Name.
+        /// </summary>
+        public static string FileName {
+            get {
+                return ResourceManager.GetString("FileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Files Analyzed.
         /// </summary>
         public static string FilesAnalyzed {
             get {
                 return ResourceManager.GetString("FilesAnalyzed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan File.
+        /// </summary>
+        public static string FileScanButton {
+            get {
+                return ResourceManager.GetString("FileScanButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Scan History.
+        /// </summary>
+        public static string FileScanHistory {
+            get {
+                return ResourceManager.GetString("FileScanHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Scanner.
+        /// </summary>
+        public static string FileScanner {
+            get {
+                return ResourceManager.GetString("FileScanner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload your files to check for malware, vulnerabilities, and security threats with ScanGuard’s advanced scanning technology..
+        /// </summary>
+        public static string FileScannerText {
+            get {
+                return ResourceManager.GetString("FileScannerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload File for Scanning.
+        /// </summary>
+        public static string FileUpload {
+            get {
+                return ResourceManager.GetString("FileUpload", resourceCulture);
             }
         }
         
@@ -817,6 +889,24 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Regularly scan your files to ensure they are free from threats. Try our website scanner for comprehensive security..
+        /// </summary>
+        public static string Keep_Your_Files_SecureText {
+            get {
+                return ResourceManager.GetString("Keep Your Files SecureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep Your Files Secure.
+        /// </summary>
+        public static string KeepYourFilesSecure {
+            get {
+                return ResourceManager.GetString("KeepYourFilesSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Հայերեն.
         /// </summary>
         public static string Language_Armenian {
@@ -993,6 +1083,15 @@ namespace ScanGuard.Resources {
         public static string Login2fa_ValidateCode {
             get {
                 return ResourceManager.GetString("Login2fa_ValidateCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Malicious.
+        /// </summary>
+        public static string Malicious {
+            get {
+                return ResourceManager.GetString("Malicious", resourceCulture);
             }
         }
         
@@ -1218,6 +1317,15 @@ namespace ScanGuard.Resources {
         public static string Nav_Users {
             get {
                 return ResourceManager.GetString("Nav_Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -1636,6 +1744,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scan Date.
+        /// </summary>
+        public static string ScanDate {
+            get {
+                return ResourceManager.GetString("ScanDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanned.
         /// </summary>
         public static string Scanned {
@@ -1947,6 +2064,15 @@ namespace ScanGuard.Resources {
         public static string ScansPerformed {
             get {
                 return ResourceManager.GetString("ScansPerformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Website.
+        /// </summary>
+        public static string ScanWebButton {
+            get {
+                return ResourceManager.GetString("ScanWebButton", resourceCulture);
             }
         }
         
@@ -2482,6 +2608,15 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vulnerability Type.
+        /// </summary>
+        public static string VulnerabilityType {
+            get {
+                return ResourceManager.GetString("VulnerabilityType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Website Scans.
         /// </summary>
         public static string WebsiteScans {
@@ -2541,6 +2676,15 @@ namespace ScanGuard.Resources {
         public static string WriteaReview {
             get {
                 return ResourceManager.GetString("WriteaReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         
