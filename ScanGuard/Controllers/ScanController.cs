@@ -43,7 +43,7 @@ public class ScanController : Controller
     {
         if (string.IsNullOrEmpty(url))
         {
-            TempData["ErrorMessage"] = "URL не указан";
+            TempData["ErrorMessage"] = "URL is not specified";
             return RedirectToAction("Scanner");
         }
 
@@ -59,7 +59,7 @@ public class ScanController : Controller
                 await _context.SaveChangesAsync();
             }
 
-            TempData["SuccessMessage"] = "Сканирование завершено успешно.";
+            TempData["SuccessMessage"] = "Site has been successfuly scanned";
             return View("~/Views/Scan/Scanner.cshtml", vulnerability);
         }
         catch (Exception ex)
