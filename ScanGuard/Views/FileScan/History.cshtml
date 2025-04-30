@@ -4,14 +4,20 @@
 <div class="history-container">
     <!-- Header -->
     <header class="history-header animate-on-scroll">
-        <h1 class="history-title">File Scan History</h1>
-        <p class="history-subtitle">View the history of your scanned files and their security details</p>
+        <h1 class="history-title">
+            <span class="home-hero-title-word" style="animation-delay: 0s;">
+                @ScanGuard.Resources.Resources.FileScanHistory
+            </span>
+        </h1>
+        <p class="history-subtitle">
+            @ScanGuard.Resources.Resources.FileHistoryText
+        </p>
     </header>
 
     <!-- Controls -->
     <div class="history-controls animate-on-scroll">
         <div class="history-search">
-            <input type="text" class="history-search-input" placeholder="Search by file name..." id="searchInput">
+            <input type="text" class="history-search-input" placeholder="@ScanGuard.Resources.Resources.FileName" id="searchInput">
         </div>
         <select class="history-filter" id="sortFilter">
             <option value="recent">Sort by Recent</option>
@@ -26,9 +32,13 @@
         <table class="history-table">
             <thead>
                 <tr>
-                    <th class="history-th">File Name</th>
+                    <th class="history-th">
+                        @ScanGuard.Resources.Resources.FileName
+                    </th>
                     <th class="history-th">Scan Date</th>
-                    <th class="history-th">File Hash</th>
+                    <th class="history-th">
+                        @ScanGuard.Resources.Resources.FileHash
+                    </th>
                     <th class="history-th">Vulnerability Type</th>
                     <th class="history-th">Malicious</th>
                 </tr>
@@ -37,12 +47,12 @@
                 @foreach (var file in Model)
                 {
                     <tr class="history-tr" data-malicious="@file.IsMalicious" data-scan-date="@file.ScanDate.ToString("yyyy-MM-dd HH:mm")">
-                        <td class="history-td history-url" data-label="File Name">
+                        <td class="history-td history-url" data-label="@ScanGuard.Resources.Resources.FileName">
                             <span class="url-text">@file.FileName</span>
                             <span class="url-tooltip">@file.FileName</span>
                         </td>
                         <td class="history-td history-date" data-label="Scan Date">@file.ScanDate.ToString("yyyy-MM-dd HH:mm")</td>
-                        <td class="history-td history-hash" data-label="File Hash">
+                        <td class="history-td history-hash" data-label="@ScanGuard.Resources.Resources.FileHash">
                             <span class="url-text">@file.FileHash</span>
                             <span class="url-tooltip">@file.FileHash</span>
                         </td>
