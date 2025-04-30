@@ -628,7 +628,7 @@ namespace ScanGuard.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Մնացեք սպառնալիքներից առաջ ScanGuard Premium-ի միջոցով: Վայելեք բացառիկ հնարավորությունները և Telegram-ի անխափան ինտեգրումը:.
+        ///   Looks up a localized string similar to Stay ahead of threats with ScanGuard Premium. Enjoy exclusive features and seamless Telegram integration..
         /// </summary>
         public static string FooterText {
             get {
