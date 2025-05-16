@@ -7,7 +7,7 @@ namespace ScanGuard.BLL.Services
 {
     public class OpenRouterService
     {
-        private readonly string apiKey = "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";
+        private readonly string apiKey = "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";
 
         public OpenRouterService()
         {
